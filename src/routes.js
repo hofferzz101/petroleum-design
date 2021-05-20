@@ -33,9 +33,9 @@ var routes = [
   },
   {
     path: "/index",
-    name: "Dashboard",
+    name: "Hualar Portal",
     icon: "ni ni-tv-2 text-primary",
-    component: Index,
+    component: Tables,
     layout: "/admin",
   },
   {

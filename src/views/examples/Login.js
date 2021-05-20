@@ -33,7 +33,10 @@ import {
   Col,
 } from "reactstrap";
 
+import { useHistory } from 'react-router-dom'
+
 const Login = () => {
+  const history = useHistory()
   return (
     <>
       <Col lg="5" md="7">
@@ -124,7 +127,7 @@ const Login = () => {
                 </label>
               </div>
               <div className="text-center">
-                <Button className="my-4" color="primary" type="button">
+                <Button onClick={() => history.push("/admin/index")} className="my-4" color="primary" type="button">
                   Sign in
                 </Button>
               </div>

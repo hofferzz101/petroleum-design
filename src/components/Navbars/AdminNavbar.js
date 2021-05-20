@@ -73,7 +73,7 @@ const AdminNavbar = (props) => {
                   </span>
                   <Media className="ml-2 d-none d-lg-block">
                     <span className="mb-0 text-sm font-weight-bold">
-                      Jessica Jones
+                      User
                     </span>
                   </Media>
                 </Media>
@@ -99,7 +99,7 @@ const AdminNavbar = (props) => {
                   <span>Support</span>
                 </DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
+                <DropdownItem href="/auth/login">
                   <i className="ni ni-user-run" />
                   <span>Logout</span>
                 </DropdownItem>
