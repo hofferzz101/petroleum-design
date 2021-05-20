@@ -35,14 +35,14 @@ const AdminNavbar = () => {
     <>
       <Navbar className="navbar-top navbar-horizontal navbar-dark" expand="md">
         <Container className="px-4">
-          <NavbarBrand to="/" tag={Link}>
+          {/* <NavbarBrand to="/" tag={Link}>
             <img
               alt="..."
               src={
                 require("../../assets/img/brand/argon-react-white.png").default
               }
             />
-          </NavbarBrand>
+          </NavbarBrand> */}
           <button className="navbar-toggler" id="navbar-collapse-main">
             <span className="navbar-toggler-icon" />
           </button>
@@ -68,7 +68,7 @@ const AdminNavbar = () => {
                 </Col>
               </Row>
             </div>
-            <Nav className="ml-auto" navbar>
+            {/* <Nav className="ml-auto" navbar>
               <NavItem>
                 <NavLink className="nav-link-icon" to="/" tag={Link}>
                   <i className="ni ni-planet" />
@@ -102,6 +102,7 @@ const AdminNavbar = () => {
                 </NavLink>
               </NavItem>
             </Nav>
+         */}
           </UncontrolledCollapse>
         </Container>
       </Navbar>

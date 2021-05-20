@@ -64,12 +64,12 @@ const Auth = (props) => {
         <AuthNavbar />
         <div className="header bg-gradient-info py-7 py-lg-8">
           <Container>
-            <div className="header-body text-center mb-7">
+            <div className="header-body text-center mb-3">
               <Row className="justify-content-center">
                 <Col lg="5" md="6">
                   <h1 className="text-white">Welcome!</h1>
                   <p className="text-lead text-light">
-                    Use these awesome forms to login or create new account in
+                    Thank you to login your account in
                     your project for free.
                   </p>
                 </Col>
