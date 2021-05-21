@@ -119,11 +119,12 @@ const Sidebar = (props) => {
         {/* Brand */}
         {logo ? (
           <NavbarBrand className="pt-0" {...navbarBrandProps}>
-            <img
+            {/* <img
               alt={logo.imgAlt}
               className="navbar-brand-img"
               src={logo.imgSrc}
-            />
+            /> */}
+            <h1 style={{marginBottom: "-30px", color: "#12cdef", fontWeight: "bold"}}>Petroleum</h1>
           </NavbarBrand>
         ) : null}
         {/* User */}
@@ -178,7 +179,10 @@ const Sidebar = (props) => {
                 <span>Support</span>
               </DropdownItem>
               <DropdownItem divider />
-              <DropdownItem href="/auth/login" onClick={(e) => e.preventDefault()}>
+              <DropdownItem
+                href="/auth/login"
+                onClick={(e) => e.preventDefault()}
+              >
                 <i className="ni ni-user-run" />
                 <span>Logout</span>
               </DropdownItem>
