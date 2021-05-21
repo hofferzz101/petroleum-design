@@ -54,6 +54,7 @@ import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import LastPageIcon from "@material-ui/icons/LastPage";
 // core components
 import Header from "components/Headers/Header.js";
+import moment from 'moment'
 
 const useStyles1 = makeStyles((theme) => ({
   root: {
@@ -132,26 +133,6 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-function createData(name, calories, fat, text, text2) {
-  return { name, calories, fat, text, text2 };
-}
-
-const rows = [
-  createData("Cupcake", 305, 3.7, "something", "something"),
-  createData("Donut", 452, 25.0, "something", "something"),
-  createData("Eclair", 262, 16.0, "something", "something"),
-  createData("Frozen yoghurt", 159, 6.0, "something", "something"),
-  createData("Gingerbread", 356, 16.0, "something", "something"),
-  createData("Honeycomb", 408, 3.2, "something", "something"),
-  createData("Ice cream sandwich", 237, 9.0, "something", "something"),
-  createData("Jelly Bean", 375, 0.0, "something", "something"),
-  createData("KitKat", 518, 26.0, "something", "something"),
-  createData("Lollipop", 392, 0.2, "something", "something"),
-  createData("Marshmallow", 318, 0, "something", "something"),
-  createData("Nougat", 360, 19.0, "something", "something"),
-  createData("Oreo", 437, 18.0, "something", "something"),
-].sort((a, b) => (a.calories < b.calories ? -1 : 1));
-
 const useStyles2 = makeStyles({
   table: {
     minWidth: 500,
@@ -162,6 +143,60 @@ const Tables = () => {
   const classes = useStyles2();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+  const rows = [
+    {
+      customerNumber: "123456",
+      customerName: "Alex",
+      orderNumber: "ASD123",
+      customerLocation: "London",
+      poNumber: "123456789",
+      rackLocation: "London",
+      orderDate: new Date(),
+      deliveryDate: new Date(),
+      status: "Delayed",
+      alerts: "None"
+    },
+    {
+      customerNumber: "123456",
+      customerName: "John",
+      orderNumber: "ASD123",
+      customerLocation: "London",
+      poNumber: "123456789",
+      rackLocation: "London",
+      orderDate: new Date(),
+      deliveryDate: new Date(),
+      status: "Completed",
+      alerts: "Product Outage"
+    },
+  ];
+
+  const data = [
+    {
+      lineNumber: "123456",
+      product: "Reg Gas",
+      rackLocation: "London",
+      qualityOrdered: "3,000",
+      qualityDelivered: "5,700",
+      freightTicket: "123456789",
+      ancillaryFees: "23",
+      totalCost: "234,565",
+      status: "Scheduled",
+      alerts: "None"
+    },
+    {
+      lineNumber: "098765",
+      product: "Mid Gas",
+      rackLocation: "London",
+      qualityOrdered: "2,500",
+      qualityDelivered: "12,000",
+      freightTicket: "123456789",
+      ancillaryFees: "43",
+      totalCost: "234,565",
+      status: "Scheduled",
+      alerts: "None"
+    },
+  ];
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
@@ -174,6 +209,10 @@ const Tables = () => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
+
+  const emptyRowsData =
+    rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
+
   return (
     <>
       <Header />
@@ -183,10 +222,6 @@ const Tables = () => {
         <Row>
           <div className="col">
             <Card className="shadow">
-              {/* <CardHeader className="border-0">
-                <h3 className="mb-0">Card tables</h3>
-              </CardHeader> */}
-
               <TableContainer component={Paper}>
                 <Table
                   className={classes.table}
@@ -194,11 +229,36 @@ const Tables = () => {
                 >
                   <TableHead>
                     <TableRow>
-                      <TableCell><b> Dessert (100g serving)</b></TableCell>
-                      <TableCell><b>Calories</b></TableCell>
-                      <TableCell><b>Fat&nbsp;(g)</b></TableCell>
-                      <TableCell><b>Carbs&nbsp;(g)</b></TableCell>
-                      <TableCell><b>Protein&nbsp;(g)</b></TableCell>
+                      <TableCell>
+                        <b> Customer Number</b>
+                      </TableCell>
+                      <TableCell>
+                        <b>Order Number</b>
+                      </TableCell>
+                      <TableCell>
+                        <b>Customer Name</b>
+                      </TableCell>
+                      <TableCell>
+                        <b>Customer Location</b>
+                      </TableCell>
+                      <TableCell>
+                        <b>PO Number</b>
+                      </TableCell>
+                      <TableCell>
+                        <b>Rack Location</b>
+                      </TableCell>
+                      <TableCell>
+                        <b>Order Date</b>
+                      </TableCell>
+                      <TableCell>
+                        <b>Delivery Date</b>
+                      </TableCell>
+                      <TableCell>
+                        <b>Status</b>
+                      </TableCell>
+                      <TableCell>
+                        <b>Alerts</b>
+                      </TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -208,28 +268,150 @@ const Tables = () => {
                           page * rowsPerPage + rowsPerPage
                         )
                       : rows
-                    ).map((row) => (
-                      <TableRow key={row.name}>
+                    ).map((row, i) => (
+                      <TableRow key={i}>
+                        <TableCell style={{ width: 250 }}>{row.customerNumber}</TableCell>
                         <TableCell style={{ width: 200 }}>
-                          {row.name}
+                          {row.orderNumber}
+                        </TableCell>
+                        <TableCell style={{ width: 200 }}>{row.customerName}</TableCell>
+                        <TableCell style={{ width: 200 }}>{row.customerLocation}</TableCell>
+                        <TableCell style={{ width: 200 }}>
+                          {row.poNumber}
                         </TableCell>
                         <TableCell style={{ width: 200 }}>
-                          {row.calories}
+                          {row.rackLocation}
                         </TableCell>
                         <TableCell style={{ width: 200 }}>
-                          {row.fat}
+                          {moment(row.orderDate).format('dddd, MMM yyy')}
                         </TableCell>
                         <TableCell style={{ width: 200 }}>
-                          {row.text}
+                          {moment(row.deliveryDate).format('dddd, MMM yyy')}
                         </TableCell>
                         <TableCell style={{ width: 200 }}>
-                          {row.text2}
+                          {row.status}
+                        </TableCell>
+                        <TableCell style={{ width: 200 }}>
+                          {row.alerts}
                         </TableCell>
                       </TableRow>
                     ))}
 
                     {emptyRows > 0 && (
                       <TableRow style={{ height: 53 * emptyRows }}>
+                        <TableCell colSpan={6} />
+                      </TableRow>
+                    )}
+                  </TableBody>
+                  <TableFooter>
+                    <TableRow>
+                      <TablePagination
+                        rowsPerPageOptions={[
+                          5,
+                          10,
+                          25,
+                          { label: "All", value: -1 },
+                        ]}
+                        colSpan={3}
+                        count={rows.length}
+                        rowsPerPage={rowsPerPage}
+                        page={page}
+                        SelectProps={{
+                          inputProps: { "aria-label": "rows per page" },
+                          native: true,
+                        }}
+                        onChangePage={handleChangePage}
+                        onChangeRowsPerPage={handleChangeRowsPerPage}
+                        ActionsComponent={TablePaginationActions}
+                      />
+                    </TableRow>
+                  </TableFooter>
+                </Table>
+              </TableContainer>
+            </Card>
+          </div>
+        </Row>
+        
+        <Row>
+          <div className="col mt-3">
+            <Card className="shadow">
+              <TableContainer component={Paper}>
+                <Table
+                  className={classes.table}
+                  aria-label="custom pagination table"
+                >
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>
+                        <b> Line Number</b>
+                      </TableCell>
+                      <TableCell>
+                        <b>Product</b>
+                      </TableCell>
+                      <TableCell>
+                        <b>Rack Location</b>
+                      </TableCell>
+                      <TableCell>
+                        <b>Quality Order (gal)</b>
+                      </TableCell>
+                      <TableCell>
+                        <b>Quality Delivered (gal)</b>
+                      </TableCell>
+                      <TableCell>
+                        <b>Freight Ticket</b>
+                      </TableCell>
+                      <TableCell>
+                        <b>Ancillary Fees</b>
+                      </TableCell>
+                      <TableCell>
+                        <b>Total Cost</b>
+                      </TableCell>
+                      <TableCell>
+                        <b>Status</b>
+                      </TableCell>
+                      <TableCell>
+                        <b>Alerts</b>
+                      </TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {(rowsPerPage > 0
+                      ? data.slice(
+                          page * rowsPerPage,
+                          page * rowsPerPage + rowsPerPage
+                        )
+                      : data
+                    ).map((row, i) => (
+                      <TableRow key={i}>
+                        <TableCell style={{ width: 250 }}>{row.lineNumber}</TableCell>
+                        <TableCell style={{ width: 200 }}>
+                          {row.product}
+                        </TableCell>
+                        <TableCell style={{ width: 200 }}>{row.rackLocation}</TableCell>
+                        <TableCell style={{ width: 200 }}>{row.qualityOrdered}</TableCell>
+                        <TableCell style={{ width: 200 }}>
+                          {row.qualityDelivered}
+                        </TableCell>
+                        <TableCell style={{ width: 200 }}>
+                          {row.freightTicket}
+                        </TableCell>
+                        <TableCell style={{ width: 200 }}>
+                          {row.ancillaryFees}
+                        </TableCell>
+                        <TableCell style={{ width: 200 }}>
+                          {row.totalCost}
+                        </TableCell>
+                        <TableCell style={{ width: 200 }}>
+                          {row.status}
+                        </TableCell>
+                        <TableCell style={{ width: 200 }}>
+                          {row.alerts}
+                        </TableCell>
+                      </TableRow>
+                    ))}
+
+                    {emptyRowsData > 0 && (
+                      <TableRow style={{ height: 53 * emptyRowsData }}>
                         <TableCell colSpan={6} />
                       </TableRow>
                     )}
