@@ -20,8 +20,10 @@ import Profile from "views/examples/Profile.js";
 import Maps from "views/examples/Maps.js";
 import Register from "views/examples/Register.js";
 import Login from "views/examples/Login.js";
-import Tables from "views/examples/Tables.js";
 import Icons from "views/examples/Icons.js";
+
+import HaulerPortal from "views/examples/Tables.js";
+import WholeSaler from "views/examples/WholeSaler";
 import Pricing from "views/examples/pricing";
 
 var routes = [
@@ -30,13 +32,20 @@ var routes = [
     path: "/index",
     name: "Hauler Portal",
     icon: "ni ni-tv-2 text-primary",
-    component: Tables,
+    component: HaulerPortal,
+    layout: "/admin",
+  },
+  {
+    path: "/whole-saler",
+    name: "Wholesaler Portal",
+    icon: "ni ni-tv-2 text-primary",
+    component: WholeSaler,
     layout: "/admin",
   },
   {
     path: "/pricing",
     name: "Pricing",
-    icon: "ni ni-planet text-blue",
+    icon: "ni ni-tv-2 text-primary",
     component: Pricing,
     layout: "/admin",
   },

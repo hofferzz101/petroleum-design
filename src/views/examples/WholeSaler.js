@@ -140,7 +140,7 @@ const useStyles2 = makeStyles({
   },
 });
 
-const Tables = () => {
+const WholeSaler = () => {
   const classes = useStyles2();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -472,4 +472,4 @@ const Tables = () => {
   );
 };
 
-export default Tables;
+export default WholeSaler;
