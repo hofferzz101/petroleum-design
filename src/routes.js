@@ -22,6 +22,7 @@ import Register from "views/examples/Register.js";
 import Login from "views/examples/Login.js";
 import Tables from "views/examples/Tables.js";
 import Icons from "views/examples/Icons.js";
+import Pricing from "views/examples/pricing";
 
 var routes = [
 
@@ -32,13 +33,13 @@ var routes = [
     component: Tables,
     layout: "/admin",
   },
-  // {
-  //   path: "/icons",
-  //   name: "Icons",
-  //   icon: "ni ni-planet text-blue",
-  //   component: Icons,
-  //   layout: "/admin",
-  // },
+  {
+    path: "/pricing",
+    name: "Pricing",
+    icon: "ni ni-planet text-blue",
+    component: Pricing,
+    layout: "/admin",
+  },
   // {
   //   path: "/maps",
   //   name: "Maps",
