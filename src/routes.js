@@ -26,6 +26,7 @@ import HaulerPortal from "views/examples/Tables.js";
 import WholeSaler from "views/examples/WholeSaler";
 import Retailer from "views/examples/Retailer";
 import Pricing from "views/examples/pricing";
+import User from "views/examples/User";
 
 var routes = [
 
@@ -55,6 +56,13 @@ var routes = [
     name: "Pricing",
     icon: "ni ni-tv-2 text-primary",
     component: Pricing,
+    layout: "/admin",
+  },
+  {
+    path: "/user",
+    name: "User",
+    icon: "ni ni-tv-2 text-primary",
+    component: User,
     layout: "/admin",
   },
   // {
