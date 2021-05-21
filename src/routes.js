@@ -24,6 +24,7 @@ import Icons from "views/examples/Icons.js";
 
 import HaulerPortal from "views/examples/Tables.js";
 import WholeSaler from "views/examples/WholeSaler";
+import Retailer from "views/examples/Retailer";
 import Pricing from "views/examples/pricing";
 
 var routes = [
@@ -40,6 +41,13 @@ var routes = [
     name: "Wholesaler Portal",
     icon: "ni ni-tv-2 text-primary",
     component: WholeSaler,
+    layout: "/admin",
+  },
+  {
+    path: "/retailer-portal",
+    name: "Retailer Portal",
+    icon: "ni ni-tv-2 text-primary",
+    component: Retailer,
     layout: "/admin",
   },
   {
