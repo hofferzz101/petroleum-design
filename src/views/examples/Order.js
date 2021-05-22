@@ -54,6 +54,8 @@ import LastPageIcon from "@material-ui/icons/LastPage"
 import Header from "components/Headers/Header.js"
 import moment from "moment"
 
+import { useHistory } from "react-router-dom"
+
 const useStyles1 = makeStyles(theme => ({
   root: {
     flexShrink: 0,
@@ -213,6 +215,8 @@ const Orders = () => {
   const emptyRowsData =
     rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage)
 
+  const history = useHistory()
+
   return (
     <>
       <Header />
@@ -352,10 +356,17 @@ const Orders = () => {
                   </div>
                 </div>
                 <div className="row">
-                    <div className="col-md-5"/> 
-                    <div className="col-md-4"> 
-                         <Button color="primary" type="button" className="btn-block w-50">Next</Button>
-                    </div>
+                  <div className="col-md-5" />
+                  <div className="col-md-4">
+                    <Button
+                      color="primary"
+                      onClick={() => history.push("/admin/order-conformation")}
+                      type="button"
+                      className="btn-block w-50"
+                    >
+                      Next
+                    </Button>
+                  </div>
                 </div>
               </Form>
             </Card>

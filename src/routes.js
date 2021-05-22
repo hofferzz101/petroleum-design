@@ -15,22 +15,22 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import Index from "views/Index.js";
-import Profile from "views/examples/Profile.js";
-import Maps from "views/examples/Maps.js";
-import Register from "views/examples/Register.js";
-import Login from "views/examples/Login.js";
-import Icons from "views/examples/Icons.js";
+import Index from "views/Index.js"
+import Profile from "views/examples/Profile.js"
+import Maps from "views/examples/Maps.js"
+import Register from "views/examples/Register.js"
+import Login from "views/examples/Login.js"
+import Icons from "views/examples/Icons.js"
 
-import HaulerPortal from "views/examples/Tables.js";
-import WholeSaler from "views/examples/WholeSaler";
-import Retailer from "views/examples/Retailer";
-import Pricing from "views/examples/pricing";
-import Orders from "views/examples/Order";
-import User from "views/examples/User";
+import HaulerPortal from "views/examples/Tables.js"
+import WholeSaler from "views/examples/WholeSaler"
+import Retailer from "views/examples/Retailer"
+import Pricing from "views/examples/pricing"
+import Orders from "views/examples/Order"
+import User from "views/examples/User"
+import OrderConformation from "views/examples/OrderConformation"
 
 var routes = [
-
   {
     path: "/index",
     name: "Hauler Portal",
@@ -108,5 +108,14 @@ var routes = [
     component: Login,
     layout: "/auth",
   },
-];
-export default routes;
+
+  {
+    path: "/order-conformation",
+    // name: "User",
+    // icon: "ni ni-tv-2 text-primary",
+    component: OrderConformation,
+    layout: "/admin",
+  },
+]
+
+export default routes
