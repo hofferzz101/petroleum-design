@@ -15,12 +15,11 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react"
+import React, { useState } from "react"
 import PropTypes from "prop-types"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
 // reactstrap components
 import {
-  Button,
   Card,
   CardHeader,
   CardBody,
@@ -36,6 +35,7 @@ import {
   Container,
   Table,
 } from "reactstrap"
+import Button from "@material-ui/core/Button"
 
 import TableHead from "@material-ui/core/TableHead"
 import TableBody from "@material-ui/core/TableBody"
@@ -137,6 +137,9 @@ const useStyles2 = makeStyles({
   table: {
     minWidth: 500,
   },
+  input: {
+    display: "none",
+  },
 })
 
 const Orders = () => {
@@ -217,6 +220,12 @@ const Orders = () => {
 
   const history = useHistory()
 
+  const [state, setstate] = useState("gal")
+  const [phoneNumber, setphoneNumber] = useState("0896-5962-87")
+  const [message, setmessage] = useState(
+    "Please call drew upon arrival (305) 587-0817"
+  )
+
   return (
     <>
       <Header />
@@ -246,6 +255,27 @@ const Orders = () => {
                     </FormGroup>
                   </div>
                 </div>
+                <div className="row mb-3">
+                  <div className="col-md-8" />
+                  <div className="col-md-3">
+                    <input
+                      accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                      className={classes.input}
+                      id="contained-button-file"
+                      multiple
+                      type="file"
+                    />
+                    <label htmlFor="contained-button-file">
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        component="span"
+                      >
+                        Upload CSV
+                      </Button>
+                    </label>
+                  </div>
+                </div>
                 <div className="row">
                   <div className="col-md-3" />
                   <div className="col-md-6">
@@ -266,34 +296,9 @@ const Orders = () => {
                           <td>
                             <Input
                               type="text"
-                              name="email"
-                              value="gal"
-                              placeholder="with a placeholder"
-                            />
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Tank 02 - Unleaded Gasoline</td>
-                          <td>5.47 / gal</td>
-                          <td>2.44 / gal</td>
-                          <td>
-                            <Input
-                              type="text"
-                              name="email"
-                              value="gal"
-                              placeholder="with a placeholder"
-                            />
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Tank 03 - Midgrade Gasoline</td>
-                          <td>6.37 / gal</td>
-                          <td>2.14 / gal</td>
-                          <td>
-                            <Input
-                              type="text"
-                              name="email"
-                              value="5,675 gal"
+                              name="email1"
+                              value={state}
+                              onChange={e => setstate(e.target.value)}
                               placeholder="with a placeholder"
                             />
                           </td>
@@ -309,7 +314,6 @@ const Orders = () => {
                     <Label>Delivery Date</Label>
                     <Input
                       type="date"
-                      value="gal"
                       placeholder="with a placeholder"
                     />
                   </div>
@@ -342,7 +346,8 @@ const Orders = () => {
                         type="text"
                         name="selectMulti"
                         id="exampleSelectMulti"
-                        value="0896-5962-87"
+                        value={phoneNumber}
+                        onChange={e => setphoneNumber(e.target.value)}
                       />
                     </FormGroup>
                     <FormGroup>
@@ -350,7 +355,8 @@ const Orders = () => {
                         type="text"
                         name="selectMulti"
                         id="exampleSelectMulti"
-                        value="Please call drew upon arrival (305) 587-0817"
+                        value={message}
+                        onChange={e => setmessage(e.target.value)}
                       />
                     </FormGroup>
                   </div>
@@ -362,9 +368,10 @@ const Orders = () => {
                       color="primary"
                       onClick={() => history.push("/admin/order-conformation")}
                       type="button"
+                      variant="contained"
                       className="btn-block w-50"
                     >
-                      Next
+                      Create
                     </Button>
                   </div>
                 </div>
