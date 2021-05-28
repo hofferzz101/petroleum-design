@@ -60,7 +60,7 @@ import moment from "moment"
 import XLSX from "xlsx"
 import { make_cols } from "./excel/MakeColumns"
 
-import { useHistory } from "react-router-dom"
+import { useHistory, Link } from "react-router-dom"
 import QRCode from "react-qr-code"
 
 const useStyles1 = makeStyles(theme => ({
@@ -311,7 +311,8 @@ const Orders = () => {
           Gallons: gallons[idx],
           ShipTo: shipTo[idx],
           Destination: destination[idx],
-          OrderNo: data[0]["order number"],
+          OrderNo: data[0]["order_number"],
+          CreatedAt: data[0]["created date"],
         })
       })
 
@@ -382,6 +383,9 @@ const Orders = () => {
                         Pick CSV
                       </Button>
                     </label>
+                  </div>
+                  <div className="col-md-1" style={{ marginTop: "2rem" }}>
+                    <Link to="/admin/order-list">Order List</Link>
                   </div>
                 </div>
 
