@@ -1,12 +1,17 @@
 
+import LandingPageFour from './LandingPages/LandingPageFour/LandingPageFour';
+import LandingPageOne from './LandingPages/LandingPageOne/LandingPageOne';
+import LandingPageTwo from './LandingPages/LandingPageTwo/LandingPageTwo';
 
-import React from 'react'
 
 function LandingPage() {
     return (
-        <div>
-            hello
-        </div>
+        
+             <>
+             <LandingPageOne/>
+             <LandingPageTwo/>
+             <LandingPageFour/>
+             </>
     )
 }
 
