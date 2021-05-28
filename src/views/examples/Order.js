@@ -318,10 +318,7 @@ const Orders = () => {
                       </Input>
                     </FormGroup>
                   </div>
-                </div>
-                <div className="row mb-3">
-                  <div className="col-md-8" />
-                  <div className="col-md-3">
+                  <div className="col-md-3" style={{marginTop: "2rem"}}>
                     <input
                       accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
                       className={classes.input}
@@ -340,9 +337,10 @@ const Orders = () => {
                     </label>
                   </div>
                 </div>
+               
                 <div className="row">
                   <div className="col-md-3" />
-                  <div className="col-md-6">
+                  <div className="col-md-6 mb-5">
                     <Table>
                       <thead>
                         <tr>
@@ -354,7 +352,7 @@ const Orders = () => {
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
+                        {/* <tr>
                           <td>Tank 01 - Clear Deisal</td>
                           <td>2.47 / gal</td>
                           <td>2.32 / gal</td>
@@ -372,7 +370,7 @@ const Orders = () => {
                               Generate QR Code
                             </Button>
                           </td>
-                        </tr>
+                        </tr> */}
                         {
                           generateTable.length
                             ? generateTable.map((item, i) => (

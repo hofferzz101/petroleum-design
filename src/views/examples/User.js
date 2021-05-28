@@ -48,6 +48,7 @@ import {
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined"
 import VisibilityOutlinedIcon from "@material-ui/icons/VisibilityOutlined"
 import DeleteOutlineOutlinedIcon from "@material-ui/icons/DeleteOutlineOutlined"
+import { Popconfirm } from "antd"
 
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap"
 
@@ -69,6 +70,24 @@ import LastPageIcon from "@material-ui/icons/LastPage"
 import Header from "components/Headers/Header.js"
 import moment from "moment"
 import { Link } from "react-router-dom"
+
+import Dialog from "@material-ui/core/Dialog"
+import DialogActions from "@material-ui/core/DialogActions"
+import DialogContent from "@material-ui/core/DialogContent"
+import DialogContentText from "@material-ui/core/DialogContentText"
+import DialogTitle from "@material-ui/core/DialogTitle"
+import Draggable from "react-draggable"
+
+function PaperComponent(props) {
+  return (
+    <Draggable
+      handle="#draggable-dialog-title"
+      cancel={'[class*="MuiDialogContent-root"]'}
+    >
+      <Paper {...props} />
+    </Draggable>
+  )
+}
 
 const useStyles1 = makeStyles(theme => ({
   root: {
@@ -221,8 +240,46 @@ const User = props => {
   var n = d.getTime()
 
   const [modal, setModal] = useState(false)
+  const [showViewModal, setshowViewModal] = useState(false)
+  const [showEditModal, setshowEditModal] = useState(false)
 
   const toggle = () => setModal(!modal)
+
+  const toggleEditModal = () => setshowEditModal(!showEditModal)
+
+  const toggleViewModal = () => setshowViewModal(!showViewModal)
+
+  const [EditData, setEditData] = useState({})
+  const [viewData, setviewData] = useState({})
+
+  const [open, setOpen] = React.useState(false)
+
+  const [name, setname] = useState("")
+  const [email, setemail] = useState("")
+  const [limit, setlimit] = useState("")
+
+  const handleClickOpen = () => {
+    setOpen(true)
+  }
+
+  const handleClose = () => {
+    setOpen(false)
+  }
+
+  const viewModal = item => {
+    setviewData(item)
+    setshowViewModal(true)
+  }
+
+  const editUser = item => {
+    setEditData(item)
+
+    setname(item.name)
+    setemail(item.email)
+    setlimit(item.limit)
+
+    setshowEditModal(true)
+  }
 
   return (
     <>
@@ -292,6 +349,99 @@ const User = props => {
                       </Button>
                     </ModalFooter>
                   </Modal>
+
+                  {/* edit modal */}
+                  <Modal
+                    isOpen={showEditModal}
+                    toggle={toggleEditModal}
+                    className={className}
+                  >
+                    <ModalHeader>Edit User</ModalHeader>
+                    <ModalBody>
+                      <Form role="form">
+                        <FormGroup className="mb-3">
+                          <InputGroup className="input-group-alternative">
+                            <Input
+                              placeholder="Username"
+                              type="text"
+                              value={name}
+                              onChange={e => setname(e.target.value)}
+                              autoComplete="new-username"
+                            />
+                          </InputGroup>
+                        </FormGroup>
+                        <FormGroup className="mb-3">
+                          <InputGroup className="input-group-alternative">
+                            <Input
+                              placeholder="Email"
+                              type="email"
+                              value={email}
+                              onChange={e => setemail(e.target.value)}
+                              autoComplete="new-email"
+                            />
+                          </InputGroup>
+                        </FormGroup>
+                        <FormGroup>
+                          <Input
+                            type="select"
+                            name="select"
+                            id="exampleSelect"
+                            value={EditData.role}
+                          >
+                            <option selected disabled value="">
+                              Select Account Title
+                            </option>
+                            <option value="Trader">Trader</option>
+                            <option value="Manager">Manager</option>
+                            <option value="Buyer">Buyer</option>
+                          </Input>
+                        </FormGroup>
+                        <FormGroup>
+                          <InputGroup className="input-group-alternative">
+                            <Input
+                              placeholder="Account Limit"
+                              value={limit}
+                              type="text"
+                              onChange={e => setlimit(e.target.value)}
+                            />
+                          </InputGroup>
+                        </FormGroup>
+                      </Form>
+                    </ModalBody>
+                    <ModalFooter>
+                      <Button color="primary" onClick={toggleEditModal}>
+                        Edit{" "}
+                      </Button>{" "}
+                      <Button color="secondary" onClick={toggleEditModal}>
+                        Cancel
+                      </Button>
+                    </ModalFooter>
+                  </Modal>
+
+                  {/* view Modal */}
+                  <Modal
+                    isOpen={showViewModal}
+                    toggle={toggleViewModal}
+                    className={className}
+                  >
+                    <ModalHeader toggle={toggleViewModal}>
+                      View User
+                    </ModalHeader>
+                    <ModalBody>
+                      <div className="p-1">
+                        <span>Name: </span> <b>{viewData.name}</b>
+                      </div>
+                      <div className="p-1">
+                        <span>Email: </span> <b>{viewData.email}</b>
+                      </div>
+                      <div className="p-1">
+                        <span>Title: </span> <b>{viewData.role}</b>
+                      </div>
+                      <div className="p-1">
+                        <span>Limit: </span> <b>{viewData.limit}</b>
+                      </div>
+                    </ModalBody>
+                  </Modal>
                 </div>
               </div>
 
@@ -334,7 +484,7 @@ const User = props => {
                         <TableCell style={{ width: 50 }}>{row.limit}</TableCell>
                         <TableCell style={{ width: 50 }}>
                           <a
-                            onClick={toggle}
+                            onClick={() => viewModal(row)}
                             style={{ cursor: "pointer" }}
                             className="material-icons-outlined"
                           >
@@ -342,7 +492,7 @@ const User = props => {
                           </a>
                           &nbsp; &nbsp; &nbsp;
                           <a
-                            onClick={toggle}
+                            onClick={() => editUser(row)}
                             style={{ cursor: "pointer" }}
                             className="material-icons-outlined"
                           >
@@ -350,13 +500,43 @@ const User = props => {
                           </a>{" "}
                           &nbsp; &nbsp;
                           <a
-                            onClick={toggle}
+                            onClick={handleClickOpen}
                             style={{ cursor: "pointer" }}
                             className="material-icons-outlined"
                           >
                             <DeleteOutlineOutlinedIcon />
                           </a>{" "}
                         </TableCell>
+                        <Dialog
+                          open={open}
+                          onClose={handleClose}
+                          PaperComponent={PaperComponent}
+                          aria-labelledby="draggable-dialog-title"
+                        >
+                          <DialogTitle
+                            style={{ cursor: "move" }}
+                            id="draggable-dialog-title"
+                          >
+                            Delete
+                          </DialogTitle>
+                          <DialogContent>
+                            <DialogContentText>
+                              Are you sure to delete ?
+                            </DialogContentText>
+                          </DialogContent>
+                          <DialogActions>
+                            <Button
+                              color="primary"
+                              autoFocus
+                              onClick={handleClose}
+                            >
+                              Cancel
+                            </Button>
+                            <Button color="danger" onClick={handleClose}>
+                              Yes
+                            </Button>
+                          </DialogActions>
+                        </Dialog>
                       </TableRow>
                     ))}
 
