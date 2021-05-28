@@ -395,8 +395,8 @@ const Orders = () => {
                                     <ModalHeader toggle={toggle}>
                                       {item["Company_Name"]}
                                     </ModalHeader>
-                                    <ModalBody>
-                                      <QRCode value={item.Company_Name} />
+                                    <ModalBody style={{textAlign: "center"}}>
+                                      <QRCode size={128} value={item.Company_Name} />
                                     </ModalBody>
                                   </Modal>
                                 </tr>
