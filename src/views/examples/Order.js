@@ -252,7 +252,7 @@ const Orders = () => {
   }
 
   // convert excel into json
-  const handleFile = uploadedFile => {
+  const handleFile = (uploadedFile) => {
     /* Boilerplate to set up FileReader */
     const reader = new FileReader()
     const rABS = !!reader.readAsBinaryString
@@ -271,6 +271,8 @@ const Orders = () => {
       const data = XLSX.utils.sheet_to_json(ws)
       /* Update state */
       setExcelData(data)
+      localStorage.setItem("Petroleum_Item", JSON.stringify(data, null, 2))
+
       setCol(make_cols(ws["!ref"]))
       // this.setState({ data: data, cols: make_cols(ws["!ref"]) }, () => {
       //   console.log(JSON.stringify(this.state.data, null, 2))
@@ -282,13 +284,14 @@ const Orders = () => {
     } else {
       reader.readAsArrayBuffer(uploadedFile)
     }
+    // if (excelData.length) {
+    //   localStorage.setItem("Petroleum_Item", JSON.stringify(excelData, null, 2))
+    // }
   }
 
   useEffect(() => {
     let data = JSON.parse(localStorage.getItem("Petroleum_Item"))
     if (data) setgenerateTable(data)
-
-    localStorage.setItem("Petroleum_Item", JSON.stringify(excelData, null, 2))
   }, [excelData, data])
   return (
     <>
@@ -318,7 +321,7 @@ const Orders = () => {
                       </Input>
                     </FormGroup>
                   </div>
-                  <div className="col-md-3" style={{marginTop: "2rem"}}>
+                  <div className="col-md-1" style={{ marginTop: "2rem" }}>
                     <input
                       accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
                       className={classes.input}
@@ -332,12 +335,12 @@ const Orders = () => {
                         color="primary"
                         component="span"
                       >
-                        Upload CSV
+                        Pick CSV
                       </Button>
                     </label>
                   </div>
                 </div>
-               
+
                 <div className="row">
                   <div className="col-md-3" />
                   <div className="col-md-6 mb-5">
@@ -393,8 +396,11 @@ const Orders = () => {
                                     <ModalHeader toggle={toggle}>
                                       {item["Company_Name"]}
                                     </ModalHeader>
-                                    <ModalBody style={{textAlign: "center"}}>
-                                      <QRCode size={128} value={item.Company_Name} />
+                                    <ModalBody style={{ textAlign: "center" }}>
+                                      <QRCode
+                                        size={128}
+                                        value={item.Company_Name}
+                                      />
                                     </ModalBody>
                                   </Modal>
                                 </tr>
