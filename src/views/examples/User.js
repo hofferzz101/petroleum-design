@@ -45,6 +45,10 @@ import {
   UncontrolledTooltip,
 } from "reactstrap"
 
+import EditOutlinedIcon from "@material-ui/icons/EditOutlined"
+import VisibilityOutlinedIcon from "@material-ui/icons/VisibilityOutlined"
+import DeleteOutlineOutlinedIcon from "@material-ui/icons/DeleteOutlineOutlined"
+
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap"
 
 import Table from "@material-ui/core/Table"
@@ -160,12 +164,14 @@ const User = props => {
     {
       name: "Alex",
       email: "alex@gmail.com",
-      role: "Author",
+      role: "Trader",
+      limit: "$700k",
     },
     {
       name: "John",
       email: "John@gmail.com",
-      role: "Hauler",
+      limit: "$900k",
+      role: "Manager",
     },
   ]
 
@@ -261,7 +267,9 @@ const User = props => {
                         </FormGroup>
                         <FormGroup>
                           <Input type="select" name="select" id="exampleSelect">
-                            <option>Select Role</option>
+                            <option selected disabled value="">
+                              Select Account Title
+                            </option>
                             <option>Author</option>
                             <option>Hauler</option>
                             <option>Wholesaler</option>
@@ -270,11 +278,7 @@ const User = props => {
                         </FormGroup>
                         <FormGroup>
                           <InputGroup className="input-group-alternative">
-                            <Input
-                              placeholder="Password"
-                              type="password"
-                              autoComplete="new-password"
-                            />
+                            <Input placeholder="Account Limit" type="text" />
                           </InputGroup>
                         </FormGroup>
                       </Form>
@@ -305,7 +309,10 @@ const User = props => {
                         <b>Email</b>
                       </TableCell>
                       <TableCell>
-                        <b>Role</b>
+                        <b>Title</b>
+                      </TableCell>
+                      <TableCell>
+                        <b>Limit</b>
                       </TableCell>
                       <TableCell>
                         <b>Action</b>
@@ -322,12 +329,33 @@ const User = props => {
                     ).map((row, i) => (
                       <TableRow key={i}>
                         <TableCell style={{ width: 100 }}>{row.name}</TableCell>
-                        <TableCell style={{ width: 50 }}>
-                          {row.email}
-                        </TableCell>
+                        <TableCell style={{ width: 50 }}>{row.email}</TableCell>
                         <TableCell style={{ width: 50 }}>{row.role}</TableCell>
+                        <TableCell style={{ width: 50 }}>{row.limit}</TableCell>
                         <TableCell style={{ width: 50 }}>
-                          <Button color="danger" onClick={toggle}>Edit</Button>
+                          <a
+                            onClick={toggle}
+                            style={{ cursor: "pointer" }}
+                            className="material-icons-outlined"
+                          >
+                            <VisibilityOutlinedIcon />
+                          </a>
+                          &nbsp; &nbsp; &nbsp;
+                          <a
+                            onClick={toggle}
+                            style={{ cursor: "pointer" }}
+                            className="material-icons-outlined"
+                          >
+                            <EditOutlinedIcon />
+                          </a>{" "}
+                          &nbsp; &nbsp;
+                          <a
+                            onClick={toggle}
+                            style={{ cursor: "pointer" }}
+                            className="material-icons-outlined"
+                          >
+                            <DeleteOutlineOutlinedIcon />
+                          </a>{" "}
                         </TableCell>
                       </TableRow>
                     ))}
