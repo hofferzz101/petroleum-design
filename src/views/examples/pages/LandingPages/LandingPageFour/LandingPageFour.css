@@ -1,0 +1,78 @@
+
+
+.left-div{
+    height: 475px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+
+.right-div{
+    height: 500px;
+    display: flex;
+    align-items: center;
+}
+
+.left-div-textOne {
+    color: blue;
+    margin-left: 45%;
+    font-weight: bolder;
+    letter-spacing: 1px;
+
+}
+
+.left-div-textTwo {
+    margin-left: 45%;
+    font-weight: bolder;
+    font-size: 32px;
+
+}
+
+.left-div-textThree {
+    margin-left: 45%;
+    margin-top: 2%;
+    font-weight: lighter;
+    font-size: 20px;
+}
+
+.right-div-text-left{
+   
+    width: 25%;
+    margin-left: 5%;
+    height: 250px;
+}
+
+.right-div-text-right{
+   
+    width: 420px;
+    margin-left: 5%;
+}
+
+.right-div-text-left-one{
+    font-size: 22px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    padding-top: 18px;
+} 
+
+.right-div-text-left-two{
+    font-size: 22px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    padding-top: 12px;
+} 
+
+.right-div-text-left-three{
+    font-size: 22px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    padding-top: 12px;
+} 
+
+.right-div-text-right-paragraph{
+    font-size: 17px;
+    color: gray;
+    font-weight: lighter;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
