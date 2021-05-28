@@ -306,7 +306,7 @@ const Orders = () => {
           Gallons: gallons[idx],
           ShipTo: shipTo[idx],
           Destination: destination[idx],
-          OrderNo: data[0]['order number']
+          OrderNo: data[0]["order number"],
         })
       })
 
@@ -333,9 +333,7 @@ const Orders = () => {
                         type="text"
                         readOnly
                         value={
-                          generateTable.length
-                            ? generateTable[0].OrderNo
-                            : ""
+                          generateTable.length ? generateTable[0].OrderNo : ""
                         }
                         name="selectMulti"
                         id="exampleSelectMulti"
