@@ -29,6 +29,7 @@ import Pricing from "views/examples/pricing"
 import Orders from "views/examples/Order"
 import User from "views/examples/User"
 import OrderConformation from "views/examples/OrderConformation"
+import LandingPage from "views/examples/pages/LandingPage"
 
 var routes = [
   {
@@ -116,6 +117,13 @@ var routes = [
     component: OrderConformation,
     layout: "/admin",
   },
+  // {
+  //   path: "/",
+  //   // name: "User",
+  //   // icon: "ni ni-tv-2 text-primary",
+  //   component: LandingPage,
+  //   layout: "/auth",
+  // },
 ]
 
 export default routes
