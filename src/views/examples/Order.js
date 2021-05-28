@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
 // reactstrap components
@@ -32,6 +32,9 @@ import {
   InputGroup,
   Row,
   Col,
+  Modal,
+  ModalHeader,
+  ModalBody,
   Container,
   Table,
 } from "reactstrap"
@@ -54,7 +57,11 @@ import LastPageIcon from "@material-ui/icons/LastPage"
 import Header from "components/Headers/Header.js"
 import moment from "moment"
 
+import XLSX from "xlsx"
+import { make_cols } from "./excel/MakeColumns"
+
 import { useHistory } from "react-router-dom"
+import QRCode from "react-qr-code"
 
 const useStyles1 = makeStyles(theme => ({
   root: {
@@ -147,6 +154,11 @@ const Orders = () => {
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(5)
 
+  const [generateTable, setgenerateTable] = useState([])
+  const [excelData, setExcelData] = useState([])
+  const [col, setCol] = useState([])
+  const [file, setFile] = useState(null)
+
   const rows = [
     {
       customerNumber: "123456",
@@ -203,6 +215,10 @@ const Orders = () => {
     },
   ]
 
+  const [modal, setModal] = useState(false)
+
+  const toggle = () => setModal(!modal)
+
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage)
 
@@ -226,6 +242,54 @@ const Orders = () => {
     "Please call drew upon arrival (305) 587-0817"
   )
 
+  // upload excel file and set into state
+  const handleChange = e => {
+    const files = e.target.files
+    if (files && files[0]) {
+      handleFile(files[0])
+      setFile(files[0])
+    }
+  }
+
+  // convert excel into json
+  const handleFile = uploadedFile => {
+    /* Boilerplate to set up FileReader */
+    const reader = new FileReader()
+    const rABS = !!reader.readAsBinaryString
+
+    reader.onload = e => {
+      /* Parse data */
+      const bstr = e.target.result
+      const wb = XLSX.read(bstr, {
+        type: rABS ? "binary" : "array",
+        bookVBA: true,
+      })
+      /* Get first worksheet */
+      const wsname = wb.SheetNames[0]
+      const ws = wb.Sheets[wsname]
+      /* Convert array of arrays */
+      const data = XLSX.utils.sheet_to_json(ws)
+      /* Update state */
+      setExcelData(data)
+      setCol(make_cols(ws["!ref"]))
+      // this.setState({ data: data, cols: make_cols(ws["!ref"]) }, () => {
+      //   console.log(JSON.stringify(this.state.data, null, 2))
+      // })
+    }
+
+    if (rABS) {
+      reader.readAsBinaryString(uploadedFile)
+    } else {
+      reader.readAsArrayBuffer(uploadedFile)
+    }
+  }
+
+  useEffect(() => {
+    let data = JSON.parse(localStorage.getItem("Petroleum_Item"))
+    if (data) setgenerateTable(data)
+
+    localStorage.setItem("Petroleum_Item", JSON.stringify(excelData, null, 2))
+  }, [excelData, data])
   return (
     <>
       <Header />
@@ -262,8 +326,8 @@ const Orders = () => {
                       accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
                       className={classes.input}
                       id="contained-button-file"
-                      multiple
                       type="file"
+                      onChange={handleChange}
                     />
                     <label htmlFor="contained-button-file">
                       <Button
@@ -286,6 +350,7 @@ const Orders = () => {
                           <th>Citgo Lemont</th>
                           <th>Exxone Chicago</th>
                           <th>Quality Desired</th>
+                          <th>Actions</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -302,20 +367,54 @@ const Orders = () => {
                               placeholder="with a placeholder"
                             />
                           </td>
+                          <td>
+                            <Button color="primary" variant="contained">
+                              Generate QR Code
+                            </Button>
+                          </td>
                         </tr>
+                        {
+                          generateTable.length
+                            ? generateTable.map((item, i) => (
+                                <tr key={i}>
+                                  <td>{item["Company_Name"]}</td>
+                                  <td>{item["Company_Email"]}</td>
+                                  <td>{item["STN"]}</td>
+                                  <td>{item["NTN"]}</td>
+                                  <td>
+                                    <Button
+                                      onClick={toggle}
+                                      color="primary"
+                                      variant="contained"
+                                    >
+                                      Generate QR Code
+                                    </Button>
+                                  </td>
+
+                                  <Modal isOpen={modal} toggle={toggle}>
+                                    <ModalHeader toggle={toggle}>
+                                      {item["Company_Name"]}
+                                    </ModalHeader>
+                                    <ModalBody>
+                                      <QRCode value={item.Company_Name} />
+                                    </ModalBody>
+                                  </Modal>
+                                </tr>
+                              ))
+                            : null
+                          // <h1>No Data</h1>
+                        }
                       </tbody>
                     </Table>
                   </div>
                 </div>
+                {/* <QRCode value="hey" /> */}
 
                 <div className="row">
                   <div className="col-md-3" />
                   <div className="col-md-3">
                     <Label>Delivery Date</Label>
-                    <Input
-                      type="date"
-                      placeholder="with a placeholder"
-                    />
+                    <Input type="date" placeholder="with a placeholder" />
                   </div>
                 </div>
                 <div className="row mt-3">
