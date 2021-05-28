@@ -252,7 +252,7 @@ const Orders = () => {
   }
 
   // convert excel into json
-  const handleFile = (uploadedFile) => {
+  const handleFile = uploadedFile => {
     /* Boilerplate to set up FileReader */
     const reader = new FileReader()
     const rABS = !!reader.readAsBinaryString
@@ -291,8 +291,29 @@ const Orders = () => {
 
   useEffect(() => {
     let data = JSON.parse(localStorage.getItem("Petroleum_Item"))
-    if (data) setgenerateTable(data)
-  }, [excelData, data])
+
+    if (data) {
+      let products = data ? data[0].Product.split(",") : []
+      let gallons = data ? data[0].Gallons.split(",") : []
+      let shipTo = data ? data[0].Shipto.toString().split("/") : []
+      let destination = data ? data[0].Destination.split(",") : []
+
+      let formatedArray = []
+
+      products.map((item, idx) => {
+        formatedArray.push({
+          Product: item,
+          Gallons: gallons[idx],
+          ShipTo: shipTo[idx],
+          Destination: destination[idx],
+          OrderNo: data[0]['order number']
+        })
+      })
+
+      setgenerateTable(formatedArray)
+      // console.clear()
+    }
+  }, [data])
   return (
     <>
       <Header />
@@ -303,6 +324,26 @@ const Orders = () => {
           <div className="col">
             <Card className="shadow">
               <Form className="mt-4 mb-4">
+                <div className="row">
+                  <div className="col-md-4" />
+                  <div className="col-md-4">
+                    <FormGroup>
+                      <Label for="exampleSelectMulti">Order no.</Label>
+                      <Input
+                        type="text"
+                        readOnly
+                        value={
+                          generateTable.length
+                            ? generateTable[0].OrderNo
+                            : ""
+                        }
+                        name="selectMulti"
+                        id="exampleSelectMulti"
+                      />
+                    </FormGroup>
+                  </div>
+                </div>
+
                 <div className="row">
                   <div className="col-md-4" />
                   <div className="col-md-4">
@@ -348,40 +389,21 @@ const Orders = () => {
                       <thead>
                         <tr>
                           <th>Tank / Product</th>
-                          <th>Citgo Lemont</th>
-                          <th>Exxone Chicago</th>
-                          <th>Quality Desired</th>
+                          <th>Gallons</th>
+                          <th>Ship To</th>
+                          <th>Destination</th>
                           <th>Actions</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {/* <tr>
-                          <td>Tank 01 - Clear Deisal</td>
-                          <td>2.47 / gal</td>
-                          <td>2.32 / gal</td>
-                          <td>
-                            <Input
-                              type="text"
-                              name="email1"
-                              value={state}
-                              onChange={e => setstate(e.target.value)}
-                              placeholder="with a placeholder"
-                            />
-                          </td>
-                          <td>
-                            <Button color="primary" variant="contained">
-                              Generate QR Code
-                            </Button>
-                          </td>
-                        </tr> */}
                         {
                           generateTable.length
                             ? generateTable.map((item, i) => (
                                 <tr key={i}>
-                                  <td>{item["Company_Name"]}</td>
-                                  <td>{item["Company_Email"]}</td>
-                                  <td>{item["STN"]}</td>
-                                  <td>{item["NTN"]}</td>
+                                  <td>{item["Product"]}</td>
+                                  <td>{item["Gallons"]}</td>
+                                  <td>{item["ShipTo"]}</td>
+                                  <td>{item["Destination"]}</td>
                                   <td>
                                     <Button
                                       onClick={toggle}
@@ -394,12 +416,12 @@ const Orders = () => {
 
                                   <Modal isOpen={modal} toggle={toggle}>
                                     <ModalHeader toggle={toggle}>
-                                      {item["Company_Name"]}
+                                      Order no: {item.OrderNo}
                                     </ModalHeader>
                                     <ModalBody style={{ textAlign: "center" }}>
                                       <QRCode
                                         size={128}
-                                        value={item.Company_Name}
+                                        value={item.OrderNo.toString()}
                                       />
                                     </ModalBody>
                                   </Modal>
