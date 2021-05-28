@@ -289,6 +289,11 @@ const Orders = () => {
     // }
   }
 
+  const createConfirmation = () => {
+    localStorage.setItem("confirm_product", JSON.stringify(generateTable))
+    history.push("/admin/order-conformation")
+  }
+
   useEffect(() => {
     let data = JSON.parse(localStorage.getItem("Petroleum_Item"))
 
@@ -311,7 +316,7 @@ const Orders = () => {
       })
 
       setgenerateTable(formatedArray)
-      // console.clear()
+      console.clear()
     }
   }, [data])
   return (
@@ -489,7 +494,7 @@ const Orders = () => {
                   <div className="col-md-4">
                     <Button
                       color="primary"
-                      onClick={() => history.push("/admin/order-conformation")}
+                      onClick={createConfirmation}
                       type="button"
                       variant="contained"
                       className="btn-block w-50"

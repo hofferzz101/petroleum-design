@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
 // reactstrap components
@@ -211,12 +211,12 @@ const OrderConformation = props => {
   const emptyRowsData =
     rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage)
 
-  var d = new Date()
-  var n = d.getTime()
+  const [confirmationData, setconfirmationData] = useState([])
 
-  const [modal, setModal] = useState(false)
-
-  const toggle = () => setModal(!modal)
+  useEffect(() => {
+    let data = JSON.parse(localStorage.getItem("confirm_product"))
+    setconfirmationData(data)
+  }, [])
 
   return (
     <>
@@ -231,49 +231,34 @@ const OrderConformation = props => {
                 <b>Delivery Station:</b> 79 River St. Chicago, IL
                 <br />
                 <b className="mt-3">Order Details:</b>
-                <Table bordered className="mt-2">
+                <Table bordered className="mt-2 mb-3">
                   <thead>
                     <tr>
                       <th>Product</th>
-                      <th>Quality (gal)</th>
-                      <th>Price (gal)</th>
-                      <th>Total Cost</th>
+                      <th>Gallons</th>
+                      <th>Ship To</th>
+                      <th>Destination</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>Unleaded Gasoline</td>
-                      <td>5,000</td>
-                      <td>2,73</td>
-                      <td>12,34</td>
-                    </tr>
-                    <tr>
-                      <td>Midgrade Gasoline</td>
-                      <td>2,000</td>
-                      <td>2.23</td>
-                      <td>11,150</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <b>Total/Average</b>
-                      </td>
-                      <td>
-                        <b>7,000</b>
-                      </td>
-                      <td>
-                        <b>4.93</b>
-                      </td>
-                      <td>
-                        <b>23,150</b>
-                      </td>
-                    </tr>
+                    {confirmationData.length
+                      ? confirmationData.map(item => (
+                          <tr>
+                            <td>{item.Product}</td>
+                            <td>{item.Gallons}</td>
+                            <td>{item.ShipTo}</td>
+                            <td>{item.Destination}</td>
+                          </tr>
+                        ))
+                      : null}
                   </tbody>
                 </Table>
-
-                <b>Rack Location: </b> Exxon Chicago <br/>
-                <b>Delivery Window: </b> Late Afternoon 06:00 pm - 11:59 pm <br/>
-                <b>PO Number: </b> 0896-592-87 <br/>
-                <b>Notes: </b> Please call drew upon arrival (305) 587-0817 <br/>
+                <b>Rack Location: </b> Exxon Chicago <br />
+                <b>Delivery Window: </b> Late Afternoon 06:00 pm - 11:59 pm{" "}
+                <br />
+                <b>PO Number: </b> 0896-592-87 <br />
+                <b>Notes: </b> Please call drew upon arrival (305) 587-0817{" "}
+                <br />
               </div>
             </Card>
           </div>
