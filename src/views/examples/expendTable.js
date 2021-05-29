@@ -16,6 +16,10 @@ import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown"
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp"
 import { ContactSupportOutlined } from "@material-ui/icons"
 
+import EditOutlinedIcon from "@material-ui/icons/EditOutlined"
+import VisibilityOutlinedIcon from "@material-ui/icons/VisibilityOutlined"
+import DeleteOutlineOutlinedIcon from "@material-ui/icons/DeleteOutlineOutlined"
+
 const useRowStyles = makeStyles({
   root: {
     "& > *": {
@@ -70,6 +74,19 @@ function Row(props) {
         <TableCell>{row["TerminalNumber"]}</TableCell>
         <TableCell>{row["createddate"]}</TableCell>
         <TableCell>{row["expirationdate"]}</TableCell>
+        <TableCell style={{ width: 180 }}>
+          <a style={{ cursor: "pointer" }} className="material-icons-outlined">
+            <VisibilityOutlinedIcon />
+          </a>
+          &nbsp; &nbsp; &nbsp;
+          <a style={{ cursor: "pointer" }} className="material-icons-outlined">
+            <EditOutlinedIcon />
+          </a>{" "}
+          &nbsp; &nbsp;
+          <a style={{ cursor: "pointer" }} className="material-icons-outlined">
+            <DeleteOutlineOutlinedIcon />
+          </a>{" "}
+        </TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -204,6 +221,9 @@ export default function CollapsibleTable() {
             </TableCell>
             <TableCell>
               <b>Expiration Date</b>
+            </TableCell>
+            <TableCell>
+              <b>Actions</b>
             </TableCell>
           </TableRow>
         </TableHead>

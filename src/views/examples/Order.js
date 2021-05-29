@@ -281,7 +281,9 @@ const Orders = () => {
       reader.readAsArrayBuffer(uploadedFile)
     }
 
-    window.location.reload()
+    setTimeout(() => {
+      window.location.reload()
+    }, 1000)
   }
 
   const createConfirmation = () => {
@@ -325,140 +327,8 @@ const Orders = () => {
         <Row>
           <div className="col">
             <Card className="shadow">
-              <Form className="mt-4 mb-4">
-                <div className="row">
-                  <div className="col-md-4" />
-                  <div className="col-md-4">
-                    <FormGroup>
-                      <Label for="exampleSelectMulti">Order no.</Label>
-                      <Input
-                        type="text"
-                        readOnly
-                        value={
-                          generateTable.length ? generateTable[0].OrderNo : ""
-                        }
-                        name="selectMulti"
-                        id="exampleSelectMulti"
-                      />
-                    </FormGroup>
-                  </div>
-                </div>
 
-                <div className="row">
-                  <div className="col-md-4" />
-                  <div className="col-md-4">
-                    <FormGroup>
-                      <Label for="exampleSelectMulti">Location</Label>
-                      <Input
-                        type="select"
-                        name="selectMulti"
-                        id="exampleSelectMulti"
-                      >
-                        <option>Philadelphia PA</option>
-                        <option>Location 2</option>
-                        <option>Location 3</option>
-                        <option>Location 4</option>
-                        <option>Location 2</option>
-                      </Input>
-                    </FormGroup>
-                  </div>
-                  <div className="col-md-1" style={{ marginTop: "2rem" }}>
-                    <input
-                      accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-                      className={classes.input}
-                      id="contained-button-file"
-                      type="file"
-                      onChange={handleChange}
-                    />
-                    <label htmlFor="contained-button-file">
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        component="span"
-                      >
-                        Pick CSV
-                      </Button>
-                    </label>
-                  </div>
-
-                  {/* <div className="col-md-1" style={{ marginTop: "2rem" }}>
-                    <Button
-                      onClick={toggle}
-                      color="primary"
-                      variant="contained"
-                    >
-                      QR Code
-                    </Button>{" "}
-                  </div> */}
-                </div>
-
-                <div className="row">
-                  <div className="col-md-3" />
-                  <div className="col-md-3">
-                    <Label>Delivery Date</Label>
-                    <Input type="date" placeholder="with a placeholder" />
-                  </div>
-                </div>
-                <div className="row mt-3">
-                  <div className="col-md-3" />
-                  <div className="col-md-3">
-                    <FormGroup>
-                      <Label>Delivery Time Preference</Label>
-                      <Input
-                        type="select"
-                        name="selectMulti"
-                        id="exampleSelectMulti"
-                      >
-                        <option>Early Morning: 12:00 am - 05:59 am</option>
-                        <option>Late Morning: 06:00 am - 11:59 am</option>
-                        <option>Early Afternoon: 12:00 pm - 05:59 pm</option>
-                        <option>Late Afternoon: 06:00 pm - 11:59 pm</option>
-                      </Input>
-                    </FormGroup>
-                  </div>
-                </div>
-
-                <div className="row">
-                  <div className="col-md-3" />
-                  <div className="col-md-3">
-                    <Label>Additional Information</Label>
-                    <FormGroup>
-                      <Input
-                        type="text"
-                        name="selectMulti"
-                        id="exampleSelectMulti"
-                        value={phoneNumber}
-                        onChange={e => setphoneNumber(e.target.value)}
-                      />
-                    </FormGroup>
-                    <FormGroup>
-                      <Input
-                        type="text"
-                        name="selectMulti"
-                        id="exampleSelectMulti"
-                        value={message}
-                        onChange={e => setmessage(e.target.value)}
-                      />
-                    </FormGroup>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-md-5" />
-                  <div className="col-md-4">
-                    <Button
-                      color="primary"
-                      onClick={createConfirmation}
-                      type="button"
-                      variant="contained"
-                      className="btn-block w-50"
-                    >
-                      Create
-                    </Button>
-                  </div>
-                </div>
-              </Form>
-
-              <div className="row">
+              <div className="row mt-4">
                 <div className="col-md-9" />
                 <div className="col-md-2 mb-4">
                   <input
@@ -478,10 +348,7 @@ const Orders = () => {
                     </Button>
                   </label>
                   &nbsp; &nbsp; &nbsp;
-                  <Button
-                    color="primary"
-                    onClick={addOrderModal}
-                  >
+                  <Button color="primary" onClick={addOrderModal}>
                     Add Order
                   </Button>
                 </div>
