@@ -387,6 +387,15 @@ const Orders = () => {
                   <div className="col-md-1" style={{ marginTop: "2rem" }}>
                     <Link to="/admin/order-list">Order List</Link>
                   </div>
+                  <div className="col-md-1" style={{ marginTop: "2rem" }}>
+                    <Button
+                      onClick={toggle}
+                      color="primary"
+                      variant="contained"
+                    >
+                      Generate QR Code
+                    </Button>{" "}
+                  </div>
                 </div>
 
                 <div className="row">
@@ -399,7 +408,6 @@ const Orders = () => {
                           <th>Gallons</th>
                           <th>Ship To</th>
                           <th>Destination</th>
-                          <th>Actions</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -411,27 +419,6 @@ const Orders = () => {
                                   <td>{item["Gallons"]}</td>
                                   <td>{item["ShipTo"]}</td>
                                   <td>{item["Destination"]}</td>
-                                  <td>
-                                    <Button
-                                      onClick={toggle}
-                                      color="primary"
-                                      variant="contained"
-                                    >
-                                      Generate QR Code
-                                    </Button>
-                                  </td>
-
-                                  <Modal isOpen={modal} toggle={toggle}>
-                                    <ModalHeader toggle={toggle}>
-                                      Order no: {item.OrderNo}
-                                    </ModalHeader>
-                                    <ModalBody style={{ textAlign: "center" }}>
-                                      <QRCode
-                                        size={128}
-                                        value={item.OrderNo.toString()}
-                                      />
-                                    </ModalBody>
-                                  </Modal>
                                 </tr>
                               ))
                             : null
@@ -442,6 +429,15 @@ const Orders = () => {
                   </div>
                 </div>
                 {/* <QRCode value="hey" /> */}
+
+                <Modal isOpen={modal} toggle={toggle}>
+                  <ModalHeader toggle={toggle}>
+                    Order no: {generateTable[0]}
+                  </ModalHeader>
+                  <ModalBody style={{ textAlign: "center" }}>
+                    <QRCode size={128} value={generateTable[0].OrderNo.toString()} />
+                  </ModalBody>
+                </Modal>
 
                 <div className="row">
                   <div className="col-md-3" />

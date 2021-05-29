@@ -239,7 +239,7 @@ const OrderList = props => {
                 <Table bordered className="mt-2 mb-3">
                   <thead>
                     <tr>
-                      <th>Product</th>
+                      <th>Order No</th>
                       <th>Created At</th>
                       <th>Actions</th>
                     </tr>
