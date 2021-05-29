@@ -21,22 +21,16 @@ import { makeStyles, useTheme } from "@material-ui/core/styles"
 // reactstrap components
 import {
   Card,
-  CardHeader,
-  CardBody,
   FormGroup,
   Label,
   Form,
   Input,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroup,
   Row,
-  Col,
   Modal,
+  ModalFooter,
   ModalHeader,
   ModalBody,
   Container,
-  Table,
 } from "reactstrap"
 import Button from "@material-ui/core/Button"
 
@@ -273,6 +267,9 @@ const Orders = () => {
       localStorage.setItem("Petroleum_Item", JSON.stringify(data, null, 2))
 
       setCol(make_cols(ws["!ref"]))
+
+      history.push("/admin/user")
+      history.push("/admin/orders")
     }
 
     if (rABS) {
@@ -280,10 +277,6 @@ const Orders = () => {
     } else {
       reader.readAsArrayBuffer(uploadedFile)
     }
-
-    setTimeout(() => {
-      window.location.reload()
-    }, 1000)
   }
 
   const createConfirmation = () => {
@@ -314,7 +307,6 @@ const Orders = () => {
         })
       })
 
-      //   console.clear()
       setgenerateTable(formatedArray)
     }
   }, [])
@@ -327,7 +319,6 @@ const Orders = () => {
         <Row>
           <div className="col">
             <Card className="shadow">
-
               <div className="row mt-4">
                 <div className="col-md-9" />
                 <div className="col-md-2 mb-4">
@@ -364,7 +355,51 @@ const Orders = () => {
               {/* add order modal */}
               <Modal isOpen={orderModal} toggle={addOrderModal}>
                 <ModalHeader>Add Order</ModalHeader>
-                <ModalBody style={{ textAlign: "center" }}></ModalBody>
+                <ModalBody style={{ textAlign: "center" }}>
+                  <Form>
+                    <FormGroup>
+                      <Input type="text" placeholder="Contract" />
+                    </FormGroup>
+                    <FormGroup>
+                      <Input type="text" placeholder="Contact Number" />
+                    </FormGroup>
+                    <FormGroup>
+                      <Input type="text" placeholder="Order No" />
+                    </FormGroup>
+                    <FormGroup>
+                      <Input type="text" placeholder="Hauler Number" />
+                    </FormGroup>
+                    <FormGroup>
+                      <Input type="text" placeholder="Driver Number" />
+                    </FormGroup>
+                    <FormGroup>
+                      <Input type="text" placeholder="PO Number" />
+                    </FormGroup>
+                    <FormGroup>
+                      <Input type="text" placeholder="Suplier Number" />
+                    </FormGroup>
+                    <FormGroup>
+                      <Input type="text" placeholder="Terminal Number	" />
+                    </FormGroup>
+                    <FormGroup>
+                      <Label for="exampleEmail">Order Date</Label>
+                      <Input type="date" placeholder="Order Date" />
+                    </FormGroup>
+                    <FormGroup>
+                      <Label for="exampleEmail">Expiration Date</Label>
+                      <Input type="date" placeholder="Expiration Date" />
+                    </FormGroup>
+                  </Form>
+                </ModalBody>
+                <ModalFooter>
+                  <Button
+                    color="primary"
+                    variant="contained"
+                    onClick={createConfirmation}
+                  >
+                    Create
+                  </Button>{" "}
+                </ModalFooter>
               </Modal>
 
               <Modal isOpen={modal} toggle={toggle}>
