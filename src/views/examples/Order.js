@@ -210,7 +210,11 @@ const Orders = () => {
 
   const [modal, setModal] = useState(false)
 
+  const [orderModal, setOrderModal] = useState(false)
+
   const toggle = () => setModal(!modal)
+
+  const addOrderModal = () => setOrderModal(!orderModal)
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage)
@@ -377,7 +381,7 @@ const Orders = () => {
                     </label>
                   </div>
 
-                  <div className="col-md-1" style={{ marginTop: "2rem" }}>
+                  {/* <div className="col-md-1" style={{ marginTop: "2rem" }}>
                     <Button
                       onClick={toggle}
                       color="primary"
@@ -385,10 +389,7 @@ const Orders = () => {
                     >
                       QR Code
                     </Button>{" "}
-                  </div>
-                  <div className="col-md-1" style={{ marginTop: "2rem" }}>
-                    <Link to="/admin/order-list">Order List</Link>
-                  </div>
+                  </div> */}
                 </div>
 
                 <div className="row">
@@ -458,12 +459,46 @@ const Orders = () => {
               </Form>
 
               <div className="row">
-                <div className="col-md-1"/>
+                <div className="col-md-9" />
+                <div className="col-md-2 mb-4">
+                  <input
+                    accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                    className={classes.input}
+                    id="contained-button-file"
+                    type="file"
+                    onChange={handleChange}
+                  />
+                  <label htmlFor="contained-button-file">
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      component="span"
+                    >
+                      Pick CSV
+                    </Button>
+                  </label>
+                  &nbsp; &nbsp; &nbsp;
+                  <Button
+                    color="primary"
+                    onClick={addOrderModal}
+                  >
+                    Add Order
+                  </Button>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-md-1" />
                 <div className="col-md-10 mb-5">
                   <CollapsedTable />
                 </div>
               </div>
               {/* <QRCode value="hey" /> */}
+
+              {/* add order modal */}
+              <Modal isOpen={orderModal} toggle={addOrderModal}>
+                <ModalHeader>Add Order</ModalHeader>
+                <ModalBody style={{ textAlign: "center" }}></ModalBody>
+              </Modal>
 
               <Modal isOpen={modal} toggle={toggle}>
                 <ModalHeader>
