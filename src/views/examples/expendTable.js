@@ -29,8 +29,6 @@ function Row(props) {
   const [open, setOpen] = React.useState(false)
   const classes = useRowStyles()
 
-  const [formated, setformated] = useState([])
-
   let array = []
   if (row) {
     let product = row.Product
@@ -60,13 +58,18 @@ function Row(props) {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
+        <TableCell>{row.Contract}</TableCell>
         <TableCell component="th" scope="row">
           {row["CustomerNumber"]}
         </TableCell>
-        <TableCell align="right">{row.order_number}</TableCell>
-        <TableCell align="right">{"row.fat"}</TableCell>
-        <TableCell align="right">{"row.carbs"}</TableCell>
-        <TableCell align="right">{row["PONumber"]}</TableCell>
+        <TableCell>{row.order_number}</TableCell>
+        <TableCell>{row["HaulerNumber"]}</TableCell>
+        <TableCell>{row["DriverNumber"]}</TableCell>
+        <TableCell>{row["PONumber"]}</TableCell>
+        <TableCell>{row["SupplierNumber"]}</TableCell>
+        <TableCell>{row["TerminalNumber"]}</TableCell>
+        <TableCell>{row["createddate"]}</TableCell>
+        <TableCell>{row["expirationdate"]}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -173,34 +176,34 @@ export default function CollapsibleTable() {
           <TableRow>
             <TableCell />
             <TableCell>
+              <b> Contract</b>
+            </TableCell>
+            <TableCell>
               <b> Customer Number</b>
             </TableCell>
             <TableCell>
               <b>Order Number</b>
             </TableCell>
             <TableCell>
-              <b>Customer Name</b>
+              <b>Hauler Number</b>
             </TableCell>
             <TableCell>
-              <b>Customer Location</b>
+              <b>Driver Number</b>
             </TableCell>
             <TableCell>
               <b>PO Number</b>
             </TableCell>
             <TableCell>
-              <b>Rack Location</b>
+              <b>Supplier Number</b>
+            </TableCell>
+            <TableCell>
+              <b>Terminal Number</b>
             </TableCell>
             <TableCell>
               <b>Order Date</b>
             </TableCell>
             <TableCell>
-              <b>Delivery Date</b>
-            </TableCell>
-            <TableCell>
-              <b>Status</b>
-            </TableCell>
-            <TableCell>
-              <b>Alerts</b>
+              <b>Expiration Date</b>
             </TableCell>
           </TableRow>
         </TableHead>
