@@ -24,7 +24,6 @@ function LandingPageOne() {
                       <Link className="top-links">CONTACTS</Link>
                       <Link className="top-links">ALL BLOCKS</Link>
                       <Link className="top-links">LOGIN</Link>
-                     
                  </div>
                 </Grid>
              </Grid>
