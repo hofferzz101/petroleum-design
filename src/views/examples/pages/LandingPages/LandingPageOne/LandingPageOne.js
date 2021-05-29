@@ -23,8 +23,9 @@ function LandingPageOne() {
                       <Link className="top-links">PRICING</Link>
                       <Link className="top-links">CONTACTS</Link>
                       <Link className="top-links">ALL BLOCKS</Link>
+
                       <Link className="top-links" to="/auth/login">LOGIN</Link>
-                     
+
                  </div>
                 </Grid>
              </Grid>
