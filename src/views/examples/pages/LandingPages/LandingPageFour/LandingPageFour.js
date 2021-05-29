@@ -16,6 +16,10 @@ const LandingPageFour = ()=>{
              </Grid>
              <Grid item lg={7}>
                 <div className="right-div">
+
+                    <div className="right-div-line">
+                       
+                    </div>
                    
                     <div className="right-div-text-left">
                         <h5 className="right-div-text-left-one"><Link>We Are Innovative</Link></h5>

@@ -76,3 +76,11 @@
     font-weight: lighter;
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
+
+
+.right-div-line{
+    height: 40%;
+    width: 4px;
+    background-color: coral;
+    border-radius: 10px;
+}
