@@ -20,6 +20,24 @@ import EditOutlinedIcon from "@material-ui/icons/EditOutlined"
 import VisibilityOutlinedIcon from "@material-ui/icons/VisibilityOutlined"
 import DeleteOutlineOutlinedIcon from "@material-ui/icons/DeleteOutlineOutlined"
 
+import QRCode from "react-qr-code"
+
+// reactstrap components
+import {
+  Card,
+  FormGroup,
+  Label,
+  Form,
+  Input,
+  Row,
+  Modal,
+  Button,
+  ModalFooter,
+  ModalHeader,
+  ModalBody,
+  Container,
+} from "reactstrap"
+
 const useRowStyles = makeStyles({
   root: {
     "& > *": {
@@ -28,7 +46,7 @@ const useRowStyles = makeStyles({
   },
 })
 
-function Row(props) {
+function Rows(props) {
   const { row } = props
   const [open, setOpen] = React.useState(false)
   const classes = useRowStyles()
@@ -50,8 +68,18 @@ function Row(props) {
     })
   }
 
+  const [modal, setModal] = useState(false)
+  const toggle = () => setModal(!modal)
+
   return (
     <React.Fragment>
+      <Modal isOpen={modal} toggle={toggle}>
+        <ModalHeader>Order no: {row ? row.order_number : ""}</ModalHeader>
+        <ModalBody style={{ textAlign: "center" }}>
+          <QRCode size={128} value={row ? JSON.stringify(row) : ""} />
+        </ModalBody>
+      </Modal>
+
       <TableRow className={classes.root}>
         <TableCell>
           <IconButton
@@ -74,11 +102,11 @@ function Row(props) {
         <TableCell>{row["TerminalNumber"]}</TableCell>
         <TableCell>{row["createddate"]}</TableCell>
         <TableCell>{row["expirationdate"]}</TableCell>
-        <TableCell style={{ width: 180 }}>
+        <TableCell style={{ width: 280 }}>
           <a style={{ cursor: "pointer" }} className="material-icons-outlined">
             <VisibilityOutlinedIcon />
           </a>
-          &nbsp; &nbsp; &nbsp;
+          &nbsp; &nbsp;
           <a style={{ cursor: "pointer" }} className="material-icons-outlined">
             <EditOutlinedIcon />
           </a>{" "}
@@ -86,6 +114,10 @@ function Row(props) {
           <a style={{ cursor: "pointer" }} className="material-icons-outlined">
             <DeleteOutlineOutlinedIcon />
           </a>{" "}
+          &nbsp; &nbsp;
+          <Button color="primary" variant="contained" onClick={toggle}>
+            QR Code
+          </Button>
         </TableCell>
       </TableRow>
       <TableRow>
@@ -125,7 +157,7 @@ function Row(props) {
   )
 }
 
-Row.propTypes = {
+Rows.propTypes = {
   row: PropTypes.shape({
     calories: PropTypes.number.isRequired,
     carbs: PropTypes.number.isRequired,
@@ -229,7 +261,7 @@ export default function CollapsibleTable() {
         </TableHead>
         <TableBody>
           {MasterData
-            ? MasterData.map((row, i) => <Row key={i} row={row} />)
+            ? MasterData.map((row, i) => <Rows key={i} row={row} />)
             : null}
         </TableBody>
       </Table>

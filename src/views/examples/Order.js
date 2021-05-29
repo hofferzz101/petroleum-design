@@ -202,11 +202,7 @@ const Orders = () => {
     },
   ]
 
-  const [modal, setModal] = useState(false)
-
   const [orderModal, setOrderModal] = useState(false)
-
-  const toggle = () => setModal(!modal)
 
   const addOrderModal = () => setOrderModal(!orderModal)
 
@@ -402,17 +398,7 @@ const Orders = () => {
                 </ModalFooter>
               </Modal>
 
-              <Modal isOpen={modal} toggle={toggle}>
-                <ModalHeader>
-                  Order no: {QR_Object ? QR_Object.order_number : ""}
-                </ModalHeader>
-                <ModalBody style={{ textAlign: "center" }}>
-                  <QRCode
-                    size={128}
-                    value={QR_Object ? JSON.stringify(QR_Object) : ""}
-                  />
-                </ModalBody>
-              </Modal>
+           
             </Card>
           </div>
         </Row>
