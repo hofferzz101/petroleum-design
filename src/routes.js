@@ -30,6 +30,7 @@ import Orders from "views/examples/Order"
 import User from "views/examples/User"
 import OrderConformation from "views/examples/OrderConformation"
 import LandingPage from "views/examples/pages/LandingPage"
+import OrderList from "views/examples/OrderList"
 
 var routes = [
   {
@@ -115,6 +116,13 @@ var routes = [
     // name: "User",
     // icon: "ni ni-tv-2 text-primary",
     component: OrderConformation,
+    layout: "/admin",
+  },
+  {
+    path: "/order-list",
+    // name: "User",
+    // icon: "ni ni-tv-2 text-primary",
+    component: OrderList,
     layout: "/admin",
   },
   // {
