@@ -60,7 +60,7 @@ import moment from "moment"
 import XLSX from "xlsx"
 import { make_cols } from "./excel/MakeColumns"
 
-import { useHistory } from "react-router-dom"
+import { useHistory, Link } from "react-router-dom"
 import QRCode from "react-qr-code"
 
 const useStyles1 = makeStyles(theme => ({
@@ -271,6 +271,8 @@ const Orders = () => {
       const data = XLSX.utils.sheet_to_json(ws)
       /* Update state */
       setExcelData(data)
+      localStorage.setItem("Petroleum_Item", JSON.stringify(data, null, 2))
+
       setCol(make_cols(ws["!ref"]))
       // this.setState({ data: data, cols: make_cols(ws["!ref"]) }, () => {
       //   console.log(JSON.stringify(this.state.data, null, 2))
@@ -282,14 +284,42 @@ const Orders = () => {
     } else {
       reader.readAsArrayBuffer(uploadedFile)
     }
+    // if (excelData.length) {
+    //   localStorage.setItem("Petroleum_Item", JSON.stringify(excelData, null, 2))
+    // }
+  }
+
+  const createConfirmation = () => {
+    localStorage.setItem("confirm_product", JSON.stringify(generateTable))
+    history.push("/admin/order-conformation")
   }
 
   useEffect(() => {
     let data = JSON.parse(localStorage.getItem("Petroleum_Item"))
-    if (data) setgenerateTable(data)
 
-    localStorage.setItem("Petroleum_Item", JSON.stringify(excelData, null, 2))
-  }, [excelData, data])
+    if (data) {
+      let products = data ? data[0].Product.split(",") : []
+      let gallons = data ? data[0].Gallons.split(",") : []
+      let shipTo = data ? data[0].Shipto.toString().split("/") : []
+      let destination = data ? data[0].Destination.split(",") : []
+
+      let formatedArray = []
+
+      products.map((item, idx) => {
+        formatedArray.push({
+          Product: item,
+          Gallons: gallons[idx],
+          ShipTo: shipTo[idx],
+          Destination: destination[idx],
+          OrderNo: data[0]["order_number"],
+          CreatedAt: data[0]["created date"],
+        })
+      })
+
+      setgenerateTable(formatedArray)
+      console.clear()
+    }
+  }, [data])
   return (
     <>
       <Header />
@@ -300,6 +330,24 @@ const Orders = () => {
           <div className="col">
             <Card className="shadow">
               <Form className="mt-4 mb-4">
+                <div className="row">
+                  <div className="col-md-4" />
+                  <div className="col-md-4">
+                    <FormGroup>
+                      <Label for="exampleSelectMulti">Order no.</Label>
+                      <Input
+                        type="text"
+                        readOnly
+                        value={
+                          generateTable.length ? generateTable[0].OrderNo : ""
+                        }
+                        name="selectMulti"
+                        id="exampleSelectMulti"
+                      />
+                    </FormGroup>
+                  </div>
+                </div>
+
                 <div className="row">
                   <div className="col-md-4" />
                   <div className="col-md-4">
@@ -318,10 +366,7 @@ const Orders = () => {
                       </Input>
                     </FormGroup>
                   </div>
-                </div>
-                <div className="row mb-3">
-                  <div className="col-md-8" />
-                  <div className="col-md-3">
+                  <div className="col-md-1" style={{ marginTop: "2rem" }}>
                     <input
                       accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
                       className={classes.input}
@@ -335,70 +380,45 @@ const Orders = () => {
                         color="primary"
                         component="span"
                       >
-                        Upload CSV
+                        Pick CSV
                       </Button>
                     </label>
                   </div>
+                  <div className="col-md-1" style={{ marginTop: "2rem" }}>
+                    <Link to="/admin/order-list">Order List</Link>
+                  </div>
+                  <div className="col-md-1" style={{ marginTop: "2rem" }}>
+                    <Button
+                      onClick={toggle}
+                      color="primary"
+                      variant="contained"
+                    >
+                      Generate QR Code
+                    </Button>{" "}
+                  </div>
                 </div>
+
                 <div className="row">
                   <div className="col-md-3" />
-                  <div className="col-md-6">
+                  <div className="col-md-6 mb-5">
                     <Table>
                       <thead>
                         <tr>
                           <th>Tank / Product</th>
-                          <th>Citgo Lemont</th>
-                          <th>Exxone Chicago</th>
-                          <th>Quality Desired</th>
-                          <th>Actions</th>
+                          <th>Gallons</th>
+                          <th>Ship To</th>
+                          <th>Destination</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>Tank 01 - Clear Deisal</td>
-                          <td>2.47 / gal</td>
-                          <td>2.32 / gal</td>
-                          <td>
-                            <Input
-                              type="text"
-                              name="email1"
-                              value={state}
-                              onChange={e => setstate(e.target.value)}
-                              placeholder="with a placeholder"
-                            />
-                          </td>
-                          <td>
-                            <Button color="primary" variant="contained">
-                              Generate QR Code
-                            </Button>
-                          </td>
-                        </tr>
                         {
                           generateTable.length
                             ? generateTable.map((item, i) => (
                                 <tr key={i}>
-                                  <td>{item["Company_Name"]}</td>
-                                  <td>{item["Company_Email"]}</td>
-                                  <td>{item["STN"]}</td>
-                                  <td>{item["NTN"]}</td>
-                                  <td>
-                                    <Button
-                                      onClick={toggle}
-                                      color="primary"
-                                      variant="contained"
-                                    >
-                                      Generate QR Code
-                                    </Button>
-                                  </td>
-
-                                  <Modal isOpen={modal} toggle={toggle}>
-                                    <ModalHeader toggle={toggle}>
-                                      {item["Company_Name"]}
-                                    </ModalHeader>
-                                    <ModalBody style={{textAlign: "center"}}>
-                                      <QRCode size={128} value={item.Company_Name} />
-                                    </ModalBody>
-                                  </Modal>
+                                  <td>{item["Product"]}</td>
+                                  <td>{item["Gallons"]}</td>
+                                  <td>{item["ShipTo"]}</td>
+                                  <td>{item["Destination"]}</td>
                                 </tr>
                               ))
                             : null
@@ -409,6 +429,15 @@ const Orders = () => {
                   </div>
                 </div>
                 {/* <QRCode value="hey" /> */}
+
+                <Modal isOpen={modal} toggle={toggle}>
+                  <ModalHeader toggle={toggle}>
+                    Order no: {generateTable[0]}
+                  </ModalHeader>
+                  <ModalBody style={{ textAlign: "center" }}>
+                    <QRCode size={128} value={generateTable[0].OrderNo.toString()} />
+                  </ModalBody>
+                </Modal>
 
                 <div className="row">
                   <div className="col-md-3" />
@@ -465,7 +494,7 @@ const Orders = () => {
                   <div className="col-md-4">
                     <Button
                       color="primary"
-                      onClick={() => history.push("/admin/order-conformation")}
+                      onClick={createConfirmation}
                       type="button"
                       variant="contained"
                       className="btn-block w-50"

@@ -46,6 +46,8 @@ import {
   UncontrolledTooltip,
 } from "reactstrap"
 
+import QRCode from "react-qr-code"
+
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap"
 
 import TableHead from "@material-ui/core/TableHead"
@@ -149,12 +151,16 @@ const useStyles2 = makeStyles({
   },
 })
 
-const OrderConformation = props => {
+const OrderList = props => {
   const { buttonLabel, className } = props
 
   const classes = useStyles2()
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(5)
+
+  const [modal, setModal] = useState(false)
+
+  const toggle = () => setModal(!modal)
 
   const rows = [
     {
@@ -214,7 +220,7 @@ const OrderConformation = props => {
   const [confirmationData, setconfirmationData] = useState([])
 
   useEffect(() => {
-    let data = JSON.parse(localStorage.getItem("confirm_product"))
+    let data = JSON.parse(localStorage.getItem("Petroleum_Item"))
     setconfirmationData(data)
   }, [])
 
@@ -228,37 +234,48 @@ const OrderConformation = props => {
           <div className="col">
             <Card className="shadow p-2">
               <div className="m-3 container">
-                <b>Delivery Station:</b> 79 River St. Chicago, IL
+                <b>Order List</b>
                 <br />
-                <b className="mt-3">Order Details:</b>
                 <Table bordered className="mt-2 mb-3">
                   <thead>
                     <tr>
-                      <th>Product</th>
-                      <th>Gallons</th>
-                      <th>Ship To</th>
-                      <th>Destination</th>
+                      <th>Order No</th>
+                      <th>Created At</th>
+                      <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {confirmationData.length
+                    {confirmationData
                       ? confirmationData.map(item => (
                           <tr>
-                            <td>{item.Product}</td>
-                            <td>{item.Gallons}</td>
-                            <td>{item.ShipTo}</td>
-                            <td>{item.Destination}</td>
+                            <td>{item["order_number"]}</td>
+                            <td>{item["created date"]}</td>
+                            <td>
+                              <Button
+                                onClick={toggle}
+                                color="primary"
+                                variant="contained"
+                              >
+                                Generate QR Code
+                              </Button>
+                            </td>
+
+                            <Modal isOpen={modal} toggle={toggle}>
+                              <ModalHeader toggle={toggle}>
+                                Order no: {item["order_number"]}
+                              </ModalHeader>
+                              <ModalBody style={{ textAlign: "center" }}>
+                                <QRCode
+                                  size={128}
+                                  value={item["order_number"].toString()}
+                                />
+                              </ModalBody>
+                            </Modal>
                           </tr>
                         ))
                       : null}
                   </tbody>
                 </Table>
-                <b>Rack Location: </b> Exxon Chicago <br />
-                <b>Delivery Window: </b> Late Afternoon 06:00 pm - 11:59 pm{" "}
-                <br />
-                <b>PO Number: </b> 0896-592-87 <br />
-                <b>Notes: </b> Please call drew upon arrival (305) 587-0817{" "}
-                <br />
               </div>
             </Card>
           </div>
@@ -268,4 +285,4 @@ const OrderConformation = props => {
   )
 }
 
-export default OrderConformation
+export default OrderList
