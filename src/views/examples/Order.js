@@ -272,12 +272,10 @@ const Orders = () => {
       const data = XLSX.utils.sheet_to_json(ws)
       /* Update state */
       setExcelData(data)
+
       localStorage.setItem("Petroleum_Item", JSON.stringify(data, null, 2))
 
       setCol(make_cols(ws["!ref"]))
-      // this.setState({ data: data, cols: make_cols(ws["!ref"]) }, () => {
-      //   console.log(JSON.stringify(this.state.data, null, 2))
-      // })
     }
 
     if (rABS) {
@@ -285,9 +283,8 @@ const Orders = () => {
     } else {
       reader.readAsArrayBuffer(uploadedFile)
     }
-    // if (excelData.length) {
-    //   localStorage.setItem("Petroleum_Item", JSON.stringify(excelData, null, 2))
-    // }
+
+    window.location.reload()
   }
 
   const createConfirmation = () => {
@@ -318,10 +315,10 @@ const Orders = () => {
         })
       })
 
-      console.clear()
+      //   console.clear()
       setgenerateTable(formatedArray)
     }
-  }, [data])
+  }, [])
   return (
     <>
       <Header />
