@@ -85,14 +85,16 @@ function Row(props) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {array.map((inner, j) => (
-                    <TableRow key={j}>
-                      <TableCell>{inner.Product}</TableCell>
-                      <TableCell>{inner.Gallons}</TableCell>
-                      <TableCell>{inner.ShipTo}</TableCell>
-                      <TableCell>{inner.Destination}</TableCell>
-                    </TableRow>
-                  ))}
+                  {array.length
+                    ? array.map((inner, j) => (
+                        <TableRow key={j}>
+                          <TableCell>{inner.Product}</TableCell>
+                          <TableCell>{inner.Gallons}</TableCell>
+                          <TableCell>{inner.ShipTo}</TableCell>
+                          <TableCell>{inner.Destination}</TableCell>
+                        </TableRow>
+                      ))
+                    : null}
                 </TableBody>
               </Table>
             </Box>
