@@ -1,0 +1,133 @@
+
+
+.parallax{
+    width: 100%;
+    height: 800px;
+    background-image: url(https://c0.wallpaperflare.com/preview/670/157/264/refinery-oil-industry-gas.jpg);
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    opacity: 0.7;
+}
+
+.first-info-div{
+    margin-top: 50%;
+    margin-right: 10%;
+}
+
+.first-info-div-topText{
+    color: blue;
+    font-weight: bolder;
+    font-size: 15px;
+}
+
+.first-info-div-bottomText{
+    color: white;
+    font-size: 35px;
+}
+
+
+.second-info-div{
+    margin-top: 55%;
+    margin-right: 15%;
+}
+
+/* .second-info-div-top{
+    
+} */
+
+.second-info-div-bottom{
+    margin-top: 30%;
+}
+
+
+.third-info-div{
+    margin-top: 55%;
+    margin-right: 15%;
+}
+
+/* .third-info-div-top{
+    
+} */
+
+.third-info-div-bottom{
+    margin-top: 30%;
+}
+
+
+.fourth-info-div{
+    margin-top: 55%;
+    margin-right: 15%;
+}
+
+/* .fourth-info-div-top{
+    
+} */
+
+.fourth-info-div-bottom{
+    margin-top: 30%;
+}
+
+
+.second-info-div-top-topText{
+    color: white;
+    font-size: 25px;
+}
+
+.second-info-div-top-bottomText{
+    color: white;
+    
+}
+
+.second-info-div-bottom-topText{
+    color: white;
+    font-size: 25px;
+}
+
+.second-info-div-bottom-bottomText{
+    color: white;
+    
+}
+
+
+
+.third-info-div-top-topText{
+    color: white;
+    font-size: 25px;
+}
+
+.third-info-div-top-bottomText{
+    color: white;
+    
+}
+
+.third-info-div-bottom-topText{
+    color: white;
+    font-size: 25px;
+}
+
+.third-info-div-bottom-bottomText{
+    color: white;
+    
+}
+
+
+
+.fourth-info-div-top-topText{
+    color: white;
+    font-size: 25px;
+}
+
+.fourth-info-div-top-bottomText{
+    color: white;
+    
+}
+
+.fourth-info-div-bottom-topText{
+    color: white;
+    font-size: 25px;
+}
+
+.fourth-info-div-bottom-bottomText{
+    color: white;
+    
+}
