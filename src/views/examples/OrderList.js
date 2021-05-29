@@ -246,8 +246,8 @@ const OrderList = props => {
                   </thead>
                   <tbody>
                     {confirmationData
-                      ? confirmationData.map(item => (
-                          <tr>
+                      ? confirmationData.map((item, i) => (
+                          <tr key={i}>
                             <td>{item["order_number"]}</td>
                             <td>{item["created date"]}</td>
                             <td>

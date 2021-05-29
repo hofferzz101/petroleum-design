@@ -236,6 +236,7 @@ const Orders = () => {
 
   const history = useHistory()
 
+  const [QR_Object, setQR_Object] = useState({})
   const [state, setstate] = useState("gal")
   const [phoneNumber, setphoneNumber] = useState("0896-5962-87")
   const [message, setmessage] = useState(
@@ -298,6 +299,7 @@ const Orders = () => {
     let data = JSON.parse(localStorage.getItem("Petroleum_Item"))
 
     if (data) {
+      setQR_Object(data[0])
       let products = data ? data[0].Product.split(",") : []
       let gallons = data ? data[0].Gallons.split(",") : []
       let shipTo = data ? data[0].Shipto.toString().split("/") : []
@@ -316,8 +318,8 @@ const Orders = () => {
         })
       })
 
-      setgenerateTable(formatedArray)
       console.clear()
+      setgenerateTable(formatedArray)
     }
   }, [data])
   return (
@@ -384,17 +386,18 @@ const Orders = () => {
                       </Button>
                     </label>
                   </div>
-                  <div className="col-md-1" style={{ marginTop: "2rem" }}>
-                    <Link to="/admin/order-list">Order List</Link>
-                  </div>
+
                   <div className="col-md-1" style={{ marginTop: "2rem" }}>
                     <Button
                       onClick={toggle}
                       color="primary"
                       variant="contained"
                     >
-                      Generate QR Code
+                      QR Code
                     </Button>{" "}
+                  </div>
+                  <div className="col-md-1" style={{ marginTop: "2rem" }}>
+                    <Link to="/admin/order-list">Order List</Link>
                   </div>
                 </div>
 
@@ -431,11 +434,14 @@ const Orders = () => {
                 {/* <QRCode value="hey" /> */}
 
                 <Modal isOpen={modal} toggle={toggle}>
-                  <ModalHeader toggle={toggle}>
-                    Order no: {generateTable[0]}
+                  <ModalHeader>
+                    Order no: {QR_Object ? QR_Object.order_number : ""}
                   </ModalHeader>
                   <ModalBody style={{ textAlign: "center" }}>
-                    <QRCode size={128} value={generateTable[0].OrderNo.toString()} />
+                    <QRCode
+                      size={128}
+                      value={QR_Object ? JSON.stringify(QR_Object) : ""}
+                    />
                   </ModalBody>
                 </Modal>
 
