@@ -40,14 +40,6 @@ import {
 } from "reactstrap"
 import Button from "@material-ui/core/Button"
 
-import TableHead from "@material-ui/core/TableHead"
-import TableBody from "@material-ui/core/TableBody"
-import TableCell from "@material-ui/core/TableCell"
-import TableContainer from "@material-ui/core/TableContainer"
-import TableFooter from "@material-ui/core/TableFooter"
-import TablePagination from "@material-ui/core/TablePagination"
-import TableRow from "@material-ui/core/TableRow"
-import Paper from "@material-ui/core/Paper"
 import IconButton from "@material-ui/core/IconButton"
 import FirstPageIcon from "@material-ui/icons/FirstPage"
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft"
@@ -55,13 +47,14 @@ import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight"
 import LastPageIcon from "@material-ui/icons/LastPage"
 // core components
 import Header from "components/Headers/Header.js"
-import moment from "moment"
 
 import XLSX from "xlsx"
 import { make_cols } from "./excel/MakeColumns"
 
 import { useHistory, Link } from "react-router-dom"
 import QRCode from "react-qr-code"
+
+import CollapsedTable from "./expendTable"
 
 const useStyles1 = makeStyles(theme => ({
   root: {
@@ -400,50 +393,6 @@ const Orders = () => {
 
                 <div className="row">
                   <div className="col-md-3" />
-                  <div className="col-md-6 mb-5">
-                    <Table>
-                      <thead>
-                        <tr>
-                          <th>Tank / Product</th>
-                          <th>Gallons</th>
-                          <th>Ship To</th>
-                          <th>Destination</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {
-                          generateTable.length
-                            ? generateTable.map((item, i) => (
-                                <tr key={i}>
-                                  <td>{item["Product"]}</td>
-                                  <td>{item["Gallons"]}</td>
-                                  <td>{item["ShipTo"]}</td>
-                                  <td>{item["Destination"]}</td>
-                                </tr>
-                              ))
-                            : null
-                          // <h1>No Data</h1>
-                        }
-                      </tbody>
-                    </Table>
-                  </div>
-                </div>
-                {/* <QRCode value="hey" /> */}
-
-                <Modal isOpen={modal} toggle={toggle}>
-                  <ModalHeader>
-                    Order no: {QR_Object ? QR_Object.order_number : ""}
-                  </ModalHeader>
-                  <ModalBody style={{ textAlign: "center" }}>
-                    <QRCode
-                      size={128}
-                      value={QR_Object ? JSON.stringify(QR_Object) : ""}
-                    />
-                  </ModalBody>
-                </Modal>
-
-                <div className="row">
-                  <div className="col-md-3" />
                   <div className="col-md-3">
                     <Label>Delivery Date</Label>
                     <Input type="date" placeholder="with a placeholder" />
@@ -507,6 +456,26 @@ const Orders = () => {
                   </div>
                 </div>
               </Form>
+
+              <div className="row">
+                <div className="col-md-1"/>
+                <div className="col-md-10 mb-5">
+                  <CollapsedTable />
+                </div>
+              </div>
+              {/* <QRCode value="hey" /> */}
+
+              <Modal isOpen={modal} toggle={toggle}>
+                <ModalHeader>
+                  Order no: {QR_Object ? QR_Object.order_number : ""}
+                </ModalHeader>
+                <ModalBody style={{ textAlign: "center" }}>
+                  <QRCode
+                    size={128}
+                    value={QR_Object ? JSON.stringify(QR_Object) : ""}
+                  />
+                </ModalBody>
+              </Modal>
             </Card>
           </div>
         </Row>
