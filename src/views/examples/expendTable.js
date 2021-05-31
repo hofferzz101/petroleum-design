@@ -76,7 +76,7 @@ function Rows(props) {
       <Modal isOpen={modal} toggle={toggle}>
         <ModalHeader>Order no: {row ? row.order_number : ""}</ModalHeader>
         <ModalBody style={{ textAlign: "center" }}>
-          <QRCode size={128} value={row ? JSON.stringify(row) : ""} />
+          <QRCode size={200} value={row ? JSON.stringify(row) : ""} />
         </ModalBody>
       </Modal>
 
