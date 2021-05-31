@@ -13,12 +13,12 @@ const LandingPageTen = ()=>{
            </Grid>
            <Grid item lg={8}>
                <div style={{marginTop:"9%"}}>
-               <h4 style={{color:"blue"}}>NEWSLETTER</h4>
+               <h4 style={{color:"#0590FF"}}>NEWSLETTER</h4>
                <h1 style={{color:"white"}}>Subscribe to our newsletters to receive</h1>
                <h1 style={{color:"white"}}>latest news and updates</h1>
                <div style={{display:"flex",flexDirection:"column"}}>
-               <input style={{height:"60px",width:"300px"}} type="text"/>
-               <Button style={{color:"white",backgroundColor:"blue",height:"60px",width:"180px",marginTop:"2%"}}>Contact Us</Button>
+               <input  type="email" placeholder="Enter your email *" style={{height:"60px",width:"300px"}} type="text"/>
+               <Button style={{color:"white",backgroundColor:"#0590FF",height:"60px",width:"180px",marginTop:"2%"}}>Contact Us</Button>
                </div>
                </div>
            </Grid>

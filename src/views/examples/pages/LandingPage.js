@@ -10,6 +10,8 @@ import LandingPageNine from './LandingPages/LandingPageNine/LandingPageNine';
 import LandingPageTen from './LandingPages/LandingPageTen/LandingPageTen'
 import LandingPageEleven from './LandingPages/LandingPageEleven/LandingPageEleven';
 import LandingPageTwelve from './LandingPages/LandingPageTwelve/LandingPageTwelve';
+import LandingPageSeventh from './LandingPages/LandingPageSeventh/LandingPageSeventh';
+import LandingPageThirteen from './LandingPages/LandingPageThirteen/LandingPageThirteen'
 
 
 function LandingPage() {
@@ -22,11 +24,13 @@ function LandingPage() {
              <LandingPageFour/>
              <LandingPageFifth/>
              <LandingPageSixth/>
+             <LandingPageSeventh/>
              <LandingPageEight/>
              <LandingPageNine/>
              <LandingPageTen/>
              <LandingPageEleven/>
              <LandingPageTwelve/>
+             <LandingPageThirteen/>
              </>
     )
 }

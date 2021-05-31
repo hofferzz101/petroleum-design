@@ -3,7 +3,7 @@ import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react"
 
 function LandingPageTwelve(props) {
   return (
-    <div>
+    <div style={{height:"960px",backgroundColor:"black"}}>
       <Map google={props.google} zoom={14}>
         <Marker name={"Current location"} />
 
@@ -18,5 +18,5 @@ function LandingPageTwelve(props) {
 }
 
 export default GoogleApiWrapper({
-  apiKey: ("AIzaSyCZQdWZWsNyakL30EbvVherj04c9HcqFc8"),
+  apiKey: (process.env.MAP_KEY),
 })(LandingPageTwelve)

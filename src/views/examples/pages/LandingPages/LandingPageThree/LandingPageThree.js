@@ -8,7 +8,7 @@ import { Button } from '@material-ui/core';
 const LandingPageThree = ()=>{
     return(
         <div className="parallax">
-       
+         
          <Grid container>
             <Grid item lg={2}>
 
@@ -23,12 +23,12 @@ const LandingPageThree = ()=>{
            <Grid item lg={2}>
               <div className="second-info-div">
                 <div className="second-info-div-top">
-                <h1 className="second-info-div-top-Topicon">Icon</h1>
+                <img src={'https://template67969.motopreview.com/mt-demo/67900/67969/mt-content/uploads/2018/07/mt-1524-icon01.png'}/>
                 <h2 className="second-info-div-top-topText">Pipeline Services</h2>
                 <h5 className="second-info-div-top-bottomText">Throughout all these years in the business, we've gotten an extensive experience when it comes to the construction of 2 in. to 60 in. pipelines. Our expertise includes…</h5>
                 </div>
                 <div className="second-info-div-bottom">
-                <h1 className="second-info-div-bottom-bottomicon">Icon</h1>
+                <img src={"https://template67969.motopreview.com/mt-demo/67900/67969/mt-content/uploads/2018/07/mt-1524-icon02.png"}/>
                 <h2 className="second-info-div-bottom-topText">Pipeline Services</h2>
                 <h5 className="second-info-div-bottom-bottomText">Throughout all these years in the business, we've gotten an extensive experience when it comes to the construction of 2 in. to 60 in. pipelines. Our expertise includes…</h5>
                 </div>
@@ -37,12 +37,12 @@ const LandingPageThree = ()=>{
             <Grid item lg={2}>
              <div className="third-info-div">
              <div className="third-info-div-top">
-                <h1 className="third-info-div-top-Topicon">Icon</h1>
+                <img src={"https://template67969.motopreview.com/mt-demo/67900/67969/mt-content/uploads/2018/07/mt-1524-icon05.png"}/>
                 <h2 className="third-info-div-top-topText">Pipeline Services</h2>
                 <h5 className="third-info-div-top-bottomText">Throughout all these years in the business, we've gotten an extensive experience when it comes to the construction of 2 in. to 60 in. pipelines. Our expertise includes…</h5>
                 </div>
                 <div className="third-info-div-bottom">
-                <h1  className="third-info-div-bottom-bottomicon">Icon</h1>
+                <img src={"https://template67969.motopreview.com/mt-demo/67900/67969/mt-content/uploads/2018/07/mt-1524-icon04.png"}/>
                 <h2  className="third-info-div-bottom-topText">Pipeline Services</h2>
                 <h5  className="third-info-div-bottom-bottomText">Throughout all these years in the business, we've gotten an extensive experience when it comes to the construction of 2 in. to 60 in. pipelines. Our expertise includes…</h5>
                 </div>
@@ -51,12 +51,12 @@ const LandingPageThree = ()=>{
             <Grid item lg={2}>
              <div className="fourth-info-div">
              <div className="fourth-info-div-top">
-                <h1 className="fourth-info-div-top-Topicon">Icon</h1>
+                <img src={"https://template67969.motopreview.com/mt-demo/67900/67969/mt-content/uploads/2018/07/mt-1524-icon03.png"}/>
                 <h2 className="fourth-info-div-top-topText">Pipeline Services</h2>
                 <h5 className="fourth-info-div-top-bottomText">Throughout all these years in the business, we've gotten an extensive experience when it comes to the construction of 2 in. to 60 in. pipelines. Our expertise includes…</h5>
                 </div>
                 <div className="fourth-info-div-bottom">
-                <h1 className="fourth-info-div-bottom-bottomicon">Icon</h1>
+                <img src={"https://template67969.motopreview.com/mt-demo/67900/67969/mt-content/uploads/2018/07/mt-1524-icon06.png"}/>
                 <h2 className="fourth-info-div-bottom-topText">Pipeline Services</h2>
                 <h5 className="fourth-info-div-bottom-bottomText">Throughout all these years in the business, we've gotten an extensive experience when it comes to the construction of 2 in. to 60 in. pipelines. Our expertise includes…</h5>
                 </div>
@@ -66,6 +66,7 @@ const LandingPageThree = ()=>{
 
             </Grid>
          </Grid>
+        
          </div>
     )
 }

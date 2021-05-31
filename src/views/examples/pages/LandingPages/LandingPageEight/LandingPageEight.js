@@ -4,15 +4,15 @@ import "./LandingPageEight.css";
 
 const LandingPageEight = ()=>{
     return(
-      <div style={{height:"925px"}}>
+      <div style={{height:"800px"}}>
 
        <Grid container>
         <Grid item lg={2}>
         </Grid>
 
         <Grid item lg={8}>
-            <div style={{marginTop:"135px"}}>
-            <h4 style={{color:"blue"}}>OUR EXPERTISE</h4>
+            <div style={{marginTop:"75px"}}>
+            <h4 style={{color:"#0590FF"}}>OUR EXPERTISE</h4>
             <h1 style={{marginBottom:"25px"}}>Meet Out Team Of Experts</h1>
             </div>
         </Grid>
