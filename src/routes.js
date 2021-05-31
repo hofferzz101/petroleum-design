@@ -30,7 +30,7 @@ import Orders from "views/examples/Order"
 import User from "views/examples/User"
 import OrderConformation from "views/examples/OrderConformation"
 import LandingPage from "views/examples/pages/LandingPage"
-import OrderList from "views/examples/OrderList"
+import OrderSearch from "views/examples/OrderSearch"
 
 var routes = [
   {
@@ -104,6 +104,13 @@ var routes = [
   //   layout: "/auth",
   // },
   {
+    path: "/order-list",
+    name: "Search Order",
+    icon: "ni ni-tv-2 text-primary",
+    component: OrderSearch,
+    layout: "/admin",
+  },
+  {
     path: "/login",
     name: "Logout",
     icon: "ni ni-key-25 text-info",
@@ -118,13 +125,7 @@ var routes = [
     component: OrderConformation,
     layout: "/admin",
   },
-  {
-    path: "/order-list",
-    // name: "User",
-    // icon: "ni ni-tv-2 text-primary",
-    component: OrderList,
-    layout: "/admin",
-  },
+
   // {
   //   path: "/",
   //   // name: "User",
