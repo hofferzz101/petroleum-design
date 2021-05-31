@@ -12,10 +12,17 @@ function LandingPageOne() {
             
              <Grid container>
                <Grid item lg={6} md={6}>
-                   <div className="top-div-left">
+                <div className="top-div-left">
+                    <div style={{display:"flex"}}>
+                    <div>
+                    <img src={'https://template67969.motopreview.com/mt-demo/67900/67969/mt-content/uploads/2018/07/mt-1524-logo-icon.png'}/>
+                    </div>
+                    <div style={{paddingLeft:"25px"}}>
                       <h2 className="top-text-div-top">GAS AND OIL</h2>
                       <h3 className="top-text-div-bottom">COMPANY</h3>
-                   </div>
+                     </div>
+                     </div>
+                </div>
                 </Grid>
                 <Grid item lg={6} md={6}>
                 <div className="top-div-right" >

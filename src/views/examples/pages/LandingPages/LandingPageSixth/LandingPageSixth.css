@@ -24,6 +24,14 @@
     border: 2px solid black;
 }
 
+
+/* .bottom-div-cardLeft-button-div :hover{
+    background-color: #092840;
+    
+} */
+
+
+
 .bottom-div-cardRight{
     height:475px;
     width: 340px;
@@ -39,7 +47,7 @@
 }
 
 .bottom-div-cardCenter-innerCenter{
-    background-color: steelblue;
+    background-color: #0590FF;
     height: 150px;
     display: flex;
     align-items: center;
@@ -49,12 +57,14 @@
 
 .bottom-div-cardLeft-innerTop{
     height: 135px;
-    background-color: black;
+    background-color: #092840;
 }
+
+
 
 .bottom-div-cardLeft-innerBottom{
     height: 135px;
-    background-color: black;
+    background-color: #092840;
 }
 
 .bottom-div-cardLeft-innerTop{

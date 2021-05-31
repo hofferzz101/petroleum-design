@@ -1,5 +1,6 @@
 import Grid from '@material-ui/core/Grid';
 import { Button } from '@material-ui/core';
+import "../../../pages/LandingPages/LandingPage.css"
 
 
 
@@ -21,7 +22,9 @@ const LandingPageNine = ()=>{
                          <h5>Industrial Seamstress</h5>
                          <h5>Machine Operator-Production</h5>
                          <h5>Industrial Electrician</h5>
-                         <Button style={{color:"white",backgroundColor:"blue",height:"60px",width:"180px",marginTop:'5%'}}>Contact Us</Button>
+                         <div>
+                         <Button className="theme-button">Contact Us</Button>
+                         </div>
                      </div>
                      </div>
                  </Grid>
