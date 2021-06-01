@@ -218,6 +218,7 @@ export default function CollapsibleTable() {
       }
 
       setMasterData(formatedArray)
+      localStorage.setItem("formatedArray", JSON.stringify(formatedArray))
     }
   }, [])
 
@@ -227,25 +228,16 @@ export default function CollapsibleTable() {
 
     if (search != "") {
       const filtered = MasterData.filter(item => {
-        return JSON.stringify(item) === search
+        return (
+          JSON.stringify(item["order_number"]).indexOf(search.toLowerCase()) !==
+          -1
+        )
       })
 
-      if (filtered.length) {
-        setMasterData(filtered)
-        setTimeout(() => {
-          alert("Record found")
-        }, 2000)
-      } else {
-        setMasterData([])
-        setTimeout(() => {
-          alert("No record found, Please search correctly!")
-        }, 2000)
-      }
+      setMasterData(filtered)
     } else {
-      setMasterData([])
-      setTimeout(() => {
-        alert("Reload Please")
-      }, 2000)
+      let data = JSON.parse(localStorage.getItem("formatedArray"))
+      setMasterData(data)
     }
   }
 
@@ -264,7 +256,7 @@ export default function CollapsibleTable() {
                 <div className="col-md-3 mt-3">
                   <Input
                     type="text"
-                    placeholder="Search..."
+                    placeholder="Search Order no..."
                     onChange={searchOnChange}
                   />
                 </div>

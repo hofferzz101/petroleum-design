@@ -22,6 +22,8 @@ import DeleteOutlineOutlinedIcon from "@material-ui/icons/DeleteOutlineOutlined"
 
 import QRCode from "react-qr-code"
 
+import { saveSvgAsPng } from "save-svg-as-png"
+
 // reactstrap components
 import {
   Card,
@@ -71,13 +73,20 @@ function Rows(props) {
   const [modal, setModal] = useState(false)
   const toggle = () => setModal(!modal)
 
+  const downloadQRCode = () => {
+    saveSvgAsPng(document.getElementById("id"), "qr.png")
+  }
+
   return (
     <React.Fragment>
       <Modal isOpen={modal} toggle={toggle}>
         <ModalHeader>Order no: {row ? row.order_number : ""}</ModalHeader>
         <ModalBody style={{ textAlign: "center" }}>
-          <QRCode size={200} value={row ? JSON.stringify(row) : ""} />
+          <div>
+            <QRCode id="id" size={200} value={row ? JSON.stringify(row) : ""} />
+          </div>
         </ModalBody>
+        <Button onClick={downloadQRCode}>Download QRCode</Button>
       </Modal>
 
       <TableRow className={classes.root}>
