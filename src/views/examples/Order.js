@@ -21,33 +21,19 @@ import { makeStyles, useTheme } from "@material-ui/core/styles"
 // reactstrap components
 import {
   Card,
-  CardHeader,
-  CardBody,
   FormGroup,
   Label,
   Form,
   Input,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroup,
   Row,
-  Col,
   Modal,
+  ModalFooter,
   ModalHeader,
   ModalBody,
   Container,
-  Table,
 } from "reactstrap"
 import Button from "@material-ui/core/Button"
 
-import TableHead from "@material-ui/core/TableHead"
-import TableBody from "@material-ui/core/TableBody"
-import TableCell from "@material-ui/core/TableCell"
-import TableContainer from "@material-ui/core/TableContainer"
-import TableFooter from "@material-ui/core/TableFooter"
-import TablePagination from "@material-ui/core/TablePagination"
-import TableRow from "@material-ui/core/TableRow"
-import Paper from "@material-ui/core/Paper"
 import IconButton from "@material-ui/core/IconButton"
 import FirstPageIcon from "@material-ui/icons/FirstPage"
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft"
@@ -55,13 +41,14 @@ import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight"
 import LastPageIcon from "@material-ui/icons/LastPage"
 // core components
 import Header from "components/Headers/Header.js"
-import moment from "moment"
 
 import XLSX from "xlsx"
 import { make_cols } from "./excel/MakeColumns"
 
 import { useHistory, Link } from "react-router-dom"
 import QRCode from "react-qr-code"
+
+import CollapsedTable from "./expendTable"
 
 const useStyles1 = makeStyles(theme => ({
   root: {
@@ -215,9 +202,9 @@ const Orders = () => {
     },
   ]
 
-  const [modal, setModal] = useState(false)
+  const [orderModal, setOrderModal] = useState(false)
 
-  const toggle = () => setModal(!modal)
+  const addOrderModal = () => setOrderModal(!orderModal)
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage)
@@ -236,6 +223,7 @@ const Orders = () => {
 
   const history = useHistory()
 
+  const [QR_Object, setQR_Object] = useState({})
   const [state, setstate] = useState("gal")
   const [phoneNumber, setphoneNumber] = useState("0896-5962-87")
   const [message, setmessage] = useState(
@@ -271,12 +259,13 @@ const Orders = () => {
       const data = XLSX.utils.sheet_to_json(ws)
       /* Update state */
       setExcelData(data)
+
       localStorage.setItem("Petroleum_Item", JSON.stringify(data, null, 2))
 
       setCol(make_cols(ws["!ref"]))
-      // this.setState({ data: data, cols: make_cols(ws["!ref"]) }, () => {
-      //   console.log(JSON.stringify(this.state.data, null, 2))
-      // })
+
+      history.push("/admin/user")
+      history.push("/admin/orders")
     }
 
     if (rABS) {
@@ -284,9 +273,6 @@ const Orders = () => {
     } else {
       reader.readAsArrayBuffer(uploadedFile)
     }
-    // if (excelData.length) {
-    //   localStorage.setItem("Petroleum_Item", JSON.stringify(excelData, null, 2))
-    // }
   }
 
   const createConfirmation = () => {
@@ -298,6 +284,7 @@ const Orders = () => {
     let data = JSON.parse(localStorage.getItem("Petroleum_Item"))
 
     if (data) {
+      setQR_Object(data[0])
       let products = data ? data[0].Product.split(",") : []
       let gallons = data ? data[0].Gallons.split(",") : []
       let shipTo = data ? data[0].Shipto.toString().split("/") : []
@@ -317,9 +304,8 @@ const Orders = () => {
       })
 
       setgenerateTable(formatedArray)
-      console.clear()
     }
-  }, [data])
+  }, [])
   return (
     <>
       <Header />
@@ -329,181 +315,90 @@ const Orders = () => {
         <Row>
           <div className="col">
             <Card className="shadow">
-              <Form className="mt-4 mb-4">
-                <div className="row">
-                  <div className="col-md-4" />
-                  <div className="col-md-4">
-                    <FormGroup>
-                      <Label for="exampleSelectMulti">Order no.</Label>
-                      <Input
-                        type="text"
-                        readOnly
-                        value={
-                          generateTable.length ? generateTable[0].OrderNo : ""
-                        }
-                        name="selectMulti"
-                        id="exampleSelectMulti"
-                      />
-                    </FormGroup>
-                  </div>
-                </div>
-
-                <div className="row">
-                  <div className="col-md-4" />
-                  <div className="col-md-4">
-                    <FormGroup>
-                      <Label for="exampleSelectMulti">Location</Label>
-                      <Input
-                        type="select"
-                        name="selectMulti"
-                        id="exampleSelectMulti"
-                      >
-                        <option>Philadelphia PA</option>
-                        <option>Location 2</option>
-                        <option>Location 3</option>
-                        <option>Location 4</option>
-                        <option>Location 2</option>
-                      </Input>
-                    </FormGroup>
-                  </div>
-                  <div className="col-md-1" style={{ marginTop: "2rem" }}>
-                    <input
-                      accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-                      className={classes.input}
-                      id="contained-button-file"
-                      type="file"
-                      onChange={handleChange}
-                    />
-                    <label htmlFor="contained-button-file">
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        component="span"
-                      >
-                        Pick CSV
-                      </Button>
-                    </label>
-                  </div>
-                  <div className="col-md-1" style={{ marginTop: "2rem" }}>
-                    <Link to="/admin/order-list">Order List</Link>
-                  </div>
-                  <div className="col-md-1" style={{ marginTop: "2rem" }}>
+              <div className="row mt-4">
+                <div className="col-md-9" />
+                <div className="col-md-2 mb-4">
+                  <input
+                    accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                    className={classes.input}
+                    id="contained-button-file"
+                    type="file"
+                    onChange={handleChange}
+                  />
+                  <label htmlFor="contained-button-file">
                     <Button
-                      onClick={toggle}
-                      color="primary"
                       variant="contained"
-                    >
-                      Generate QR Code
-                    </Button>{" "}
-                  </div>
-                </div>
-
-                <div className="row">
-                  <div className="col-md-3" />
-                  <div className="col-md-6 mb-5">
-                    <Table>
-                      <thead>
-                        <tr>
-                          <th>Tank / Product</th>
-                          <th>Gallons</th>
-                          <th>Ship To</th>
-                          <th>Destination</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {
-                          generateTable.length
-                            ? generateTable.map((item, i) => (
-                                <tr key={i}>
-                                  <td>{item["Product"]}</td>
-                                  <td>{item["Gallons"]}</td>
-                                  <td>{item["ShipTo"]}</td>
-                                  <td>{item["Destination"]}</td>
-                                </tr>
-                              ))
-                            : null
-                          // <h1>No Data</h1>
-                        }
-                      </tbody>
-                    </Table>
-                  </div>
-                </div>
-                {/* <QRCode value="hey" /> */}
-
-                <Modal isOpen={modal} toggle={toggle}>
-                  <ModalHeader toggle={toggle}>
-                    Order no: {generateTable[0]}
-                  </ModalHeader>
-                  <ModalBody style={{ textAlign: "center" }}>
-                    <QRCode size={128} value={generateTable[0].OrderNo.toString()} />
-                  </ModalBody>
-                </Modal>
-
-                <div className="row">
-                  <div className="col-md-3" />
-                  <div className="col-md-3">
-                    <Label>Delivery Date</Label>
-                    <Input type="date" placeholder="with a placeholder" />
-                  </div>
-                </div>
-                <div className="row mt-3">
-                  <div className="col-md-3" />
-                  <div className="col-md-3">
-                    <FormGroup>
-                      <Label>Delivery Time Preference</Label>
-                      <Input
-                        type="select"
-                        name="selectMulti"
-                        id="exampleSelectMulti"
-                      >
-                        <option>Early Morning: 12:00 am - 05:59 am</option>
-                        <option>Late Morning: 06:00 am - 11:59 am</option>
-                        <option>Early Afternoon: 12:00 pm - 05:59 pm</option>
-                        <option>Late Afternoon: 06:00 pm - 11:59 pm</option>
-                      </Input>
-                    </FormGroup>
-                  </div>
-                </div>
-
-                <div className="row">
-                  <div className="col-md-3" />
-                  <div className="col-md-3">
-                    <Label>Additional Information</Label>
-                    <FormGroup>
-                      <Input
-                        type="text"
-                        name="selectMulti"
-                        id="exampleSelectMulti"
-                        value={phoneNumber}
-                        onChange={e => setphoneNumber(e.target.value)}
-                      />
-                    </FormGroup>
-                    <FormGroup>
-                      <Input
-                        type="text"
-                        name="selectMulti"
-                        id="exampleSelectMulti"
-                        value={message}
-                        onChange={e => setmessage(e.target.value)}
-                      />
-                    </FormGroup>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-md-5" />
-                  <div className="col-md-4">
-                    <Button
                       color="primary"
-                      onClick={createConfirmation}
-                      type="button"
-                      variant="contained"
-                      className="btn-block w-50"
+                      component="span"
                     >
-                      Create
+                      Pick CSV
                     </Button>
-                  </div>
+                  </label>
+                  &nbsp; &nbsp; &nbsp;
+                  <Button color="primary" onClick={addOrderModal}>
+                    Add Order
+                  </Button>
                 </div>
-              </Form>
+              </div>
+              <div className="row">
+                <div className="col-md-1" />
+                <div className="col-md-10 mb-5">
+                  <CollapsedTable />
+                </div>
+              </div>
+              {/* <QRCode value="hey" /> */}
+
+              {/* add order modal */}
+              <Modal isOpen={orderModal} toggle={addOrderModal}>
+                <ModalHeader>Add Order</ModalHeader>
+                <ModalBody style={{ textAlign: "center" }}>
+                  <Form>
+                    <FormGroup>
+                      <Input type="text" placeholder="Contract" />
+                    </FormGroup>
+                    <FormGroup>
+                      <Input type="text" placeholder="Contact Number" />
+                    </FormGroup>
+                    <FormGroup>
+                      <Input type="text" placeholder="Order No" />
+                    </FormGroup>
+                    <FormGroup>
+                      <Input type="text" placeholder="Hauler Number" />
+                    </FormGroup>
+                    <FormGroup>
+                      <Input type="text" placeholder="Driver Number" />
+                    </FormGroup>
+                    <FormGroup>
+                      <Input type="text" placeholder="PO Number" />
+                    </FormGroup>
+                    <FormGroup>
+                      <Input type="text" placeholder="Suplier Number" />
+                    </FormGroup>
+                    <FormGroup>
+                      <Input type="text" placeholder="Terminal Number	" />
+                    </FormGroup>
+                    <FormGroup>
+                      <Label for="exampleEmail">Order Date</Label>
+                      <Input type="date" placeholder="Order Date" />
+                    </FormGroup>
+                    <FormGroup>
+                      <Label for="exampleEmail">Expiration Date</Label>
+                      <Input type="date" placeholder="Expiration Date" />
+                    </FormGroup>
+                  </Form>
+                </ModalBody>
+                <ModalFooter>
+                  <Button
+                    color="primary"
+                    variant="contained"
+                    onClick={createConfirmation}
+                  >
+                    Create
+                  </Button>{" "}
+                </ModalFooter>
+              </Modal>
+
+           
             </Card>
           </div>
         </Row>
