@@ -12,7 +12,11 @@ import {
   scroller,
 } from "react-scroll"
 
+import { useHistory } from "react-router-dom"
+
 function LandingPageOne() {
+
+  let history = useHistory()
   return (
     <div>
       <div
@@ -44,8 +48,7 @@ function LandingPageOne() {
           </Grid>
           <Grid item lg={6} md={6}>
             <div className="top-div-right">
-
-            <Link
+              <Link
                 activeClass="active"
                 to="about-us"
                 spy={true}
@@ -60,7 +63,7 @@ function LandingPageOne() {
                 </span>
               </Link>
 
-            <Link
+              <Link
                 activeClass="active"
                 to="pricing"
                 spy={true}
@@ -74,8 +77,7 @@ function LandingPageOne() {
                   PRICING
                 </span>
               </Link>
-              
-              
+
               <Link
                 activeClass="active"
                 to="contact"
@@ -102,130 +104,114 @@ function LandingPageOne() {
               >
                 {/* <i className="side-menu__icon typcn typcn-th-large-outline hor-icon"></i> */}
                 <span className="side-menu__label" style={{ color: "#fff" }}>
-                    
-                <div class="dropdown">
-                <span class="dropbtn">ALL BLOCKS</span>
-                <div class="dropdown-content">
-                <Link
-                activeClass="active"
-                to="about-us"
-                spy={true}
-                smooth={true}
-                offset={-70}
-                duration={500}
-                className="top-links"
-                >
-                {/* <i className="side-menu__icon typcn typcn-th-large-outline hor-icon"></i> */}
-                <span className="side-menu__label">
-                  About Us
-                </span>
-                </Link>
-                <Link
-                activeClass="active"
-                to="services"
-                spy={true}
-                smooth={true}
-                offset={-70}
-                duration={500}
-                className="top-links"
-                >
-                {/* <i className="side-menu__icon typcn typcn-th-large-outline hor-icon"></i> */}
-                <span className="side-menu__label">
-                  Services
-                </span>
-                </Link>
-                <Link
-                activeClass="active"
-                to="benefits"
-                spy={true}
-                smooth={true}
-                offset={-70}
-                duration={500}
-                className="top-links"
-                >
-                {/* <i className="side-menu__icon typcn typcn-th-large-outline hor-icon"></i> */}
-                <span className="side-menu__label">
-                  Benefits
-                </span>
-                </Link>
-                <Link
-                activeClass="active"
-                to="counters"
-                spy={true}
-                smooth={true}
-                offset={-70}
-                duration={500}
-                className="top-links"
-                >
-                {/* <i className="side-menu__icon typcn typcn-th-large-outline hor-icon"></i> */}
-                <span className="side-menu__label">
-                  Counters
-                </span>
-                </Link>
-                <Link
-                activeClass="active"
-                to="pricing"
-                spy={true}
-                smooth={true}
-                offset={-70}
-                duration={500}
-                className="top-links"
-                >
-                {/* <i className="side-menu__icon typcn typcn-th-large-outline hor-icon"></i> */}
-                <span className="side-menu__label">
-                  Pricing
-                </span>
-                </Link>
-                <Link
-                activeClass="active"
-                to="testimonials"
-                spy={true}
-                smooth={true}
-                offset={-70}
-                duration={500}
-                className="top-links"
-                >
-                {/* <i className="side-menu__icon typcn typcn-th-large-outline hor-icon"></i> */}
-                <span className="side-menu__label">
-                  Testimonials
-                </span>
-                </Link>
-                <Link
-                activeClass="active"
-                to="team"
-                spy={true}
-                smooth={true}
-                offset={-70}
-                duration={500}
-                className="top-links"
-                >
-                {/* <i className="side-menu__icon typcn typcn-th-large-outline hor-icon"></i> */}
-                <span className="side-menu__label">
-                  Team
-                </span>
-                </Link>
-                <Link
-                activeClass="active"
-                to="contact"
-                spy={true}
-                smooth={true}
-                offset={-70}
-                duration={500}
-                className="top-links"
-                >
-                {/* <i className="side-menu__icon typcn typcn-th-large-outline hor-icon"></i> */}
-                <span className="side-menu__label">
-                  Contact
-                </span>
-                </Link>
-                
-                </div>
-                </div>
-
+                  <div class="dropdown">
+                    <span class="dropbtn">ALL BLOCKS</span>
+                    <div class="dropdown-content">
+                      <Link
+                        activeClass="active"
+                        to="about-us"
+                        spy={true}
+                        smooth={true}
+                        offset={-70}
+                        duration={500}
+                        className="top-links"
+                      >
+                        {/* <i className="side-menu__icon typcn typcn-th-large-outline hor-icon"></i> */}
+                        <span className="side-menu__label">About Us</span>
+                      </Link>
+                      <Link
+                        activeClass="active"
+                        to="services"
+                        spy={true}
+                        smooth={true}
+                        offset={-70}
+                        duration={500}
+                        className="top-links"
+                      >
+                        {/* <i className="side-menu__icon typcn typcn-th-large-outline hor-icon"></i> */}
+                        <span className="side-menu__label">Services</span>
+                      </Link>
+                      <Link
+                        activeClass="active"
+                        to="benefits"
+                        spy={true}
+                        smooth={true}
+                        offset={-70}
+                        duration={500}
+                        className="top-links"
+                      >
+                        {/* <i className="side-menu__icon typcn typcn-th-large-outline hor-icon"></i> */}
+                        <span className="side-menu__label">Benefits</span>
+                      </Link>
+                      <Link
+                        activeClass="active"
+                        to="counters"
+                        spy={true}
+                        smooth={true}
+                        offset={-70}
+                        duration={500}
+                        className="top-links"
+                      >
+                        {/* <i className="side-menu__icon typcn typcn-th-large-outline hor-icon"></i> */}
+                        <span className="side-menu__label">Counters</span>
+                      </Link>
+                      <Link
+                        activeClass="active"
+                        to="pricing"
+                        spy={true}
+                        smooth={true}
+                        offset={-70}
+                        duration={500}
+                        className="top-links"
+                      >
+                        {/* <i className="side-menu__icon typcn typcn-th-large-outline hor-icon"></i> */}
+                        <span className="side-menu__label">Pricing</span>
+                      </Link>
+                      <Link
+                        activeClass="active"
+                        to="testimonials"
+                        spy={true}
+                        smooth={true}
+                        offset={-70}
+                        duration={500}
+                        className="top-links"
+                      >
+                        {/* <i className="side-menu__icon typcn typcn-th-large-outline hor-icon"></i> */}
+                        <span className="side-menu__label">Testimonials</span>
+                      </Link>
+                      <Link
+                        activeClass="active"
+                        to="team"
+                        spy={true}
+                        smooth={true}
+                        offset={-70}
+                        duration={500}
+                        className="top-links"
+                      >
+                        {/* <i className="side-menu__icon typcn typcn-th-large-outline hor-icon"></i> */}
+                        <span className="side-menu__label">Team</span>
+                      </Link>
+                      <Link
+                        activeClass="active"
+                        to="contact"
+                        spy={true}
+                        smooth={true}
+                        offset={-70}
+                        duration={500}
+                        className="top-links"
+                      >
+                        {/* <i className="side-menu__icon typcn typcn-th-large-outline hor-icon"></i> */}
+                        <span className="side-menu__label">Contact</span>
+                      </Link>
+                    </div>
+                  </div>
                 </span>
               </Link>
-              
-              <Link className="top-links" to="/auth/login">
+
+              <Link
+                className="top-links"
+                onClick={() => history.push("/auth/login")}
+              >
                 LOGIN
               </Link>
             </div>
