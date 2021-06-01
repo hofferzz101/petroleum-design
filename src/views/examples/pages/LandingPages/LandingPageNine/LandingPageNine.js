@@ -1,6 +1,11 @@
 import Grid from '@material-ui/core/Grid';
-import { Button } from '@material-ui/core';
+// import { Button } from '@material-ui/core';
 import "../../../pages/LandingPages/LandingPage.css"
+import { Button } from 'reactstrap';
+import './LandingPageNine.css'
+import CustomButton from '../button/Button';
+
+
 
 
 
@@ -22,9 +27,10 @@ const LandingPageNine = ()=>{
                          <h5>Industrial Seamstress</h5>
                          <h5>Machine Operator-Production</h5>
                          <h5>Industrial Electrician</h5>
-                         <div>
-                         <Button>Contact Us</Button>
+                         <div style={{paddingTop:"40px"}}>
+                         <CustomButton/>
                          </div>
+
                      </div>
                      </div>
                  </Grid>

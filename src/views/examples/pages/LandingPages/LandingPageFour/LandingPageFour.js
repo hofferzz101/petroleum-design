@@ -1,12 +1,13 @@
 import "./LandingPageFour.css"
 import Grid from '@material-ui/core/Grid';
 import { Link } from 'react-router-dom';
+import VerticalTabs from "../verticalTab/VerticalTab";
 
 
 
 const LandingPageFour = ()=>{
     return(
-         <Grid container id="counters">
+         <Grid container id="benefits">
              <Grid item lg={5}>
                 <div className="left-div">
                     <h4 className="left-div-textOne">OUR EXPERTISE</h4>
@@ -18,19 +19,19 @@ const LandingPageFour = ()=>{
                  
                 <div className="right-div">
 
-                    <div className="right-div-line">
+                    {/* <div className="right-div-line">
                        
-                    </div>
-                   
-                    <div className="right-div-text-left">
+                    </div> */}
+                          <VerticalTabs/>
+                    {/* <div className="right-div-text-left">
                         <h5 className="right-div-text-left-one"><Link>We Are Innovative</Link></h5>
                         <h5 className="right-div-text-left-two"><Link>We Develop And Transform</Link></h5>
                         <h5 className="right-div-text-left-three"><Link>We Are Trade Experts</Link></h5>
-                    </div>
-                    <div className="right-div-text-right">
+                    </div> */}
+                    {/* <div className="right-div-text-right">
                         <h5 className="right-div-text-right-paragraph">To meet the energy needs, we continually innovate to produce sustainable and responsible solutions in oil and gas, solar energy, and bioenergies. Our professionals work to provide the best services to our clients, partners and investors. They all have years of professional experience and high expertise in gas and oil industry.</h5>
                         
-                    </div>
+                    </div> */}
                     
                 </div>
              </Grid>

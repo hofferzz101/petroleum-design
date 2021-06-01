@@ -15,11 +15,11 @@
 }
 
 .left-div-textOne {
-    color: blue;
+    color: #0590FF;
     margin-left: 45%;
     font-weight: bolder;
     letter-spacing: 1px;
-
+    
 }
 
 .left-div-textTwo {
@@ -34,6 +34,7 @@
     margin-top: 2%;
     font-weight: lighter;
     font-size: 20px;
+    margin-right: 20px;
 }
 
 .right-div-text-left{

@@ -9,7 +9,7 @@ const LandingPageSixth = ()=>{
         <Grid container>
             <Grid item lg={12} md={12} sm={12}>
                 <div className="top-div">
-                    <p className="top-div-para">PRICE TABLES</p>
+                    <h4 className="top-div-para">PRICE TABLES</h4>
                     <h1>Show Your Pricing Plans</h1>
                 </div>
             </Grid>
