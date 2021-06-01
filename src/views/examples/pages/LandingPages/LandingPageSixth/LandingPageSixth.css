@@ -25,6 +25,8 @@
 }
 
 
+
+
 /* .bottom-div-cardLeft-button-div :hover{
     background-color: #092840;
     
@@ -60,6 +62,48 @@
     background-color: #092840;
 }
 
+.bottom-div-cardLeft{
+    
+    height:475px;
+    width: 340px;
+    border: 2px solid black;
+    
+}
+
+.card-left{
+    height: 130px;
+    background-color: #092840;
+    text-align: center;
+}
+
+.card-left :hover{
+    background-color: orange;
+    height: 130px;
+}
+
+.card-center{
+    height: 150px;
+    background-color: #0590FF;
+    text-align: center;
+}
+
+.card-center :hover{
+    background-color: orange;
+    height: 150px;
+}
+
+.card-right{
+    height: 130px;
+    background-color: #092840;
+    text-align: center;
+}
+
+.card-right :hover{
+    background-color: orange;
+    height: 130px;
+}
+
+
 
 
 .bottom-div-cardLeft-innerBottom{
@@ -78,4 +122,22 @@
     align-items: center;
     justify-content: center;
 }
+
+
+.bottom-div-cardLeft-button-div :hover{
+    background-color: #092840;
+    color : white !important
+    
+}
+
+.bottom-div-cardCenter-button-div :hover{
+    background-color: #0590FF ;
+    color : white !important
+}
+
+.bottom-div-cardRight-button-div :hover{
+    background-color: #092840;
+    color : white !important
+}
+
 

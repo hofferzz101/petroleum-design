@@ -4,7 +4,7 @@ import './LandingPageTwo.css'
 
 const LandingPageTwo = ()=>{
     return (
-       <div>
+       <div id="about-us">
          <Grid container>
              <Grid item lg={6}>
                 <div className="main-div-left">

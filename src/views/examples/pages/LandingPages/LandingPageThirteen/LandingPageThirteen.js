@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 const LandingPageThirteen = ()=>{
     return (
         <div style={{backgroundColor:"black"}}>
-       <Grid container style={{borderBottom:"2px solid lightgray"}}>
+       <Grid container style={{borderBottom:"1px solid lightgray"}}>
           <Grid item lg={2}>
           </Grid>
 

@@ -1,13 +1,13 @@
 import Grid from '@material-ui/core/Grid';
 import "./LandingPageThree.css";
 import { Button } from '@material-ui/core';
-
+import CustomButton from '../button/Button'
 
 
 
 const LandingPageThree = ()=>{
     return(
-        <div className="parallax">
+        <div className="parallax" id="services">
          
          <Grid container>
             <Grid item lg={2}>
@@ -17,7 +17,8 @@ const LandingPageThree = ()=>{
               <div className="first-info-div">
                   <h5 className="first-info-div-topText">OUR SERVICES</h5>
                   <h1 className="first-info-div-bottomText">Our mission is to sustainably provide the world with the energy it needs.</h1>
-                  <Button color="primary" style={{color:"white",backgroundColor:"blue",height:"60px",width:"180px",marginTop:'10%'}}>Contact Us</Button>
+                  {/* <CustomButton/> */}
+                  {/* <Button className="button-change" color="primary" style={{color:"white",backgroundColor:"blue",height:"60px",width:"180px",marginTop:'10%'}}>Contact Us</Button> */}
               </div>
            </Grid>
            <Grid item lg={2}>
