@@ -23,7 +23,7 @@ const LandingPageNine = ()=>{
                          <h5>Machine Operator-Production</h5>
                          <h5>Industrial Electrician</h5>
                          <div>
-                         <Button className="theme-button">Contact Us</Button>
+                         <Button>Contact Us</Button>
                          </div>
                      </div>
                      </div>

@@ -6,7 +6,7 @@ import { Button } from '@material-ui/core';
 const LandingPageTen = ()=>{
     return(
         
-       <div className="parallax-bottom">
+       <div className="parallax-bottom" id="contact">
 
          <Grid container>
            <Grid item lg={2}>

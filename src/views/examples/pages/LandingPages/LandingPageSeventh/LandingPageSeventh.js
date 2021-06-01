@@ -6,7 +6,7 @@ import "./LandingPageSeventh.css"
 
 const LandingPageSeventh = ()=>{
     return(
-       <div style={{height:"850px"}}>
+       <div style={{height:"850px"}} id="testimonials">
          <Grid container>
            <Grid item lg={6}>
                 <div style={{backgroundImage:`url("https://dneegypt.nyc3.digitaloceanspaces.com/2019/05/OilRig.jpeg")`,backgroundSize:"cover",height:"100%",opacity:"0.9"}}>

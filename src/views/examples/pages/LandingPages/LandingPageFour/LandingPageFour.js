@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 const LandingPageFour = ()=>{
     return(
-         <Grid container>
+         <Grid container id="counters">
              <Grid item lg={5}>
                 <div className="left-div">
                     <h4 className="left-div-textOne">OUR EXPERTISE</h4>
@@ -15,6 +15,7 @@ const LandingPageFour = ()=>{
                 </div>
              </Grid>
              <Grid item lg={7}>
+                 
                 <div className="right-div">
 
                     <div className="right-div-line">

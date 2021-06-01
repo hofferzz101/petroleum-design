@@ -4,7 +4,7 @@ import "./LandingPageEight.css";
 
 const LandingPageEight = ()=>{
     return(
-      <div style={{height:"800px"}}>
+      <div style={{height:"800px"}} id="team">
 
        <Grid container>
         <Grid item lg={2}>
