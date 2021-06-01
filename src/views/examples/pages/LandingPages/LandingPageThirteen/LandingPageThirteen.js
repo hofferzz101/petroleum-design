@@ -2,6 +2,7 @@ import Grid from '@material-ui/core/Grid';
 import { Button } from '@material-ui/core';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import { Link } from 'react-router-dom';
+import CustomButton from '../button/Button';
 
 
 
@@ -53,7 +54,9 @@ const LandingPageThirteen = ()=>{
                <div style={{height:"350px",backgroundColor:"linen",width:"30%",backgroundColor:"black",paddingTop:"100px"}}>
                    <h2 style={{paddingBottom:"20px",color:"white"}}>Subscribe</h2>
                    <input type="email" placeholder="Enter your email *" style={{height:"60px",width:"250px"}} type="text"/>
-                   <Button style={{color:"white",backgroundColor:"#0590FF",height:"60px",width:"180px",marginTop:"5%"}}>Contact Us</Button>
+                   <div style={{paddingTop:"10px"}}>
+                   <CustomButton/>
+                   </div>
                </div>
                </div>
           </Grid>

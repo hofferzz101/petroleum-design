@@ -1,8 +1,12 @@
+import "./Button.css"
+
 
 
 const customButton = ()=>{
     return(
-        <button style={{height:"50px",width:"180px"}}>Contact Us</button>
+                        <div className="my-btn-div">
+                         <button className="my-btn">Contact Us</button>
+                        </div>
     )
 }
 
