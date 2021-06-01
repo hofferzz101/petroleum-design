@@ -74,7 +74,7 @@ function Rows(props) {
   const toggle = () => setModal(!modal)
 
   const downloadQRCode = () => {
-    saveSvgAsPng(document.getElementById("id"), "qr.png")
+    saveSvgAsPng(document.getElementById("id"), row.order_number + "-qr.png")
   }
 
   return (
