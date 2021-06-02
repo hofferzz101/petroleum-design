@@ -29,7 +29,6 @@ import Pricing from "views/examples/pricing"
 import Orders from "views/examples/Order"
 import User from "views/examples/User"
 import OrderConformation from "views/examples/OrderConformation"
-import LandingPage from "views/examples/pages/LandingPage"
 import OrderSearch from "views/examples/OrderSearch"
 
 var routes = [

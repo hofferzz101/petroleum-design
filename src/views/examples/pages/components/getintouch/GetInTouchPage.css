@@ -1,0 +1,32 @@
+
+
+/* .input-div :hover{
+   border: 1px solid black;
+ 
+} */
+
+
+.input-style{
+    border:1px solid black;
+    margin-right: 10px ;
+    background-color: #F7F7F7;
+    height: 50px;
+    width:220px;
+    border-radius:0
+}
+
+.input-style-subject{
+    border : 1px solid black;
+    background-color: #F7F7F7;
+    height: 50px;
+    width:450px;
+    border-radius:0
+}
+
+
+.btn-style :hover{
+    opacity: 0.5;
+}
+/* .input-div :hover{
+    border: 1px solid black
+} */
