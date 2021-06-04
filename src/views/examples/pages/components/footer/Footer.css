@@ -1,0 +1,75 @@
+/* Styling for fullScreen Width */
+
+.main-div-footer{
+    height: 475px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.inner-div-footer{
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    align-items: center
+
+}
+
+.icon-div-footer{
+    margin-bottom: 30px
+}
+
+.footer-text{
+    font-weight: thinner;
+    margin-bottom: 20px
+}
+
+
+
+/* Styling for ( iPad landscape · width: 1024px ) */
+/* Styling for ( iPad portrait · width: 768px ) */
+
+@media (max-width: 1024px) {
+     .main-div-footer{
+         height: 400px;
+     }
+}
+
+
+/* Styling for ( iPad portrait · width: 736px ) */
+
+
+@media (max-width: 736px) {
+    .main-div-footer{
+        height: 320px;
+    }
+}
+
+
+/* Styling for ( iPhone 6-8 Plump portrait · width: 414px ) */
+
+@media (max-width: 414px) {
+    .main-div-footer{
+        height: 375px;
+    }
+}
+
+
+/* Styling for ( iPhone 6-8 landscape · width: 667px ) */
+
+@media (min-width: 667px) {
+    .main-div-footer{
+        height: 350px;
+    }
+}
+
+
+
+/* Styling for ( iPhone 6-8 landscape · width: 684px ) */
+
+
+@media (max-width: 684px) {
+    .main-div-footer{
+        height: 355px;
+    }
+}

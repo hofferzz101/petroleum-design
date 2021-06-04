@@ -1,0 +1,90 @@
+/* Styling for fullScreen Width */
+/* Styling for ( iPad landscape · width: 1024px ) */
+
+.main-div-tech{
+    height: 1300px;
+}
+
+.main-grid-tech{
+    padding-top: 120px
+}
+
+.img-tech{
+    width: 100%;
+    height: 525px
+}
+
+.grid-div-tech{
+    height: 540px;
+    background-color: #F7F7F7;
+    margin-top: 20px;
+    text-align: center;
+    padding-right: 50px;
+    padding-left: 50px;
+}
+
+.grid-div-tech-heading{
+    font-size: 35px;
+    color:#755edb;
+    padding-top: 50px
+}
+
+.grid-div-tech-heading2{
+    font-weight: lighter;
+    padding-top: 10px;
+    padding-bottom: 10px
+}
+
+.grid-div-tech-para1{
+    font-weight:lighter;
+    line-height: 1.6
+}
+
+.grid-div-tech-para2{
+    font-weight: lighter;
+    line-height: 1.6
+}
+
+
+
+/* Styling for ( iPad portrait · width: 768px ) */
+/* Styling for ( iPhone 6-8 Plump landscape · width: 736px ) */
+
+@media (max-width: 768px) {
+    .main-div-tech{
+       margin-top: 30px;
+    }
+
+}
+
+
+
+/* Styling for ( iPhone 6-8 Plump portrait · width: 414px ) */
+/* Styling for ( iPhone 6-8 landscape · width: 667px ) */
+
+@media (max-width: 414px){
+
+   .grid-div-tech-heading{
+       font-size: 25px;
+       
+   }
+
+   .grid-div-tech{
+       height: 865px;
+   }
+
+}
+
+
+
+/* Styling for ( iPhone 6-8 portrait · width: 375px ) */
+/* Styling for ( Android (Pixel 2) landscape · width: 684px ) */
+/*  Styling for ( Android (Pixel 2) portrait · width: 412px ) */
+/* Styling for ( iPhone eXpensive landscape · width: 734px ) */
+/* Styling for ( iPhone eXpensive portrait · width: 375px ) */
+   
+   @media (max-width: 375px) {
+    .grid-div-tech{
+        height: 985px;
+    }
+   }
