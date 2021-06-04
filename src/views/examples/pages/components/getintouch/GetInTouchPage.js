@@ -4,32 +4,32 @@ import "./GetInTouchPage.css"
 
 const GetInTouch = ()=>{
     return(
-        <div style={{height:'1100px',backgroundColor:"#F7F7F7",marginLeft:"75px",marginRight:"75px",paddingTop:"40px"}}>
+        <div className="main-div-getintouch">
            <Grid container>
             
-             <Grid item lg={8}>
-                 <h1 style={{color: "#755edb",fontSize:"40px",textAlign:"center"}}>GET IN TOUCH</h1>
+             <Grid item lg={8} md={5} sm={12} xs={12} className="inner-div-getintouch">
+                 <h1 className="top-grid-heading-getintouch">GET IN TOUCH</h1>
              </Grid>
-             <Grid item lg={4}>
-                 <div style={{display:"flex"}}>
+             <Grid item lg={4} md={7} sm={12} xs={12}>
+                 <div className="bottom-grid-div-getintouch">
 
                     <div className="input-div">
-                    <h4 style={{fontWeight:"lighter"}}>Name *</h4>
+                    <h4 className="formfeild-getintouch">Name *</h4>
                     <input className="input-style" type="text" placeholder="Enter Your Name"/>
                     </div>
                     <div className="input-div">
-                    <h4 style={{fontWeight:"lighter"}}>Email *</h4>
+                    <h4 className="formfeild-getintouch" style={{fontWeight:"lighter"}}>Email *</h4>
                     <input className="input-style" type="text" placeholder="Enter Your Name"/>
                     </div>
                  </div>
 
-                 <div style={{display:"flex"}}>
+                 <div className="bottom-grid-div-getintouch">
                      <div className="input-div">
-                     <h4 style={{fontWeight:"lighter"}}>Phone</h4>
+                     <h4 className="formfeild-getintouch" style={{fontWeight:"lighter"}}>Phone</h4>
                      <input className="input-style" type="text" placeholder="Enter Your Name"/>
                      </div>
                      <div className="input-div">
-                     <h4 style={{fontWeight:"lighter"}}>Address</h4>
+                     <h4 className="formfeild-getintouch" style={{fontWeight:"lighter"}}>Address</h4>
                       <input className="input-style" type="text" placeholder="Enter Your Name"/>
                     </div>
                   <div>
@@ -37,15 +37,17 @@ const GetInTouch = ()=>{
                 </div>
                   
                 </div>
-                   <div>
-                     <h4 style={{fontWeight:"lighter"}}>Subject</h4>
+                   <div className="bottom-grid-div-getintouch-subject">
+                     <h4 className="formfeild-getintouch" style={{fontWeight:"lighter"}}>Subject</h4>
                      <input className="input-style-subject" type="text" placeholder="Type the subject"/>
                    </div>
-                   <div>
-                     <h4 style={{fontWeight:"lighter"}}>Message</h4>
-                       <textarea rows="5" cols="54" placeholder="Type your message here"></textarea>
+                   <div className="bottom-grid-div-getintouch-message">
+                     <h4 className="formfeild-getintouch" style={{fontWeight:"lighter"}}>Message</h4>
+                       <textarea className="getintouch-textarea" rows="5" cols="54" placeholder="Type your message here"></textarea>
                    </div>
-                   <button className="btn-style" style={{backgroundColor:"black",color:"white",height:"50px",width:"455px",border:"none",marginTop:"10px"}}>Submit</button>
+                   <div className="btn-div">
+                   <button className="btn-style">Submit</button>
+                   </div>
              </Grid>
             
            </Grid>

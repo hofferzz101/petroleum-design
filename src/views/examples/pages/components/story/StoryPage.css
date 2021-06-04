@@ -1,0 +1,196 @@
+
+
+/* Styling for fullScreen Width */
+/* Styling for ( iPad landscape · width: 1024px ) */
+
+
+.main-div-story{
+    height: 1400px;
+    background-color: #F7F7F7;
+
+}
+
+.top-grid-div-story{
+    text-align: center;
+    margin-top: 5%; 
+    position: relative;
+    height: 500px
+}
+
+.img-text-div-story{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+
+.img-text-story{
+    color: white;
+    font-size: 40px;
+}
+
+.bottom-grid-div-story{
+    text-align: center;
+    padding: 100px;
+}
+
+.bottom-grid-heading-story{
+    padding-bottom: 25px;
+}
+
+.bottom-grid-text-story{
+    padding-bottom: 25px;
+    font-weight: lighter
+}
+
+.bottom-grid-btn-story{
+    height: 50px;
+    width:135px;
+    border-radius: 25px 25px 25px 25px;
+    border-width: 0;
+    background-color: #755edb;
+    color: white
+}
+
+
+
+
+/* Styling for ( iPad portrait · width: 768px ) */
+/* Styling for ( iPhone 6-8 Plump landscape · width: 736px ) */
+
+
+@media (max-width: 768px) {
+    .main-div-story{
+        padding-top: 60px;
+    }
+
+    .img-text-story{
+        font-size: 25px;
+    }
+}
+
+
+/* Styling for ( iPhone 6-8 Plump portrait · width: 414px ) */
+
+
+ 
+  @media (max-width: 414px) {
+
+    .img-text-story{
+        font-size: 15px;
+    }
+
+    .img-div-story{
+
+        height: 180px;
+        width: auto;
+    }
+
+    .bottom-grid-heading-story{
+        font-size: 20px;
+    }
+
+    .bottom-grid-text-story{
+        font-size: 12px;
+        text-align: center;
+    }
+
+    .img-text-div-story{
+        position: absolute;
+        top: 35%;
+        left: 60%;
+        transform: translate(-90%, -75%);
+    }
+    
+    .top-grid-div-story {
+        text-align: center;
+        margin-top: 5%;
+        position: relative;
+        height: 260px;
+    }
+
+}
+      
+
+
+
+/* Styling for ( iPhone 6-8 landscape · width: 667px ) */
+
+
+@media (max-width: 667px) {
+    .top-grid-div-story{
+        height: 220px;
+    }
+
+    .main-div-story{
+        margin-top: 50px;
+        height: 1325px;
+        
+    }
+}
+
+
+
+
+/* Styling for ( iPhone 6-8 portrait · width: 375px ) */
+
+@media (max-width: 375px) {
+      
+    .img-div-story{
+        height: 166px;
+        width: auto;
+    }
+
+    .img-text-div-story{
+        position: absolute;
+        top: 60%;
+        left: 60%;
+        transform: translate(-90%, -75%);
+        margin-top: 15px;
+    }
+    
+    
+    .top-grid-div-story{
+        height: 145px;
+    }
+    
+    .bottom-grid-div-story {
+        text-align: center;
+        padding: 80px;
+    }
+
+    .main-div-story{
+        height: 1250px;
+    }
+
+}
+
+
+/* Styling for ( Android (Pixel 2) landscape · width: 684px ) */
+
+
+@media (max-width: 684px) {
+
+    .bottom-grid-div-story {
+        text-align: center;
+        padding: 70px;
+    }
+
+    .img-text-div-story{
+        position: absolute;
+        top: 45%;
+        left: 60%;
+        transform: translate(-90%, -75%);
+    }
+
+    .main-div-story{
+        height: 1350px;
+    }
+
+}
+
+
+
+/* Styling for ( Android (Pixel 2) portrait · width: 412px ) */
+
+
