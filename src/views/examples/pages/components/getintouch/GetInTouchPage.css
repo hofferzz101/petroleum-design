@@ -7,6 +7,18 @@
 
 
 /* Styling for fullScreen Width */
+.input-style::placeholder {
+   padding-left: 10px;
+}
+
+.input-style-subject::placeholder{
+    padding-left: 10px;
+}
+
+.getintouch-textarea::placeholder{
+   padding-left: 10px;
+   padding-top: 2px;
+}
 
 
 .input-style{
@@ -15,7 +27,8 @@
     background-color: #F7F7F7;
     height: 50px;
     width:220px;
-    border-radius:0
+    border-radius:0;
+
 }
 
 .input-style-subject{
@@ -214,6 +227,20 @@
     .input-div{
         padding-left: 12px;
     }
+
+
+    .input-style::placeholder {
+        padding-left: 4px;
+     }
+     
+     .input-style-subject::placeholder{
+         padding-left: 4px;
+     }
+     
+     .getintouch-textarea::placeholder{
+        padding-left: 4px;
+        padding-top: 2px;
+     }
 
 }
 
