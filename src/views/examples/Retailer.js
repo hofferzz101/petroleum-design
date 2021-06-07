@@ -53,7 +53,7 @@ import LastPageIcon from "@material-ui/icons/LastPage";
 // core components
 import Header from "components/Headers/Header.js";
 import moment from "moment";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const useStyles1 = makeStyles((theme) => ({
   root: {
@@ -139,6 +139,7 @@ const useStyles2 = makeStyles({
 });
 
 const RetailerPortal = () => {
+  const history = useHistory()
   const classes = useStyles2();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -254,6 +255,9 @@ const RetailerPortal = () => {
                 {moment(n).format("MMMM Do YYYY, h:mm:ss a")}
                 <div className="mt-1">
                   <Link>Refresh</Link>
+                  <div className="float-right">
+                    <Button color="primary" onClick={() => history.push("/admin/orders")}>Create Order</Button>
+                  </div>
                 </div>
               </div>
             </Card>
