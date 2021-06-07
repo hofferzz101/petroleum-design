@@ -35,6 +35,8 @@ import {
 
 import { useHistory } from "react-router-dom"
 import { notification } from "antd"
+import { v4 as uuidv4 } from 'uuid';
+
 const showNotfication = (type, title, text) => {
   notification[type]({
     message: title,
@@ -50,6 +52,13 @@ const Login = () => {
 
   const login = () => {
     if (email == "admin@tandemlogistics.com" && password == "FTA9876!11") {
+      
+      let user_details = {
+        id: uuidv4(),
+        email: email,
+      }
+
+      localStorage.setItem("user_details", JSON.stringify(user_details))
       history.push("/admin/index")
     } else {
       showNotfication("error", "Login Failed", "You email or password incorrect!")

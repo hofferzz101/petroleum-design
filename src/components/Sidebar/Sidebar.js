@@ -16,10 +16,10 @@
 
 */
 /*eslint-disable*/
-import React, { useState } from "react";
-import { NavLink as NavLinkRRD, Link } from "react-router-dom";
+import React, { useState } from "react"
+import { NavLink as NavLinkRRD, Link } from "react-router-dom"
 // nodejs library to set properties for components
-import { PropTypes } from "prop-types";
+import { PropTypes } from "prop-types"
 
 // reactstrap components
 import {
@@ -50,26 +50,26 @@ import {
   Container,
   Row,
   Col,
-} from "reactstrap";
+} from "reactstrap"
 
-var ps;
+var ps
 
-const Sidebar = (props) => {
-  const [collapseOpen, setCollapseOpen] = useState();
+const Sidebar = props => {
+  const [collapseOpen, setCollapseOpen] = useState()
   // verifies if routeName is the one active (in browser input)
-  const activeRoute = (routeName) => {
-    return props.location.pathname.indexOf(routeName) > -1 ? "active" : "";
-  };
+  const activeRoute = routeName => {
+    return props.location.pathname.indexOf(routeName) > -1 ? "active" : ""
+  }
   // toggles collapse between opened and closed (true/false)
   const toggleCollapse = () => {
-    setCollapseOpen((data) => !data);
-  };
+    setCollapseOpen(data => !data)
+  }
   // closes the collapse
   const closeCollapse = () => {
-    setCollapseOpen(false);
-  };
+    setCollapseOpen(false)
+  }
   // creates the links that appear in the left menu / Sidebar
-  const createLinks = (routes) => {
+  const createLinks = routes => {
     return routes.map((prop, key) => {
       return (
         <NavItem key={key}>
@@ -83,22 +83,22 @@ const Sidebar = (props) => {
             {prop.name}
           </NavLink>
         </NavItem>
-      );
-    });
-  };
+      )
+    })
+  }
 
-  const { bgColor, routes, logo } = props;
-  let navbarBrandProps;
+  const { bgColor, routes, logo } = props
+  let navbarBrandProps
   if (logo && logo.innerLink) {
     navbarBrandProps = {
       to: logo.innerLink,
       tag: Link,
-    };
+    }
   } else if (logo && logo.outterLink) {
     navbarBrandProps = {
       href: logo.outterLink,
       target: "_blank",
-    };
+    }
   }
 
   return (
@@ -124,7 +124,15 @@ const Sidebar = (props) => {
               className="navbar-brand-img"
               src={logo.imgSrc}
             /> */}
-            <h1 style={{marginBottom: "-30px", color: "#12cdef", fontWeight: "bold"}}>Petroleum</h1>
+            <h1
+              style={{
+                marginBottom: "-30px",
+                color: "#12cdef",
+                fontWeight: "bold",
+              }}
+            >
+              Petroleum
+            </h1>
           </NavbarBrand>
         ) : null}
         {/* User */}
@@ -149,6 +157,7 @@ const Sidebar = (props) => {
               <Media className="align-items-center">
                 <span className="avatar avatar-sm rounded-circle">
                   <img
+                    style={{ height: "36px", width: "100px" }}
                     alt="..."
                     src={
                       require("../../assets/img/theme/team-1-800x800.jpg")
@@ -181,7 +190,7 @@ const Sidebar = (props) => {
               <DropdownItem divider />
               <DropdownItem
                 href="/auth/login"
-                onClick={(e) => e.preventDefault()}
+                onClick={e => e.preventDefault()}
               >
                 <i className="ni ni-user-run" />
                 <span>Logout</span>
@@ -220,7 +229,7 @@ const Sidebar = (props) => {
             </Row>
           </div>
           {/* Form */}
-          <Form className="mt-4 mb-3 d-md-none">
+          {/* <Form className="mt-4 mb-3 d-md-none">
             <InputGroup className="input-group-rounded input-group-merge">
               <Input
                 aria-label="Search"
@@ -234,7 +243,7 @@ const Sidebar = (props) => {
                 </InputGroupText>
               </InputGroupAddon>
             </InputGroup>
-          </Form>
+          </Form> */}
           {/* Navigation */}
           <Nav navbar>{createLinks(routes)}</Nav>
           {/* Divider */}
@@ -273,12 +282,12 @@ const Sidebar = (props) => {
         </Collapse>
       </Container>
     </Navbar>
-  );
-};
+  )
+}
 
 Sidebar.defaultProps = {
   routes: [{}],
-};
+}
 
 Sidebar.propTypes = {
   // links that will be displayed inside the component
@@ -295,6 +304,6 @@ Sidebar.propTypes = {
     // the alt for the img
     imgAlt: PropTypes.string.isRequired,
   }),
-};
+}
 
-export default Sidebar;
+export default Sidebar

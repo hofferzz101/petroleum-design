@@ -15,8 +15,8 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 // reactstrap components
 import {
   DropdownMenu,
@@ -33,9 +33,25 @@ import {
   Nav,
   Container,
   Media,
-} from "reactstrap";
+} from "reactstrap"
 
-const AdminNavbar = (props) => {
+import { useHistory } from "react-router-dom"
+
+const AdminNavbar = props => {
+
+  const [email, setEmail] = useState("")
+  const history = useHistory()
+
+  const logout = () => {
+    localStorage.removeItem("user_details")
+    history.push("/auth/login")
+  }
+
+  useEffect(() => {
+    let data = JSON.parse(localStorage.getItem("user_details"))
+    setEmail(data.email)
+  }, [])
+
   return (
     <>
       <Navbar className="navbar-top navbar-dark" expand="md" id="navbar-main">
@@ -46,7 +62,7 @@ const AdminNavbar = (props) => {
           >
             {props.brandText}
           </Link>
-          <Form className="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
+          {/* <Form className="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
             <FormGroup className="mb-0">
               <InputGroup className="input-group-alternative">
                 <InputGroupAddon addonType="prepend">
@@ -57,13 +73,14 @@ const AdminNavbar = (props) => {
                 <Input placeholder="Search" type="text" />
               </InputGroup>
             </FormGroup>
-          </Form>
+          </Form> */}
           <Nav className="align-items-center d-none d-md-flex" navbar>
             <UncontrolledDropdown nav>
               <DropdownToggle className="pr-0" nav>
                 <Media className="align-items-center">
-                  <span className="avatar avatar-sm rounded-circle">
+                  <span className="avatar avatar-sm ">
                     <img
+                    style={{height: "34px"}}
                       alt="..."
                       src={
                         require("../../assets/img/theme/team-4-800x800.jpg")
@@ -72,9 +89,7 @@ const AdminNavbar = (props) => {
                     />
                   </span>
                   <Media className="ml-2 d-none d-lg-block">
-                    <span className="mb-0 text-sm font-weight-bold">
-                      User
-                    </span>
+                    <span className="mb-0 text-sm font-weight-bold">{email}</span>
                   </Media>
                 </Media>
               </DropdownToggle>
@@ -99,7 +114,7 @@ const AdminNavbar = (props) => {
                   <span>Support</span>
                 </DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem href="/auth/login">
+                <DropdownItem onClick={logout}>
                   <i className="ni ni-user-run" />
                   <span>Logout</span>
                 </DropdownItem>
@@ -109,7 +124,7 @@ const AdminNavbar = (props) => {
         </Container>
       </Navbar>
     </>
-  );
-};
+  )
+}
 
-export default AdminNavbar;
+export default AdminNavbar
