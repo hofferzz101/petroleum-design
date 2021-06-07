@@ -29,7 +29,7 @@ const StoryPage = ()=>{
                          Character Recognition (OCR) technology. Free up your back-office staff while reducing paperwork, clutter and those pesky credit and rebills.</h3>
                     <h3 className="bottom-grid-text-story">With a digitized cloud ecosystem of processes and clean data, midstream distribution 
                         stakeholders can reduce overhead and run operations based on real-time information and analysis.</h3>
-                        <button className="bottom-grid-btn-story">Contact Us</button>
+                        
                  </Grid>
                  <Grid item lg={3} >
                  </Grid>
