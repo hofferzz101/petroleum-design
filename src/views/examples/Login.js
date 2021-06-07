@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+import React, { useState } from "react"
 
 // reactstrap components
 import {
@@ -31,55 +31,36 @@ import {
   InputGroup,
   Row,
   Col,
-} from "reactstrap";
+} from "reactstrap"
 
-import { useHistory } from 'react-router-dom'
+import { useHistory } from "react-router-dom"
+import { notification } from "antd"
+const showNotfication = (type, title, text) => {
+  notification[type]({
+    message: title,
+    description: text,
+  })
+}
 
 const Login = () => {
   const history = useHistory()
+
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
+  const login = () => {
+    if (email == "admin@tandemlogistics.com" && password == "FTA9876!11") {
+      history.push("/admin/index")
+    } else {
+      showNotfication("error", "Login Failed", "You email or password incorrect!")
+    }
+  }
+
   return (
     <>
       <Col lg="5" md="7">
         <Card className="bg-secondary shadow border-0">
-          <CardHeader className="bg-transparent">
-            {/* <div className="btn-wrapper text-center">
-              <Button
-                className="btn-neutral btn-icon"
-                color="default"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
-              >
-                <span className="btn-inner--icon">
-                  <img
-                    alt="..."
-                    src={
-                      require("../../assets/img/icons/common/github.svg")
-                        .default
-                    }
-                  />
-                </span>
-                <span className="btn-inner--text">Github</span>
-              </Button>
-              <Button
-                className="btn-neutral btn-icon"
-                color="default"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
-              >
-                <span className="btn-inner--icon">
-                  <img
-                    alt="..."
-                    src={
-                      require("../../assets/img/icons/common/google.svg")
-                        .default
-                    }
-                  />
-                </span>
-                <span className="btn-inner--text">Google</span>
-              </Button>
-            </div>
-       */}
-          </CardHeader>
+          <CardHeader className="bg-transparent"></CardHeader>
           <CardBody className="px-lg-5 py-lg-5">
             <div className="text-center text-muted mb-4">
               <small>Sign in with credentials</small>
@@ -95,6 +76,8 @@ const Login = () => {
                   <Input
                     placeholder="Email"
                     type="email"
+                    onChange={e => setEmail(e.target.value)}
+                    value={email}
                     autoComplete="new-email"
                   />
                 </InputGroup>
@@ -109,6 +92,8 @@ const Login = () => {
                   <Input
                     placeholder="Password"
                     type="password"
+                    onChange={e => setPassword(e.target.value)}
+                    value={password}
                     autoComplete="new-password"
                   />
                 </InputGroup>
@@ -127,7 +112,12 @@ const Login = () => {
                 </label>
               </div>
               <div className="text-center">
-                <Button onClick={() => history.push("/admin/index")} className="my-4" color="primary" type="button">
+                <Button
+                  onClick={login}
+                  className="my-4"
+                  color="primary"
+                  type="button"
+                >
                   Sign in
                 </Button>
               </div>
@@ -139,7 +129,7 @@ const Login = () => {
             <a
               className="text-light"
               href="#pablo"
-              onClick={(e) => e.preventDefault()}
+              onClick={e => e.preventDefault()}
             >
               <small>Forgot password?</small>
             </a>
@@ -156,7 +146,7 @@ const Login = () => {
         </Row>
       </Col>
     </>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login
