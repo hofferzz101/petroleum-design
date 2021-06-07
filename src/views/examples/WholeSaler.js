@@ -183,8 +183,8 @@ const WholeSaler = () => {
       qualityOrdered: "3,000",
       qualityDelivered: "5,700",
       freightTicket: "123456789",
-      ancillaryFees: "23",
-      totalCost: "234,565",
+      ancillaryFees: "$23",
+      totalCost: "$234,565",
       status: "Scheduled",
       alerts: "None",
     },
@@ -195,8 +195,8 @@ const WholeSaler = () => {
       qualityOrdered: "2,500",
       qualityDelivered: "12,000",
       freightTicket: "123456789",
-      ancillaryFees: "43",
-      totalCost: "234,565",
+      ancillaryFees: "$43",
+      totalCost: "$234,565",
       status: "Scheduled",
       alerts: "None",
     },
@@ -306,10 +306,10 @@ const WholeSaler = () => {
                           {row.rackLocation}
                         </TableCell>
                         <TableCell style={{ width: 200 }}>
-                          {moment(row.orderDate).format("dddd, MMM yyy")}
+                          {moment(row.orderDate).format("DD/MM/YY")}
                         </TableCell>
                         <TableCell style={{ width: 200 }}>
-                          {moment(row.deliveryDate).format("dddd, MMM yyy")}
+                          {moment(row.deliveryDate).format("DD/MM/YY")}
                         </TableCell>
                         <TableCell style={{ width: 200 }}>
                           {row.status}
