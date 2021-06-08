@@ -15,9 +15,9 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
-import PropTypes from "prop-types";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import React from "react"
+import PropTypes from "prop-types"
+import { makeStyles, useTheme } from "@material-ui/core/styles"
 // reactstrap components
 import {
   Badge,
@@ -36,54 +36,56 @@ import {
   Container,
   Row,
   UncontrolledTooltip,
-} from "reactstrap";
+} from "reactstrap"
 
-import Table from "@material-ui/core/Table";
-import TableHead from "@material-ui/core/TableHead";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableFooter from "@material-ui/core/TableFooter";
-import TablePagination from "@material-ui/core/TablePagination";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
-import IconButton from "@material-ui/core/IconButton";
-import FirstPageIcon from "@material-ui/icons/FirstPage";
-import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
-import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
-import LastPageIcon from "@material-ui/icons/LastPage";
+import Table from "@material-ui/core/Table"
+import TableHead from "@material-ui/core/TableHead"
+import TableBody from "@material-ui/core/TableBody"
+import TableCell from "@material-ui/core/TableCell"
+import TableContainer from "@material-ui/core/TableContainer"
+import TableFooter from "@material-ui/core/TableFooter"
+import TablePagination from "@material-ui/core/TablePagination"
+import TableRow from "@material-ui/core/TableRow"
+import Paper from "@material-ui/core/Paper"
+import IconButton from "@material-ui/core/IconButton"
+import FirstPageIcon from "@material-ui/icons/FirstPage"
+import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft"
+import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight"
+import LastPageIcon from "@material-ui/icons/LastPage"
 // core components
-import Header from "components/Headers/Header.js";
-import moment from "moment";
-import { Link } from "react-router-dom";
+import Header from "components/Headers/Header.js"
+import moment from "moment"
+import { Link } from "react-router-dom"
 
-const useStyles1 = makeStyles((theme) => ({
+import { ExportCSV } from "./excel/exportExcel"
+
+const useStyles1 = makeStyles(theme => ({
   root: {
     flexShrink: 0,
     marginLeft: theme.spacing(2.5),
   },
-}));
+}))
 
 function TablePaginationActions(props) {
-  const classes = useStyles1();
-  const theme = useTheme();
-  const { count, page, rowsPerPage, onChangePage } = props;
+  const classes = useStyles1()
+  const theme = useTheme()
+  const { count, page, rowsPerPage, onChangePage } = props
 
-  const handleFirstPageButtonClick = (event) => {
-    onChangePage(event, 0);
-  };
+  const handleFirstPageButtonClick = event => {
+    onChangePage(event, 0)
+  }
 
-  const handleBackButtonClick = (event) => {
-    onChangePage(event, page - 1);
-  };
+  const handleBackButtonClick = event => {
+    onChangePage(event, page - 1)
+  }
 
-  const handleNextButtonClick = (event) => {
-    onChangePage(event, page + 1);
-  };
+  const handleNextButtonClick = event => {
+    onChangePage(event, page + 1)
+  }
 
-  const handleLastPageButtonClick = (event) => {
-    onChangePage(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
-  };
+  const handleLastPageButtonClick = event => {
+    onChangePage(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1))
+  }
 
   return (
     <div className={classes.root}>
@@ -124,7 +126,7 @@ function TablePaginationActions(props) {
         {theme.direction === "rtl" ? <FirstPageIcon /> : <LastPageIcon />}
       </IconButton>
     </div>
-  );
+  )
 }
 
 TablePaginationActions.propTypes = {
@@ -132,18 +134,18 @@ TablePaginationActions.propTypes = {
   onChangePage: PropTypes.func.isRequired,
   page: PropTypes.number.isRequired,
   rowsPerPage: PropTypes.number.isRequired,
-};
+}
 
 const useStyles2 = makeStyles({
   table: {
     minWidth: 500,
   },
-});
+})
 
 const Tables = () => {
-  const classes = useStyles2();
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const classes = useStyles2()
+  const [page, setPage] = React.useState(0)
+  const [rowsPerPage, setRowsPerPage] = React.useState(5)
 
   const rows = [
     {
@@ -170,7 +172,7 @@ const Tables = () => {
       status: "Completed",
       alerts: "Product Outage",
     },
-  ];
+  ]
 
   const data = [
     {
@@ -197,25 +199,32 @@ const Tables = () => {
       status: "Scheduled",
       alerts: "None",
     },
-  ];
+  ]
 
   const emptyRows =
-    rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+    rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage)
 
   const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
+    setPage(newPage)
+  }
 
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
+  const handleChangeRowsPerPage = event => {
+    setRowsPerPage(parseInt(event.target.value, 10))
+    setPage(0)
+  }
 
   const emptyRowsData =
-    rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
+    rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage)
 
-  var d = new Date();
-  var n = d.getTime();
+  var d = new Date()
+  var n = d.getTime()
+
+  let exportDate = new Date()
+  const orderFilename =
+    "hauler-order-data-" + moment(exportDate).format("DD-MM-YY, h:mm:ss a")
+
+  const detailsFilename =
+    "hauler-details-data-" + moment(exportDate).format("DD-MM-YY, h:mm:ss a")
 
   return (
     <>
@@ -227,7 +236,8 @@ const Tables = () => {
           <div className="col">
             <Card className="shadow">
               <div className="m-3">
-                <b>Last Update: </b> {moment(n).format("MMMM Do YYYY, h:mm:ss a")}
+                <b>Last Update: </b>{" "}
+                {moment(n).format("MMMM Do YYYY, h:mm:ss a")}
                 <div className="mt-1">
                   <Link>Refresh</Link>
                 </div>
@@ -343,6 +353,9 @@ const Tables = () => {
                     </TableRow>
                   </TableFooter>
                 </Table>
+                <div className="float-right mt-2 mb-3 mr-4">
+                  <ExportCSV csvData={rows} fileName={orderFilename} />
+                </div>
               </TableContainer>
             </Card>
           </div>
@@ -462,6 +475,9 @@ const Tables = () => {
                     </TableRow>
                   </TableFooter>
                 </Table>
+                <div className="float-right mt-2 mb-3 mr-4">
+                  <ExportCSV csvData={data} fileName={detailsFilename} />
+                </div>
               </TableContainer>
             </Card>
           </div>
@@ -469,7 +485,7 @@ const Tables = () => {
         {/* Dark table */}
       </Container>
     </>
-  );
-};
+  )
+}
 
-export default Tables;
+export default Tables

@@ -18,6 +18,8 @@
 import React, { useState } from "react"
 import PropTypes from "prop-types"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
+import { ExportCSV } from "./excel/exportExcel"
+
 // reactstrap components
 import {
   CardHeader,
@@ -178,6 +180,10 @@ const User = props => {
   const classes = useStyles2()
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(5)
+
+  let exportDate = new Date()
+  const fileName =
+    "user-data-" + moment(exportDate).format("DD-MM-YY, h:mm:ss a")
 
   const rows = [
     {
@@ -570,6 +576,9 @@ const User = props => {
                     </TableRow>
                   </TableFooter>
                 </Table>
+                <div className="float-right mt-2 mb-3 mr-4">
+                  <ExportCSV csvData={rows} fileName={fileName} />
+                </div>
               </TableContainer>
             </Card>
           </div>

@@ -58,6 +58,8 @@ import Header from "components/Headers/Header.js"
 import moment from "moment"
 import { Link, useHistory } from "react-router-dom"
 
+import { ExportCSV } from "./excel/exportExcel"
+
 const useStyles1 = makeStyles(theme => ({
   root: {
     flexShrink: 0,
@@ -220,6 +222,14 @@ const WholeSaler = () => {
   var d = new Date()
   var n = d.getTime()
 
+  let exportDate = new Date()
+  const wholeSalerFilename =
+    "wholesaler-order-data-" + moment(exportDate).format("DD-MM-YY, h:mm:ss a")
+
+  const detailsFilename =
+    "wholesaler-details-data-" +
+    moment(exportDate).format("DD-MM-YY, h:mm:ss a")
+
   return (
     <>
       <Header />
@@ -235,7 +245,12 @@ const WholeSaler = () => {
                 <div className="mt-1">
                   <Link>Refresh</Link>
                   <div className="float-right">
-                    <Button color="primary" onClick={() => history.push("/admin/orders")}>Create Order</Button>
+                    <Button
+                      color="primary"
+                      onClick={() => history.push("/admin/orders")}
+                    >
+                      Create Order
+                    </Button>
                   </div>
                 </div>
               </div>
@@ -350,6 +365,9 @@ const WholeSaler = () => {
                     </TableRow>
                   </TableFooter>
                 </Table>
+                <div className="float-right mt-2 mb-3 mr-4">
+                  <ExportCSV csvData={rows} fileName={detailsFilename} />
+                </div>
               </TableContainer>
             </Card>
           </div>
@@ -469,6 +487,9 @@ const WholeSaler = () => {
                     </TableRow>
                   </TableFooter>
                 </Table>
+                <div className="float-right mt-2 mb-3 mr-4">
+                  <ExportCSV csvData={data} fileName={detailsFilename} />
+                </div>
               </TableContainer>
             </Card>
           </div>
