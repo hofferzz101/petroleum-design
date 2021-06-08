@@ -6,12 +6,29 @@ const GetInTouch = ()=>{
     return(
         <div className="main-div-getintouch">
            <Grid container>
-            
-             <Grid item lg={8} md={5} sm={12} xs={12} className="inner-div-getintouch">
-                 <h1 className="top-grid-heading-getintouch">GET IN TOUCH</h1>
-             </Grid>
-             <Grid item lg={4} md={7} sm={12} xs={12}>
-                 <div className="bottom-grid-div-getintouch">
+             
+             <Grid item lg={12} md={12} sm={12} xs={12}>
+             <h1 className="top-grid-heading-getintouch">GET IN TOUCH</h1>
+              
+
+
+                <div className="form-div-getintouch">
+                  <h4>Name *</h4>
+                  <input className="input-div-getintouch" type="text" placeholder="Enter Your Name"/>
+                  <h4>Email *</h4>
+                  <input className="input-div-getintouch" type="text" placeholder="Enter Your Email"/>
+                  <h4>Phone *</h4>
+                  <input className="input-div-getintouch" type="number" placeholder="Enter Your Number"/>
+                  <h4>Address *</h4>
+                  <input className="input-div-getintouch" type="text" placeholder="Enter Your Address"/>
+                  <h4>Subject *</h4>
+                  <input className="input-div-getintouch" type="text" placeholder="Enter The Subject"/>
+                  <h4>Message</h4>
+                  <textarea rows="5" cols="54" placeholder="Type your message here"></textarea>
+                  <button className="btn-style-getintouch">Submit</button>
+                </div>
+
+                 {/* <div className="bottom-grid-div-getintouch">
 
                     <div className="input-div">
                     <h4 className="formfeild-getintouch">Name *</h4>
@@ -35,6 +52,7 @@ const GetInTouch = ()=>{
                   <div>
                   
                 </div>
+                
                   
                 </div>
                    <div className="bottom-grid-div-getintouch-subject">
@@ -47,7 +65,9 @@ const GetInTouch = ()=>{
                    </div>
                    <div className="btn-div">
                    <button className="btn-style">Submit</button>
-                   </div>
+                   </div> */}
+
+                   
              </Grid>
             
            </Grid>

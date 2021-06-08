@@ -7,6 +7,10 @@
 
 
 /* Styling for fullScreen Width */
+
+
+
+
 .input-style::placeholder {
    padding-left: 10px;
 }
@@ -54,7 +58,7 @@
 
 
 .main-div-getintouch{
-    height: 900px;
+    height: 800px;
     background-color: #F7F7F7;
     margin-left: 75px;
     margin-right: 75px;
@@ -67,291 +71,68 @@
     color: #755edb;
     font-size: 40px;
     text-align: center;
-    height: 470px;
-  
-}
-
-
-.bottom-grid-div-getintouch{
-    display: flex
-}
-
-.formfeild-getintouch{
-    font-weight: lighter;
-}
-
-
-
-/* Styling in ( iPad landscape · width: 1024px ) */
-
-
-@media (max-width: 1024px) {
-    /* .bottom-grid-div-getintouch{
-        padding-left: 25px;
-    }
-
-    .bottom-grid-div-getintouch-subject{
-        padding-left: 25px;
-    }
+    height: 50px;
     
-    .bottom-grid-div-getintouch-message{
-        padding-left: 24px;
-    }
-
-    .btn-style{
-        padding-left: 23;
-    } */
-
-
-
-    /* Styling in ( iPad landscape · width: 768px ) */
     
 }
 
-@media (width: 768px) {
-      
-    .bottom-grid-div-getintouch{
-        padding-left: 75px;
-    }
 
-    .bottom-grid-div-getintouch-subject{
-        padding-left: 75px;
-    }
-    
-    .bottom-grid-div-getintouch-message{
-        padding-left: 75px;
-    }
 
-    .btn-div{
-        padding-left: 75px;
-    }
 
-    .main-div-getintouch{
-        height: 1000px;
-    }
-    
+.form-div-getintouch{
+    display:flex;
+    flex-direction: column;
+    padding-right:25%;
+    padding-left:25%;
+    padding-top: 5%;
+}
 
+.input-div-getintouch{
+    height: 50px;
+}
+
+.btn-style-getintouch{
+    height: 45px;
+    margin-top: 3%;
+    color: white;
+    background-color: black;
+    border-width: 0;
 }
 
 
-/* Styling in ( iPad landscape · width: 736px ) */
+/* Styling for iPad portrait · width: 768px */
 
-
-@media (max-width: 736px){
-
-    .main-div-getintouch{
-        height: 1000px;
+@media (max-width:768px) {
+    .form-div-getintouch{
+        padding-right: 5%;
+        padding-left: 5%;
     }
-
-    .bottom-grid-div-getintouch{
-        padding-left: 60px;
-    }
-
-    .bottom-grid-div-getintouch-subject{
-        padding-left: 60px;
-    }
-    
-    .bottom-grid-div-getintouch-message{
-        padding-left: 60px;
-    }
-
-    .btn-div{
-        padding-left: 60px;
-    }
-
 }
 
 
-/* Styling for ( iPhone 6-8 Plump portrait · width: 414px ) */
-
+/* Styling for iPhone 6-8 Plump portrait · width: 414px */
 
 @media (max-width:414px) {
-
-    .inner-div-getintouch{
-        display: none;
+    .form-div-getintouch{
+        padding-left: 0;
+        padding-right: 0;
     }
-
-    
-     
     .main-div-getintouch{
-        margin-right: 0px;
-        margin-left: 0px;
+        margin-left: 5px;
+        margin-right: 5px;
         margin-top: 150px;
-        height: 650px;
     }
-   
     .top-grid-heading-getintouch{
-        font-size: 25px;
-         width: 375px;
+        font-size: 30px;
     }
-
-
-    .input-style{
-        width: 150px;
-    }
-
-    .input-style-subject{
-        width: 320px;
-        
-    }
-
-    .getintouch-textarea{
-        width: 320px;
-    }
-
-    .btn-style{
-        width: 320px;
-        
-    }
-
-    .bottom-grid-div-getintouch{
-        padding-left: 45px;
-    }
-    
-    .bottom-grid-div-getintouch-subject{
-        padding-left: 45px;
-        margin-left: 12px;
-        
-    }
-    
-    .bottom-grid-div-getintouch-message{
-        padding-left: 45px;
-        margin-left: 12px;
-    }
-
-    .btn-div{
-        padding-left: 45px;
-        margin-left: 10px;
-    }
-
-    .input-div{
-        padding-left: 12px;
-    }
-
-
-    .input-style::placeholder {
-        padding-left: 4px;
-     }
-     
-     .input-style-subject::placeholder{
-         padding-left: 4px;
-     }
-     
-     .getintouch-textarea::placeholder{
-        padding-left: 4px;
-        padding-top: 2px;
-     }
-
 }
 
 
+/* Styling for iPhone 6-8 portrait · width: 375px */
 
-/* Styling for ( iPhone 6-8 portrait · width: 375px ) */
-
-
-@media (max-width: 375px) {
-
-
-    .inner-div-getintouch{
-        display: none;
-    }
-
+@media (max-width:375px) {
     .main-div-getintouch{
-        height: 600px;
-    }
-
-    .main-div-getintouch{
-        margin-top: 300px;
-    }
-
-    .btn-style{
-        width: 285px;
-      
-
-    }
-
-    .top-grid-heading-getintouch {
-        font-size: 25px;
-        width: 350px;
-    }
-
-    
-    .bottom-grid-div-getintouch{
-        padding-left: 0px;
-        margin-right: 0px;
+        margin-top: 250px;
     }
     
-    .bottom-grid-div-getintouch-subject{
-        padding-left: 0px;
-        margin-left: 0px;
-      
-    }
-    
-    .bottom-grid-div-getintouch-message{
-        padding-left: 0px;
-        margin-left: 0px;
-       
-    }
-
-    .input-div{
-        padding-left: 0px;
-    }
-
-    .input-style-subject{
-        width: 310px;
-    }
-
-    .getintouch-textarea{
-        width: 310px;
-    }
-
-}
-
-  
-
-/* Styling for ( iPhone 6-8 landscape · width: 667px ) */
-
-
-@media (max-width:667px) {
-     
-
-    .bottom-grid-div-getintouch{
-        padding-left: 25px;
-    }
-
-    .bottom-grid-div-getintouch-subject{
-        padding-left: 25px;
-    }
-    
-    .bottom-grid-div-getintouch-message{
-        padding-left: 25px;
-    }
-
-    .btn-div{
-        padding-left: 25px;
-    }
-
-}
-
-
-
-@media (max-width:684px) {
-
-    .bottom-grid-div-getintouch{
-        padding-left: 30px;
-    }
-
-    .bottom-grid-div-getintouch-subject{
-        padding-left: 30px;
-    }
-    
-    .bottom-grid-div-getintouch-message{
-        padding-left: 30px;
-    }
-
-    .btn-div{
-        padding-left: 30px;
-    }
-
-
 }

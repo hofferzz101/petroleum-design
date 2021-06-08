@@ -10,7 +10,7 @@ function LandingPageFront() {
     <WelcomePage/>
     <StoryPage/>
     <TechnologyPage/>
-    {/* <GetInTouch/> */}
+    <GetInTouch/>
     <Footer/>
     </>
   );
