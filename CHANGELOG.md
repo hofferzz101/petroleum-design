@@ -1,9 +1,4 @@
 ## [1.2.0] 2021-01-26
-### Bug fixing
-- https://github.com/creativetimofficial/argon-dashboard-react/pull/38
-- https://github.com/creativetimofficial/argon-dashboard-react/pull/33
-- https://github.com/creativetimofficial/argon-dashboard-react/issues/29
-- https://github.com/creativetimofficial/argon-dashboard-react/issues/23
 ### Major style changes
 - Moved all `src/scss/argon-dashboard/bootstrap` files to `node_modules/bootstrap`
 ### Deleted components
@@ -47,12 +42,7 @@ _If they will persist in our 2.*.* version, we will drop their usages and replac
 _In development mode, some of the above plugins will throw a warning because they still use React v16 syntax. If the error will persist in our 2.*.* version, we will drop their usage and replace them with other plugins._
 
 ## [1.1.0] 2020-02-10
-### Bug fixing
-- https://github.com/creativetimofficial/argon-dashboard-react/issues/18 (Added this in live docs, we need for our product to have a homepage prop inside the package.json. If build is not working, just delete the homepage prop from inside the package.json, or configure it to your own specs.)
-- https://github.com/creativetimofficial/argon-dashboard-react/issues/17
-- https://github.com/creativetimofficial/argon-dashboard-react/issues/15
-- https://github.com/creativetimofficial/argon-dashboard-react/issues/12
-- https://github.com/creativetimofficial/argon-dashboard-react/issues/3
+
 - Changed `componentWillMount` with `constructor` function inside `src/views/Index.js` (this was for initializing the charts)
 ### Major style changes
 - Changed the whole `src/assets/scss/*` folder
