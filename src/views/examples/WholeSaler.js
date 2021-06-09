@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react"
+import React, { useState } from "react"
 import PropTypes from "prop-types"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
 // reactstrap components
@@ -222,6 +222,107 @@ const WholeSaler = () => {
   var d = new Date()
   var n = d.getTime()
 
+  const [HaulerData, setHaulerData] = useState(rows)
+  const [column, setColumn] = useState("")
+  const [search, setsearch] = useState("")
+
+  const handleColumn = e => {
+    setColumn(e.target.value)
+  }
+
+  const searchOnChange = e => {
+    setsearch(e.target.value)
+
+    let search = e.target.value
+    if (column != "") {
+      if (search != "") {
+        if (column == "terminal") {
+          const filtered = HaulerData.filter(item => {
+            return (
+              item.customerNumber
+                .toLowerCase()
+                .indexOf(search.toLowerCase()) !== -1
+            )
+          })
+          setHaulerData(filtered)
+        } else if (column == "ulsd") {
+          const filtered = HaulerData.filter(item => {
+            return (
+              item.orderNumber.toLowerCase().indexOf(search.toLowerCase()) !==
+              -1
+            )
+          })
+          setHaulerData(filtered)
+        } else if (column == "urleaded") {
+          const filtered = HaulerData.filter(item => {
+            return (
+              item.customerName.toLowerCase().indexOf(search.toLowerCase()) !==
+              -1
+            )
+          })
+          setHaulerData(filtered)
+        } else if (column == "mid-grade") {
+          const filtered = HaulerData.filter(item => {
+            return (
+              item.customerLocation
+                .toLowerCase()
+                .indexOf(search.toLowerCase()) !== -1
+            )
+          })
+          setHaulerData(filtered)
+        } else if (column == "premium-grade") {
+          const filtered = HaulerData.filter(item => {
+            return (
+              item.poNumber.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            )
+          })
+          setHaulerData(filtered)
+        } else if (column == "heating-oil") {
+          const filtered = HaulerData.filter(item => {
+            return (
+              item.rackLocation.toLowerCase().indexOf(search.toLowerCase()) !==
+              -1
+            )
+          })
+          setHaulerData(filtered)
+        } else if (column == "butane") {
+          const filtered = HaulerData.filter(item => {
+            return (
+              item.orderDate.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            )
+          })
+          setHaulerData(filtered)
+        } else if (column == "karosene") {
+          const filtered = HaulerData.filter(item => {
+            return (
+              item.deliveryDate.toLowerCase().indexOf(search.toLowerCase()) !==
+              -1
+            )
+          })
+          setHaulerData(filtered)
+        } else if (column == "propane") {
+          const filtered = HaulerData.filter(item => {
+            return (
+              item.status.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            )
+          })
+          setHaulerData(filtered)
+        } else {
+          const filtered = HaulerData.filter(item => {
+            return (
+              item.alerts.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            )
+          })
+          setHaulerData(filtered)
+        }
+      } else {
+        setHaulerData(rows)
+      }
+    } else {
+      alert("error")
+    }
+  }
+
   let exportDate = new Date()
   const wholeSalerFilename =
     "wholesaler-order-data-" + moment(exportDate).format("DD-MM-YY, h:mm:ss a")
@@ -252,6 +353,38 @@ const WholeSaler = () => {
                       Create Order
                     </Button>
                   </div>
+                </div>
+              </div>
+
+              <div className="row mt-4 ml-3">
+                <div className="col-md-2">
+                  <select
+                    onChange={handleColumn}
+                    style={{ width: "15rem", padding: "7px" }}
+                  >
+                    <option value="" disabled selected>
+                      Select Columns
+                    </option>
+                    <option value="terminal">Customer Number</option>
+                    <option value="ulsd">Order Number</option>
+                    <option value="urleaded">Customer Name</option>
+                    <option value="mid-grade">Customer Location </option>
+                    <option value="premium-grade">PO Number </option>
+                    <option value="heating-oil">Rack Location</option>
+                    <option value="butane">Order Date </option>
+                    <option value="karosene">Delivery Date </option>
+                    <option value="propane">Status </option>
+                    <option value="bitumen">Alerts </option>
+                  </select>
+                </div>
+                <div className="col-md-1">
+                  <input
+                    value={search}
+                    onChange={searchOnChange}
+                    placeholder="Search..."
+                    disabled={column == ""}
+                    style={{ width: "15rem", padding: "7px" }}
+                  />
                 </div>
               </div>
               <TableContainer component={Paper}>
@@ -295,11 +428,11 @@ const WholeSaler = () => {
                   </TableHead>
                   <TableBody>
                     {(rowsPerPage > 0
-                      ? rows.slice(
+                      ? HaulerData.slice(
                           page * rowsPerPage,
                           page * rowsPerPage + rowsPerPage
                         )
-                      : rows
+                      : HaulerData
                     ).map((row, i) => (
                       <TableRow key={i}>
                         <TableCell style={{ width: 250 }}>
@@ -351,7 +484,7 @@ const WholeSaler = () => {
                           { label: "All", value: -1 },
                         ]}
                         colSpan={3}
-                        count={rows.length}
+                        count={HaulerData.length}
                         rowsPerPage={rowsPerPage}
                         page={page}
                         SelectProps={{
