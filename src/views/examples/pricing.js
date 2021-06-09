@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react"
+import React, { useState } from "react"
 import PropTypes from "prop-types"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
 // reactstrap components
@@ -202,6 +202,9 @@ const Pricing = () => {
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage)
 
+  const [column, setColumn] = useState("")
+  const [search, setsearch] = useState("")
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage)
   }
@@ -213,6 +216,109 @@ const Pricing = () => {
 
   const emptyRowsData =
     rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage)
+
+    const [pricingData, setPricingData] = useState(data)
+
+  const handleColumn = e => {
+    setColumn(e.target.value)
+  }
+
+  const searchOnChange = e => {
+    setsearch(e.target.value)
+
+    let search = e.target.value
+    if (column != "") {
+      if (search != "") {
+        if (column == "terminal") {
+          const filtered = pricingData.filter(item => {
+            return (
+              item.lineNumber.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            )
+          })
+          setPricingData(filtered)
+        } else if (column == "ulsd") {
+          const filtered = pricingData.filter(item => {
+            return (
+              item.product.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            )
+          })
+          setPricingData(filtered)
+        } else if (column == "urleaded") {
+          const filtered = pricingData.filter(item => {
+            return (
+              item.rackLocation.toLowerCase().indexOf(search.toLowerCase()) !==
+              -1
+            )
+          })
+          setPricingData(filtered)
+        } else if (column == "mid-grade") {
+          const filtered = pricingData.filter(item => {
+            return (
+              item.qualityOrdered
+                .toLowerCase()
+                .indexOf(search.toLowerCase()) !== -1
+            )
+          })
+          setPricingData(filtered)
+        } else if (column == "premium-grade") {
+          const filtered = pricingData.filter(item => {
+            return (
+              item.qualityDelivered
+                .toLowerCase()
+                .indexOf(search.toLowerCase()) !== -1
+            )
+          })
+          setPricingData(filtered)
+        } else if (column == "heating-oil") {
+          const filtered = pricingData.filter(item => {
+            return (
+              item.freightTicket.toLowerCase().indexOf(search.toLowerCase()) !==
+              -1
+            )
+          })
+          setPricingData(filtered)
+        } else if (column == "butane") {
+          const filtered = pricingData.filter(item => {
+            return (
+              item.ancillaryFees.toLowerCase().indexOf(search.toLowerCase()) !==
+              -1
+            )
+          })
+          setPricingData(filtered)
+        } else if (column == "karosene") {
+          const filtered = pricingData.filter(item => {
+            return (
+              item.totalCost.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            )
+          })
+          setPricingData(filtered)
+        } else if (column == "propane") {
+          const filtered = pricingData.filter(item => {
+            return (
+              item.status.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            )
+          })
+          setPricingData(filtered)
+        } else if (column == "bitumen") {
+          const filtered = pricingData.filter(item => {
+            return (
+              item.alerts.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            )
+          })
+          setPricingData(filtered)
+        } else {
+          const filtered = pricingData.filter(item => {
+            return item.ngl.toLowerCase().indexOf(search.toLowerCase()) !== -1
+          })
+          setPricingData(filtered)
+        }
+      } else {
+        setPricingData(data)
+      }
+    } else {
+      alert("error")
+    }
+  }
 
   let exportDate = new Date()
   const fileName =
@@ -280,7 +386,39 @@ const Pricing = () => {
             </Card>
           </div>
         </Row>
-
+        <div className="row mt-4">
+          <div className="col-md-2">
+            <select
+              onChange={handleColumn}
+              style={{ width: "15rem", padding: "7px" }}
+            >
+              <option value="" disabled selected>
+                Select Columns
+              </option>
+              <option value="terminal">Terminal</option>
+              <option value="ulsd">ULSD</option>
+              <option value="urleaded">Unleaded Gasoline </option>
+              <option value="mid-grade">Mid-Grade Gasoline </option>
+              <option value="premium-grade">Premium Gasoline </option>
+              <option value="heating-oil">Heating Oil </option>
+              <option value="butane">Butane </option>
+              <option value="karosene">Karosene </option>
+              <option value="propane">Propane </option>
+              <option value="bitumen">Bitumen </option>
+              <option value="ngl">NGL </option>
+            </select>
+          </div>
+          <div className="col-md-1">
+            <input
+              className="ml-3"
+              value={search}
+              onChange={searchOnChange}
+              placeholder="Search..."
+              disabled={column == ""}
+              style={{ width: "15rem", padding: "7px" }}
+            />
+          </div>
+        </div>
         <Row>
           <div className="col mt-3">
             <Card className="shadow">
@@ -328,11 +466,11 @@ const Pricing = () => {
                   </TableHead>
                   <TableBody>
                     {(rowsPerPage > 0
-                      ? data.slice(
+                      ? pricingData.slice(
                           page * rowsPerPage,
                           page * rowsPerPage + rowsPerPage
                         )
-                      : data
+                      : pricingData
                     ).map((row, i) => (
                       <TableRow key={i}>
                         <TableCell style={{ width: 250 }}>
@@ -385,7 +523,7 @@ const Pricing = () => {
                           { label: "All", value: -1 },
                         ]}
                         colSpan={3}
-                        count={rows.length}
+                        count={pricingData.length}
                         rowsPerPage={rowsPerPage}
                         page={page}
                         SelectProps={{
