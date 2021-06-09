@@ -181,6 +181,9 @@ const User = props => {
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(5)
 
+  const [column, setColumn] = useState("")
+  const [search, setsearch] = useState("")
+
   let exportDate = new Date()
   const fileName =
     "user-data-" + moment(exportDate).format("DD-MM-YY, h:mm:ss a")
@@ -258,6 +261,8 @@ const User = props => {
   const [EditData, setEditData] = useState({})
   const [viewData, setviewData] = useState({})
 
+  const [userData, setData] = useState(rows)
+
   const [open, setOpen] = React.useState(false)
 
   const [name, setname] = useState("")
@@ -287,6 +292,49 @@ const User = props => {
     setshowEditModal(true)
   }
 
+  const handleColumn = e => {
+    setColumn(e.target.value)
+  }
+
+  const searchOnChange = e => {
+    setsearch(e.target.value)
+
+    let search = e.target.value
+    if (column != "") {
+      if (search != "") {
+        if (column == "name") {
+          const filtered = userData.filter(item => {
+            return item.name.toLowerCase().indexOf(search.toLowerCase()) !== -1
+          })
+          setData(filtered)
+        } else if (column == "email") {
+          const filtered = userData.filter(item => {
+            return item.email.toLowerCase().indexOf(search.toLowerCase()) !== -1
+          })
+          setData(filtered)
+        } else if (column == "title") {
+          const filtered = userData.filter(item => {
+            return item.role.toLowerCase().indexOf(search.toLowerCase()) !== -1
+          })
+          setData(filtered)
+        } else {
+          const filtered = userData.filter(item => {
+            return (
+              item.limit.toLowerCase().indexOf(
+                search.toLowerCase()
+              ) !== -1
+            )
+          })
+          setData(filtered)
+        }
+      } else {
+        setData(rows)
+      }
+    } else {
+      alert("error")
+    }
+  }
+
   return (
     <>
       <Header />
@@ -301,6 +349,28 @@ const User = props => {
                 {moment(n).format("MMMM Do YYYY, h:mm:ss a")}
                 <div className="mt-1">
                   <Link>Refresh</Link>
+                  <div className="mt-3">
+                    <select
+                      onChange={handleColumn}
+                      style={{ width: "15rem", padding: "7px" }}
+                    >
+                      <option value="" disabled selected>
+                        Select Columns
+                      </option>
+                      <option value="name">Name</option>
+                      <option value="email">Email</option>
+                      <option value="title">Title</option>
+                      <option value="limit">Limit</option>
+                    </select>
+                    <input
+                      className="ml-3"
+                      value={search}
+                      onChange={searchOnChange}
+                      placeholder="Search..."
+                      disabled={column == ""}
+                      style={{ width: "15rem", padding: "7px" }}
+                    />
+                  </div>
                 </div>
                 <div align="right">
                   <Button color="primary" onClick={toggle}>
@@ -477,11 +547,11 @@ const User = props => {
                   </TableHead>
                   <TableBody>
                     {(rowsPerPage > 0
-                      ? rows.slice(
+                      ? userData.slice(
                           page * rowsPerPage,
                           page * rowsPerPage + rowsPerPage
                         )
-                      : rows
+                      : userData
                     ).map((row, i) => (
                       <TableRow key={i}>
                         <TableCell style={{ width: 100 }}>{row.name}</TableCell>
@@ -562,7 +632,7 @@ const User = props => {
                           { label: "All", value: -1 },
                         ]}
                         colSpan={3}
-                        count={rows.length}
+                        count={userData.length}
                         rowsPerPage={rowsPerPage}
                         page={page}
                         SelectProps={{

@@ -15,9 +15,9 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
-import PropTypes from "prop-types";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import React, { useState } from "react"
+import PropTypes from "prop-types"
+import { makeStyles, useTheme } from "@material-ui/core/styles"
 // reactstrap components
 import {
   Button,
@@ -34,54 +34,54 @@ import {
   Row,
   Col,
   Container,
-} from "reactstrap";
+} from "reactstrap"
 
-import Table from "@material-ui/core/Table";
-import TableHead from "@material-ui/core/TableHead";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableFooter from "@material-ui/core/TableFooter";
-import TablePagination from "@material-ui/core/TablePagination";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
-import IconButton from "@material-ui/core/IconButton";
-import FirstPageIcon from "@material-ui/icons/FirstPage";
-import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
-import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
-import LastPageIcon from "@material-ui/icons/LastPage";
+import Table from "@material-ui/core/Table"
+import TableHead from "@material-ui/core/TableHead"
+import TableBody from "@material-ui/core/TableBody"
+import TableCell from "@material-ui/core/TableCell"
+import TableContainer from "@material-ui/core/TableContainer"
+import TableFooter from "@material-ui/core/TableFooter"
+import TablePagination from "@material-ui/core/TablePagination"
+import TableRow from "@material-ui/core/TableRow"
+import Paper from "@material-ui/core/Paper"
+import IconButton from "@material-ui/core/IconButton"
+import FirstPageIcon from "@material-ui/icons/FirstPage"
+import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft"
+import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight"
+import LastPageIcon from "@material-ui/icons/LastPage"
 // core components
-import Header from "components/Headers/Header.js";
-import moment from "moment";
-import { Link, useHistory } from "react-router-dom";
+import Header from "components/Headers/Header.js"
+import moment from "moment"
+import { Link, useHistory } from "react-router-dom"
 
-const useStyles1 = makeStyles((theme) => ({
+const useStyles1 = makeStyles(theme => ({
   root: {
     flexShrink: 0,
     marginLeft: theme.spacing(2.5),
   },
-}));
+}))
 
 function TablePaginationActions(props) {
-  const classes = useStyles1();
-  const theme = useTheme();
-  const { count, page, rowsPerPage, onChangePage } = props;
+  const classes = useStyles1()
+  const theme = useTheme()
+  const { count, page, rowsPerPage, onChangePage } = props
 
-  const handleFirstPageButtonClick = (event) => {
-    onChangePage(event, 0);
-  };
+  const handleFirstPageButtonClick = event => {
+    onChangePage(event, 0)
+  }
 
-  const handleBackButtonClick = (event) => {
-    onChangePage(event, page - 1);
-  };
+  const handleBackButtonClick = event => {
+    onChangePage(event, page - 1)
+  }
 
-  const handleNextButtonClick = (event) => {
-    onChangePage(event, page + 1);
-  };
+  const handleNextButtonClick = event => {
+    onChangePage(event, page + 1)
+  }
 
-  const handleLastPageButtonClick = (event) => {
-    onChangePage(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
-  };
+  const handleLastPageButtonClick = event => {
+    onChangePage(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1))
+  }
 
   return (
     <div className={classes.root}>
@@ -122,7 +122,7 @@ function TablePaginationActions(props) {
         {theme.direction === "rtl" ? <FirstPageIcon /> : <LastPageIcon />}
       </IconButton>
     </div>
-  );
+  )
 }
 
 TablePaginationActions.propTypes = {
@@ -130,19 +130,22 @@ TablePaginationActions.propTypes = {
   onChangePage: PropTypes.func.isRequired,
   page: PropTypes.number.isRequired,
   rowsPerPage: PropTypes.number.isRequired,
-};
+}
 
 const useStyles2 = makeStyles({
   table: {
     minWidth: 500,
   },
-});
+})
 
 const RetailerPortal = () => {
   const history = useHistory()
-  const classes = useStyles2();
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const classes = useStyles2()
+  const [page, setPage] = React.useState(0)
+  const [rowsPerPage, setRowsPerPage] = React.useState(5)
+
+  const [column, setColumn] = useState("")
+  const [search, setsearch] = useState("")
 
   const rows = [
     {
@@ -169,7 +172,7 @@ const RetailerPortal = () => {
       status: "Completed",
       alerts: "Product Outage",
     },
-  ];
+  ]
 
   const data = [
     {
@@ -198,25 +201,129 @@ const RetailerPortal = () => {
       alerts: "1.98",
       ngl: "23.5",
     },
-  ];
+  ]
+
+  const [retailerData, setRetailerData] = useState(data)
 
   const emptyRows =
-    rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+    rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage)
 
   const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
+    setPage(newPage)
+  }
 
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
+  const handleChangeRowsPerPage = event => {
+    setRowsPerPage(parseInt(event.target.value, 10))
+    setPage(0)
+  }
 
   const emptyRowsData =
-    rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
+    rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage)
 
-  var d = new Date();
-  var n = d.getTime();
+  var d = new Date()
+  var n = d.getTime()
+
+  const handleColumn = e => {
+    setColumn(e.target.value)
+  }
+
+  const searchOnChange = e => {
+    setsearch(e.target.value)
+
+    let search = e.target.value
+    if (column != "") {
+      if (search != "") {
+        if (column == "terminal") {
+          const filtered = retailerData.filter(item => {
+            return (
+              item.lineNumber.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            )
+          })
+          setRetailerData(filtered)
+        } else if (column == "ulsd") {
+          const filtered = retailerData.filter(item => {
+            return (
+              item.product.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            )
+          })
+          setRetailerData(filtered)
+        } else if (column == "urleaded") {
+          const filtered = retailerData.filter(item => {
+            return (
+              item.rackLocation.toLowerCase().indexOf(search.toLowerCase()) !==
+              -1
+            )
+          })
+          setRetailerData(filtered)
+        } else if (column == "mid-grade") {
+          const filtered = retailerData.filter(item => {
+            return (
+              item.qualityOrdered
+                .toLowerCase()
+                .indexOf(search.toLowerCase()) !== -1
+            )
+          })
+          setRetailerData(filtered)
+        } else if (column == "premium-grade") {
+          const filtered = retailerData.filter(item => {
+            return (
+              item.qualityDelivered
+                .toLowerCase()
+                .indexOf(search.toLowerCase()) !== -1
+            )
+          })
+          setRetailerData(filtered)
+        } else if (column == "heating-oil") {
+          const filtered = retailerData.filter(item => {
+            return (
+              item.freightTicket.toLowerCase().indexOf(search.toLowerCase()) !==
+              -1
+            )
+          })
+          setRetailerData(filtered)
+        } else if (column == "butane") {
+          const filtered = retailerData.filter(item => {
+            return (
+              item.ancillaryFees.toLowerCase().indexOf(search.toLowerCase()) !==
+              -1
+            )
+          })
+          setRetailerData(filtered)
+        } else if (column == "karosene") {
+          const filtered = retailerData.filter(item => {
+            return (
+              item.totalCost.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            )
+          })
+          setRetailerData(filtered)
+        } else if (column == "propane") {
+          const filtered = retailerData.filter(item => {
+            return (
+              item.status.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            )
+          })
+          setRetailerData(filtered)
+        } else if (column == "bitumen") {
+          const filtered = retailerData.filter(item => {
+            return (
+              item.alerts.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            )
+          })
+          setRetailerData(filtered)
+        } else {
+          const filtered = retailerData.filter(item => {
+            return item.ngl.toLowerCase().indexOf(search.toLowerCase()) !== -1
+          })
+          setRetailerData(filtered)
+        }
+      } else {
+        setRetailerData(data)
+      }
+    } else {
+      alert("error")
+    }
+  }
+
   return (
     <>
       <Header />
@@ -256,7 +363,45 @@ const RetailerPortal = () => {
                 <div className="mt-1">
                   <Link>Refresh</Link>
                   <div className="float-right">
-                    <Button color="primary" onClick={() => history.push("/admin/orders")}>Create Order</Button>
+                    <Button
+                      color="primary"
+                      onClick={() => history.push("/admin/orders")}
+                    >
+                      Create Order
+                    </Button>
+                  </div>
+                </div>
+                <div className="row mt-4">
+                  <div className="col-md-2">
+                    <select
+                      onChange={handleColumn}
+                      style={{ width: "15rem", padding: "7px" }}
+                    >
+                      <option value="" disabled selected>
+                        Select Columns
+                      </option>
+                      <option value="terminal">Terminal</option>
+                      <option value="ulsd">ULSD</option>
+                      <option value="urleaded">Unleaded Gasoline </option>
+                      <option value="mid-grade">Mid-Grade Gasoline </option>
+                      <option value="premium-grade">Premium Gasoline </option>
+                      <option value="heating-oil">Heating Oil </option>
+                      <option value="butane">Butane </option>
+                      <option value="karosene">Karosene </option>
+                      <option value="propane">Propane </option>
+                      <option value="bitumen">Bitumen </option>
+                      <option value="ngl">NGL </option>
+                    </select>
+                  </div>
+                  <div className="col-md-1">
+                    <input
+                      className="ml-3"
+                      value={search}
+                      onChange={searchOnChange}
+                      placeholder="Search..."
+                      disabled={column == ""}
+                      style={{ width: "15rem", padding: "7px" }}
+                    />
                   </div>
                 </div>
               </div>
@@ -267,7 +412,6 @@ const RetailerPortal = () => {
         <Row>
           <div className="col mt-3">
             <Card className="shadow">
-           
               <TableContainer component={Paper}>
                 <Table
                   className={classes.table}
@@ -312,11 +456,11 @@ const RetailerPortal = () => {
                   </TableHead>
                   <TableBody>
                     {(rowsPerPage > 0
-                      ? data.slice(
+                      ? retailerData.slice(
                           page * rowsPerPage,
                           page * rowsPerPage + rowsPerPage
                         )
-                      : data
+                      : retailerData
                     ).map((row, i) => (
                       <TableRow key={i}>
                         <TableCell style={{ width: 250 }}>
@@ -369,7 +513,7 @@ const RetailerPortal = () => {
                           { label: "All", value: -1 },
                         ]}
                         colSpan={3}
-                        count={rows.length}
+                        count={retailerData.length}
                         rowsPerPage={rowsPerPage}
                         page={page}
                         SelectProps={{
@@ -384,7 +528,7 @@ const RetailerPortal = () => {
                   </TableFooter>
                 </Table>
               </TableContainer>
-       
+
               <TableContainer className="mt-6" component={Paper}>
                 <Table
                   className={classes.table}
@@ -501,14 +645,14 @@ const RetailerPortal = () => {
                   </TableFooter>
                 </Table>
               </TableContainer>
-       
             </Card>
           </div>
         </Row>
+
         {/* Dark table */}
       </Container>
     </>
-  );
-};
+  )
+}
 
-export default RetailerPortal;
+export default RetailerPortal
