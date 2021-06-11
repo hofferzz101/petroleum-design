@@ -389,6 +389,9 @@ const Tables = () => {
                         <b>Delivery Date</b>
                       </TableCell>
                       <TableCell>
+                        <b>Delivery Window</b>
+                      </TableCell>
+                      <TableCell>
                         <b>Status</b>
                       </TableCell>
                       <TableCell>
@@ -428,6 +431,15 @@ const Tables = () => {
                         </TableCell>
                         <TableCell style={{ width: 200 }}>
                           {moment(row.deliveryDate).format("DD/MM/YY")}
+                        </TableCell>
+                        <TableCell>
+                          <select>
+                            <option>Select</option>
+                            <option>00:00 – 05:59</option>
+                            <option>06:00 – 11:59</option>
+                            <option>12:00 – 5:59</option>
+                            <option>6:00 – 11:59</option>
+                          </select>
                         </TableCell>
                         <TableCell style={{ width: 200 }}>
                           {row.status}
