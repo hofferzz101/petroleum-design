@@ -348,7 +348,7 @@ const RetailerPortal = () => {
                   <div className="float-right">
                     <Button
                       color="primary"
-                      onClick={() => history.push("/admin/orders")}
+                      onClick={() => history.push("/admin/create-order")}
                     >
                       Create Order
                     </Button>
