@@ -13,6 +13,7 @@ import Orders from "views/examples/Order"
 import User from "views/examples/User"
 import OrderConformation from "views/examples/OrderConformation"
 import OrderSearch from "views/examples/OrderSearch"
+import CreateOrder from "views/examples/Create-Order"
 
 var routes = [
   {
@@ -48,6 +49,13 @@ var routes = [
     name: "Orders",
     icon: "ni ni-tv-2 text-primary",
     component: Orders,
+    layout: "/admin",
+  },
+  {
+    path: "/create-order",
+    name: "Create-Order",
+    icon: "ni ni-tv-2 text-primary",
+    component: CreateOrder,
     layout: "/admin",
   },
   {

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
@@ -319,7 +318,10 @@ const Orders = () => {
                     </Button>
                   </label>
                   &nbsp; &nbsp; &nbsp;
-                  <Button color="primary" onClick={addOrderModal}>
+                  <Button
+                    color="primary"
+                    onClick={() => history.push("/admin/create-order")}
+                  >
                     Add Order
                   </Button>
                 </div>
@@ -331,58 +333,6 @@ const Orders = () => {
                 </div>
               </div>
               {/* <QRCode value="hey" /> */}
-
-              {/* add order modal */}
-              <Modal isOpen={orderModal} toggle={addOrderModal}>
-                <ModalHeader>Add Order</ModalHeader>
-                <ModalBody style={{ textAlign: "center" }}>
-                  <Form>
-                    <FormGroup>
-                      <Input type="text" placeholder="Contract" />
-                    </FormGroup>
-                    <FormGroup>
-                      <Input type="text" placeholder="Contact Number" />
-                    </FormGroup>
-                    <FormGroup>
-                      <Input type="text" placeholder="Order No" />
-                    </FormGroup>
-                    <FormGroup>
-                      <Input type="text" placeholder="Hauler Number" />
-                    </FormGroup>
-                    <FormGroup>
-                      <Input type="text" placeholder="Driver Number" />
-                    </FormGroup>
-                    <FormGroup>
-                      <Input type="text" placeholder="PO Number" />
-                    </FormGroup>
-                    <FormGroup>
-                      <Input type="text" placeholder="Suplier Number" />
-                    </FormGroup>
-                    <FormGroup>
-                      <Input type="text" placeholder="Terminal Number	" />
-                    </FormGroup>
-                    <FormGroup>
-                      <Label for="exampleEmail">Order Date</Label>
-                      <Input type="date" placeholder="Order Date" />
-                    </FormGroup>
-                    <FormGroup>
-                      <Label for="exampleEmail">Expiration Date</Label>
-                      <Input type="date" placeholder="Expiration Date" />
-                    </FormGroup>
-                  </Form>
-                </ModalBody>
-                <ModalFooter>
-                  <Button
-                    color="primary"
-                    variant="contained"
-                    onClick={createConfirmation}
-                  >
-                    Create
-                  </Button>{" "}
-                </ModalFooter>
-              </Modal>
-
-           
             </Card>
           </div>
         </Row>
