@@ -34,9 +34,16 @@
         justify-content: space-between;
     }
 
-    .logo{
-        margin-left: 5%;
+    .logo-style-tandem{
+        height: 80px;
+        /* background-color: crimson; */
+        margin-left: 150px;
+        
     }
+
+    /* .logo{
+        margin-left: 5%;
+    } */
 
     /* .login-text{
         margin-right: 5%;
@@ -113,6 +120,18 @@
             
             width: 300px;
         }
+        .logo-style-tandem{
+            height: 70px;
+            /* background-color: crimson; */
+            margin-left: 120px;
+            
+        }
+
+        .header-div-wrap{
+            width: 60%;
+            /* background-color: crimson; */
+        }
+    
         
     }
 
@@ -122,6 +141,15 @@
           .grid-right{
               padding-right: 22px;
           }
+
+          .logo-style-tandem{
+            height: 60px;
+            /* background-color: crimson; */
+            margin-left: 100px;
+            
+        }
+
+        
     }
 
 
@@ -139,6 +167,12 @@
             height: 650px;
             background-size: 100% 100%;
             background-attachment: fixed;
+        }
+        .logo-style-tandem{
+            height: 60px;
+            /* background-color: crimson; */
+            margin-left: 100px;
+            
         }
     }
 
@@ -262,6 +296,14 @@
             background-attachment: fixed;
         }
 
+        .logo-style-tandem{
+            height: 50px;
+            /* background-color: crimson; */
+            margin-left: 70px;
+            
+        }
+
+        
     }
 
 
@@ -325,7 +367,12 @@
                  width: 100%;
             }
 
-            
+            .logo-style-tandem{
+                height: 50px;
+                /* background-color: crimson; */
+                margin-left: 150px;
+                
+            }
 
             
        }
@@ -357,6 +404,12 @@
        .grid-left-heading {
         margin-right: 8px;
         font-size: 17px;
+    }
+    .logo-style-tandem{
+        height: 50px;
+        /* background-color: crimson; */
+        margin-left: 120px;
+        
     }
        
     }

@@ -3,6 +3,7 @@ import DLyDni from "../../../../../DLyDni.jpeg";
 import {Link} from "react-router-dom";
 import './WelcomePage.css';
 import TemporaryDrawer from "./Hamburger";
+import logobicycle from "../bicycleLogo2.png";
 
 const WelcomePage = ()=>{
     return(
@@ -10,7 +11,7 @@ const WelcomePage = ()=>{
              <div className="hamburger-icon"><TemporaryDrawer/></div>
            <div className="header-div">
               
-              <div className="logo"><h1 className="logo-text">TANDEM</h1></div>
+              <img className="logo-style-tandem" src={logobicycle} />
               <div className="header-div-wrap">
               <div className="home-text-div"><h4 className="home-text"><Link>Home</Link></h4></div>
               <div className="home-text-div"><h4 className="home-text"><Link>About Us</Link></h4></div>
