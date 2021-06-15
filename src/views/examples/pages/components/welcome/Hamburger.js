@@ -59,9 +59,9 @@ export default function TemporaryDrawer() {
       <List>
         {["Home", "About Us", "Our Technology", "Login"].map((text, index) => (
           <ListItem button key={text}>
-            <ListItemIcon>
+            {/* <ListItemIcon>
               {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
+            </ListItemIcon> */}
             <ListItemText
               primary={text}
               onClick={text == "Login" ? login : ""}
@@ -69,15 +69,7 @@ export default function TemporaryDrawer() {
           </ListItem>
         ))}
       </List>
-      {/* <Divider /> */}
-      {/* <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List> */}
+      
     </div>
   )
 
