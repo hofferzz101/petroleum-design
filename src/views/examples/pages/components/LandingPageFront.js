@@ -8,10 +8,10 @@ function LandingPageFront() {
   return (
     <>
     <WelcomePage/>
-    {/* <StoryPage/>
+    <StoryPage/>
     <TechnologyPage/>
     <GetInTouch/>
-    <Footer/> */}
+    <Footer/>
     </>
   );
 }
