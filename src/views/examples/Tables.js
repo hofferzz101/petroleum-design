@@ -41,6 +41,8 @@ import moment from "moment"
 import { Link } from "react-router-dom"
 
 import { ExportCSV } from "./excel/exportExcel"
+import "./pages/Tables.css"
+import { filter } from "async"
 
 const useStyles1 = makeStyles(theme => ({
   root: {
@@ -125,37 +127,51 @@ const useStyles2 = makeStyles({
   },
 })
 
+
+const rows = [
+  {
+    customerNumber: "123456",
+    customerName: "Alex",
+    orderNumber: "ASD123",
+    customerLocation: "London",
+    poNumber: "123456789",
+    rackLocation: "London",
+    orderDate: new Date(),
+    deliveryDate: new Date(),
+    status: "Delayed",
+    alerts: "None",
+  },
+  {
+    customerNumber: "123457",
+    customerName: "John",
+    orderNumber: "ASD123",
+    customerLocation: "London",
+    poNumber: "123456789",
+    rackLocation: "London",
+    orderDate: new Date(),
+    deliveryDate: new Date(),
+    status: "Completed",
+    alerts: "Product Outage",
+  },
+]
+
 const Tables = () => {
   const classes = useStyles2()
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(5)
 
-  const rows = [
-    {
-      customerNumber: "123456",
-      customerName: "Alex",
-      orderNumber: "ASD123",
-      customerLocation: "London",
-      poNumber: "123456789",
-      rackLocation: "London",
-      orderDate: new Date(),
-      deliveryDate: new Date(),
-      status: "Delayed",
-      alerts: "None",
-    },
-    {
-      customerNumber: "123456",
-      customerName: "John",
-      orderNumber: "ASD123",
-      customerLocation: "London",
-      poNumber: "123456789",
-      rackLocation: "London",
-      orderDate: new Date(),
-      deliveryDate: new Date(),
-      status: "Completed",
-      alerts: "Product Outage",
-    },
-  ]
+  const [CustomerName, setCustomerName] = React.useState("")
+  const [filterCustomer, setFilterCustomer] = React.useState(rows)
+  const [OrderNumber, setOrderNumber] = React.useState("")
+  const [CustomerNumber, setCustomerNumber] = React.useState("")
+  const [CustomerLocation, setCustomerLocation] = React.useState("")
+  const [POnumber, setPOnumber] = React.useState("")
+  const [RackLocation, setRackLocation] = React.useState("")
+  const [OrderDate, setOrderDate] = React.useState("")
+  const [DiliveryDate, setDiliveryDate] = React.useState("")
+  const [DiliveryWindow, setDiliveryWindow] = React.useState("")
+  const [Status, setStatus] = React.useState("")
+  const [Alert, setAlert] = React.useState("")
 
   const data = [
     {
@@ -217,98 +233,166 @@ const Tables = () => {
     setColumn(e.target.value)
   }
 
-  const searchOnChange = e => {
-    setsearch(e.target.value)
 
-    let search = e.target.value
-    if (column != "") {
-      if (search != "") {
-        if (column == "terminal") {
-          const filtered = HaulerData.filter(item => {
-            return (
-              item.customerNumber
-                .toLowerCase()
-                .indexOf(search.toLowerCase()) !== -1
-            )
-          })
-          setHaulerData(filtered)
-        } else if (column == "ulsd") {
-          const filtered = HaulerData.filter(item => {
-            return (
-              item.orderNumber.toLowerCase().indexOf(search.toLowerCase()) !==
-              -1
-            )
-          })
-          setHaulerData(filtered)
-        } else if (column == "urleaded") {
-          const filtered = HaulerData.filter(item => {
-            return (
-              item.customerName.toLowerCase().indexOf(search.toLowerCase()) !==
-              -1
-            )
-          })
-          setHaulerData(filtered)
-        } else if (column == "mid-grade") {
-          const filtered = HaulerData.filter(item => {
-            return (
-              item.customerLocation
-                .toLowerCase()
-                .indexOf(search.toLowerCase()) !== -1
-            )
-          })
-          setHaulerData(filtered)
-        } else if (column == "premium-grade") {
-          const filtered = HaulerData.filter(item => {
-            return (
-              item.poNumber.toLowerCase().indexOf(search.toLowerCase()) !== -1
-            )
-          })
-          setHaulerData(filtered)
-        } else if (column == "heating-oil") {
-          const filtered = HaulerData.filter(item => {
-            return (
-              item.rackLocation.toLowerCase().indexOf(search.toLowerCase()) !==
-              -1
-            )
-          })
-          setHaulerData(filtered)
-        } else if (column == "butane") {
-          const filtered = HaulerData.filter(item => {
-            return (
-              item.orderDate.toLowerCase().indexOf(search.toLowerCase()) !== -1
-            )
-          })
-          setHaulerData(filtered)
-        } else if (column == "karosene") {
-          const filtered = HaulerData.filter(item => {
-            return (
-              item.deliveryDate.toLowerCase().indexOf(search.toLowerCase()) !==
-              -1
-            )
-          })
-          setHaulerData(filtered)
-        } else if (column == "propane") {
-          const filtered = HaulerData.filter(item => {
-            return (
-              item.status.toLowerCase().indexOf(search.toLowerCase()) !== -1
-            )
-          })
-          setHaulerData(filtered)
-        } else {
-          const filtered = HaulerData.filter(item => {
-            return (
-              item.alerts.toLowerCase().indexOf(search.toLowerCase()) !== -1
-            )
-          })
-          setHaulerData(filtered)
-        }
-      } else {
-        setHaulerData(rows)
-      }
-    } else {
-      alert("error")
+
+  const handleSearch = (e, flag) => {
+    let search = ""
+    let filtered = ""
+    switch (flag) {
+      case "Customer Number":
+        setCustomerNumber(e.target.value)
+         search = e.target.value
+        
+         filtered = rows.filter(item => {
+          return (
+            item.customerNumber.toLowerCase().indexOf(search.toLowerCase()) !== -1
+          )
+
+        })
+        setFilterCustomer(filtered)
+
+
+        break;
+      case "Order Number":
+        console.log(flag)
+        setOrderNumber(e.target.value)
+         search = e.target.value
+        
+         filtered = rows.filter(item => {
+          return (
+            item.orderNumber.toLowerCase().indexOf(search.toLowerCase()) !== -1
+          )
+
+        })
+        setFilterCustomer(filtered)
+        break;
+      case "Customer Name":
+        setCustomerName(e.target.value)
+         search = e.target.value
+        
+         filtered = rows.filter(item => {
+          return (
+            item.customerName.toLowerCase().indexOf(search.toLowerCase()) !== -1
+          )
+
+        })
+        setFilterCustomer(filtered)
+        console.log(flag)
+        break;
+      case "Customer Location":
+        setCustomerLocation(e.target.value)
+        search = e.target.value
+       
+        filtered = rows.filter(item => {
+         return (
+           item.customerLocation.toLowerCase().indexOf(search.toLowerCase()) !== -1
+         )
+
+       })
+       setFilterCustomer(filtered)
+        console.log(flag)
+        break;
+      case "PO Number":
+        setPOnumber(e.target.value)
+        search = e.target.value
+       
+        filtered = rows.filter(item => {
+         return (
+           item.poNumber.toLowerCase().indexOf(search.toLowerCase()) !== -1
+         )
+
+       })
+       setFilterCustomer(filtered)
+        console.log(flag)
+        break;
+      case "Rack Location":
+        setRackLocation(e.target.value)
+        search = e.target.value
+       
+        filtered = rows.filter(item => {
+         return (
+           item.rackLocation.toLowerCase().indexOf(search.toLowerCase()) !== -1
+         )
+
+       })
+       setFilterCustomer(filtered)
+        console.log(flag)
+        break;
+      case "Order Date":
+        setOrderDate(e.target.value)
+        search = e.target.value
+       
+        filtered = rows.filter(item => {
+         return (
+           item.orderDate.toLowerCase().indexOf(search.toLowerCase()) !== -1
+         )
+
+       })
+       setFilterCustomer(filtered)
+       
+        console.log(flag)
+        break;
+      case "Delivery Date":
+        setDiliveryDate(e.target.value)
+        search = e.target.value
+       
+        filtered = rows.filter(item => {
+         return (
+           item.DiliveryDate.toLowerCase().indexOf(search.toLowerCase()) !== -1
+         )
+
+       })
+       setFilterCustomer(filtered)
+        console.log(flag)
+        break;
+      case "Delivery Window":
+        setDiliveryWindow(e.target.value)
+        search = e.target.value
+       
+        filtered = rows.filter(item => {
+         return (
+           item.DiliveryWindow.toLowerCase().indexOf(search.toLowerCase()) !== -1
+         )
+
+       })
+       setFilterCustomer(filtered)
+        console.log(flag)
+        break;
+      case "Status":
+        setStatus(e.target.value)
+        search = e.target.value
+       
+        filtered = rows.filter(item => {
+         return (
+           item.status.toLowerCase().indexOf(search.toLowerCase()) !== -1
+         )
+
+       })
+       setFilterCustomer(filtered)
+        console.log(filtered)
+        break;
+      case "Alert":
+        setAlert(e.target.value)
+        search = e.target.value
+        
+        filtered = rows.filter(item => {
+         return (
+           item.alerts.toLowerCase().indexOf(search.toLowerCase()) !== -1
+         )
+
+       })
+       setFilterCustomer(filtered)
+        console.log(filtered)
+        break;
+
+      default:
+        setFilterCustomer(rows)
+        break;
     }
   }
+
+
+
 
   return (
     <>
@@ -326,7 +410,7 @@ const Tables = () => {
                   <Link>Refresh</Link>
                 </div>
               </div>
-              <div className="row mt-4 ml-3">
+              {/* <div className="row mt-4 ml-3">
                 <div className="col-md-2">
                   <select
                     onChange={handleColumn}
@@ -357,82 +441,119 @@ const Tables = () => {
                   />
                 </div>
               </div>
+             */}
               <TableContainer component={Paper}>
                 <Table
                   className={classes.table}
+
                   aria-label="custom pagination table"
                 >
                   <TableHead>
                     <TableRow>
-                      <TableCell>
-                        <b>Customer Number</b>
+
+                      <TableCell className="table-headers-tables">
+                        <div className="tableCell-top">
+                          <b className="tableCell-top-title">Customer Number</b>
+                        </div>
+                        <input className="tableCell-top-input" value={CustomerNumber} onChange={(e) => handleSearch(e, "Customer Number")} placeholder="Search" />
+
                       </TableCell>
-                      <TableCell>
-                        <b>Order Number</b>
+                      <TableCell className="table-headers-tables">
+                        <div className="tableCell-top">
+                          <b className="tableCell-top-title">Order Number</b>
+                        </div>
+                        <input className="tableCell-top-input" value={OrderNumber} placeholder="Search" onChange={(e) => handleSearch(e, "Order Number")} />
                       </TableCell>
-                      <TableCell>
-                        <b>Customer Name</b>
+                      <TableCell className="table-headers-tables">
+                        <div className="tableCell-top">
+                          <b className="tableCell-top-title">Customer Name</b>
+                        </div>
+                        <input className="tableCell-top-input" value={CustomerName} onChange={(e) => handleSearch(e, "Customer Name")} placeholder="Search" />
                       </TableCell>
-                      <TableCell>
-                        <b>Customer Location</b>
+                      <TableCell className="table-headers-tables">
+                        <div className="tableCell-top">
+                          <b className="tableCell-top-title">Customer Location</b>
+                        </div>
+                        <input className="tableCell-top-input" placeholder="Search" onChange={(e) => handleSearch(e, "Customer Location")} />
                       </TableCell>
-                      <TableCell>
-                        <b>PO Number</b>
+                      <TableCell className="table-headers-tables">
+                        <div className="tableCell-top">
+                          <b className="tableCell-top-title">PO Number</b>
+                        </div>
+                        <input className="tableCell-top-input" placeholder="Search" onChange={(e) => handleSearch(e, "PO Number")} />
                       </TableCell>
-                      <TableCell>
-                        <b>Rack Location</b>
+                      <TableCell className="table-headers-tables">
+                        <div className="tableCell-top">
+                          <b className="tableCell-top-title">Rack Location</b>
+                        </div>
+                        <input className="tableCell-top-input" placeholder="Search" onChange={(e) => handleSearch(e, "Rack Location")} />
                       </TableCell>
-                      <TableCell>
-                        <b>Order Date</b>
+                      <TableCell className="table-headers-tables">
+                        <div className="tableCell-top">
+                          <b className="tableCell-top-title">Order Date</b>
+                        </div>
+                        <input className="tableCell-top-input" placeholder="Search" onChange={(e) => handleSearch(e, "Order Date")}/>
                       </TableCell>
-                      <TableCell>
-                        <b>Delivery Date</b>
+                      <TableCell className="table-headers-tables">
+                        <div className="tableCell-top">
+                          <b className="tableCell-top-title">Delivery Date</b>
+                        </div>
+                        <input className="tableCell-top-input" placeholder="Search" onChange={(e) => handleSearch(e, "Delivery Date")}/>
                       </TableCell>
-                      <TableCell>
-                        <b>Delivery Window</b>
+                      <TableCell className="table-headers-tables">
+                        <div className="tableCell-top">
+                          <b className="tableCell-top-title">Delivery Window</b>
+                        </div>
+                        <input className="tableCell-top-input" placeholder="Search" onChange={(e) => handleSearch(e, "Delivery Window")}/>
                       </TableCell>
-                      <TableCell>
-                        <b>Status</b>
+                      <TableCell className="table-headers-tables">
+                        <div className="tableCell-top">
+                          <b className="tableCell-top-title">Status</b>
+                        </div>
+                        <input className="tableCell-top-input" placeholder="Search"  onChange={(e) => handleSearch(e, "Status")}/>
                       </TableCell>
-                      <TableCell>
-                        <b>Alerts</b>
+                      <TableCell className="table-headers-tables">
+                        <div className="tableCell-top">
+                          <b className="tableCell-top-title">Alerts</b>
+                        </div>
+                        <input className="tableCell-top-input" placeholder="Search" onChange={(e) => handleSearch(e, "Alert")}/>
                       </TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     {(rowsPerPage > 0
-                      ? HaulerData.slice(
-                          page * rowsPerPage,
-                          page * rowsPerPage + rowsPerPage
-                        )
-                      : HaulerData
+                      ? filterCustomer.slice(
+                        page * rowsPerPage,
+                        page * rowsPerPage + rowsPerPage
+                      )
+                      : filterCustomer
                     ).map((row, i) => (
-                      <TableRow key={i}>
-                        <TableCell style={{ width: 250 }}>
+                      <TableRow key={i} className={i % 2 == 0 ? "tableCell-bottom-dark" : "tableCell-bottom-light"}>
+                        <TableCell className="tableCell-bottom">
                           {row.customerNumber}
                         </TableCell>
-                        <TableCell style={{ width: 200 }}>
+                        <TableCell className="tableCell-bottom">
                           {row.orderNumber}
                         </TableCell>
-                        <TableCell style={{ width: 200 }}>
+                        <TableCell className="tableCell-bottom">
                           {row.customerName}
                         </TableCell>
-                        <TableCell style={{ width: 200 }}>
+                        <TableCell className="tableCell-bottom">
                           {row.customerLocation}
                         </TableCell>
-                        <TableCell style={{ width: 200 }}>
+                        <TableCell className="tableCell-bottom">
                           {row.poNumber}
                         </TableCell>
-                        <TableCell style={{ width: 200 }}>
+                        <TableCell className="tableCell-bottom">
                           {row.rackLocation}
                         </TableCell>
-                        <TableCell style={{ width: 200 }}>
+                        <TableCell className="tableCell-bottom">
                           {moment(row.orderDate).format("DD/MM/YY")}
                         </TableCell>
-                        <TableCell style={{ width: 200 }}>
+                        <TableCell className="tableCell-bottom">
                           {moment(row.deliveryDate).format("DD/MM/YY")}
                         </TableCell>
-                        <TableCell>
+                        <TableCell className="tableCell-bottom">
                           <select>
                             <option>Select</option>
                             <option>00:00 – 05:59</option>
@@ -441,10 +562,10 @@ const Tables = () => {
                             <option>6:00 – 11:59</option>
                           </select>
                         </TableCell>
-                        <TableCell style={{ width: 200 }}>
+                        <TableCell className="tableCell-bottom">
                           {row.status}
                         </TableCell>
-                        <TableCell style={{ width: 200 }}>
+                        <TableCell className="tableCell-bottom">
                           {row.alerts}
                         </TableCell>
                       </TableRow>
@@ -487,7 +608,7 @@ const Tables = () => {
             </Card>
           </div>
         </Row>
-
+        {/* second table */}
         <Row>
           <div className="col mt-3">
             <Card className="shadow">
@@ -498,75 +619,106 @@ const Tables = () => {
                 >
                   <TableHead>
                     <TableRow>
-                      <TableCell>
-                        <b> Line Number</b>
+                      <TableCell className="table-headers-tables">
+                        <div className="tableCell-top">
+                          <b className="tableCell-top-title"> Line Number</b>
+                        </div>
+                        <input className="tableCell-top-input" value={CustomerNumber} onChange={{}} placeholder="Search" />
                       </TableCell>
-                      <TableCell>
-                        <b>Product</b>
+                      <TableCell className="table-headers-tables">
+                        <div className="tableCell-top">
+                          <b className="tableCell-top-title">Product</b>
+                        </div>
+                        <input className="tableCell-top-input" value={CustomerNumber} onChange={{}} placeholder="Search" />
+
                       </TableCell>
-                      <TableCell>
-                        <b>Rack Location</b>
+                      <TableCell className="table-headers-tables">
+                        <div className="tableCell-top">
+                          <b className="tableCell-top-title">Rack Location</b>
+                        </div>
+                        <input className="tableCell-top-input" value={CustomerNumber} onChange={{}} placeholder="Search" />
                       </TableCell>
-                      <TableCell>
-                        <b>Quality Order (gal)</b>
+                      <TableCell className="table-headers-tables">
+                        <div className="tableCell-top">
+                          <b className="tableCell-top-title">Quality Order (gal)</b>
+                        </div>
+                        <input className="tableCell-top-input" value={CustomerNumber} onChange={{}} placeholder="Search" />
                       </TableCell>
-                      <TableCell>
-                        <b>Quality Delivered (gal)</b>
+                      <TableCell className="table-headers-tables">
+                        <div className="tableCell-top">
+                          <b className="tableCell-top-title">Quality Delivered (gal)</b>
+                        </div>
+                        <input className="tableCell-top-input" value={CustomerNumber} onChange={{}} placeholder="Search" />
                       </TableCell>
-                      <TableCell>
-                        <b>Freight Ticket</b>
+                      <TableCell className="table-headers-tables">
+                        <div className="tableCell-top">
+                          <b className="tableCell-top-title">Freight Ticket</b>
+                        </div>
+                        <input className="tableCell-top-input" value={CustomerNumber} onChange={{}} placeholder="Search" />
                       </TableCell>
-                      <TableCell>
-                        <b>Ancillary Fees</b>
+                      <TableCell className="table-headers-tables">
+                        <div className="tableCell-top">
+                          <b className="tableCell-top-title">Ancillary Fees</b>
+                        </div>
+                        <input className="tableCell-top-input" value={CustomerNumber} onChange={{}} placeholder="Search" />
                       </TableCell>
-                      <TableCell>
-                        <b>Total Cost</b>
+                      <TableCell className="table-headers-tables">
+                        <div className="tableCell-top">
+                          <b className="tableCell-top-title">Total Cost</b>
+                        </div>
+                        <input className="tableCell-top-input" value={CustomerNumber} onChange={{}} placeholder="Search" />
                       </TableCell>
-                      <TableCell>
-                        <b>Status</b>
+                      <TableCell className="table-headers-tables">
+                        <div className="tableCell-top">
+                          <b className="tableCell-top-title">Status</b>
+                        </div>
+                        <input className="tableCell-top-input" value={CustomerNumber} onChange={{}} placeholder="Search" />
                       </TableCell>
-                      <TableCell>
-                        <b>Alerts</b>
+                      <TableCell className="table-headers-tables">
+                      <div className="tableCell-top">
+                        <b className="tableCell-top-title">Alerts</b>
+                        </div>
+                        <input className="tableCell-top-input" value={CustomerNumber} onChange={{}} placeholder="Search" />
                       </TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     {(rowsPerPage > 0
                       ? data.slice(
-                          page * rowsPerPage,
-                          page * rowsPerPage + rowsPerPage
-                        )
+                        page * rowsPerPage,
+                        page * rowsPerPage + rowsPerPage
+                      )
                       : data
                     ).map((row, i) => (
-                      <TableRow key={i}>
-                        <TableCell style={{ width: 250 }}>
+                      <TableRow key={i} className={i % 2 == 0 ? "tableCell-bottom-dark" : "tableCell-bottom-light"}>
+                        <TableCell className="tableCell-bottom">
                           {row.lineNumber}
                         </TableCell>
-                        <TableCell style={{ width: 200 }}>
+                        <TableCell className="tableCell-bottom">
                           {row.product}
                         </TableCell>
-                        <TableCell style={{ width: 200 }}>
+                        <TableCell className="tableCell-bottom">
                           {row.rackLocation}
                         </TableCell>
-                        <TableCell style={{ width: 200 }}>
+                        <TableCell className="tableCell-bottom">
                           {row.qualityOrdered}
                         </TableCell>
-                        <TableCell style={{ width: 200 }}>
+                        <TableCell className="tableCell-bottom">
                           {row.qualityDelivered}
                         </TableCell>
-                        <TableCell style={{ width: 200 }}>
+                        <TableCell className="tableCell-bottom">
                           {row.freightTicket}
                         </TableCell>
-                        <TableCell style={{ width: 200 }}>
+                        <TableCell className="tableCell-bottom">
                           {row.ancillaryFees}
                         </TableCell>
-                        <TableCell style={{ width: 200 }}>
+                        <TableCell className="tableCell-bottom">
                           {row.totalCost}
                         </TableCell>
-                        <TableCell style={{ width: 200 }}>
+                        <TableCell className="tableCell-bottom">
                           {row.status}
                         </TableCell>
-                        <TableCell style={{ width: 200 }}>
+                        <TableCell className="tableCell-bottom">
                           {row.alerts}
                         </TableCell>
                       </TableRow>
