@@ -40,8 +40,64 @@ import LastPageIcon from "@material-ui/icons/LastPage"
 import Header from "components/Headers/Header.js"
 import moment from "moment"
 import { Link, useHistory } from "react-router-dom"
+import "./pages/WholeSaler.css"
 
 import { ExportCSV } from "./excel/exportExcel"
+
+
+const rows = [
+  {
+    customerNumber: "123456",
+    customerName: "Alex",
+    orderNumber: "ASD123",
+    customerLocation: "London",
+    poNumber: "123456789",
+    rackLocation: "London",
+    orderDate: new Date(),
+    deliveryDate: new Date(),
+    status: "Delayed",
+    alerts: "None",
+  },
+  {
+    customerNumber: "123456",
+    customerName: "John",
+    orderNumber: "ASD123",
+    customerLocation: "London",
+    poNumber: "123456789",
+    rackLocation: "London",
+    orderDate: new Date(),
+    deliveryDate: new Date(),
+    status: "Completed",
+    alerts: "Product Outage",
+  },
+]
+
+const data = [
+  {
+    lineNumber: "123456",
+    product: "Reg Gas",
+    rackLocation: "London",
+    qualityOrdered: "3,000",
+    qualityDelivered: "5,700",
+    freightTicket: "123456789",
+    ancillaryFees: "$23",
+    totalCost: "$234,565",
+    status: "Scheduled",
+    alerts: "None",
+  },
+  {
+    lineNumber: "098765",
+    product: "Mid Gas",
+    rackLocation: "London",
+    qualityOrdered: "2,500",
+    qualityDelivered: "12,000",
+    freightTicket: "123456789",
+    ancillaryFees: "$43",
+    totalCost: "$234,565",
+    status: "Scheduled",
+    alerts: "None",
+  },
+]
 
 const useStyles1 = makeStyles(theme => ({
   root: {
@@ -130,62 +186,36 @@ const WholeSaler = () => {
   const classes = useStyles2()
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(5)
+  const [CustomerName, setCustomerName] = React.useState("")
+  const [filterCustomer, setFilterCustomer] = React.useState(rows)
+  const [filterCustomer2, setFilterCustomer2] = React.useState(data)
+  const [OrderNumber, setOrderNumber] = React.useState("")
+  const [CustomerNumber, setCustomerNumber] = React.useState("")
+  const [CustomerLocation, setCustomerLocation] = React.useState("")
+  const [POnumber, setPOnumber] = React.useState("")
+  const [RackLocation, setRackLocation] = React.useState("")
+  const [OrderDate, setOrderDate] = React.useState("")
+  const [DiliveryDate, setDiliveryDate] = React.useState("")
+  const [DiliveryWindow, setDiliveryWindow] = React.useState("")
+  const [Status, setStatus] = React.useState("")
+  const [Alert, setAlert] = React.useState("")
+
+
+  const [LineNumber, setLineNumber] = React.useState("")
+  const [Product, setProduct] = React.useState("")
+  const [RackLocation2, setRackLocation2] = React.useState("")
+  const [QualityOrder, setQualityOrder] = React.useState("")
+  const [QualityDelivered, setQualityDelivered] = React.useState("")
+  const [FreightTicket, setFreightTicket] = React.useState("")
+  const [AncillaryFees, setAncillaryFees] = React.useState("")
+  const [TotalCost, setTotalCost] = React.useState("")
+  const [Status2, setStatus2] = React.useState("")
+  const [Alert2, setAlert2] = React.useState("")
+
 
   const history = useHistory()
 
-  const rows = [
-    {
-      customerNumber: "123456",
-      customerName: "Alex",
-      orderNumber: "ASD123",
-      customerLocation: "London",
-      poNumber: "123456789",
-      rackLocation: "London",
-      orderDate: new Date(),
-      deliveryDate: new Date(),
-      status: "Delayed",
-      alerts: "None",
-    },
-    {
-      customerNumber: "123456",
-      customerName: "John",
-      orderNumber: "ASD123",
-      customerLocation: "London",
-      poNumber: "123456789",
-      rackLocation: "London",
-      orderDate: new Date(),
-      deliveryDate: new Date(),
-      status: "Completed",
-      alerts: "Product Outage",
-    },
-  ]
-
-  const data = [
-    {
-      lineNumber: "123456",
-      product: "Reg Gas",
-      rackLocation: "London",
-      qualityOrdered: "3,000",
-      qualityDelivered: "5,700",
-      freightTicket: "123456789",
-      ancillaryFees: "$23",
-      totalCost: "$234,565",
-      status: "Scheduled",
-      alerts: "None",
-    },
-    {
-      lineNumber: "098765",
-      product: "Mid Gas",
-      rackLocation: "London",
-      qualityOrdered: "2,500",
-      qualityDelivered: "12,000",
-      freightTicket: "123456789",
-      ancillaryFees: "$43",
-      totalCost: "$234,565",
-      status: "Scheduled",
-      alerts: "None",
-    },
-  ]
+  
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage)
@@ -208,6 +238,309 @@ const WholeSaler = () => {
   const [HaulerData, setHaulerData] = useState(rows)
   const [column, setColumn] = useState("")
   const [search, setsearch] = useState("")
+
+  const handleSearch = (e, flag) => {
+    let search = ""
+    let filtered = ""
+    switch (flag) {
+      case "Customer Number":
+        setCustomerNumber(e.target.value)
+      
+         search = e.target.value
+        
+         filtered = rows.filter(item => {
+          return (
+            item.customerNumber.toLowerCase().indexOf(search.toLowerCase()) !== -1
+          )
+
+        })
+        console.log("filter",filtered)
+        setFilterCustomer(filtered)
+
+
+        break;
+      case "Order Number":
+        console.log(flag)
+        setOrderNumber(e.target.value)
+         search = e.target.value
+        
+         filtered = rows.filter(item => {
+          return (
+            item.orderNumber.toLowerCase().indexOf(search.toLowerCase()) !== -1
+          )
+
+        })
+        setFilterCustomer(filtered)
+        break;
+      case "Customer Name":
+        setCustomerName(e.target.value)
+         search = e.target.value
+        
+         filtered = rows.filter(item => {
+          return (
+            item.customerName.toLowerCase().indexOf(search.toLowerCase()) !== -1
+          )
+
+        })
+        setFilterCustomer(filtered)
+        console.log(flag)
+        break;
+      case "Customer Location":
+        setCustomerLocation(e.target.value)
+        search = e.target.value
+       
+        filtered = rows.filter(item => {
+         return (
+           item.customerLocation.toLowerCase().indexOf(search.toLowerCase()) !== -1
+         )
+
+       })
+       setFilterCustomer(filtered)
+        console.log(flag)
+        break;
+      case "PO Number":
+        setPOnumber(e.target.value)
+        search = e.target.value
+       
+        filtered = rows.filter(item => {
+         return (
+           item.poNumber.toLowerCase().indexOf(search.toLowerCase()) !== -1
+         )
+
+       })
+       setFilterCustomer(filtered)
+        console.log(flag)
+        break;
+      case "Rack Location":
+        setRackLocation(e.target.value)
+        search = e.target.value
+       
+        filtered = rows.filter(item => {
+         return (
+           item.rackLocation.toLowerCase().indexOf(search.toLowerCase()) !== -1
+         )
+
+       })
+       setFilterCustomer(filtered)
+        console.log(flag)
+        break;
+      case "Order Date":
+        setOrderDate(e.target.value)
+        search = e.target.value
+       
+        filtered = rows.filter(item => {
+         return (
+           item.orderDate.toLowerCase().indexOf(search.toLowerCase()) !== -1
+         )
+
+       })
+       setFilterCustomer(filtered)
+       
+        console.log(flag)
+        break;
+      case "Delivery Date":
+        setDiliveryDate(e.target.value)
+        search = e.target.value
+       
+        filtered = rows.filter(item => {
+         return (
+           item.DiliveryDate.toLowerCase().indexOf(search.toLowerCase()) !== -1
+         )
+
+       })
+       setFilterCustomer(filtered)
+        console.log(flag)
+        break;
+      case "Delivery Window":
+        setDiliveryWindow(e.target.value)
+        search = e.target.value
+       
+        filtered = rows.filter(item => {
+         return (
+           item.DiliveryWindow.toLowerCase().indexOf(search.toLowerCase()) !== -1
+         )
+
+       })
+       setFilterCustomer(filtered)
+        console.log(flag)
+        break;
+      case "Status":
+        setStatus(e.target.value)
+        search = e.target.value
+       
+        filtered = rows.filter(item => {
+         return (
+           item.status.toLowerCase().indexOf(search.toLowerCase()) !== -1
+         )
+
+       })
+       setFilterCustomer(filtered)
+        console.log(filtered)
+        break;
+      case "Alert":
+        setAlert(e.target.value)
+        search = e.target.value
+        
+        filtered = rows.filter(item => {
+         return (
+           item.alerts.toLowerCase().indexOf(search.toLowerCase()) !== -1
+         )
+
+       })
+       setFilterCustomer(filtered)
+        console.log(filtered)
+        break;
+
+      default:
+        setFilterCustomer(rows)
+        break;
+    }
+  }
+
+
+  const handleSearch2 = (e, flag) => {
+    let search = ""
+    let filtered = ""
+    switch (flag) {
+      case "Line Number":
+        setLineNumber(e.target.value)
+         search = e.target.value
+        
+         filtered = data.filter(item => {
+          return (
+            item.lineNumber.toLowerCase().indexOf(search.toLowerCase()) !== -1
+          )
+
+        })
+        setFilterCustomer2(filtered)
+
+
+        break;
+      case "Product":
+        console.log(flag)
+        setProduct(e.target.value)
+         search = e.target.value
+        
+         filtered = data.filter(item => {
+          return (
+            item.product.toLowerCase().indexOf(search.toLowerCase()) !== -1
+          )
+
+        })
+        setFilterCustomer2(filtered)
+        break;
+      case "Rack Location 2":
+        setRackLocation2(e.target.value)
+         search = e.target.value
+        
+         filtered = data.filter(item => {
+          return (
+            item.rackLocation.toLowerCase().indexOf(search.toLowerCase()) !== -1
+          )
+
+        })
+        setFilterCustomer2(filtered)
+        console.log(flag)
+        break;
+      case "Quality Order":
+        setQualityOrder(e.target.value)
+        search = e.target.value
+       
+        filtered = data.filter(item => {
+         return (
+           item.qualityOrdered.toLowerCase().indexOf(search.toLowerCase()) !== -1
+         )
+
+       })
+       setFilterCustomer2(filtered)
+        
+        break;
+      case "Quality Delivered":
+        setQualityDelivered(e.target.value)
+        search = e.target.value
+       
+        filtered = data.filter(item => {
+         return (
+           item.qualityDelivered.toLowerCase().indexOf(search.toLowerCase()) !== -1
+         )
+
+       })
+       setFilterCustomer2(filtered)
+        console.log(flag)
+        break;
+      case "Freight Ticket":
+        setFreightTicket(e.target.value)
+        search = e.target.value
+       
+        filtered = data.filter(item => {
+         return (
+           item.freightTicket.toLowerCase().indexOf(search.toLowerCase()) !== -1
+         )
+
+       })
+       setFilterCustomer2(filtered)
+        console.log(flag)
+        break;
+      case "Ancillary Fees":
+        setAncillaryFees(e.target.value)
+        search = e.target.value
+       
+        filtered = data.filter(item => {
+         return (
+           item.ancillaryFees.toLowerCase().indexOf(search.toLowerCase()) !== -1
+         )
+
+       })
+       setFilterCustomer2(filtered)
+       
+        console.log(flag)
+        break;
+      case "Total Cost":
+        setTotalCost(e.target.value)
+        search = e.target.value
+       
+        filtered = data.filter(item => {
+         return (
+           item.totalCost.toLowerCase().indexOf(search.toLowerCase()) !== -1
+         )
+
+       })
+       setFilterCustomer2(filtered)
+        
+        break;
+      case "Status2":
+        setStatus2(e.target.value)
+        search = e.target.value
+       
+        filtered = data.filter(item => {
+         return (
+           item.status.toLowerCase().indexOf(search.toLowerCase()) !== -1
+         )
+
+       })
+       setFilterCustomer2(filtered)
+        
+        break;
+      
+      case "Alert2":
+        setAlert2(e.target.value)
+        search = e.target.value
+        
+        filtered = data.filter(item => {
+         return (
+           item.alerts.toLowerCase().indexOf(search.toLowerCase()) !== -1
+         )
+
+       })
+       setFilterCustomer2(filtered)
+        
+        break;
+
+      default:
+        setFilterCustomer2(data)
+        break;
+    }
+  }
 
   const handleColumn = e => {
     setColumn(e.target.value)
@@ -339,37 +672,8 @@ const WholeSaler = () => {
                 </div>
               </div>
 
-              <div className="row mt-4 ml-3">
-                <div className="col-md-2">
-                  <select
-                    onChange={handleColumn}
-                    style={{ width: "15rem", padding: "7px" }}
-                  >
-                    <option value="" disabled selected>
-                      Select Columns
-                    </option>
-                    <option value="terminal">Customer Number</option>
-                    <option value="ulsd">Order Number</option>
-                    <option value="urleaded">Customer Name</option>
-                    <option value="mid-grade">Customer Location </option>
-                    <option value="premium-grade">PO Number </option>
-                    <option value="heating-oil">Rack Location</option>
-                    <option value="butane">Order Date </option>
-                    <option value="karosene">Delivery Date </option>
-                    <option value="propane">Status </option>
-                    <option value="bitumen">Alerts </option>
-                  </select>
-                </div>
-                <div className="col-md-1">
-                  <input
-                    value={search}
-                    onChange={searchOnChange}
-                    placeholder="Search..."
-                    disabled={column == ""}
-                    style={{ width: "15rem", padding: "7px" }}
-                  />
-                </div>
-              </div>
+             
+                
               <TableContainer component={Paper}>
                 <Table
                   className={classes.table}
@@ -377,75 +681,106 @@ const WholeSaler = () => {
                 >
                   <TableHead>
                     <TableRow>
-                      <TableCell>
-                        <b> Customer Number</b>
+                      <TableCell className="table-headers-tables">
+                        <div className="tableCell-top">
+                        <b className="tableCell-top-title"> Customer Number</b>
+                        </div>
+                        <input className="tableCell-top-input" value={CustomerNumber} onChange={(e) => handleSearch(e, "Customer Number")} placeholder="Search" />
                       </TableCell>
-                      <TableCell>
-                        <b>Order Number</b>
+                      <TableCell className="table-headers-tables">
+                        <div className="tableCell-top">
+                        <b className="tableCell-top-title">Order Number</b>
+                        </div>
+                        <input className="tableCell-top-input" value={OrderNumber} placeholder="Search" onChange={(e) => handleSearch(e, "Order Number")} />
                       </TableCell>
-                      <TableCell>
-                        <b>Customer Name</b>
+                      <TableCell className="table-headers-tables">
+                        <div className="tableCell-top">
+                        <b className="tableCell-top-title">Customer Name</b>
+                        </div>
+                        <input className="tableCell-top-input" value={CustomerName} onChange={(e) => handleSearch(e, "Customer Name")} placeholder="Search" />
                       </TableCell>
-                      <TableCell>
-                        <b>Customer Location</b>
+                      <TableCell className="table-headers-tables">
+                        <div className="tableCell-top">
+                        <b className="tableCell-top-title">Customer Location</b>
+                        </div>
+                        <input className="tableCell-top-input" placeholder="Search" onChange={(e) => handleSearch(e, "Customer Location")} />
                       </TableCell>
-                      <TableCell>
-                        <b>PO Number</b>
+                      <TableCell className="table-headers-tables">
+                        <div className="tableCell-top">
+                        <b className="tableCell-top-title">PO Number</b>
+                        </div>
+                        <input className="tableCell-top-input" placeholder="Search" onChange={(e) => handleSearch(e, "PO Number")} />
                       </TableCell>
-                      <TableCell>
-                        <b>Rack Location</b>
+                      <TableCell className="table-headers-tables">
+                        <div className="tableCell-top">
+                        <b className="tableCell-top-title">Rack Location</b>
+                        </div>
+                        <input className="tableCell-top-input" placeholder="Search" onChange={(e) => handleSearch(e, "Rack Location")} />
                       </TableCell>
-                      <TableCell>
-                        <b>Order Date</b>
+                      <TableCell className="table-headers-tables">
+                        <div className="tableCell-top">
+                        <b className="tableCell-top-title">Order Date</b>
+                        </div>
+                        <input className="tableCell-top-input" placeholder="Search" onChange={(e) => handleSearch(e, "Order Date")}/>
                       </TableCell>
-                      <TableCell>
-                        <b>Delivery Date</b>
+                      <TableCell className="table-headers-tables">
+                        <div className="tableCell-top">
+                        <b className="tableCell-top-title">Delivery Date</b>
+                        </div>
+                        <input className="tableCell-top-input" placeholder="Search" onChange={(e) => handleSearch(e, "Delivery Date")}/>
                       </TableCell>
-                      <TableCell>
-                        <b>Status</b>
+                      <TableCell className="table-headers-tables">
+                        <div className="tableCell-top">
+                        <b className="tableCell-top-title">Status</b>
+                        </div>
+                        <input className="tableCell-top-input" placeholder="Search"  onChange={(e) => handleSearch(e, "Status")}/>
                       </TableCell>
-                      <TableCell>
-                        <b>Alerts</b>
+                      
+                      <TableCell className="table-headers-tables">
+                        <div className="tableCell-top">
+                        <b className="tableCell-top-title">Alerts</b>
+                        </div>
+                        <input className="tableCell-top-input" placeholder="Search" onChange={(e) => handleSearch(e, "Alert")}/>
                       </TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     {(rowsPerPage > 0
-                      ? HaulerData.slice(
+                      ? filterCustomer.slice(
                           page * rowsPerPage,
                           page * rowsPerPage + rowsPerPage
                         )
-                      : HaulerData
+                      : filterCustomer
                     ).map((row, i) => (
-                      <TableRow key={i}>
-                        <TableCell style={{ width: 250 }}>
+                      <TableRow key={i} className={i % 2 == 0 ? "tableCell-bottom-dark" : "tableCell-bottom-light"}>
+                        <TableCell className="tableCell-bottom">
                           {row.customerNumber}
                         </TableCell>
-                        <TableCell style={{ width: 200 }}>
+                        <TableCell className="tableCell-bottom">
                           {row.orderNumber}
                         </TableCell>
-                        <TableCell style={{ width: 200 }}>
+                        <TableCell className="tableCell-bottom">
                           {row.customerName}
                         </TableCell>
-                        <TableCell style={{ width: 200 }}>
+                        <TableCell className="tableCell-bottom">
                           {row.customerLocation}
                         </TableCell>
-                        <TableCell style={{ width: 200 }}>
+                        <TableCell className="tableCell-bottom">
                           {row.poNumber}
                         </TableCell>
-                        <TableCell style={{ width: 200 }}>
+                        <TableCell className="tableCell-bottom">
                           {row.rackLocation}
                         </TableCell>
-                        <TableCell style={{ width: 200 }}>
+                        <TableCell className="tableCell-bottom">
                           {moment(row.orderDate).format("DD/MM/YY")}
                         </TableCell>
-                        <TableCell style={{ width: 200 }}>
+                        <TableCell className="tableCell-bottom">
                           {moment(row.deliveryDate).format("DD/MM/YY")}
                         </TableCell>
-                        <TableCell style={{ width: 200 }}>
+                        <TableCell className="tableCell-bottom">
                           {row.status}
                         </TableCell>
-                        <TableCell style={{ width: 200 }}>
+                        <TableCell className="tableCell-bottom">
                           {row.alerts}
                         </TableCell>
                       </TableRow>
@@ -499,75 +834,106 @@ const WholeSaler = () => {
                 >
                   <TableHead>
                     <TableRow>
-                      <TableCell>
-                        <b> Line Number</b>
+                      <TableCell className="table-headers-tables">
+                      <div className="tableCell-top">
+                        <b className="tableCell-top-title"> Line Number</b>
+                        </div>
+                        <input className="tableCell-top-input" value={LineNumber} onChange={(e)=>handleSearch2(e, "Line Number")} placeholder="Search" />
                       </TableCell>
-                      <TableCell>
-                        <b>Product</b>
+                      <TableCell className="table-headers-tables">
+                      <div className="tableCell-top">
+                        <b className="tableCell-top-title">Product</b>
+                        </div>
+                        <input className="tableCell-top-input" value={Product} onChange={(e)=>handleSearch2(e,"Product")} placeholder="Search" />
                       </TableCell>
-                      <TableCell>
-                        <b>Rack Location</b>
+                      <TableCell className="table-headers-tables">
+                      <div className="tableCell-top">
+                        <b className="tableCell-top-title">Rack Location</b>
+                        
+                        </div>
+                        <input className="tableCell-top-input" value={RackLocation2} onChange={(e)=>handleSearch2(e,"Rack Location")} placeholder="Search" />
                       </TableCell>
-                      <TableCell>
-                        <b>Quality Order (gal)</b>
+                      <TableCell className="table-headers-tables">
+                      <div className="tableCell-top">
+                        <b className="tableCell-top-title">Quality Order (gal)</b>
+                        </div>
+                        <input className="tableCell-top-input" value={QualityOrder} onChange={(e)=>handleSearch2(e,"Quality Order")} placeholder="Search" />
                       </TableCell>
-                      <TableCell>
-                        <b>Quality Delivered (gal)</b>
+                      <TableCell className="table-headers-tables">
+                      <div className="tableCell-top">
+                        <b className="tableCell-top-title">Quality Delivered (gal)</b>
+                        </div>
+                        <input className="tableCell-top-input" value={QualityDelivered} onChange={(e)=>handleSearch2(e,"Quality Delivered")} placeholder="Search" />
                       </TableCell>
-                      <TableCell>
-                        <b>Freight Ticket</b>
+                      <TableCell className="table-headers-tables">
+                      <div className="tableCell-top">
+                        <b className="tableCell-top-title">Freight Ticket</b>
+                        </div>
+                        <input className="tableCell-top-input" value={FreightTicket} onChange={(e)=>handleSearch2(e,"Freight Ticket")} placeholder="Search" />
                       </TableCell>
-                      <TableCell>
-                        <b>Ancillary Fees</b>
+                      <TableCell className="table-headers-tables">
+                      <div className="tableCell-top">
+                        <b className="tableCell-top-title">Ancillary Fees</b>
+                        </div>
+                        <input className="tableCell-top-input" value={AncillaryFees} onChange={(e)=>handleSearch2(e,"Ancillary Fees")} placeholder="Search" />
                       </TableCell>
-                      <TableCell>
-                        <b>Total Cost</b>
+                      <TableCell className="table-headers-tables">
+                      <div className="tableCell-top">
+                        <b className="tableCell-top-title">Total Cost</b>
+                        </div>
+                        <input className="tableCell-top-input" value={TotalCost} onChange={(e)=>handleSearch2(e,"Total Cost")} placeholder="Search" />
                       </TableCell>
-                      <TableCell>
-                        <b>Status</b>
+                      <TableCell className="table-headers-tables">
+                      <div className="tableCell-top">
+                        <b className="tableCell-top-title">Status</b>
+                        </div>
+                        <input className="tableCell-top-input" value={Status2} onChange={(e)=>handleSearch2(e,"Status2")} placeholder="Search" />
                       </TableCell>
-                      <TableCell>
-                        <b>Alerts</b>
+                      <TableCell className="table-headers-tables">
+                      <div className="tableCell-top">
+                        <b className="tableCell-top-title">Alerts</b>
+                        </div>
+                        <input className="tableCell-top-input" value={Alert2} onChange={(e)=>handleSearch2(e,"Alert2")} placeholder="Search" />
                       </TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     {(rowsPerPage > 0
-                      ? data.slice(
+                      ? filterCustomer2.slice(
                           page * rowsPerPage,
                           page * rowsPerPage + rowsPerPage
                         )
-                      : data
+                      : filterCustomer2
                     ).map((row, i) => (
-                      <TableRow key={i}>
-                        <TableCell style={{ width: 250 }}>
+                      <TableRow key={i} className={i % 2 == 0 ? "tableCell-bottom-dark" : "tableCell-bottom-light"}>
+                        <TableCell className="tableCell-bottom">
                           {row.lineNumber}
                         </TableCell>
-                        <TableCell style={{ width: 200 }}>
+                        <TableCell className="tableCell-bottom">
                           {row.product}
                         </TableCell>
-                        <TableCell style={{ width: 200 }}>
+                        <TableCell className="tableCell-bottom">
                           {row.rackLocation}
                         </TableCell>
-                        <TableCell style={{ width: 200 }}>
+                        <TableCell className="tableCell-bottom">
                           {row.qualityOrdered}
                         </TableCell>
-                        <TableCell style={{ width: 200 }}>
+                        <TableCell className="tableCell-bottom">
                           {row.qualityDelivered}
                         </TableCell>
-                        <TableCell style={{ width: 200 }}>
+                        <TableCell className="tableCell-bottom">
                           {row.freightTicket}
                         </TableCell>
-                        <TableCell style={{ width: 200 }}>
+                        <TableCell className="tableCell-bottom">
                           {row.ancillaryFees}
                         </TableCell>
-                        <TableCell style={{ width: 200 }}>
+                        <TableCell className="tableCell-bottom">
                           {row.totalCost}
                         </TableCell>
-                        <TableCell style={{ width: 200 }}>
+                        <TableCell className="tableCell-bottom">
                           {row.status}
                         </TableCell>
-                        <TableCell style={{ width: 200 }}>
+                        <TableCell className="tableCell-bottom">
                           {row.alerts}
                         </TableCell>
                       </TableRow>

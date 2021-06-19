@@ -155,6 +155,33 @@ const rows = [
   },
 ]
 
+const data = [
+  {
+    lineNumber: "123456",
+    product: "Reg Gas",
+    rackLocation: "London",
+    qualityOrdered: "3,000",
+    qualityDelivered: "5,700",
+    freightTicket: "123456789",
+    ancillaryFees: "$23",
+    totalCost: "$234,565",
+    status: "Scheduled",
+    alerts: "None",
+  },
+  {
+    lineNumber: "098765",
+    product: "Mid Gas",
+    rackLocation: "London",
+    qualityOrdered: "2,500",
+    qualityDelivered: "12,000",
+    freightTicket: "123456789",
+    ancillaryFees: "$43",
+    totalCost: "$234,565",
+    status: "Scheduled",
+    alerts: "None",
+  },
+]
+
 const Tables = () => {
   const classes = useStyles2()
   const [page, setPage] = React.useState(0)
@@ -162,6 +189,7 @@ const Tables = () => {
 
   const [CustomerName, setCustomerName] = React.useState("")
   const [filterCustomer, setFilterCustomer] = React.useState(rows)
+  const [filterCustomer2, setFilterCustomer2] = React.useState(data)
   const [OrderNumber, setOrderNumber] = React.useState("")
   const [CustomerNumber, setCustomerNumber] = React.useState("")
   const [CustomerLocation, setCustomerLocation] = React.useState("")
@@ -173,32 +201,20 @@ const Tables = () => {
   const [Status, setStatus] = React.useState("")
   const [Alert, setAlert] = React.useState("")
 
-  const data = [
-    {
-      lineNumber: "123456",
-      product: "Reg Gas",
-      rackLocation: "London",
-      qualityOrdered: "3,000",
-      qualityDelivered: "5,700",
-      freightTicket: "123456789",
-      ancillaryFees: "$23",
-      totalCost: "$234,565",
-      status: "Scheduled",
-      alerts: "None",
-    },
-    {
-      lineNumber: "098765",
-      product: "Mid Gas",
-      rackLocation: "London",
-      qualityOrdered: "2,500",
-      qualityDelivered: "12,000",
-      freightTicket: "123456789",
-      ancillaryFees: "$43",
-      totalCost: "$234,565",
-      status: "Scheduled",
-      alerts: "None",
-    },
-  ]
+
+  const [LineNumber, setLineNumber] = React.useState("")
+  const [Product, setProduct] = React.useState("")
+  const [RackLocation2, setRackLocation2] = React.useState("")
+  const [QualityOrder, setQualityOrder] = React.useState("")
+  const [QualityDelivered, setQualityDelivered] = React.useState("")
+  const [FreightTicket, setFreightTicket] = React.useState("")
+  const [AncillaryFees, setAncillaryFees] = React.useState("")
+  const [TotalCost, setTotalCost] = React.useState("")
+  const [Status2, setStatus2] = React.useState("")
+  const [Alert2, setAlert2] = React.useState("")
+
+  console.log(CustomerNumber)
+  
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage)
@@ -387,6 +403,151 @@ const Tables = () => {
 
       default:
         setFilterCustomer(rows)
+        break;
+    }
+  }
+
+
+  const handleSearch2 = (e, flag) => {
+    let search = ""
+    let filtered = ""
+    switch (flag) {
+      case "Line Number":
+        setLineNumber(e.target.value)
+         search = e.target.value
+        
+         filtered = data.filter(item => {
+          return (
+            item.lineNumber.toLowerCase().indexOf(search.toLowerCase()) !== -1
+          )
+
+        })
+        setFilterCustomer2(filtered)
+
+
+        break;
+      case "Product":
+        console.log(flag)
+        setProduct(e.target.value)
+         search = e.target.value
+        
+         filtered = data.filter(item => {
+          return (
+            item.product.toLowerCase().indexOf(search.toLowerCase()) !== -1
+          )
+
+        })
+        setFilterCustomer2(filtered)
+        break;
+      case "Rack Location 2":
+        setRackLocation2(e.target.value)
+         search = e.target.value
+        
+         filtered = data.filter(item => {
+          return (
+            item.rackLocation.toLowerCase().indexOf(search.toLowerCase()) !== -1
+          )
+
+        })
+        setFilterCustomer2(filtered)
+        console.log(flag)
+        break;
+      case "Quality Order":
+        setQualityOrder(e.target.value)
+        search = e.target.value
+       
+        filtered = data.filter(item => {
+         return (
+           item.qualityOrdered.toLowerCase().indexOf(search.toLowerCase()) !== -1
+         )
+
+       })
+       setFilterCustomer2(filtered)
+        
+        break;
+      case "Quality Delivered":
+        setQualityDelivered(e.target.value)
+        search = e.target.value
+       
+        filtered = data.filter(item => {
+         return (
+           item.qualityDelivered.toLowerCase().indexOf(search.toLowerCase()) !== -1
+         )
+
+       })
+       setFilterCustomer2(filtered)
+        console.log(flag)
+        break;
+      case "Freight Ticket":
+        setFreightTicket(e.target.value)
+        search = e.target.value
+       
+        filtered = data.filter(item => {
+         return (
+           item.freightTicket.toLowerCase().indexOf(search.toLowerCase()) !== -1
+         )
+
+       })
+       setFilterCustomer2(filtered)
+        console.log(flag)
+        break;
+      case "Ancillary Fees":
+        setAncillaryFees(e.target.value)
+        search = e.target.value
+       
+        filtered = data.filter(item => {
+         return (
+           item.ancillaryFees.toLowerCase().indexOf(search.toLowerCase()) !== -1
+         )
+
+       })
+       setFilterCustomer2(filtered)
+       
+        console.log(flag)
+        break;
+      case "Total Cost":
+        setTotalCost(e.target.value)
+        search = e.target.value
+       
+        filtered = data.filter(item => {
+         return (
+           item.totalCost.toLowerCase().indexOf(search.toLowerCase()) !== -1
+         )
+
+       })
+       setFilterCustomer2(filtered)
+        
+        break;
+      case "Status2":
+        setStatus2(e.target.value)
+        search = e.target.value
+       
+        filtered = data.filter(item => {
+         return (
+           item.status.toLowerCase().indexOf(search.toLowerCase()) !== -1
+         )
+
+       })
+       setFilterCustomer2(filtered)
+        
+        break;
+      
+      case "Alert2":
+        setAlert2(e.target.value)
+        search = e.target.value
+        
+        filtered = data.filter(item => {
+         return (
+           item.alerts.toLowerCase().indexOf(search.toLowerCase()) !== -1
+         )
+
+       })
+       setFilterCustomer2(filtered)
+        
+        break;
+
+      default:
+        setFilterCustomer2(data)
         break;
     }
   }
@@ -623,68 +784,68 @@ const Tables = () => {
                         <div className="tableCell-top">
                           <b className="tableCell-top-title"> Line Number</b>
                         </div>
-                        <input className="tableCell-top-input" value={CustomerNumber} onChange={{}} placeholder="Search" />
+                        <input className="tableCell-top-input" value={LineNumber} onChange={(e)=>handleSearch2(e, "Line Number")} placeholder="Search" />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                         <div className="tableCell-top">
                           <b className="tableCell-top-title">Product</b>
                         </div>
-                        <input className="tableCell-top-input" value={CustomerNumber} onChange={{}} placeholder="Search" />
+                        <input className="tableCell-top-input" value={Product} onChange={(e)=>handleSearch2(e,"Product")} placeholder="Search" />
 
                       </TableCell>
                       <TableCell className="table-headers-tables">
                         <div className="tableCell-top">
                           <b className="tableCell-top-title">Rack Location</b>
                         </div>
-                        <input className="tableCell-top-input" value={CustomerNumber} onChange={{}} placeholder="Search" />
+                        <input className="tableCell-top-input" value={RackLocation2} onChange={(e)=>handleSearch2(e,"Rack Location")} placeholder="Search" />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                         <div className="tableCell-top">
                           <b className="tableCell-top-title">Quality Order (gal)</b>
                         </div>
-                        <input className="tableCell-top-input" value={CustomerNumber} onChange={{}} placeholder="Search" />
+                        <input className="tableCell-top-input" value={QualityOrder} onChange={(e)=>handleSearch2(e,"Quality Order")} placeholder="Search" />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                         <div className="tableCell-top">
                           <b className="tableCell-top-title">Quality Delivered (gal)</b>
                         </div>
-                        <input className="tableCell-top-input" value={CustomerNumber} onChange={{}} placeholder="Search" />
+                        <input className="tableCell-top-input" value={QualityDelivered} onChange={(e)=>handleSearch2(e,"Quality Delivered")} placeholder="Search" />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                         <div className="tableCell-top">
                           <b className="tableCell-top-title">Freight Ticket</b>
                         </div>
-                        <input className="tableCell-top-input" value={CustomerNumber} onChange={{}} placeholder="Search" />
+                        <input className="tableCell-top-input" value={FreightTicket} onChange={(e)=>handleSearch2(e,"Freight Ticket")} placeholder="Search" />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                         <div className="tableCell-top">
                           <b className="tableCell-top-title">Ancillary Fees</b>
                         </div>
-                        <input className="tableCell-top-input" value={CustomerNumber} onChange={{}} placeholder="Search" />
+                        <input className="tableCell-top-input" value={AncillaryFees} onChange={(e)=>handleSearch2(e,"Ancillary Fees")} placeholder="Search" />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                         <div className="tableCell-top">
                           <b className="tableCell-top-title">Total Cost</b>
                         </div>
-                        <input className="tableCell-top-input" value={CustomerNumber} onChange={{}} placeholder="Search" />
+                        <input className="tableCell-top-input" value={TotalCost} onChange={(e)=>handleSearch2(e,"Total Cost")} placeholder="Search" />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                         <div className="tableCell-top">
-                          <b className="tableCell-top-title">Status</b>
+                          <b className="tableCell-top-title">Status2</b>
                         </div>
-                        <input className="tableCell-top-input" value={CustomerNumber} onChange={{}} placeholder="Search" />
+                        <input className="tableCell-top-input" value={Status2} onChange={(e)=>handleSearch2(e,"Status2")} placeholder="Search" />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                       <div className="tableCell-top">
-                        <b className="tableCell-top-title">Alerts</b>
+                        <b className="tableCell-top-title">Alert2</b>
                         </div>
-                        <input className="tableCell-top-input" value={CustomerNumber} onChange={{}} placeholder="Search" />
+                        <input className="tableCell-top-input" value={Alert2} onChange={(e)=>handleSearch2(e,"Alert2")} placeholder="Search" />
                       </TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     {(rowsPerPage > 0
-                      ? data.slice(
+                      ? filterCustomer2.slice(
                         page * rowsPerPage,
                         page * rowsPerPage + rowsPerPage
                       )
