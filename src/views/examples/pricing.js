@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import PropTypes from "prop-types"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
+import './pages/pricing.css'
 // reactstrap components
 import {
   Button,
@@ -128,28 +129,30 @@ const Pricing = () => {
 
   const rows = [
     {
-      customerNumber: "123456",
-      customerName: "Alex",
-      orderNumber: "ASD123",
-      customerLocation: "London",
-      poNumber: "123456789",
-      rackLocation: "London",
-      orderDate: new Date(),
-      deliveryDate: new Date(),
-      status: "Delayed",
-      alerts: "None",
+      terminal: "Exion Philadelphia",
+      ulsd: "12.34",
+      unleadedgasoline: "23.45",
+      midgradegasoline: "3000",
+      premiumgasoline: "5700",
+      heatingoil: '2.343',
+      butane: '23.45',
+      karosene: "89.87",
+      propane: "98.9",
+      bitumen:"12.98",
+      ngl:"23.65",
     },
     {
-      customerNumber: "123456",
-      customerName: "John",
-      orderNumber: "ASD123",
-      customerLocation: "London",
-      poNumber: "123456789",
-      rackLocation: "London",
-      orderDate: new Date(),
-      deliveryDate: new Date(),
-      status: "Completed",
-      alerts: "Product Outage",
+      terminal: "BP Cherryhill",
+      ulsd: "12.34",
+      unleadedgasoline: "23.45",
+      midgradegasoline: "3000",
+      premiumgasoline: "5700",
+      heatingoil: '2.343',
+      butane: '23.45',
+      karosene: "89.87",
+      propane: "98.9",
+      bitumen:"12.98",
+      ngl:"23.65",
     },
   ]
 
@@ -182,11 +185,24 @@ const Pricing = () => {
     },
   ]
 
-  const emptyRows =
-    rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage)
+  // const emptyRows =
+  //   rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage)
 
   const [column, setColumn] = useState("")
   const [search, setsearch] = useState("")
+
+  const [filterCustomer, setFilterCustomer] = React.useState(rows)
+  const [Terminal, setTerminal] = React.useState("")
+  const [ULSD, setULSD] = React.useState("")
+  const [UnleadedGas, setUnleadedGas] = React.useState("")
+  const [MidGradeGas, setMidGradeGas] = React.useState("")
+  const [PremiumGas, setPremiumGas] = React.useState("")
+  const [HeatingOil, setHeatingOil] = React.useState("")
+  const [Butane, setButane] = React.useState("")
+  const [Karosene, setKarosene] = React.useState("")
+  const [Propane, setPropane] = React.useState("")
+  const [Bitumen, setBitumen] = React.useState("")
+  const [NGL, setNGL] = React.useState("")
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage)
@@ -199,6 +215,166 @@ const Pricing = () => {
 
   const emptyRowsData =
     rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage)
+
+
+    const handleSearch = (e, flag) => {
+      let search = ""
+      let filtered = ""
+      switch (flag) {
+        case "Terminal":
+          setTerminal(e.target.value)
+        
+           search = e.target.value
+          
+           filtered = rows.filter(item => {
+            return (
+              item.terminal.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            )
+  
+          })
+          console.log("filter",filtered)
+          setFilterCustomer(filtered)
+  
+  
+          break;
+        case "ULSD":
+          console.log(flag)
+          setULSD(e.target.value)
+           search = e.target.value
+          
+           filtered = rows.filter(item => {
+            return (
+              item.ulsd.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            )
+  
+          })
+          setFilterCustomer(filtered)
+          break;
+        case "Unleaded Gasoline":
+          setUnleadedGas(e.target.value)
+           search = e.target.value
+          
+           filtered = rows.filter(item => {
+            return (
+              item.unleadedgasoline.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            )
+  
+          })
+          setFilterCustomer(filtered)
+          console.log(flag)
+          break;
+        case "Mid-Grade Gasoline":
+          setMidGradeGas(e.target.value)
+          search = e.target.value
+         
+          filtered = rows.filter(item => {
+           return (
+             item.midgradegasoline.toLowerCase().indexOf(search.toLowerCase()) !== -1
+           )
+  
+         })
+         setFilterCustomer(filtered)
+          console.log(flag)
+          break;
+        case "Premium Gasoline":
+          setPremiumGas(e.target.value)
+          search = e.target.value
+         
+          filtered = rows.filter(item => {
+           return (
+             item.premiumgasoline.toLowerCase().indexOf(search.toLowerCase()) !== -1
+           )
+  
+         })
+         setFilterCustomer(filtered)
+          console.log(flag)
+          break;
+        case "Heating Oil":
+          setHeatingOil(e.target.value)
+          search = e.target.value
+         
+          filtered = rows.filter(item => {
+           return (
+             item.heatingoil.toLowerCase().indexOf(search.toLowerCase()) !== -1
+           )
+  
+         })
+         setFilterCustomer(filtered)
+          console.log(flag)
+          break;
+        case "Butane":
+          setButane(e.target.value)
+          search = e.target.value
+         
+          filtered = rows.filter(item => {
+           return (
+             item.butane.toLowerCase().indexOf(search.toLowerCase()) !== -1
+           )
+  
+         })
+         setFilterCustomer(filtered)
+         
+          console.log(flag)
+          break;
+        case "Karosene":
+          setKarosene(e.target.value)
+          search = e.target.value
+         
+          filtered = rows.filter(item => {
+           return (
+             item.karosene.toLowerCase().indexOf(search.toLowerCase()) !== -1
+           )
+  
+         })
+         setFilterCustomer(filtered)
+          console.log(flag)
+          break;
+        case "Propane":
+          setPropane(e.target.value)
+          search = e.target.value
+         
+          filtered = rows.filter(item => {
+           return (
+             item.propane.toLowerCase().indexOf(search.toLowerCase()) !== -1
+           )
+  
+         })
+         setFilterCustomer(filtered)
+          console.log(flag)
+          break;
+        case "Bitumen":
+          setBitumen(e.target.value)
+          search = e.target.value
+         
+          filtered = rows.filter(item => {
+           return (
+             item.bitumen.toLowerCase().indexOf(search.toLowerCase()) !== -1
+           )
+  
+         })
+         setFilterCustomer(filtered)
+          console.log(filtered)
+          break;
+        case "NGL":
+          setNGL(e.target.value)
+          search = e.target.value
+          
+          filtered = rows.filter(item => {
+           return (
+             item.ngl.toLowerCase().indexOf(search.toLowerCase()) !== -1
+           )
+  
+         })
+         setFilterCustomer(filtered)
+          console.log(filtered)
+          break;
+  
+        default:
+          setFilterCustomer(rows)
+          break;
+      }
+    }
+
 
     const [pricingData, setPricingData] = useState(data)
 
@@ -369,9 +545,9 @@ const Pricing = () => {
             </Card>
           </div>
         </Row>
-        <div className="row mt-4">
+        {/* <div className="row mt-4">
           <div className="col-md-2">
-            <select
+           <select
               onChange={handleColumn}
               style={{ width: "15rem", padding: "7px" }}
             >
@@ -388,8 +564,8 @@ const Pricing = () => {
               <option value="karosene">Karosene </option>
               <option value="propane">Propane </option>
               <option value="bitumen">Bitumen </option>
-              <option value="ngl">NGL </option>
-            </select>
+              <option value="ngl">NGL </option> 
+            </select> 
           </div>
           <div className="col-md-1">
             <input
@@ -401,7 +577,7 @@ const Pricing = () => {
               style={{ width: "15rem", padding: "7px" }}
             />
           </div>
-        </div>
+        </div> */}
         <Row>
           <div className="col mt-3">
             <Card className="shadow">
@@ -412,82 +588,116 @@ const Pricing = () => {
                 >
                   <TableHead>
                     <TableRow>
-                      <TableCell>
-                        <b> Terminal</b>
+                      <TableCell className="table-headers-tables">
+                      <div className="tableCell-top">
+                        <b className="tableCell-top-title"> Terminal</b>
+                        </div>
+                        <input className="tableCell-top-input" value={Terminal} onChange={(e) => handleSearch(e, "Terminal")} placeholder="Search" />
                       </TableCell>
-                      <TableCell>
-                        <b>ULSD</b>
+                      <TableCell className="table-headers-tables">
+                      <div className="tableCell-top">
+                        <b className="tableCell-top-title">ULSD</b>
+                        </div>
+                        <input className="tableCell-top-input" value={ULSD} onChange={(e) => handleSearch(e, "ULSD")} placeholder="Search" />
                       </TableCell>
-                      <TableCell>
-                        <b>Unleaded Gasoline</b>
+                      <TableCell className="table-headers-tables">
+                      <div className="tableCell-top">
+                        <b className="tableCell-top-title">Unleaded Gasoline</b>
+                        </div>
+                        <input className="tableCell-top-input" value={UnleadedGas} onChange={(e) => handleSearch(e, "Unleaded Gasoline")} placeholder="Search" />
                       </TableCell>
-                      <TableCell>
-                        <b>Mid-Grade Gasoline</b>
+                      <TableCell className="table-headers-tables">
+                      <div className="tableCell-top">
+                        <b className="tableCell-top-title">Mid-Grade Gasoline</b>
+                        </div>
+                        <input className="tableCell-top-input" value={MidGradeGas} onChange={(e) => handleSearch(e, "Mid-Grade Gasoline")} placeholder="Search" />
                       </TableCell>
-                      <TableCell>
-                        <b>Premium Gasoline</b>
+                      <TableCell className="table-headers-tables">
+                      <div className="tableCell-top">
+                        <b className="tableCell-top-title">Premium Gasoline</b>
+                        </div>
+                        <input className="tableCell-top-input" value={PremiumGas} onChange={(e) => handleSearch(e, "Premium Gasoline")} placeholder="Search" />
                       </TableCell>
-                      <TableCell>
-                        <b>Heating Oil</b>
+                      <TableCell className="table-headers-tables">
+                      <div className="tableCell-top">
+                        <b className="tableCell-top-title">Heating Oil</b>
+                        </div>
+                        <input className="tableCell-top-input" value={HeatingOil} onChange={(e) => handleSearch(e, "Heating Oil")} placeholder="Search" />
                       </TableCell>
-                      <TableCell>
-                        <b>Butane</b>
+                      <TableCell className="table-headers-tables">
+                      <div className="tableCell-top">
+                        <b className="tableCell-top-title">Butane</b>
+                        </div>
+                        <input className="tableCell-top-input" value={Butane} onChange={(e) => handleSearch(e, "Butane")} placeholder="Search" />
                       </TableCell>
-                      <TableCell>
-                        <b>Karosene</b>
+                      <TableCell className="table-headers-tables">
+                      <div className="tableCell-top">
+                        <b className="tableCell-top-title">Karosene</b>
+                        </div>
+                        <input className="tableCell-top-input" value={Karosene} onChange={(e) => handleSearch(e, "Karosene")} placeholder="Search" />
                       </TableCell>
-                      <TableCell>
-                        <b>Propane</b>
+                      <TableCell className="table-headers-tables">
+                      <div className="tableCell-top">
+                        <b className="tableCell-top-title">Propane</b>
+                        </div>
+                        <input className="tableCell-top-input" value={Propane} onChange={(e) => handleSearch(e, "Propane")} placeholder="Search" />
                       </TableCell>
-                      <TableCell>
-                        <b>Bitumen</b>
+                      <TableCell className="table-headers-tables">
+                      <div className="tableCell-top">
+                        <b className="tableCell-top-title">Bitumen</b>
+                        </div>
+                        <input className="tableCell-top-input" value={Bitumen} onChange={(e) => handleSearch(e, "Bitumen")} placeholder="Search" />
                       </TableCell>
-                      <TableCell>
-                        <b>NGL</b>
+                      <TableCell className="table-headers-tables">
+                      <div className="tableCell-top">
+                        <b className="tableCell-top-title">NGL</b>
+                        </div>
+                        <input className="tableCell-top-input" value={NGL} onChange={(e) => handleSearch(e, "NGL")} placeholder="Search" />
                       </TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     {(rowsPerPage > 0
-                      ? pricingData.slice(
+                      ? filterCustomer.slice(
                           page * rowsPerPage,
                           page * rowsPerPage + rowsPerPage
                         )
-                      : pricingData
+                      : filterCustomer
                     ).map((row, i) => (
-                      <TableRow key={i}>
-                        <TableCell style={{ width: 250 }}>
-                          {row.lineNumber}
-                        </TableCell>
-                        <TableCell style={{ width: 200 }}>
-                          {row.product}
-                        </TableCell>
-                        <TableCell style={{ width: 200 }}>
-                          {row.rackLocation}
-                        </TableCell>
-                        <TableCell style={{ width: 200 }}>
-                          {row.qualityOrdered}
-                        </TableCell>
-                        <TableCell style={{ width: 200 }}>
-                          {row.qualityDelivered}
-                        </TableCell>
-                        <TableCell style={{ width: 200 }}>
-                          {row.freightTicket}
-                        </TableCell>
-                        <TableCell style={{ width: 200 }}>
-                          {row.ancillaryFees}
-                        </TableCell>
-                        <TableCell style={{ width: 200 }}>
-                          {row.totalCost}
-                        </TableCell>
-                        <TableCell style={{ width: 200 }}>
-                          {row.status}
-                        </TableCell>
-                        <TableCell style={{ width: 200 }}>
-                          {row.alerts}
-                        </TableCell>
-                        <TableCell style={{ width: 200 }}>{row.ngl}</TableCell>
-                      </TableRow>
+                      
+                      <TableRow key={i} className={i % 2 == 0 ? "tableCell-bottom-dark" : "tableCell-bottom-light"}>
+                      <TableCell className="tableCell-bottom">
+                        {row.terminal}
+                      </TableCell>
+                      <TableCell className="tableCell-bottom">
+                        {row.ulsd}
+                      </TableCell>
+                      <TableCell className="tableCell-bottom">
+                        {row.unleadedgasoline}
+                      </TableCell>
+                      <TableCell className="tableCell-bottom">
+                        {row.midgradegasoline}
+                      </TableCell>
+                      <TableCell className="tableCell-bottom">
+                        {row.premiumgasoline}
+                      </TableCell>
+                      <TableCell className="tableCell-bottom">
+                        {row.freightTicket}
+                      </TableCell>
+                      <TableCell className="tableCell-bottom">
+                        {row.heatingoil}
+                      </TableCell>
+                      <TableCell className="tableCell-bottom">
+                        {row.butane}
+                      </TableCell>
+                      <TableCell className="tableCell-bottom">
+                        {row.karosene}
+                      </TableCell>
+                      <TableCell className="tableCell-bottom">
+                        {row.bitumen}
+                      </TableCell>
+                      <TableCell className="tableCell-bottom">{row.ngl}</TableCell>
+                    </TableRow>
                     ))}
 
                     {emptyRowsData > 0 && (

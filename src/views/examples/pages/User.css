@@ -8,16 +8,15 @@
   
   .tableCell-top-title {
     color: white;
-    
   }
   
-  .tableCell-top-input {
+  .tableCell-top-input-user {
     border-radius: 35px;
-    width: 140px;
+    width: 300px !important;
     border-width: 1px;
   }
   
-  .tableCell-top-input::placeholder {
+  .tableCell-top-input-user::placeholder {
     padding-left: 10px !important;
   }
   

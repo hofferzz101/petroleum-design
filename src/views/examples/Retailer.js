@@ -42,57 +42,59 @@ import "./pages/Retailer.css"
 
 const rows = [
   {
-    customerNumber: "123456",
-    customerName: "Alex",
-    orderNumber: "ASD123",
-    customerLocation: "London",
-    poNumber: "123456789",
-    rackLocation: "London",
-    orderDate: new Date(),
-    deliveryDate: new Date(),
-    status: "Delayed",
-    alerts: "None",
+    terminal: "Exion Philadelphia",
+    ulsd: "12.34",
+    unleadedgasoline: "23.45",
+    midgradegasoline: "3000",
+    premiumgasoline: "5700",
+    heatingoil: '2.343',
+    butane: '23.45',
+    karosene: "89.87",
+    propane: "98.9",
+    bitumen:"12.98",
+    ngl:"23.65",
   },
   {
-    customerNumber: "123456",
-    customerName: "John",
-    orderNumber: "ASD123",
-    customerLocation: "London",
-    poNumber: "123456789",
-    rackLocation: "London",
-    orderDate: new Date(),
-    deliveryDate: new Date(),
-    status: "Completed",
-    alerts: "Product Outage",
+    terminal: "BP Cherryhill",
+    ulsd: "12.34",
+    unleadedgasoline: "23.45",
+    midgradegasoline: "3000",
+    premiumgasoline: "5700",
+    heatingoil: '2.343',
+    butane: '23.45',
+    karosene: "89.87",
+    propane: "98.9",
+    bitumen:"12.98",
+    ngl:"23.65",
   },
 ]
 
 const data = [
   {
-    lineNumber: "Exion Philadelphia",
-    product: "12.34",
-    rackLocation: "23.45",
-    qualityOrdered: "3,000",
-    qualityDelivered: "5,700",
-    freightTicket: "2.343",
-    ancillaryFees: "23.45",
-    totalCost: "89.87",
-    status: "98.9",
-    alerts: "12.98",
-    ngl: "23.65",
+    terminal: "Exion Philadelphia",
+    ulsd: "12.34",
+    unleadedgasoline: "23.45",
+    midgradegasoline: "3000",
+    premiumgasoline: "5700",
+    heatingoil: '2.343',
+    butane: '23.45',
+    karosene: "89.87",
+    propane: "98.9",
+    bitumen:"12.98",
+    ngl:"23.65",
   },
   {
-    lineNumber: "BP CHery Hill",
-    product: "12.4",
-    rackLocation: "3.45",
-    qualityOrdered: "3,400",
-    qualityDelivered: "5,760",
-    freightTicket: "2.33",
-    ancillaryFees: "3.4",
-    totalCost: "8.8",
-    status: "9.9",
-    alerts: "1.98",
-    ngl: "23.5",
+    terminal: "BP Cherryhill",
+    ulsd: "12.34",
+    unleadedgasoline: "23.45",
+    midgradegasoline: "3000",
+    premiumgasoline: "5700",
+    heatingoil: '2.343',
+    butane: '23.45',
+    karosene: "89.87",
+    propane: "98.9",
+    bitumen:"12.98",
+    ngl:"23.65",
   },
 ]
 
@@ -197,28 +199,34 @@ const RetailerPortal = () => {
   const [CustomerName, setCustomerName] = React.useState("")
   const [filterCustomer, setFilterCustomer] = React.useState(rows)
   const [filterCustomer2, setFilterCustomer2] = React.useState(data)
-  const [OrderNumber, setOrderNumber] = React.useState("")
-  const [CustomerNumber, setCustomerNumber] = React.useState("")
-  const [CustomerLocation, setCustomerLocation] = React.useState("")
-  const [POnumber, setPOnumber] = React.useState("")
-  const [RackLocation, setRackLocation] = React.useState("")
-  const [OrderDate, setOrderDate] = React.useState("")
-  const [DiliveryDate, setDiliveryDate] = React.useState("")
-  const [DiliveryWindow, setDiliveryWindow] = React.useState("")
-  const [Status, setStatus] = React.useState("")
-  const [Alert, setAlert] = React.useState("")
+  
+  const [Terminal, setTerminal] = React.useState("")
+  const [ULSD, setULSD] = React.useState("")
+  const [UnleadedGas, setUnleadedGas] = React.useState("")
+  const [MidGradeGas, setMidGradeGas] = React.useState("")
+  const [PremiumGas, setPremiumGas] = React.useState("")
+  const [HeatingOil, setHeatingOil] = React.useState("")
+  const [Butane, setButane] = React.useState("")
+  const [Karosene, setKarosene] = React.useState("")
+  const [Propane, setPropane] = React.useState("")
+  const [Bitumen, setBitumen] = React.useState("")
+  const [NGL, setNGL] = React.useState("")
 
+  const [Terminal2, setTerminal2] = React.useState("")
+  const [ULSD2, setULSD2] = React.useState("")
+  const [UnleadedGas2, setUnleadedGas2] = React.useState("")
+  const [MidGradeGas2, setMidGradeGas2] = React.useState("")
+  const [PremiumGas2, setPremiumGas2] = React.useState("")
+  const [HeatingOil2, setHeatingOil2] = React.useState("")
+  const [Butane2, setButane2] = React.useState("")
+  const [Karosene2, setKarosene2] = React.useState("")
+  const [Propane2,setPropane2] = React.useState("")
+  const [Bitumen2, setBitumen2] = React.useState("")
+  const [NGL2, setNGL2] = React.useState("")
+  
+  
 
-  const [LineNumber, setLineNumber] = React.useState("")
-  const [Product, setProduct] = React.useState("")
-  const [RackLocation2, setRackLocation2] = React.useState("")
-  const [QualityOrder, setQualityOrder] = React.useState("")
-  const [QualityDelivered, setQualityDelivered] = React.useState("")
-  const [FreightTicket, setFreightTicket] = React.useState("")
-  const [AncillaryFees, setAncillaryFees] = React.useState("")
-  const [TotalCost, setTotalCost] = React.useState("")
-  const [Status2, setStatus2] = React.useState("")
-  const [Alert2, setAlert2] = React.useState("")
+  
 
   const [retailerData, setRetailerData] = useState(data)
 
@@ -245,14 +253,14 @@ const RetailerPortal = () => {
     let search = ""
     let filtered = ""
     switch (flag) {
-      case "Customer Number":
-        setCustomerNumber(e.target.value)
+      case "Terminal":
+        setTerminal(e.target.value)
       
          search = e.target.value
         
          filtered = rows.filter(item => {
           return (
-            item.customerNumber.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            item.terminal.toLowerCase().indexOf(search.toLowerCase()) !== -1
           )
 
         })
@@ -261,78 +269,78 @@ const RetailerPortal = () => {
 
 
         break;
-      case "Order Number":
+      case "ULSD":
         console.log(flag)
-        setOrderNumber(e.target.value)
+        setULSD(e.target.value)
          search = e.target.value
         
          filtered = rows.filter(item => {
           return (
-            item.orderNumber.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            item.ulsd.toLowerCase().indexOf(search.toLowerCase()) !== -1
           )
 
         })
         setFilterCustomer(filtered)
         break;
-      case "Customer Name":
-        setCustomerName(e.target.value)
+      case "Unleaded Gasoline":
+        setUnleadedGas(e.target.value)
          search = e.target.value
         
          filtered = rows.filter(item => {
           return (
-            item.customerName.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            item.unleadedgasoline.toLowerCase().indexOf(search.toLowerCase()) !== -1
           )
 
         })
         setFilterCustomer(filtered)
         console.log(flag)
         break;
-      case "Customer Location":
-        setCustomerLocation(e.target.value)
+      case "Mid-Grade Gasoline":
+        setMidGradeGas(e.target.value)
         search = e.target.value
        
         filtered = rows.filter(item => {
          return (
-           item.customerLocation.toLowerCase().indexOf(search.toLowerCase()) !== -1
+           item.midgradegasoline.toLowerCase().indexOf(search.toLowerCase()) !== -1
          )
 
        })
        setFilterCustomer(filtered)
         console.log(flag)
         break;
-      case "PO Number":
-        setPOnumber(e.target.value)
+      case "Premium Gasoline":
+        setPremiumGas(e.target.value)
         search = e.target.value
        
         filtered = rows.filter(item => {
          return (
-           item.poNumber.toLowerCase().indexOf(search.toLowerCase()) !== -1
+           item.premiumgasoline.toLowerCase().indexOf(search.toLowerCase()) !== -1
          )
 
        })
        setFilterCustomer(filtered)
         console.log(flag)
         break;
-      case "Rack Location":
-        setRackLocation(e.target.value)
+      case "Heating Oil":
+        setHeatingOil(e.target.value)
         search = e.target.value
        
         filtered = rows.filter(item => {
          return (
-           item.rackLocation.toLowerCase().indexOf(search.toLowerCase()) !== -1
+           item.heatingoil.toLowerCase().indexOf(search.toLowerCase()) !== -1
          )
 
        })
        setFilterCustomer(filtered)
         console.log(flag)
         break;
-      case "Order Date":
-        setOrderDate(e.target.value)
+      case "Butane":
+        setButane(e.target.value)
         search = e.target.value
        
         filtered = rows.filter(item => {
          return (
-           item.orderDate.toLowerCase().indexOf(search.toLowerCase()) !== -1
+           item.butane.toLowerCase().indexOf(search.toLowerCase()) !== -1
          )
 
        })
@@ -340,52 +348,52 @@ const RetailerPortal = () => {
        
         console.log(flag)
         break;
-      case "Delivery Date":
-        setDiliveryDate(e.target.value)
+      case "Karosene":
+        setKarosene(e.target.value)
         search = e.target.value
        
         filtered = rows.filter(item => {
          return (
-           item.DiliveryDate.toLowerCase().indexOf(search.toLowerCase()) !== -1
+           item.karosene.toLowerCase().indexOf(search.toLowerCase()) !== -1
          )
 
        })
        setFilterCustomer(filtered)
         console.log(flag)
         break;
-      case "Delivery Window":
-        setDiliveryWindow(e.target.value)
+      case "Propane":
+        setPropane(e.target.value)
         search = e.target.value
        
         filtered = rows.filter(item => {
          return (
-           item.DiliveryWindow.toLowerCase().indexOf(search.toLowerCase()) !== -1
+           item.propane.toLowerCase().indexOf(search.toLowerCase()) !== -1
          )
 
        })
        setFilterCustomer(filtered)
         console.log(flag)
         break;
-      case "Status":
-        setStatus(e.target.value)
+      case "Bitumen":
+        setBitumen(e.target.value)
         search = e.target.value
        
         filtered = rows.filter(item => {
          return (
-           item.status.toLowerCase().indexOf(search.toLowerCase()) !== -1
+           item.bitumen.toLowerCase().indexOf(search.toLowerCase()) !== -1
          )
 
        })
        setFilterCustomer(filtered)
         console.log(filtered)
         break;
-      case "Alert":
-        setAlert(e.target.value)
+      case "NGL":
+        setNGL(e.target.value)
         search = e.target.value
         
         filtered = rows.filter(item => {
          return (
-           item.alerts.toLowerCase().indexOf(search.toLowerCase()) !== -1
+           item.ngl.toLowerCase().indexOf(search.toLowerCase()) !== -1
          )
 
        })
@@ -404,13 +412,13 @@ const RetailerPortal = () => {
     let search = ""
     let filtered = ""
     switch (flag) {
-      case "Line Number":
-        setLineNumber(e.target.value)
+      case "Terminal":
+        setTerminal2(e.target.value)
          search = e.target.value
         
          filtered = data.filter(item => {
           return (
-            item.lineNumber.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            item.terminal.toLowerCase().indexOf(search.toLowerCase()) !== -1
           )
 
         })
@@ -418,78 +426,78 @@ const RetailerPortal = () => {
 
 
         break;
-      case "Product":
+      case "ULSD":
         console.log(flag)
-        setProduct(e.target.value)
+        setULSD2(e.target.value)
          search = e.target.value
         
          filtered = data.filter(item => {
           return (
-            item.product.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            item.ulsd.toLowerCase().indexOf(search.toLowerCase()) !== -1
           )
 
         })
         setFilterCustomer2(filtered)
         break;
-      case "Rack Location 2":
-        setRackLocation2(e.target.value)
+      case "Unleaded Gasoline":
+        setUnleadedGas2(e.target.value)
          search = e.target.value
         
          filtered = data.filter(item => {
           return (
-            item.rackLocation.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            item.unleadedgasoline.toLowerCase().indexOf(search.toLowerCase()) !== -1
           )
 
         })
         setFilterCustomer2(filtered)
         console.log(flag)
         break;
-      case "Quality Order":
-        setQualityOrder(e.target.value)
+      case "Mid-Grade Gasoline":
+        setMidGradeGas2(e.target.value)
         search = e.target.value
        
         filtered = data.filter(item => {
          return (
-           item.qualityOrdered.toLowerCase().indexOf(search.toLowerCase()) !== -1
+           item.midgradegasoline.toLowerCase().indexOf(search.toLowerCase()) !== -1
          )
 
        })
        setFilterCustomer2(filtered)
         
         break;
-      case "Quality Delivered":
-        setQualityDelivered(e.target.value)
+      case "Premium Gasoline":
+        setPremiumGas2(e.target.value)
         search = e.target.value
        
         filtered = data.filter(item => {
          return (
-           item.qualityDelivered.toLowerCase().indexOf(search.toLowerCase()) !== -1
+           item.premiumgasoline.toLowerCase().indexOf(search.toLowerCase()) !== -1
          )
 
        })
        setFilterCustomer2(filtered)
         console.log(flag)
         break;
-      case "Freight Ticket":
-        setFreightTicket(e.target.value)
+      case "Heating Oil":
+        setHeatingOil2(e.target.value)
         search = e.target.value
        
         filtered = data.filter(item => {
          return (
-           item.freightTicket.toLowerCase().indexOf(search.toLowerCase()) !== -1
+           item.heatingoil.toLowerCase().indexOf(search.toLowerCase()) !== -1
          )
 
        })
        setFilterCustomer2(filtered)
         console.log(flag)
         break;
-      case "Ancillary Fees":
-        setAncillaryFees(e.target.value)
+      case "Butane":
+        setButane2(e.target.value)
         search = e.target.value
        
         filtered = data.filter(item => {
          return (
-           item.ancillaryFees.toLowerCase().indexOf(search.toLowerCase()) !== -1
+           item.butane.toLowerCase().indexOf(search.toLowerCase()) !== -1
          )
 
        })
@@ -497,26 +505,26 @@ const RetailerPortal = () => {
        
         console.log(flag)
         break;
-      case "Total Cost":
-        setTotalCost(e.target.value)
+      case "Karosene":
+        setKarosene2(e.target.value)
         search = e.target.value
        
         filtered = data.filter(item => {
          return (
-           item.totalCost.toLowerCase().indexOf(search.toLowerCase()) !== -1
+           item.karosene.toLowerCase().indexOf(search.toLowerCase()) !== -1
          )
 
        })
        setFilterCustomer2(filtered)
         
         break;
-      case "Status2":
-        setStatus2(e.target.value)
+      case "Propane":
+        setPropane2(e.target.value)
         search = e.target.value
        
         filtered = data.filter(item => {
          return (
-           item.status.toLowerCase().indexOf(search.toLowerCase()) !== -1
+           item.propane.toLowerCase().indexOf(search.toLowerCase()) !== -1
          )
 
        })
@@ -524,13 +532,27 @@ const RetailerPortal = () => {
         
         break;
       
-      case "Alert2":
-        setAlert2(e.target.value)
+      case "Bitumen":
+        setBitumen2(e.target.value)
         search = e.target.value
         
         filtered = data.filter(item => {
          return (
-           item.alerts.toLowerCase().indexOf(search.toLowerCase()) !== -1
+           item.bitumen.toLowerCase().indexOf(search.toLowerCase()) !== -1
+         )
+
+       })
+       setFilterCustomer2(filtered)
+        
+        break;
+
+        case "NGL":
+        setNGL2(e.target.value)
+        search = e.target.value
+        
+        filtered = data.filter(item => {
+         return (
+           item.ngl.toLowerCase().indexOf(search.toLowerCase()) !== -1
          )
 
        })
@@ -547,106 +569,106 @@ const RetailerPortal = () => {
 
 
 
-  const handleColumn = e => {
-    setColumn(e.target.value)
-  }
+  // const handleColumn = e => {
+  //   setColumn(e.target.value)
+  // }
 
-  const searchOnChange = e => {
-    setsearch(e.target.value)
+  // const searchOnChange = e => {
+  //   setsearch(e.target.value)
 
-    let search = e.target.value
-    if (column != "") {
-      if (search != "") {
-        if (column == "terminal") {
-          const filtered = retailerData.filter(item => {
-            return (
-              item.lineNumber.toLowerCase().indexOf(search.toLowerCase()) !== -1
-            )
-          })
-          setRetailerData(filtered)
-        } else if (column == "ulsd") {
-          const filtered = retailerData.filter(item => {
-            return (
-              item.product.toLowerCase().indexOf(search.toLowerCase()) !== -1
-            )
-          })
-          setRetailerData(filtered)
-        } else if (column == "urleaded") {
-          const filtered = retailerData.filter(item => {
-            return (
-              item.rackLocation.toLowerCase().indexOf(search.toLowerCase()) !==
-              -1
-            )
-          })
-          setRetailerData(filtered)
-        } else if (column == "mid-grade") {
-          const filtered = retailerData.filter(item => {
-            return (
-              item.qualityOrdered
-                .toLowerCase()
-                .indexOf(search.toLowerCase()) !== -1
-            )
-          })
-          setRetailerData(filtered)
-        } else if (column == "premium-grade") {
-          const filtered = retailerData.filter(item => {
-            return (
-              item.qualityDelivered
-                .toLowerCase()
-                .indexOf(search.toLowerCase()) !== -1
-            )
-          })
-          setRetailerData(filtered)
-        } else if (column == "heating-oil") {
-          const filtered = retailerData.filter(item => {
-            return (
-              item.freightTicket.toLowerCase().indexOf(search.toLowerCase()) !==
-              -1
-            )
-          })
-          setRetailerData(filtered)
-        } else if (column == "butane") {
-          const filtered = retailerData.filter(item => {
-            return (
-              item.ancillaryFees.toLowerCase().indexOf(search.toLowerCase()) !==
-              -1
-            )
-          })
-          setRetailerData(filtered)
-        } else if (column == "karosene") {
-          const filtered = retailerData.filter(item => {
-            return (
-              item.totalCost.toLowerCase().indexOf(search.toLowerCase()) !== -1
-            )
-          })
-          setRetailerData(filtered)
-        } else if (column == "propane") {
-          const filtered = retailerData.filter(item => {
-            return (
-              item.status.toLowerCase().indexOf(search.toLowerCase()) !== -1
-            )
-          })
-          setRetailerData(filtered)
-        } else if (column == "bitumen") {
-          const filtered = retailerData.filter(item => {
-            return (
-              item.alerts.toLowerCase().indexOf(search.toLowerCase()) !== -1
-            )
-          })
-          setRetailerData(filtered)
-        } else {
-          const filtered = retailerData.filter(item => {
-            return item.ngl.toLowerCase().indexOf(search.toLowerCase()) !== -1
-          })
-          setRetailerData(filtered)
-        }
-      } else {
-        setRetailerData(data)
-      }
-    } else {
-      alert("error")
-    }
-  }
+  //   let search = e.target.value
+  //   if (column != "") {
+  //     if (search != "") {
+  //       if (column == "terminal") {
+  //         const filtered = retailerData.filter(item => {
+  //           return (
+  //             item.lineNumber.toLowerCase().indexOf(search.toLowerCase()) !== -1
+  //           )
+  //         })
+  //         setRetailerData(filtered)
+  //       } else if (column == "ulsd") {
+  //         const filtered = retailerData.filter(item => {
+  //           return (
+  //             item.product.toLowerCase().indexOf(search.toLowerCase()) !== -1
+  //           )
+  //         })
+  //         setRetailerData(filtered)
+  //       } else if (column == "urleaded") {
+  //         const filtered = retailerData.filter(item => {
+  //           return (
+  //             item.rackLocation.toLowerCase().indexOf(search.toLowerCase()) !==
+  //             -1
+  //           )
+  //         })
+  //         setRetailerData(filtered)
+  //       } else if (column == "mid-grade") {
+  //         const filtered = retailerData.filter(item => {
+  //           return (
+  //             item.qualityOrdered
+  //               .toLowerCase()
+  //               .indexOf(search.toLowerCase()) !== -1
+  //           )
+  //         })
+  //         setRetailerData(filtered)
+  //       } else if (column == "premium-grade") {
+  //         const filtered = retailerData.filter(item => {
+  //           return (
+  //             item.qualityDelivered
+  //               .toLowerCase()
+  //               .indexOf(search.toLowerCase()) !== -1
+  //           )
+  //         })
+  //         setRetailerData(filtered)
+  //       } else if (column == "heating-oil") {
+  //         const filtered = retailerData.filter(item => {
+  //           return (
+  //             item.freightTicket.toLowerCase().indexOf(search.toLowerCase()) !==
+  //             -1
+  //           )
+  //         })
+  //         setRetailerData(filtered)
+  //       } else if (column == "butane") {
+  //         const filtered = retailerData.filter(item => {
+  //           return (
+  //             item.ancillaryFees.toLowerCase().indexOf(search.toLowerCase()) !==
+  //             -1
+  //           )
+  //         })
+  //         setRetailerData(filtered)
+  //       } else if (column == "karosene") {
+  //         const filtered = retailerData.filter(item => {
+  //           return (
+  //             item.totalCost.toLowerCase().indexOf(search.toLowerCase()) !== -1
+  //           )
+  //         })
+  //         setRetailerData(filtered)
+  //       } else if (column == "propane") {
+  //         const filtered = retailerData.filter(item => {
+  //           return (
+  //             item.status.toLowerCase().indexOf(search.toLowerCase()) !== -1
+  //           )
+  //         })
+  //         setRetailerData(filtered)
+  //       } else if (column == "bitumen") {
+  //         const filtered = retailerData.filter(item => {
+  //           return (
+  //             item.alerts.toLowerCase().indexOf(search.toLowerCase()) !== -1
+  //           )
+  //         })
+  //         setRetailerData(filtered)
+  //       } else {
+  //         const filtered = retailerData.filter(item => {
+  //           return item.ngl.toLowerCase().indexOf(search.toLowerCase()) !== -1
+  //         })
+  //         setRetailerData(filtered)
+  //       }
+  //     } else {
+  //       setRetailerData(data)
+  //     }
+  //   } else {
+  //     alert("error")
+  //   }
+  // }
 
   return (
     <>
@@ -715,108 +737,108 @@ const RetailerPortal = () => {
                       <div className="tableCell-top">
                         <b className="tableCell-top-title"> Terminal</b>
                         </div>
-                        <input className="tableCell-top-input" value={CustomerNumber} onChange={(e) => handleSearch(e, "Terminal")} placeholder="Search" />
+                        <input className="tableCell-top-input" value={Terminal} onChange={(e) => handleSearch(e, "Terminal")} placeholder="Search" />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                       <div className="tableCell-top">
                         <b className="tableCell-top-title">ULSD</b>
                         </div>
-                        <input className="tableCell-top-input" value={CustomerNumber} onChange={(e) => handleSearch(e, "ULSD")} placeholder="Search" />
+                        <input className="tableCell-top-input" value={ULSD} onChange={(e) => handleSearch(e, "ULSD")} placeholder="Search" />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                       <div className="tableCell-top">
                         <b className="tableCell-top-title">Unleaded Gasoline</b>
                         </div>
-                        <input className="tableCell-top-input" value={CustomerNumber} onChange={(e) => handleSearch(e, "Unleaded Gasoline")} placeholder="Search" />
+                        <input className="tableCell-top-input" value={UnleadedGas} onChange={(e) => handleSearch(e, "Unleaded Gasoline")} placeholder="Search" />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                       <div className="tableCell-top">
                         <b className="tableCell-top-title">Mid-Grade Gasoline</b>
                         </div>
-                        <input className="tableCell-top-input" value={CustomerNumber} onChange={(e) => handleSearch(e, "Mid-Grade Gasoline")} placeholder="Search" />
+                        <input className="tableCell-top-input" value={MidGradeGas} onChange={(e) => handleSearch(e, "Mid-Grade Gasoline")} placeholder="Search" />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                       <div className="tableCell-top">
                         <b className="tableCell-top-title">Premium Gasoline</b>
                         </div>
-                        <input className="tableCell-top-input" value={CustomerNumber} onChange={(e) => handleSearch(e, "Premium Gasoline")} placeholder="Search" />
+                        <input className="tableCell-top-input" value={PremiumGas} onChange={(e) => handleSearch(e, "Premium Gasoline")} placeholder="Search" />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                       <div className="tableCell-top">
                         <b className="tableCell-top-title">Heating Oil</b>
                         </div>
-                        <input className="tableCell-top-input" value={CustomerNumber} onChange={(e) => handleSearch(e, "Heating Oil")} placeholder="Search" />
+                        <input className="tableCell-top-input" value={HeatingOil} onChange={(e) => handleSearch(e, "Heating Oil")} placeholder="Search" />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                       <div className="tableCell-top">
                         <b className="tableCell-top-title">Butane</b>
                         </div>
-                        <input className="tableCell-top-input" value={CustomerNumber} onChange={(e) => handleSearch(e, "Butane")} placeholder="Search" />
+                        <input className="tableCell-top-input" value={Butane} onChange={(e) => handleSearch(e, "Butane")} placeholder="Search" />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                       <div className="tableCell-top">
                         <b className="tableCell-top-title">Karosene</b>
                         </div>
-                        <input className="tableCell-top-input" value={CustomerNumber} onChange={(e) => handleSearch(e, "Karosene")} placeholder="Search" />
+                        <input className="tableCell-top-input" value={Karosene} onChange={(e) => handleSearch(e, "Karosene")} placeholder="Search" />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                       <div className="tableCell-top">
                         <b className="tableCell-top-title">Propane</b>
                         </div>
-                        <input className="tableCell-top-input" value={CustomerNumber} onChange={(e) => handleSearch(e, "Propane")} placeholder="Search" />
+                        <input className="tableCell-top-input" value={Propane} onChange={(e) => handleSearch(e, "Propane")} placeholder="Search" />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                       <div className="tableCell-top">
                         <b className="tableCell-top-title">Bitumen</b>
                         </div>
-                        <input className="tableCell-top-input" value={CustomerNumber} onChange={(e) => handleSearch(e, "Bitumen")} placeholder="Search" />
+                        <input className="tableCell-top-input" value={Bitumen} onChange={(e) => handleSearch(e, "Bitumen")} placeholder="Search" />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                       <div className="tableCell-top">
                         <b className="tableCell-top-title">NGL</b>
                         </div>
-                        <input className="tableCell-top-input" value={CustomerNumber} onChange={(e) => handleSearch(e, "NGL")} placeholder="Search" />
+                        <input className="tableCell-top-input" value={NGL} onChange={(e) => handleSearch(e, "NGL")} placeholder="Search" />
                       </TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     {(rowsPerPage > 0
-                      ? retailerData.slice(
+                      ? filterCustomer.slice(
                           page * rowsPerPage,
                           page * rowsPerPage + rowsPerPage
                         )
-                      : retailerData
+                      : filterCustomer
                     ).map((row, i) => (
                       <TableRow key={i} className={i % 2 == 0 ? "tableCell-bottom-dark" : "tableCell-bottom-light"}>
                         <TableCell className="tableCell-bottom">
-                          {row.lineNumber}
+                          {row.terminal}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                          {row.product}
+                          {row.ulsd}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                          {row.rackLocation}
+                          {row.unleadedgasoline}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                          {row.qualityOrdered}
+                          {row.midgradegasoline}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                          {row.qualityDelivered}
+                          {row.premiumgasoline}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
                           {row.freightTicket}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                          {row.ancillaryFees}
+                          {row.heatingoil}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                          {row.totalCost}
+                          {row.butane}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                          {row.status}
+                          {row.karosene}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                          {row.alerts}
+                          {row.bitumen}
                         </TableCell>
                         <TableCell className="tableCell-bottom">{row.ngl}</TableCell>
                       </TableRow>
@@ -865,108 +887,108 @@ const RetailerPortal = () => {
                       <div className="tableCell-top">
                         <b className="tableCell-top-title"> Terminal</b>
                         </div>
-                        <input className="tableCell-top-input" value={LineNumber} onChange={(e)=>handleSearch2(e, "Terminal")} placeholder="Search" />
+                        <input className="tableCell-top-input" value={Terminal2} onChange={(e)=>handleSearch2(e, "Terminal")} placeholder="Search" />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                       <div className="tableCell-top">
                         <b className="tableCell-top-title">ULSD</b>
                         </div>
-                        <input className="tableCell-top-input" value={LineNumber} onChange={(e)=>handleSearch2(e, "ULSD")} placeholder="Search" />
+                        <input className="tableCell-top-input" value={ULSD2} onChange={(e)=>handleSearch2(e, "ULSD")} placeholder="Search" />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                       <div className="tableCell-top">
                         <b className="tableCell-top-title">Unleaded Gasoline</b>
                         </div>
-                        <input className="tableCell-top-input" value={LineNumber} onChange={(e)=>handleSearch2(e, "Unleaded Gasoline")} placeholder="Search" />
+                        <input className="tableCell-top-input" value={UnleadedGas2} onChange={(e)=>handleSearch2(e, "Unleaded Gasoline")} placeholder="Search" />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                       <div className="tableCell-top">
                         <b className="tableCell-top-title">Mid-Grade Gasoline</b>
                         </div>
-                        <input className="tableCell-top-input" value={LineNumber} onChange={(e)=>handleSearch2(e, "Mid-Grade Gasoline")} placeholder="Search" />
+                        <input className="tableCell-top-input" value={MidGradeGas2} onChange={(e)=>handleSearch2(e, "Mid-Grade Gasoline")} placeholder="Search" />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                       <div className="tableCell-top">
                         <b className="tableCell-top-title">Premium Gasoline</b>
                         </div>
-                        <input className="tableCell-top-input" value={LineNumber} onChange={(e)=>handleSearch2(e, "Premium Gasoline")} placeholder="Search" />
+                        <input className="tableCell-top-input" value={PremiumGas2} onChange={(e)=>handleSearch2(e, "Premium Gasoline")} placeholder="Search" />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                       <div className="tableCell-top">
                         <b className="tableCell-top-title">Heating Oil</b>
                         </div>
-                        <input className="tableCell-top-input" value={LineNumber} onChange={(e)=>handleSearch2(e, "Heating Oil")} placeholder="Search" />
+                        <input className="tableCell-top-input" value={HeatingOil2} onChange={(e)=>handleSearch2(e, "Heating Oil")} placeholder="Search" />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                       <div className="tableCell-top">
                         <b className="tableCell-top-title">Butane</b>
                         </div>
-                        <input className="tableCell-top-input" value={LineNumber} onChange={(e)=>handleSearch2(e, "Butane")} placeholder="Search" />
+                        <input className="tableCell-top-input" value={Butane2} onChange={(e)=>handleSearch2(e, "Butane")} placeholder="Search" />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                       <div className="tableCell-top">
                         <b className="tableCell-top-title">Karosene</b>
                         </div>
-                        <input className="tableCell-top-input" value={LineNumber} onChange={(e)=>handleSearch2(e, "Karosene")} placeholder="Search" />
+                        <input className="tableCell-top-input" value={Karosene2} onChange={(e)=>handleSearch2(e, "Karosene")} placeholder="Search" />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                       <div className="tableCell-top">
                         <b className="tableCell-top-title">Propane</b>
                         </div>
-                        <input className="tableCell-top-input" value={LineNumber} onChange={(e)=>handleSearch2(e, "Propane")} placeholder="Search" />
+                        <input className="tableCell-top-input" value={Propane2} onChange={(e)=>handleSearch2(e, "Propane")} placeholder="Search" />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                       <div className="tableCell-top">
                         <b className="tableCell-top-title">Bitumen</b>
                         </div>
-                        <input className="tableCell-top-input" value={LineNumber} onChange={(e)=>handleSearch2(e, "Bitumen")} placeholder="Search" />
+                        <input className="tableCell-top-input" value={Bitumen2} onChange={(e)=>handleSearch2(e, "Bitumen")} placeholder="Search" />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                       <div className="tableCell-top">
                         <b className="tableCell-top-title">NGL</b>
                         </div>
-                        <input className="tableCell-top-input" value={LineNumber} onChange={(e)=>handleSearch2(e, "NGL")} placeholder="Search" />
+                        <input className="tableCell-top-input" value={NGL2} onChange={(e)=>handleSearch2(e, "NGL")} placeholder="Search" />
                       </TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     {(rowsPerPage > 0
-                      ? data.slice(
+                      ? filterCustomer2.slice(
                           page * rowsPerPage,
                           page * rowsPerPage + rowsPerPage
                         )
-                      : data
+                      : filterCustomer2
                     ).map((row, i) => (
                       <TableRow key={i} className={i % 2 == 0 ? "tableCell-bottom-dark" : "tableCell-bottom-light"}>
                         <TableCell className="tableCell-bottom">
-                          {row.lineNumber}
+                          {row.terminal}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                          {row.product}
+                          {row.ulsd}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                          {row.rackLocation}
+                          {row.unleadedgasoline}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                          {row.qualityOrdered}
+                          {row.midgradegasoline}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                          {row.qualityDelivered}
+                          {row.premiumgasoline}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
                           {row.freightTicket}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                          {row.ancillaryFees}
+                          {row.heatingoil}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                          {row.totalCost}
+                          {row.butane}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                          {row.status}
+                          {row.karosene}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                          {row.alerts}
+                          {row.bitumen}
                         </TableCell>
                         <TableCell className="tableCell-bottom">{row.ngl}</TableCell>
                       </TableRow>
