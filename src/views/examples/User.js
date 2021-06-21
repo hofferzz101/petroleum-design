@@ -63,6 +63,7 @@ import DialogContent from "@material-ui/core/DialogContent"
 import DialogContentText from "@material-ui/core/DialogContentText"
 import DialogTitle from "@material-ui/core/DialogTitle"
 import Draggable from "react-draggable"
+import "./pages/User.css"
 
 function PaperComponent(props) {
   return (
@@ -512,20 +513,35 @@ const User = props => {
                 >
                   <TableHead>
                     <TableRow>
-                      <TableCell>
-                        <b> Name</b>
+                      <TableCell className="table-headers-tables">
+                      <div className="tableCell-top">
+                        <b className="tableCell-top-title"> Name</b>
+                        </div>
+                        <input className="tableCell-top-input-user" placeholder="Search" />
                       </TableCell>
-                      <TableCell>
-                        <b>Email</b>
+                      <TableCell className="table-headers-tables">
+                      <div className="tableCell-top">
+                        <b className="tableCell-top-title">Email</b>
+                        </div>
+                        <input className="tableCell-top-input-user" placeholder="Search" />
                       </TableCell>
-                      <TableCell>
-                        <b>Title</b>
+                      <TableCell className="table-headers-tables">
+                      <div className="tableCell-top">
+                        <b className="tableCell-top-title">Title</b>
+                        </div>
+                        <input className="tableCell-top-input-user" placeholder="Search" />
                       </TableCell>
-                      <TableCell>
-                        <b>Limit</b>
+                      <TableCell className="table-headers-tables">
+                      <div className="tableCell-top">
+                        <b className="tableCell-top-title">Limit</b>
+                        </div>
+                        <input className="tableCell-top-input-user" placeholder="Search" />
                       </TableCell>
-                      <TableCell>
-                        <b>Action</b>
+                      <TableCell className="table-headers-tables">
+                      <div className="tableCell-top">
+                        <b className="tableCell-top-title">Action</b>
+                        </div>
+                        <input className="tableCell-top-input-user" placeholder="Search" />
                       </TableCell>
                     </TableRow>
                   </TableHead>
@@ -537,12 +553,12 @@ const User = props => {
                         )
                       : userData
                     ).map((row, i) => (
-                      <TableRow key={i}>
-                        <TableCell style={{ width: 100 }}>{row.name}</TableCell>
-                        <TableCell style={{ width: 50 }}>{row.email}</TableCell>
-                        <TableCell style={{ width: 50 }}>{row.role}</TableCell>
-                        <TableCell style={{ width: 50 }}>{row.limit}</TableCell>
-                        <TableCell style={{ width: 50 }}>
+                      <TableRow key={i} className={i % 2 == 0 ? "tableCell-bottom-dark" : "tableCell-bottom-light"}>
+                        <TableCell className="tableCell-bottom">{row.name}</TableCell>
+                        <TableCell className="tableCell-bottom">{row.email}</TableCell>
+                        <TableCell className="tableCell-bottom">{row.role}</TableCell>
+                        <TableCell className="tableCell-bottom">{row.limit}</TableCell>
+                        <TableCell className="tableCell-bottom">
                           <a
                             onClick={() => viewModal(row)}
                             style={{ cursor: "pointer" }}

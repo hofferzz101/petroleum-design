@@ -21,7 +21,7 @@ import VisibilityOutlinedIcon from "@material-ui/icons/VisibilityOutlined"
 import DeleteOutlineOutlinedIcon from "@material-ui/icons/DeleteOutlineOutlined"
 
 import Header from "components/Headers/Header.js"
-
+import "./pages/OrderSearch.css"
 import QRCode from "react-qr-code"
 
 // reactstrap components
@@ -47,6 +47,36 @@ const useRowStyles = makeStyles({
     },
   },
 })
+
+const rows = [
+  {
+    contract: "Exion Philadelphia",
+    customernumber: "12.34",
+    ordernumber: "23.45",
+    haulernumber: "3000",
+    drivernumber: "5700",
+    ponumber:"111",
+    suppliernumber: '2.343',
+    terminalnumber: '23.45',
+    orderdate: "89.87",
+    
+    expirationdate:"12.98",
+    actions:"23.65",
+  },
+  {
+    contract: "Exion Philadelphia",
+    customernumber: "12.34",
+    ordernumber: "23.45",
+    haulernumber: "3000",
+    drivernumber: "5700",
+    suppliernumber: '2.343',
+    terminalnumber: '23.45',
+    orderdate: "89.87",
+   
+    expirationdate:"12.98",
+    actions:"23.65",
+  },
+]
 
 function Rows(props) {
   const { row } = props
@@ -181,6 +211,168 @@ export default function CollapsibleTable() {
   const [MasterData, setMasterData] = useState([])
   const [search, setsearch] = useState("")
 
+  const [filterCustomer, setFilterCustomer] = React.useState(rows)
+  const [Contract, setContract] = React.useState("")
+  const [CustomerNumber, setCustomerNumber] = React.useState("")
+  const [OrderNumber, setOrderNumber] = React.useState("")
+  const [HaulerNumber, setHaulerNumber] = React.useState("")
+  const [DriverNumber, setDriverNumber] = React.useState("")
+  const [PONumber, setPONumber] = React.useState("")
+  const [SupplierNumber, setSupplierNumber] = React.useState("")
+  const [TerminalNumber, setTerminalNumber] = React.useState("")
+  const [OrderDate, setOrderDate] = React.useState("")
+  const [ExpirationDate, setExpirationDate] = React.useState("")
+  const [Actions, setActions] = React.useState("")
+  const [rowsPerPage, setRowsPerPage] = React.useState(5)
+  const [page, setPage] = React.useState(0)
+
+
+  const handleSearch = (e, flag) => {
+    let search = ""
+    let filtered = ""
+    switch (flag) {
+      case "Contract":
+        setContract(e.target.value)
+      
+         search = e.target.value
+        
+         filtered = rows.filter(item => {
+          return (
+            item.contract.toLowerCase().indexOf(search.toLowerCase()) !== -1
+          )
+
+        })
+        console.log("filter",filtered)
+        setFilterCustomer(filtered)
+
+
+        break;
+      case "Customer Number":
+        console.log(flag)
+        setCustomerNumber(e.target.value)
+         search = e.target.value
+        
+         filtered = rows.filter(item => {
+          return (
+            item.customernumber.toLowerCase().indexOf(search.toLowerCase()) !== -1
+          )
+
+        })
+        setFilterCustomer(filtered)
+        break;
+      case "Hauler Number":
+        setHaulerNumber(e.target.value)
+         search = e.target.value
+        
+         filtered = rows.filter(item => {
+          return (
+            item.haulernumber.toLowerCase().indexOf(search.toLowerCase()) !== -1
+          )
+
+        })
+        setFilterCustomer(filtered)
+        console.log(flag)
+        break;
+      case "Driver Number":
+        setDriverNumber(e.target.value)
+        search = e.target.value
+       
+        filtered = rows.filter(item => {
+         return (
+           item.drivernumber.toLowerCase().indexOf(search.toLowerCase()) !== -1
+         )
+
+       })
+       setFilterCustomer(filtered)
+        console.log(flag)
+        break;
+      case "PO Number":
+        setPONumber(e.target.value)
+        search = e.target.value
+       
+        filtered = rows.filter(item => {
+         return (
+           item.ponumber.toLowerCase().indexOf(search.toLowerCase()) !== -1
+         )
+
+       })
+       setFilterCustomer(filtered)
+        console.log(flag)
+        break;
+      case "Supplier Number":
+        setSupplierNumber(e.target.value)
+        search = e.target.value
+       
+        filtered = rows.filter(item => {
+         return (
+           item.suppliernumber.toLowerCase().indexOf(search.toLowerCase()) !== -1
+         )
+
+       })
+       setFilterCustomer(filtered)
+        console.log(flag)
+        break;
+      case "Terminal Number":
+        setTerminalNumber(e.target.value)
+        search = e.target.value
+       
+        filtered = rows.filter(item => {
+         return (
+           item.terminalnumber.toLowerCase().indexOf(search.toLowerCase()) !== -1
+         )
+
+       })
+       setFilterCustomer(filtered)
+       
+        console.log(flag)
+        break;
+      case "Order Date":
+        setOrderDate(e.target.value)
+        search = e.target.value
+       
+        filtered = rows.filter(item => {
+         return (
+           item.orderdate.toLowerCase().indexOf(search.toLowerCase()) !== -1
+         )
+
+       })
+       setFilterCustomer(filtered)
+        console.log(flag)
+        break;
+      
+      case "Expiration Date":
+        setExpirationDate(e.target.value)
+        search = e.target.value
+       
+        filtered = rows.filter(item => {
+         return (
+           item.expirationdate.toLowerCase().indexOf(search.toLowerCase()) !== -1
+         )
+
+       })
+       setFilterCustomer(filtered)
+        console.log(filtered)
+        break;
+      case "Actions":
+        setActions(e.target.value)
+        search = e.target.value
+        
+        filtered = rows.filter(item => {
+         return (
+           item.actions.toLowerCase().indexOf(search.toLowerCase()) !== -1
+         )
+
+       })
+       setFilterCustomer(filtered)
+        console.log(filtered)
+        break;
+
+      default:
+        setFilterCustomer(rows)
+        break;
+    }
+  }
+
   useEffect(() => {
     let data = JSON.parse(localStorage.getItem("Petroleum_Item"))
     if (data) {
@@ -241,6 +433,14 @@ export default function CollapsibleTable() {
     }
   }
 
+  const handleChangeRowsPerPage = event => {
+    setRowsPerPage(parseInt(event.target.value, 10))
+    setPage(0)
+  }
+
+  const emptyRowsData =
+    rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage)
+
   return (
     <>
       <Header />
@@ -266,40 +466,73 @@ export default function CollapsibleTable() {
                   <TableContainer component={Paper}>
                     <Table aria-label="collapsible table">
                       <TableHead>
-                        <TableRow>
-                          <TableCell />
-                          <TableCell>
-                            <b> Contract</b>
+                        <TableRow >
+                          
+                          <TableCell className="table-headers-tables">
+                          <div className="tableCell-top">
+                            <b className="tableCell-top-title"> Contract</b>
+                            </div>
+                            <input className="tableCell-top-input" value={Contract} onChange={(e) => handleSearch(e, "Contract")} placeholder="Search" />
                           </TableCell>
-                          <TableCell>
-                            <b> Customer Number</b>
+                          <TableCell className="table-headers-tables">
+                          <div className="tableCell-top">
+                            <b className="tableCell-top-title"> Customer Number</b>
+                            </div>
+                            <input className="tableCell-top-input" value={CustomerNumber} onChange={(e) => handleSearch(e, "Customer Number")} placeholder="Search" />
                           </TableCell>
-                          <TableCell>
-                            <b>Order Number</b>
+                          <TableCell className="table-headers-tables">
+                          <div className="tableCell-top">
+                            <b className="tableCell-top-title">Order Number</b>
+                            </div>
+                            <input className="tableCell-top-input" value={OrderNumber} onChange={(e) => handleSearch(e, "Order Number")} placeholder="Search" />
                           </TableCell>
-                          <TableCell>
-                            <b>Hauler Number</b>
+                          <TableCell className="table-headers-tables">
+                          <div className="tableCell-top">
+                            <b className="tableCell-top-title">Hauler Number</b>
+                            </div>
+                            <input className="tableCell-top-input" value={HaulerNumber} onChange={(e) => handleSearch(e, "Hauler Number")} placeholder="Search" />
                           </TableCell>
-                          <TableCell>
-                            <b>Driver Number</b>
+                          <TableCell className="table-headers-tables">
+                          <div className="tableCell-top">
+                            <b className="tableCell-top-title">Driver Number</b>
+                            </div>
+                            <input className="tableCell-top-input" value={DriverNumber} onChange={(e) => handleSearch(e, "Driver Number")} placeholder="Search" />
                           </TableCell>
-                          <TableCell>
-                            <b>PO Number</b>
+                          <TableCell className="table-headers-tables">
+                          <div className="tableCell-top">
+                            <b className="tableCell-top-title">PO Number</b>
+                            </div>
+                            <input className="tableCell-top-input" value={PONumber} onChange={(e) => handleSearch(e, "PO Number")} placeholder="Search" />
                           </TableCell>
-                          <TableCell>
-                            <b>Supplier Number</b>
+                          <TableCell className="table-headers-tables">
+                          <div className="tableCell-top">
+                            <b className="tableCell-top-title">Supplier Number</b>
+                            </div>
+                            <input className="tableCell-top-input" value={SupplierNumber} onChange={(e) => handleSearch(e, "Supplier Number")} placeholder="Search" />
                           </TableCell>
-                          <TableCell>
-                            <b>Terminal Number</b>
+                          <TableCell className="table-headers-tables">
+                          <div className="tableCell-top">
+                            <b className="tableCell-top-title">Terminal Number</b>
+                            </div>
+                            <input className="tableCell-top-input" value={TerminalNumber} onChange={(e) => handleSearch(e, "Terminal Number")} placeholder="Search" />
                           </TableCell>
-                          <TableCell>
-                            <b>Order Date</b>
+                          <TableCell className="table-headers-tables">
+                          <div className="tableCell-top">
+                            <b className="tableCell-top-title">Order Date</b>
+                            </div>
+                            <input className="tableCell-top-input" value={OrderDate} onChange={(e) => handleSearch(e, "Order Date")} placeholder="Search" />
                           </TableCell>
-                          <TableCell>
-                            <b>Expiration Date</b>
+                          <TableCell className="table-headers-tables">
+                          <div className="tableCell-top">
+                            <b className="tableCell-top-title">Expiration Date</b>
+                            </div>
+                            <input className="tableCell-top-input" value={ExpirationDate} onChange={(e) => handleSearch(e, "Expiration Date")} placeholder="Search" />
                           </TableCell>
-                          <TableCell>
-                            <b>Actions</b>
+                          <TableCell className="table-headers-tables">
+                          <div className="tableCell-top">
+                            <b className="tableCell-top-title">Actions</b>
+                            </div>
+                            <input className="tableCell-top-input" value={Actions} onChange={(e) => handleSearch(e, "Actions")} placeholder="Search" />
                           </TableCell>
                         </TableRow>
                       </TableHead>
@@ -309,6 +542,56 @@ export default function CollapsibleTable() {
                               <Rows key={i} row={row} />
                             ))
                           : null}
+                      </TableBody>
+                      <TableBody>
+                      {(rowsPerPage > 0
+                      ? filterCustomer.slice(
+                          page * rowsPerPage,
+                          page * rowsPerPage + rowsPerPage
+                        )
+                      : filterCustomer
+                    ).map((row, i) => (
+                      
+                      <TableRow key={i} className={i % 2 == 0 ? "tableCell-bottom-dark" : "tableCell-bottom-light"}>
+                      <TableCell className="tableCell-bottom">
+                        {row.contract}
+                      </TableCell>
+                      <TableCell className="tableCell-bottom">
+                        {row.customernumber}
+                      </TableCell>
+                      <TableCell className="tableCell-bottom">
+                        {row.ordernumber}
+                      </TableCell>
+                      <TableCell className="tableCell-bottom">
+                        {row.haulernumber}
+                      </TableCell>
+                      <TableCell className="tableCell-bottom">
+                        {row.drivernumber}
+                      </TableCell>
+                      <TableCell className="tableCell-bottom">
+                        {row.ponumber}
+                      </TableCell>
+                      <TableCell className="tableCell-bottom">
+                        {row.suppliernumber}
+                      </TableCell>
+                      <TableCell className="tableCell-bottom">
+                        {row.terminalnumber}
+                      </TableCell>
+                      <TableCell className="tableCell-bottom">
+                        {row.orderdate}
+                      </TableCell>
+                      <TableCell className="tableCell-bottom">
+                        {row.expirationdate}
+                      </TableCell>
+                      <TableCell className="tableCell-bottom">{row.actions}</TableCell>
+                    </TableRow>
+                    ))}
+
+                    {emptyRowsData > 0 && (
+                      <TableRow style={{ height: 53 * emptyRowsData }}>
+                        <TableCell colSpan={6} />
+                      </TableRow>
+                    )}
                       </TableBody>
                     </Table>
                   </TableContainer>

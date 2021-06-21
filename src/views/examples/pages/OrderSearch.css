@@ -8,12 +8,11 @@
   
   .tableCell-top-title {
     color: white;
-    
   }
   
   .tableCell-top-input {
     border-radius: 35px;
-    width: 140px;
+    width: 140px !important;
     border-width: 1px;
   }
   

@@ -1,0 +1,430 @@
+
+.main-form-co{
+    margin-top:50px;
+   
+}
+
+.location-div-co{
+    display:flex
+}
+
+.location-div-label-co{
+    margin-left:150px
+}
+
+.location-div-input-co{
+    margin-left:55px;
+    width:30%
+}
+
+.products-div-co{
+    display:flex
+}
+
+.products-div-label-co{
+    margin-left:135px
+}
+
+.products-div-table{
+ 
+    border: 1px solid lightgray;
+    border-radius: 20px;
+    margin-left:55px;
+    border-collapse: separate !important;
+    
+}
+
+
+.products-div-table-heading{
+    color:#2993e5;
+    margin-left:20px
+}
+
+.products-div-table-subheading{
+    color:#2993e5
+}
+
+.formgroup-diliverydate-maindiv{
+    display:flex
+}
+
+.diliverydate-labeldiv{
+    margin-left:130px
+}
+
+.diliverydate-contactno{
+    margin-left:40px
+}
+
+.diliveryTime-div{
+    display: flex;
+}
+
+.diliveryTime-heading-div{
+    margin-left:40px
+}
+
+.diliverytime-input{
+    width:300px;
+    margin-left:40px
+}
+
+.additional-main-div{
+    display: flex;
+}
+
+.additional-label{
+    margin-left:60px
+}
+
+.additional-input{
+    width:300px;
+    margin-left:40px;
+    margin-bottom:10px
+}
+
+.additional-input2{
+    width:300px;
+    margin-left:40px
+}
+
+.btn-div-co{
+    width: 200px
+}
+
+#btn-co{
+    margin-left: 500px;
+    background-color: #2993e5;
+    color: white
+}
+
+
+
+/* for 1430px */
+
+
+@media (max-width:1430px) {
+    .location-text{
+        font-size: 15px;
+    }
+    .location-div-label-co{
+        margin-left: 90px;
+    }
+    .products-text{
+        font-size: 15px;
+    }
+    .products-div-label-co{
+        margin-left: 75px;
+    }
+    .products-div-table{
+        width: 700px;
+    }
+    .deliverytext{
+        font-size: 15px;
+    }
+    .diliverydate-labeldiv{
+        margin-left: 70px;
+    }
+    .diliveryTimeAndPrefer{
+        font-size: 15px;
+    }
+    .diliveryTime-heading-div{
+        margin-left: 0px;
+    }
+    .additional-info{
+        font-size: 15px;
+    }
+    .additional-label{
+        margin-left: 17px;
+    }
+}
+
+
+@media (max-width:1320px) {
+    .location-text{
+        font-size: 14px;
+    }
+    .location-div-label-co{
+        margin-left: 50px;
+    }
+    .products-text{
+        font-size: 14px;
+    }
+    .products-div-label-co{
+        margin-left: 35px;
+    }
+    .products-div-table{
+        width: 600px;
+    }
+    .deliverytext{
+        font-size: 14px;
+    }
+    .diliverydate-labeldiv{
+        margin-left: 35px;
+    }
+    .diliveryTimeAndPrefer{
+        font-size: 14px;
+    }
+    .diliveryTime-heading-div{
+        margin-left: -15px;
+    }
+    .additional-info{
+        font-size: 14px;
+    }
+    .additional-label{
+        margin-left: 3px;
+    }
+    #btn-co{
+        margin-left: 350px;
+    }
+}
+
+@media (max-width:1175px) {
+    .products-div-table{
+        width: 400px;
+    }
+}
+
+@media (max-width:1150px) {
+    .products-text{
+        font-size: 12px;
+    }
+    .products-div-label-co{
+        margin-left: 5px;
+    }
+    .products-div-table{
+        margin-left: 20px;
+    }
+    .location-text{
+        font-size: 12px;
+    }
+    .location-div-label-co{
+        margin-left: 20px;
+    }
+    .location-div-input-co{
+        margin-left: 20px;
+    }
+    .deliverytext{
+        font-size: 12px;
+    }
+    .diliverydate-labeldiv{
+        margin-left: -10px;
+    }
+    .diliverydate-contactno{
+        margin-left: 24px;
+    }
+    .diliveryTimeAndPrefer{
+        font-size: 12px;
+    }
+    .diliverytime-input{
+        margin-left: 20px;
+    }
+    .additional-info{
+        font-size: 12px;
+    }
+    .additional-label{
+        margin-left: 0px;
+    }
+    .additional-input{
+        margin-left: 18px;
+    }
+    .additional-input2{
+        margin-left: 18px;
+    }
+    #btn-co{
+        margin-left: 250px;
+    }
+}
+
+
+@media (max-width:1080px) {
+    .products-div-co{
+        display:flex;
+        flex-direction: column;
+    }
+    .products-div-table{
+        margin-left: 0px;
+    }
+    .location-div-input-co{
+        width: 60%;
+    }
+}
+
+@media (max-width:990px) {
+    .products-div-table{
+        overflow-x: auto;
+        display: inline-block;
+        width: 500px;
+    }
+    #btn-co{
+       margin-left: 150px;
+    }
+    .location-div-input-co{
+        width: 60%;
+    }
+}
+
+@media (max-width:900px) {
+     .products-div-table{
+         width: 450px;
+     }
+     .location-div-input-co{
+        width: 60%;
+    }
+}
+
+@media (max-width:860px) {
+    .products-div-table{
+        width: 400px;
+    }
+    .location-div-input-co{
+        width: 60%;
+    }
+}
+
+@media (max-width:776px) {
+    .products-div-table{
+        width: 450px;
+    }
+    .location-div-input-co{
+        width: 60%;
+    }
+}
+
+@media (max-width:667px) {
+     .products-div-table{
+         width: 450px !important;
+     }
+}
+
+@media (max-width:768px) {
+    .products-div-table{
+        width: 350px;
+    }
+    .location-div-input-co{
+        width: 60%;
+    }
+    .diliverytime-input{
+        width: 90%;
+    }
+    .additional-input{
+        width: 100%;
+    }
+    .additional-input2{
+        width: 100%;
+    }
+}
+
+@media (max-width:560px) {
+    .products-div-table{
+        width: 425px;
+    }
+    .formgroup-diliverydate-maindiv{
+        display: flex;
+        flex-direction: column;
+    }
+    .diliveryTime-div{
+        display: flex;
+        flex-direction: column;
+    }
+    .diliverytime-input{
+        width: 95%;
+    }
+    .additional-main-div{
+        display: flex;
+        flex-direction: column;
+    }
+    .additional-input{
+        width: 95%;
+    }
+    .additional-input2{
+        width: 95%;
+    }
+    .location-div-input-co{
+        width: 60%;
+    }
+}
+
+@media (max-width:530px) {
+    .products-div-table{
+        width: 400px;
+    }
+    .location-div-input-co{
+        width: 60%;
+    }
+}
+
+@media (max-width:500px) {
+    .products-div-table{
+        width: 375px;
+    }
+    .location-div-input-co{
+        width: 60%;
+    }
+}
+
+@media (max-width:480px) {
+    .products-div-table{
+        width: 350px;
+    }
+    #btn-co{
+        margin-left: 65px;
+    }
+    .location-div-input-co{
+        width: 60%;
+    }
+}
+
+@media (max-width:450px) {
+    .products-div-table{
+        width: 325px;
+    }
+    #btn-co{
+        margin-left: 60px;
+    }
+    .location-div-input-co{
+        width: 60%;
+    }
+}
+
+@media (max-width:430px) {
+    .products-div-table{
+        width: 300px;
+    }
+    #btn-co{
+        margin-left: 60px;
+    }
+    .location-div-input-co{
+        width: 60%;
+    }
+}
+
+@media (max-width:400px) {
+    .products-div-table{
+        width: 275px;
+    }
+    #btn-co{
+        margin-left: 55px;
+    }
+    .location-div-input-co{
+        width: 60%;
+    }
+}
+
+@media (max-width:380px) {
+    .products-div-table{
+        width: 260px;
+    }
+    #btn-co{
+        margin-left: 50px;
+    }
+    .location-div-input-co{
+        width: 60%;
+    }
+}
+
+@media (max-width:414px) {
+    .products-div-table{
+        width: 260px;
+    }
+}
