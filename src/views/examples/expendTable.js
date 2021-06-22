@@ -23,7 +23,7 @@ import DeleteOutlineOutlinedIcon from "@material-ui/icons/DeleteOutlineOutlined"
 import QRCode from "react-qr-code"
 
 import { saveSvgAsPng } from "save-svg-as-png"
-
+import "./pages/expendTable.css"
 // reactstrap components
 import {
   Card,
@@ -70,6 +70,7 @@ function Rows(props) {
     })
   }
 
+
   const [modal, setModal] = useState(false)
   const toggle = () => setModal(!modal)
 
@@ -83,13 +84,13 @@ function Rows(props) {
         <ModalHeader>Order no: {row ? row.order_number : ""}</ModalHeader>
         <ModalBody style={{ textAlign: "center" }}>
           <div>
-            <QRCode id="id" size={200} value={row ? JSON.stringify(row) : ""} />
+
           </div>
         </ModalBody>
         <Button onClick={downloadQRCode}>Download QRCode</Button>
       </Modal>
 
-      <TableRow className={classes.root}>
+      <TableRow id="opening-row-collapse" onClick={()=>setOpen(!open)} style={{}} className={classes.root}>
         <TableCell>
           <IconButton
             aria-label="expand row"
@@ -132,10 +133,12 @@ function Rows(props) {
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
+          <div className="table-styling">
             <Box margin={1}>
               <Typography variant="h6" gutterBottom component="div">
                 Products
               </Typography>
+              
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
@@ -148,19 +151,32 @@ function Rows(props) {
                 <TableBody>
                   {array.length
                     ? array.map((inner, j) => (
+                      <>
+                      
                         <TableRow key={j}>
                           <TableCell>{inner.Product}</TableCell>
                           <TableCell>{inner.Gallons}</TableCell>
                           <TableCell>{inner.ShipTo}</TableCell>
                           <TableCell>{inner.Destination}</TableCell>
                         </TableRow>
-                      ))
+                        
+                      </>
+                    ))
                     : null}
                 </TableBody>
               </Table>
+              
             </Box>
+            </div>
+            
           </Collapse>
         </TableCell>
+        {
+          open ?
+            <div className="qr-design">
+              <QRCode className="qr-code-design" id="id" size={170} value={row ? JSON.stringify(row) : ""} />
+            </div> : null
+        }
       </TableRow>
     </React.Fragment>
   )
@@ -270,8 +286,11 @@ export default function CollapsibleTable() {
         </TableHead>
         <TableBody>
           {MasterData
-            ? MasterData.map((row, i) => <Rows key={i} row={row} />)
+            ? MasterData.map((row, i) =>
+              <Rows key={i} row={row} />
+            )
             : null}
+
         </TableBody>
       </Table>
     </TableContainer>

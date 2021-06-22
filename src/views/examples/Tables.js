@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
 // reactstrap components
@@ -160,11 +160,11 @@ const data = [
     lineNumber: "123456",
     product: "Reg Gas",
     rackLocation: "London",
-    qualityOrdered: "3,000",
-    qualityDelivered: "5,700",
+    qualityOrdered: 3000,
+    qualityDelivered: 5700,
     freightTicket: "123456789",
-    ancillaryFees: "$23",
-    totalCost: "$234,565",
+    ancillaryFees: 23,
+    totalCost: 234565,
     status: "Scheduled",
     alerts: "None",
   },
@@ -172,11 +172,48 @@ const data = [
     lineNumber: "098765",
     product: "Mid Gas",
     rackLocation: "London",
-    qualityOrdered: "2,500",
-    qualityDelivered: "12,000",
+    qualityOrdered: 2500,
+    qualityDelivered: 12000,
     freightTicket: "123456789",
-    ancillaryFees: "$43",
-    totalCost: "$234,565",
+    ancillaryFees: 43,
+    totalCost: 234565,
+    status: "Scheduled",
+    alerts: "None",
+  },
+
+  {
+    lineNumber: "098765",
+    product: "Mid Gas",
+    rackLocation: "London",
+    qualityOrdered: 2500,
+    qualityDelivered: 12000,
+    freightTicket: "123456789",
+    ancillaryFees: 43,
+    totalCost: 234565,
+    status: "Scheduled",
+    alerts: "None",
+  },
+  {
+    lineNumber: "123456",
+    product: "Reg Gas",
+    rackLocation: "London",
+    qualityOrdered: 3000,
+    qualityDelivered: 5700,
+    freightTicket: "123456789",
+    ancillaryFees: 23,
+    totalCost: 234565,
+    status: "Scheduled",
+    alerts: "None",
+  },
+  {
+    lineNumber: "098765",
+    product: "Mid Gas",
+    rackLocation: "London",
+    qualityOrdered: 2500,
+    qualityDelivered: 12000,
+    freightTicket: "123456789",
+    ancillaryFees: 43,
+    totalCost: 234565,
     status: "Scheduled",
     alerts: "None",
   },
@@ -232,6 +269,33 @@ const Tables = () => {
   const [column, setColumn] = useState("")
   const [search, setsearch] = useState("")
 
+  const [qualityOrder, setqualityOrder] = useState()
+  const [qualityDeliver, setQualityDeliver] = useState()
+  const [ancillaryFee, setAncillaryFee] = useState()
+  const [totalCosting,setTotalCosting] = useState()
+
+
+  function getSummery(arr, prop1, prop2,prop3,prop4){
+
+  let salary = arr.reduce((acc,val) => acc+=val[prop1],0)
+  setqualityOrder(salary)
+    let quantity = arr.reduce((acc,val) => acc+=val[prop2],0)
+    setQualityDeliver(quantity)
+     let cost = arr.reduce((acc,val) => acc+=val[prop3],0)
+      setTotalCosting(cost)
+   let ancillaryFee = arr.reduce((acc,val) => acc+=val[prop4],0)
+   setAncillaryFee(ancillaryFee)
+    
+  }
+
+  
+  
+  
+
+useEffect(()=> {
+  getSummery(data, "qualityOrdered", "qualityDelivered", "totalCost","ancillaryFees")
+},[])
+  
   const emptyRowsData =
     rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage)
 
@@ -554,6 +618,10 @@ const Tables = () => {
 
 
 
+   
+
+
+
 
   return (
     <>
@@ -847,7 +915,10 @@ const Tables = () => {
                     {(rowsPerPage > 0
                       ? filterCustomer2.slice(
                         page * rowsPerPage,
-                        page * rowsPerPage + rowsPerPage
+                        page * rowsPerPage + rowsPerPage,
+                        page * rowsPerPage + rowsPerPage+rowsPerPage,
+                        page * rowsPerPage + rowsPerPage+rowsPerPage+rowsPerPage,
+                        page * rowsPerPage + rowsPerPage+rowsPerPage+rowsPerPage+rowsPerPage
                       )
                       : data
                     ).map((row, i) => (
@@ -884,6 +955,27 @@ const Tables = () => {
                         </TableCell>
                       </TableRow>
                     ))}
+                    <TableRow style={{backgroundColor:"lightgray"}}>
+                      <TableCell className="tableCell-bottom"></TableCell>
+                      <TableCell className="tableCell-bottom"></TableCell>
+                      <TableCell className="tableCell-bottom"></TableCell>
+                      <TableCell className="tableCell-bottom">
+                        {qualityOrder}
+                      </TableCell>
+                      <TableCell className="tableCell-bottom">
+                        {qualityDeliver}
+                      </TableCell>
+                      <TableCell className="tableCell-bottom"></TableCell>
+                      <TableCell className="tableCell-bottom">
+                        {ancillaryFee}
+                      </TableCell>
+                      <TableCell className="tableCell-bottom">
+                        {totalCosting}
+                      </TableCell>
+                      <TableCell className="tableCell-bottom"></TableCell>
+                      <TableCell className="tableCell-bottom"></TableCell>
+
+                    </TableRow>
 
                     {emptyRowsData > 0 && (
                       <TableRow style={{ height: 53 * emptyRowsData }}>
