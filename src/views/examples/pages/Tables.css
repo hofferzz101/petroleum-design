@@ -26,6 +26,15 @@
   border-right: 2px solid white !important;
 }
 
+/* .tableCell-bottom-light:hover{
+  background-color:#00CCFF;
+}
+
+.tableCell-bottom-dark:hover{
+  background-color: #00CCFF;
+} */
+
+
 .table-headers-tables {
   padding: 1px !important;
   /* border-right: 1px solid white !important; */

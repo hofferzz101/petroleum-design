@@ -1,0 +1,49 @@
+#opening-row-collapse:hover{
+   background-color: #F0F0F0;
+}
+
+.qr-design{
+   position:absolute;
+   margin-left:200px;
+   margin-top:50px;
+}
+
+@media (max-width:1400px) {
+   .qr-design{
+      position:absolute;
+      margin-left:150px;
+      margin-top:50px;
+   }
+}
+
+@media (max-width:1340px) {
+   .qr-design{
+      position:absolute;
+      margin-left:90px;
+      margin-top:50px;
+   }
+}
+
+@media (max-width:1260px) {
+   .qr-design{
+      position:absolute;
+      margin-left:50px;
+      margin-top:50px;
+   }
+}
+
+
+@media (max-width:1200px) {
+   .qr-design{
+      position:absolute;
+      margin-left:10px;
+      margin-top:50px;
+   }
+}
+
+@media (max-width:1160px) {
+   .qr-design{
+      position: relative;
+     
+   }
+}
