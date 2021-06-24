@@ -300,7 +300,11 @@ const Orders = () => {
             <Card className="shadow">
               <div className="row mt-4">
                 <div className="col-md-9" />
-                <div className="col-md-2 mb-4">
+
+                  <div className="col-md-2 mb-4">
+                  <input style={{width:"240px"}} placeholder="Search Table"/>
+                 </div>
+                {/* <div className="col-md-2 mb-4">
                   <input
                     accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
                     className={classes.input}
@@ -324,7 +328,7 @@ const Orders = () => {
                   >
                     Add Order
                   </Button>
-                </div>
+                </div> */}
               </div>
               <div className="row">
                 <div className="col-md-1" />

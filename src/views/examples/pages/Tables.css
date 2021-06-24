@@ -26,13 +26,13 @@
   border-right: 2px solid white !important;
 }
 
-/* .tableCell-bottom-light:hover{
-  background-color:#00CCFF;
+.tableCell-bottom-light:hover{
+  background-color:#79a5f2;
 }
 
 .tableCell-bottom-dark:hover{
-  background-color: #00CCFF;
-} */
+  background-color: #79a5f2;
+}
 
 
 .table-headers-tables {
