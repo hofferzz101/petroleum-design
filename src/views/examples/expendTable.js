@@ -48,6 +48,8 @@ const useRowStyles = makeStyles({
   },
 })
 
+
+
 function Rows(props) {
   const { row } = props
   const [open, setOpen] = React.useState(false)
@@ -112,7 +114,7 @@ function Rows(props) {
         <TableCell>{row["TerminalNumber"]}</TableCell>
         <TableCell>{row["createddate"]}</TableCell>
         <TableCell>{row["expirationdate"]}</TableCell>
-        <TableCell style={{ width: 280 }}>
+        {/* <TableCell style={{ width: 280 }}>
           <a style={{ cursor: "pointer" }} className="material-icons-outlined">
             <VisibilityOutlinedIcon />
           </a>
@@ -125,10 +127,10 @@ function Rows(props) {
             <DeleteOutlineOutlinedIcon />
           </a>{" "}
           &nbsp; &nbsp;
-          <Button color="primary" variant="contained" onClick={toggle}>
+          <Button color="primary" variant="contained" >
             QR Code
           </Button>
-        </TableCell>
+        </TableCell> */}
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -202,6 +204,8 @@ Rows.propTypes = {
 
 export default function CollapsibleTable() {
   const [MasterData, setMasterData] = useState([])
+  // const [openingModal, setOpeningModal] = useState(false)
+  
 
   useEffect(() => {
     let data = JSON.parse(localStorage.getItem("Petroleum_Item"))
@@ -243,6 +247,10 @@ export default function CollapsibleTable() {
     }
   }, [])
 
+  //  const handlingModal = ()=>{
+  //     setOpeningModal(true)
+  //  }
+
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
@@ -256,6 +264,7 @@ export default function CollapsibleTable() {
               <b> Customer Number</b>
             </TableCell>
             <TableCell>
+            <i onClick={{}} style={{marginRight:"3px"}} className="fas fa-pencil-alt"></i>
               <b>Order Number</b>
             </TableCell>
             <TableCell>
@@ -279,9 +288,9 @@ export default function CollapsibleTable() {
             <TableCell>
               <b>Expiration Date</b>
             </TableCell>
-            <TableCell>
+            {/* <TableCell>
               <b>Actions</b>
-            </TableCell>
+            </TableCell> */}
           </TableRow>
         </TableHead>
         <TableBody>

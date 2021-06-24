@@ -46,7 +46,7 @@ var routes = [
   },
   {
     path: "/orders",
-    name: "Orders",
+    name: "Terminal",
     icon: "ni ni-tv-2 text-primary",
     component: Orders,
     layout: "/admin",

@@ -89,13 +89,16 @@
 }
 
 .btn-div-co{
-    width: 200px
+    width: 200px;
+   
+    
 }
 
 #btn-co{
     margin-left: 500px;
     background-color: #2993e5;
-    color: white
+    color: white;
+    margin-top: 5px;
 }
 
 
