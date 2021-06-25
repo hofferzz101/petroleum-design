@@ -264,7 +264,6 @@ export default function CollapsibleTable() {
               <b> Customer Number</b>
             </TableCell>
             <TableCell>
-            <i onClick={{}} style={{marginRight:"3px"}} className="fas fa-pencil-alt"></i>
               <b>Order Number</b>
             </TableCell>
             <TableCell>

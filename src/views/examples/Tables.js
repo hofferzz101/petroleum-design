@@ -39,10 +39,22 @@ import LastPageIcon from "@material-ui/icons/LastPage"
 import Header from "components/Headers/Header.js"
 import moment from "moment"
 import { Link } from "react-router-dom"
+import {
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  FormGroup,
+  Label,
+  Input,
+} from "reactstrap"
 
 import { ExportCSV } from "./excel/exportExcel"
 import "./pages/Tables.css"
-import { filter } from "async"
+import EditIcon from "@material-ui/icons/Edit"
+import ListIcon from "@material-ui/icons/List"
+import QRCode from "react-qr-code"
 
 const useStyles1 = makeStyles(theme => ({
   root: {
@@ -126,7 +138,6 @@ const useStyles2 = makeStyles({
     minWidth: 500,
   },
 })
-
 
 const rows = [
   {
@@ -260,6 +271,24 @@ const Tables = () => {
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(5)
 
+  const [isEdit, setisEdit] = useState(false)
+  const [EditObj, setisEditObj] = useState({})
+
+  const [modal, setModal] = useState(false)
+
+  const toggle = () => setModal(!modal)
+
+  const handleChange = (flag, item) => {
+    if (flag == "edit") {
+      setModal(true)
+      setisEdit(true)
+      setisEditObj(item)
+    } else {
+      setModal(true)
+      setisEdit(false)
+    }
+  }
+
   const [CustomerName, setCustomerName] = React.useState("")
   const [filterCustomer, setFilterCustomer] = React.useState(rows)
   const [filterCustomer2, setFilterCustomer2] = React.useState(data)
@@ -273,7 +302,6 @@ const Tables = () => {
   const [DiliveryWindow, setDiliveryWindow] = React.useState("")
   const [Status, setStatus] = React.useState("")
   const [Alert, setAlert] = React.useState("")
-
 
   const [LineNumber, setLineNumber] = React.useState("")
   const [Product, setProduct] = React.useState("")
@@ -307,26 +335,25 @@ const Tables = () => {
   const [ancillaryFee, setAncillaryFee] = useState()
   const [totalCosting, setTotalCosting] = useState()
 
-
   function getSummery(arr, prop1, prop2, prop3, prop4) {
-
-    let salary = arr.reduce((acc, val) => acc += val[prop1], 0)
+    let salary = arr.reduce((acc, val) => (acc += val[prop1]), 0)
     setqualityOrder(salary)
-    let quantity = arr.reduce((acc, val) => acc += val[prop2], 0)
+    let quantity = arr.reduce((acc, val) => (acc += val[prop2]), 0)
     setQualityDeliver(quantity)
-    let cost = arr.reduce((acc, val) => acc += val[prop3], 0)
+    let cost = arr.reduce((acc, val) => (acc += val[prop3]), 0)
     setTotalCosting(cost)
-    let ancillaryFee = arr.reduce((acc, val) => acc += val[prop4], 0)
+    let ancillaryFee = arr.reduce((acc, val) => (acc += val[prop4]), 0)
     setAncillaryFee(ancillaryFee)
-
   }
 
-
-
-
-
   useEffect(() => {
-    getSummery(data, "qualityOrdered", "qualityDelivered", "totalCost", "ancillaryFees")
+    getSummery(
+      data,
+      "qualityOrdered",
+      "qualityDelivered",
+      "totalCost",
+      "ancillaryFees"
+    )
   }, [])
 
   const emptyRowsData =
@@ -346,8 +373,6 @@ const Tables = () => {
     setColumn(e.target.value)
   }
 
-
-
   const handleSearch = (e, flag) => {
     let search = ""
     let filtered = ""
@@ -358,14 +383,13 @@ const Tables = () => {
 
         filtered = rows.filter(item => {
           return (
-            item.customerNumber.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            item.customerNumber.toLowerCase().indexOf(search.toLowerCase()) !==
+            -1
           )
-
         })
         setFilterCustomer(filtered)
 
-
-        break;
+        break
       case "Order Number":
         console.log(flag)
         setOrderNumber(e.target.value)
@@ -375,10 +399,9 @@ const Tables = () => {
           return (
             item.orderNumber.toLowerCase().indexOf(search.toLowerCase()) !== -1
           )
-
         })
         setFilterCustomer(filtered)
-        break;
+        break
       case "Customer Name":
         setCustomerName(e.target.value)
         search = e.target.value
@@ -387,24 +410,24 @@ const Tables = () => {
           return (
             item.customerName.toLowerCase().indexOf(search.toLowerCase()) !== -1
           )
-
         })
         setFilterCustomer(filtered)
         console.log(flag)
-        break;
+        break
       case "Customer Location":
         setCustomerLocation(e.target.value)
         search = e.target.value
 
         filtered = rows.filter(item => {
           return (
-            item.customerLocation.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            item.customerLocation
+              .toLowerCase()
+              .indexOf(search.toLowerCase()) !== -1
           )
-
         })
         setFilterCustomer(filtered)
         console.log(flag)
-        break;
+        break
       case "PO Number":
         setPOnumber(e.target.value)
         search = e.target.value
@@ -413,11 +436,10 @@ const Tables = () => {
           return (
             item.poNumber.toLowerCase().indexOf(search.toLowerCase()) !== -1
           )
-
         })
         setFilterCustomer(filtered)
         console.log(flag)
-        break;
+        break
       case "Rack Location":
         setRackLocation(e.target.value)
         search = e.target.value
@@ -426,11 +448,10 @@ const Tables = () => {
           return (
             item.rackLocation.toLowerCase().indexOf(search.toLowerCase()) !== -1
           )
-
         })
         setFilterCustomer(filtered)
         console.log(flag)
-        break;
+        break
       case "Order Date":
         setOrderDate(e.target.value)
         search = e.target.value
@@ -439,12 +460,11 @@ const Tables = () => {
           return (
             item.orderDate.toLowerCase().indexOf(search.toLowerCase()) !== -1
           )
-
         })
         setFilterCustomer(filtered)
 
         console.log(flag)
-        break;
+        break
       case "Delivery Date":
         setDiliveryDate(e.target.value)
         search = e.target.value
@@ -453,57 +473,49 @@ const Tables = () => {
           return (
             item.DiliveryDate.toLowerCase().indexOf(search.toLowerCase()) !== -1
           )
-
         })
         setFilterCustomer(filtered)
         console.log(flag)
-        break;
+        break
       case "Delivery Window":
         setDiliveryWindow(e.target.value)
         search = e.target.value
 
         filtered = rows.filter(item => {
           return (
-            item.DiliveryWindow.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            item.DiliveryWindow.toLowerCase().indexOf(search.toLowerCase()) !==
+            -1
           )
-
         })
         setFilterCustomer(filtered)
         console.log(flag)
-        break;
+        break
       case "Status":
         setStatus(e.target.value)
         search = e.target.value
 
         filtered = rows.filter(item => {
-          return (
-            item.status.toLowerCase().indexOf(search.toLowerCase()) !== -1
-          )
-
+          return item.status.toLowerCase().indexOf(search.toLowerCase()) !== -1
         })
         setFilterCustomer(filtered)
         console.log(filtered)
-        break;
+        break
       case "Alert":
         setAlert(e.target.value)
         search = e.target.value
 
         filtered = rows.filter(item => {
-          return (
-            item.alerts.toLowerCase().indexOf(search.toLowerCase()) !== -1
-          )
-
+          return item.alerts.toLowerCase().indexOf(search.toLowerCase()) !== -1
         })
         setFilterCustomer(filtered)
         console.log(filtered)
-        break;
+        break
 
       default:
         setFilterCustomer(rows)
-        break;
+        break
     }
   }
-
 
   const handleSearch2 = (e, flag) => {
     let search = ""
@@ -517,25 +529,20 @@ const Tables = () => {
           return (
             item.lineNumber.toLowerCase().indexOf(search.toLowerCase()) !== -1
           )
-
         })
         setFilterCustomer2(filtered)
 
-
-        break;
+        break
       case "Product":
         console.log(flag)
         setProduct(e.target.value)
         search = e.target.value
 
         filtered = data.filter(item => {
-          return (
-            item.product.toLowerCase().indexOf(search.toLowerCase()) !== -1
-          )
-
+          return item.product.toLowerCase().indexOf(search.toLowerCase()) !== -1
         })
         setFilterCustomer2(filtered)
-        break;
+        break
       case "Rack Location 2":
         setRackLocation2(e.target.value)
         search = e.target.value
@@ -544,64 +551,64 @@ const Tables = () => {
           return (
             item.rackLocation.toLowerCase().indexOf(search.toLowerCase()) !== -1
           )
-
         })
         setFilterCustomer2(filtered)
         console.log(flag)
-        break;
+        break
       case "Quality Order":
         setQualityOrder(e.target.value)
         search = e.target.value
 
         filtered = data.filter(item => {
           return (
-            item.qualityOrdered.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            item.qualityOrdered.toLowerCase().indexOf(search.toLowerCase()) !==
+            -1
           )
-
         })
         setFilterCustomer2(filtered)
 
-        break;
+        break
       case "Quality Delivered":
         setQualityDelivered(e.target.value)
         search = e.target.value
 
         filtered = data.filter(item => {
           return (
-            item.qualityDelivered.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            item.qualityDelivered
+              .toLowerCase()
+              .indexOf(search.toLowerCase()) !== -1
           )
-
         })
         setFilterCustomer2(filtered)
         console.log(flag)
-        break;
+        break
       case "Freight Ticket":
         setFreightTicket(e.target.value)
         search = e.target.value
 
         filtered = data.filter(item => {
           return (
-            item.freightTicket.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            item.freightTicket.toLowerCase().indexOf(search.toLowerCase()) !==
+            -1
           )
-
         })
         setFilterCustomer2(filtered)
         console.log(flag)
-        break;
+        break
       case "Ancillary Fees":
         setAncillaryFees(e.target.value)
         search = e.target.value
 
         filtered = data.filter(item => {
           return (
-            item.ancillaryFees.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            item.ancillaryFees.toLowerCase().indexOf(search.toLowerCase()) !==
+            -1
           )
-
         })
         setFilterCustomer2(filtered)
 
         console.log(flag)
-        break;
+        break
       case "Total Cost":
         setTotalCost(e.target.value)
         search = e.target.value
@@ -610,42 +617,35 @@ const Tables = () => {
           return (
             item.totalCost.toLowerCase().indexOf(search.toLowerCase()) !== -1
           )
-
         })
         setFilterCustomer2(filtered)
 
-        break;
+        break
       case "Status2":
         setStatus2(e.target.value)
         search = e.target.value
 
         filtered = data.filter(item => {
-          return (
-            item.status.toLowerCase().indexOf(search.toLowerCase()) !== -1
-          )
-
+          return item.status.toLowerCase().indexOf(search.toLowerCase()) !== -1
         })
         setFilterCustomer2(filtered)
 
-        break;
+        break
 
       case "Alert2":
         setAlert2(e.target.value)
         search = e.target.value
 
         filtered = data.filter(item => {
-          return (
-            item.alerts.toLowerCase().indexOf(search.toLowerCase()) !== -1
-          )
-
+          return item.alerts.toLowerCase().indexOf(search.toLowerCase()) !== -1
         })
         setFilterCustomer2(filtered)
 
-        break;
+        break
 
       default:
         setFilterCustomer2(data)
-        break;
+        break
     }
   }
 
@@ -700,99 +700,159 @@ const Tables = () => {
               <TableContainer component={Paper}>
                 <Table
                   className={classes.table}
-
                   aria-label="custom pagination table"
                 >
                   <TableHead>
                     <TableRow>
-
-                    <TableCell className="table-headers-tables">
+                      <TableCell className="table-headers-tables">
                         <div className="tableCell-top">
                           <b className="tableCell-top-title">Order Number</b>
                         </div>
-                        <input className="tableCell-top-input" value={OrderNumber} placeholder="Search" onChange={(e) => handleSearch(e, "Order Number")} />
+                        <input
+                          className="tableCell-top-input"
+                          value={OrderNumber}
+                          placeholder="Search"
+                          onChange={e => handleSearch(e, "Order Number")}
+                        />
                       </TableCell>
 
                       <TableCell className="table-headers-tables">
                         <div className="tableCell-top">
                           <b className="tableCell-top-title">Customer Number</b>
                         </div>
-                        <input className="tableCell-top-input" value={CustomerNumber} onChange={(e) => handleSearch(e, "Customer Number")} placeholder="Search" />
-
+                        <input
+                          className="tableCell-top-input"
+                          value={CustomerNumber}
+                          onChange={e => handleSearch(e, "Customer Number")}
+                          placeholder="Search"
+                        />
                       </TableCell>
-                      
+
                       <TableCell className="table-headers-tables">
                         <div className="tableCell-top">
                           <b className="tableCell-top-title">Customer Name</b>
                         </div>
-                        <input className="tableCell-top-input" value={CustomerName} onChange={(e) => handleSearch(e, "Customer Name")} placeholder="Search" />
+                        <input
+                          className="tableCell-top-input"
+                          value={CustomerName}
+                          onChange={e => handleSearch(e, "Customer Name")}
+                          placeholder="Search"
+                        />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                         <div className="tableCell-top">
-                          <b className="tableCell-top-title">Customer Location</b>
+                          <b className="tableCell-top-title">
+                            Customer Location
+                          </b>
                         </div>
-                        <input className="tableCell-top-input" placeholder="Search" onChange={(e) => handleSearch(e, "Customer Location")} />
+                        <input
+                          className="tableCell-top-input"
+                          placeholder="Search"
+                          onChange={e => handleSearch(e, "Customer Location")}
+                        />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                         <div className="tableCell-top">
                           <b className="tableCell-top-title">PO Number</b>
                         </div>
-                        <input className="tableCell-top-input" placeholder="Search" onChange={(e) => handleSearch(e, "PO Number")} />
+                        <input
+                          className="tableCell-top-input"
+                          placeholder="Search"
+                          onChange={e => handleSearch(e, "PO Number")}
+                        />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                         <div className="tableCell-top">
                           <b className="tableCell-top-title">Rack Location</b>
                         </div>
-                        <input className="tableCell-top-input" placeholder="Search" onChange={(e) => handleSearch(e, "Rack Location")} />
+                        <input
+                          className="tableCell-top-input"
+                          placeholder="Search"
+                          onChange={e => handleSearch(e, "Rack Location")}
+                        />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                         <div className="tableCell-top">
                           <b className="tableCell-top-title">Order Date</b>
                         </div>
-                        <input className="tableCell-top-input" placeholder="Search" onChange={(e) => handleSearch(e, "Order Date")} />
+                        <input
+                          className="tableCell-top-input"
+                          placeholder="Search"
+                          onChange={e => handleSearch(e, "Order Date")}
+                        />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                         <div className="tableCell-top">
                           <b className="tableCell-top-title">Delivery Date</b>
                         </div>
-                        <input className="tableCell-top-input" placeholder="Search" onChange={(e) => handleSearch(e, "Delivery Date")} />
+                        <input
+                          className="tableCell-top-input"
+                          placeholder="Search"
+                          onChange={e => handleSearch(e, "Delivery Date")}
+                        />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                         <div className="tableCell-top">
                           <b className="tableCell-top-title">Delivery Window</b>
                         </div>
-                        <input className="tableCell-top-input" placeholder="Search" onChange={(e) => handleSearch(e, "Delivery Window")} />
+                        <input
+                          className="tableCell-top-input"
+                          placeholder="Search"
+                          onChange={e => handleSearch(e, "Delivery Window")}
+                        />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                         <div className="tableCell-top">
                           <b className="tableCell-top-title">Status</b>
                         </div>
-                        <input className="tableCell-top-input" placeholder="Search" onChange={(e) => handleSearch(e, "Status")} />
+                        <input
+                          className="tableCell-top-input"
+                          placeholder="Search"
+                          onChange={e => handleSearch(e, "Status")}
+                        />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                         <div className="tableCell-top">
                           <b className="tableCell-top-title">Alerts</b>
                         </div>
-                        <input className="tableCell-top-input" placeholder="Search" onChange={(e) => handleSearch(e, "Alert")} />
+                        <input
+                          className="tableCell-top-input"
+                          placeholder="Search"
+                          onChange={e => handleSearch(e, "Alert")}
+                        />
+                      </TableCell>
+                      <TableCell
+                        style={{ width: "300px" }}
+                        className="table-headers-tables"
+                      >
+                        <div className="tableCell-top">
+                          <b className="tableCell-top-title">Actions</b>
+                        </div>
                       </TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     {(rowsPerPage > 0
                       ? filterCustomer.slice(
-                        page * rowsPerPage,
-                        page * rowsPerPage + rowsPerPage
-                      )
+                          page * rowsPerPage,
+                          page * rowsPerPage + rowsPerPage
+                        )
                       : filterCustomer
                     ).map((row, i) => (
-                      <TableRow key={i} className={i % 2 == 0 ? "tableCell-bottom-dark" : "tableCell-bottom-light"}>
+                      <TableRow
+                        key={i}
+                        className={
+                          i % 2 == 0
+                            ? "tableCell-bottom-dark"
+                            : "tableCell-bottom-light"
+                        }
+                      >
                         <TableCell className="tableCell-bottom">
                           {row.orderNumber}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
                           {row.customerNumber}
                         </TableCell>
-                        
 
                         <TableCell className="tableCell-bottom">
                           {row.customerName}
@@ -826,6 +886,11 @@ const Tables = () => {
                         </TableCell>
                         <TableCell className="tableCell-bottom">
                           {row.alerts}
+                        </TableCell>
+                        <TableCell className="tableCell-bottom">
+                          <EditIcon onClick={() => handleChange("edit", row)} />{" "}
+                          &nbsp;
+                          <ListIcon onClick={() => handleChange("list", row)} />
                         </TableCell>
                       </TableRow>
                     ))}
@@ -882,77 +947,144 @@ const Tables = () => {
                         <div className="tableCell-top">
                           <b className="tableCell-top-title"> Line Number</b>
                         </div>
-                        <input className="tableCell-top-input" value={LineNumber} onChange={(e) => handleSearch2(e, "Line Number")} placeholder="Search" />
+                        <input
+                          className="tableCell-top-input"
+                          value={LineNumber}
+                          onChange={e => handleSearch2(e, "Line Number")}
+                          placeholder="Search"
+                        />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                         <div className="tableCell-top">
                           <b className="tableCell-top-title">Product</b>
                         </div>
-                        <input className="tableCell-top-input" value={Product} onChange={(e) => handleSearch2(e, "Product")} placeholder="Search" />
-
+                        <input
+                          className="tableCell-top-input"
+                          value={Product}
+                          onChange={e => handleSearch2(e, "Product")}
+                          placeholder="Search"
+                        />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                         <div className="tableCell-top">
                           <b className="tableCell-top-title">Rack Location</b>
                         </div>
-                        <input className="tableCell-top-input" value={RackLocation2} onChange={(e) => handleSearch2(e, "Rack Location")} placeholder="Search" />
+                        <input
+                          className="tableCell-top-input"
+                          value={RackLocation2}
+                          onChange={e => handleSearch2(e, "Rack Location")}
+                          placeholder="Search"
+                        />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                         <div className="tableCell-top">
-                          <b className="tableCell-top-title">Quality Order (gal)</b>
+                          <b className="tableCell-top-title">
+                            Quality Order (gal)
+                          </b>
                         </div>
-                        <input className="tableCell-top-input" value={QualityOrder} onChange={(e) => handleSearch2(e, "Quality Order")} placeholder="Search" />
+                        <input
+                          className="tableCell-top-input"
+                          value={QualityOrder}
+                          onChange={e => handleSearch2(e, "Quality Order")}
+                          placeholder="Search"
+                        />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                         <div className="tableCell-top">
-                          <b className="tableCell-top-title">Quality Delivered (gal)</b>
+                          <b className="tableCell-top-title">
+                            Quality Delivered (gal)
+                          </b>
                         </div>
-                        <input className="tableCell-top-input" value={QualityDelivered} onChange={(e) => handleSearch2(e, "Quality Delivered")} placeholder="Search" />
+                        <input
+                          className="tableCell-top-input"
+                          value={QualityDelivered}
+                          onChange={e => handleSearch2(e, "Quality Delivered")}
+                          placeholder="Search"
+                        />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                         <div className="tableCell-top">
                           <b className="tableCell-top-title">Freight Ticket</b>
                         </div>
-                        <input className="tableCell-top-input" value={FreightTicket} onChange={(e) => handleSearch2(e, "Freight Ticket")} placeholder="Search" />
+                        <input
+                          className="tableCell-top-input"
+                          value={FreightTicket}
+                          onChange={e => handleSearch2(e, "Freight Ticket")}
+                          placeholder="Search"
+                        />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                         <div className="tableCell-top">
                           <b className="tableCell-top-title">Ancillary Fees</b>
                         </div>
-                        <input className="tableCell-top-input" value={AncillaryFees} onChange={(e) => handleSearch2(e, "Ancillary Fees")} placeholder="Search" />
+                        <input
+                          className="tableCell-top-input"
+                          value={AncillaryFees}
+                          onChange={e => handleSearch2(e, "Ancillary Fees")}
+                          placeholder="Search"
+                        />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                         <div className="tableCell-top">
                           <b className="tableCell-top-title">Total Cost</b>
                         </div>
-                        <input className="tableCell-top-input" value={TotalCost} onChange={(e) => handleSearch2(e, "Total Cost")} placeholder="Search" />
+                        <input
+                          className="tableCell-top-input"
+                          value={TotalCost}
+                          onChange={e => handleSearch2(e, "Total Cost")}
+                          placeholder="Search"
+                        />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                         <div className="tableCell-top">
                           <b className="tableCell-top-title">Status2</b>
                         </div>
-                        <input className="tableCell-top-input" value={Status2} onChange={(e) => handleSearch2(e, "Status2")} placeholder="Search" />
+                        <input
+                          className="tableCell-top-input"
+                          value={Status2}
+                          onChange={e => handleSearch2(e, "Status2")}
+                          placeholder="Search"
+                        />
                       </TableCell>
                       <TableCell className="table-headers-tables">
                         <div className="tableCell-top">
                           <b className="tableCell-top-title">Alert2</b>
                         </div>
-                        <input className="tableCell-top-input" value={Alert2} onChange={(e) => handleSearch2(e, "Alert2")} placeholder="Search" />
+                        <input
+                          className="tableCell-top-input"
+                          value={Alert2}
+                          onChange={e => handleSearch2(e, "Alert2")}
+                          placeholder="Search"
+                        />
                       </TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     {(rowsPerPage > 0
                       ? filterCustomer2.slice(
-                        page * rowsPerPage,
-                        page * rowsPerPage + rowsPerPage,
-                        page * rowsPerPage + rowsPerPage + rowsPerPage,
-                        page * rowsPerPage + rowsPerPage + rowsPerPage + rowsPerPage,
-                        page * rowsPerPage + rowsPerPage + rowsPerPage + rowsPerPage + rowsPerPage
-                      )
+                          page * rowsPerPage,
+                          page * rowsPerPage + rowsPerPage,
+                          page * rowsPerPage + rowsPerPage + rowsPerPage,
+                          page * rowsPerPage +
+                            rowsPerPage +
+                            rowsPerPage +
+                            rowsPerPage,
+                          page * rowsPerPage +
+                            rowsPerPage +
+                            rowsPerPage +
+                            rowsPerPage +
+                            rowsPerPage
+                        )
                       : data
                     ).map((row, i) => (
-                      <TableRow key={i} className={i % 2 == 0 ? "tableCell-bottom-dark" : "tableCell-bottom-light"}>
+                      <TableRow
+                        key={i}
+                        className={
+                          i % 2 == 0
+                            ? "tableCell-bottom-dark"
+                            : "tableCell-bottom-light"
+                        }
+                      >
                         <TableCell className="tableCell-bottom">
                           {row.lineNumber}
                         </TableCell>
@@ -972,11 +1104,14 @@ const Tables = () => {
                           {row.freightTicket}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                         {/* $ {row.ancillaryFees} */}
-                         {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(row.ancillaryFees)}
+                          {/* $ {row.ancillaryFees} */}
+                          {new Intl.NumberFormat("en-US", {
+                            style: "currency",
+                            currency: "USD",
+                          }).format(row.ancillaryFees)}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                         $ {row.totalCost}
+                          $ {row.totalCost}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
                           {row.status}
@@ -999,15 +1134,20 @@ const Tables = () => {
                       <TableCell className="tableCell-bottom"></TableCell>
                       <TableCell className="tableCell-bottom">
                         {/* {ancillaryFee} */}
-                        {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(ancillaryFee)}
+                        {new Intl.NumberFormat("en-US", {
+                          style: "currency",
+                          currency: "USD",
+                        }).format(ancillaryFee)}
                       </TableCell>
                       <TableCell className="tableCell-bottom">
                         {/* {totalCosting} */}
-                        {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(totalCosting)}
+                        {new Intl.NumberFormat("en-US", {
+                          style: "currency",
+                          currency: "USD",
+                        }).format(totalCosting)}
                       </TableCell>
                       <TableCell className="tableCell-bottom"></TableCell>
                       <TableCell className="tableCell-bottom"></TableCell>
-
                     </TableRow>
 
                     {emptyRowsData > 0 && (
@@ -1047,6 +1187,45 @@ const Tables = () => {
             </Card>
           </div>
         </Row>
+
+        <div>
+          <Modal isOpen={modal} toggle={toggle}>
+            <ModalHeader toggle={toggle}>
+              {isEdit ? "Edit" : "View"}
+            </ModalHeader>
+            {isEdit ? (
+              <ModalBody>
+                <FormGroup>
+                  <Label for="exampleEmail">Status</Label>
+                  <Input type="text" id="exampleEmail" placeholder="Status" />
+                </FormGroup>
+              </ModalBody>
+            ) : (
+              //  <QRCode className="qr-code-design" id="id" size={170} value={row ? JSON.stringify(row) : ""} />
+              <ModalBody>
+                <div className="row">
+                  <div className="col-md-3 ml-4"/>
+                  <div className="col-md-1">
+                  <QRCode
+                    className="qr-code-design"
+                    id="id"
+                    size={170}
+                    value={EditObj ? JSON.stringify(EditObj) : ""}
+                  />
+                  </div>
+                </div>
+              </ModalBody>
+            )}
+            <ModalFooter>
+              <Button color="primary" onClick={toggle}>
+                {isEdit ? "Edit Status" : "Download PDF"}
+              </Button>{" "}
+              <Button color="secondary" onClick={toggle}>
+                Cancel
+              </Button>
+            </ModalFooter>
+          </Modal>
+        </div>
         {/* Dark table */}
       </Container>
     </>
