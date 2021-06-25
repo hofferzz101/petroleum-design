@@ -286,9 +286,6 @@ const Tables = () => {
   const [Status2, setStatus2] = React.useState("")
   const [Alert2, setAlert2] = React.useState("")
 
-  console.log(CustomerNumber)
-
-
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage)
 

@@ -26,13 +26,16 @@ const AdminNavbar = props => {
   const history = useHistory()
 
   const logout = () => {
-    localStorage.removeItem("user_details")
+    localStorage.removeItem("loggedInUser")
+    localStorage.removeItem("token")
     history.push("/auth/login")
   }
 
   useEffect(() => {
-    let data = JSON.parse(localStorage.getItem("user_details"))
-    setEmail(data.email)
+    let data = JSON.parse(localStorage.getItem("loggedInUser"))
+    if(!!data) {
+      setEmail(data.email)
+    }
   }, [])
 
   return (

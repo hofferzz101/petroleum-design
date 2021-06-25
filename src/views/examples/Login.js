@@ -1,4 +1,3 @@
-
 import React, { useState } from "react"
 
 // reactstrap components
@@ -18,35 +17,36 @@ import {
 } from "reactstrap"
 
 import { useHistory } from "react-router-dom"
-import { notification } from "antd"
-import { v4 as uuidv4 } from 'uuid';
+import { CREATE } from "../../configuration/API-Instance"
 
-const showNotfication = (type, title, text) => {
-  notification[type]({
-    message: title,
-    description: text,
-  })
-}
+import { showNotfication } from "../../components/ResuableComponents/notification"
 
 const Login = () => {
   const history = useHistory()
+
+  const [isPwdDisplayed, setisPwdDisplayed] = useState(false)
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
   const login = () => {
-    if (email == "admin@tandemlogistics.com" && password == "FTA9876!11") {
-      
-      let user_details = {
-        id: uuidv4(),
-        email: email,
-      }
-
-      localStorage.setItem("user_details", JSON.stringify(user_details))
-      history.push("/admin/index")
-    } else {
-      showNotfication("error", "Login Failed", "You email or password incorrect!")
+    let body = {
+      email,
+      password,
     }
+
+    CREATE("/user/login", body)
+      .then(result => {
+        if (result.status == 200) {
+          history.push("/admin/index")
+          localStorage.setItem("token", result.data.response.token)
+          localStorage.setItem("loggedInUser", JSON.stringify(result.data.response.user))
+          showNotfication("success", "Login Passed", "LoggedIn Successfully")
+        }
+      })
+      .catch(e =>
+        showNotfication("error", "Login failed", e.response.data.message)
+      )
   }
 
   return (
@@ -84,7 +84,7 @@ const Login = () => {
                   </InputGroupAddon>
                   <Input
                     placeholder="Password"
-                    type="password"
+                    type={isPwdDisplayed ? "text" : "password"}
                     onChange={e => setPassword(e.target.value)}
                     value={password}
                     autoComplete="new-password"
@@ -96,12 +96,13 @@ const Login = () => {
                   className="custom-control-input"
                   id=" customCheckLogin"
                   type="checkbox"
+                  onChange={() => setisPwdDisplayed(!isPwdDisplayed)}
                 />
                 <label
                   className="custom-control-label"
                   htmlFor=" customCheckLogin"
                 >
-                  <span className="text-muted">Remember me</span>
+                  <span className="text-muted">Show Password</span>
                 </label>
               </div>
               <div className="text-center">
