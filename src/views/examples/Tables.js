@@ -704,6 +704,17 @@ const Tables = () => {
                 >
                   <TableHead>
                     <TableRow>
+                    <TableCell
+                        id="iconCellT"
+                        style={{ width: "100px" }}
+                        className="table-headers-tables"
+                      >
+                        <div className="tableCell-top">
+                          <b className="tableCell-top-title">Actions</b>
+                        </div>
+                        <div style={{width:"100px",height:"28px"}}></div>
+                        {/* <input/> */}
+                      </TableCell>
                       <TableCell className="table-headers-tables">
                         <div className="tableCell-top">
                           <b className="tableCell-top-title">Order Number</b>
@@ -821,14 +832,7 @@ const Tables = () => {
                           onChange={e => handleSearch(e, "Alert")}
                         />
                       </TableCell>
-                      <TableCell
-                        style={{ width: "300px" }}
-                        className="table-headers-tables"
-                      >
-                        <div className="tableCell-top">
-                          <b className="tableCell-top-title">Actions</b>
-                        </div>
-                      </TableCell>
+                      
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -847,6 +851,11 @@ const Tables = () => {
                             : "tableCell-bottom-light"
                         }
                       >
+                         <TableCell style={{width:"120px", }} id="iconCellB" className="tableCell-bottom">
+                          <EditIcon onClick={() => handleChange("edit", row)} />{" "}
+                          &nbsp;
+                          <ListIcon onClick={() => handleChange("list", row)} />
+                        </TableCell>
                         <TableCell className="tableCell-bottom">
                           {row.orderNumber}
                         </TableCell>
@@ -887,11 +896,11 @@ const Tables = () => {
                         <TableCell className="tableCell-bottom">
                           {row.alerts}
                         </TableCell>
-                        <TableCell className="tableCell-bottom">
+                        {/* <TableCell className="tableCell-bottom">
                           <EditIcon onClick={() => handleChange("edit", row)} />{" "}
                           &nbsp;
                           <ListIcon onClick={() => handleChange("list", row)} />
-                        </TableCell>
+                        </TableCell> */}
                       </TableRow>
                     ))}
 
