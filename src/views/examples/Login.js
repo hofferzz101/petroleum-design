@@ -38,7 +38,9 @@ const Login = () => {
     CREATE("/user/login", body)
       .then(result => {
         if (result.status == 200) {
-          history.push("/admin/index")
+          // history.push("/admin/index")
+          window.location.replace(`${window.location.protocol}//${window.location.host}/admin/index`)
+
           localStorage.setItem("token", result.data.response.token)
           localStorage.setItem("loggedInUser", JSON.stringify(result.data.response.user))
           showNotfication("success", "Login Passed", "LoggedIn Successfully")

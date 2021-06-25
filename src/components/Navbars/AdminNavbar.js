@@ -28,7 +28,8 @@ const AdminNavbar = props => {
   const logout = () => {
     localStorage.removeItem("loggedInUser")
     localStorage.removeItem("token")
-    history.push("/auth/login")
+    // console.log(`http://${window.location.host}/auth/login`)
+    window.location.replace(`${window.location.protocol}//${window.location.host}/auth/login`)
   }
 
   useEffect(() => {
