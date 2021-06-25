@@ -29,7 +29,7 @@ var routes = []
     ? (routes = [
         {
           path: "/index",
-          name: "Hauler 3Portal",
+          name: "Hauler Portal",
           icon: "ni ni-tv-2 text-primary",
           component: HaulerPortal,
           layout: "/admin",
