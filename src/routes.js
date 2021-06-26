@@ -24,35 +24,87 @@ if (!!data) {
 
 var routes = []
 
-{
-  role == "Hauler"
-    ? (routes = [
-        {
-          path: "/index",
-          name: "Hauler Portal",
-          icon: "ni ni-tv-2 text-primary",
-          component: HaulerPortal,
-          layout: "/admin",
-        },
-        {
-          path: "/create-order",
-          name: "Create-Order",
-          icon: "ni ni-tv-2 text-primary",
-          component: CreateOrder,
-          layout: "/admin",
-        },
-      ])
-    : (routes = [
-        {
-          path: "/login",
-          name: "Logout",
-          icon: "ni ni-key-25 text-info",
-          component: Login,
-          layout: "/auth",
-        },
-      ])
+if (role == "Hauler") {
+  routes = [
+    {
+      path: "/index",
+      name: "Hauler Portal",
+      icon: "ni ni-tv-2 text-primary",
+      component: HaulerPortal,
+      layout: "/admin",
+    },
+    {
+      path: "/create-order",
+      name: "Create-Order",
+      icon: "ni ni-tv-2 text-primary",
+      component: CreateOrder,
+      layout: "/admin",
+    },
+  ]
+} else if (role == "Terminal") {
+  routes = [
+    {
+      path: "/orders",
+      name: "Terminal",
+      icon: "ni ni-tv-2 text-primary",
+      component: Orders,
+      layout: "/admin",
+    },
+  ]
+} else {
+  routes = [
+    {
+      path: "/login",
+      name: "Logout",
+      icon: "ni ni-key-25 text-info",
+      component: Login,
+      layout: "/auth",
+    },
+  ]
 }
 
+// {
+//   role == "Hauler"
+//     ? (routes = [
+//         {
+//           path: "/index",
+//           name: "Hauler Portal",
+//           icon: "ni ni-tv-2 text-primary",
+//           component: HaulerPortal,
+//           layout: "/admin",
+//         },
+//         {
+//           path: "/create-order",
+//           name: "Create-Order",
+//           icon: "ni ni-tv-2 text-primary",
+//           component: CreateOrder,
+//           layout: "/admin",
+//         },
+//       ])
+//     : (routes = [
+//         {
+//           path: "/login",
+//           name: "Logout",
+//           icon: "ni ni-key-25 text-info",
+//           component: Login,
+//           layout: "/auth",
+//         },
+//       ])
+// }
+
+// {
+//   role == "Terminal"
+//     ? (routes = [
+//         {
+//           path: "/orders",
+//           name: "Terminal",
+//           icon: "ni ni-tv-2 text-primary",
+//           component: Orders,
+//           layout: "/admin",
+//         },
+//       ])
+//     : null
+// }
 // routes = [
 // {
 //   path: "/index",

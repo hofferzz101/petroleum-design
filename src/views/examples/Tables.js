@@ -704,7 +704,7 @@ const Tables = () => {
                 >
                   <TableHead>
                     <TableRow>
-                    <TableCell
+                      <TableCell
                         id="iconCellT"
                         style={{ width: "100px" }}
                         className="table-headers-tables"
@@ -712,7 +712,7 @@ const Tables = () => {
                         <div className="tableCell-top">
                           <b className="tableCell-top-title">Actions</b>
                         </div>
-                        <div style={{width:"100px",height:"28px"}}></div>
+                        <div style={{ width: "100px", height: "28px" }}></div>
                         {/* <input/> */}
                       </TableCell>
                       <TableCell className="table-headers-tables">
@@ -832,7 +832,6 @@ const Tables = () => {
                           onChange={e => handleSearch(e, "Alert")}
                         />
                       </TableCell>
-                      
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -851,7 +850,11 @@ const Tables = () => {
                             : "tableCell-bottom-light"
                         }
                       >
-                         <TableCell style={{width:"120px", }} id="iconCellB" className="tableCell-bottom">
+                        <TableCell
+                          style={{ width: "120px" }}
+                          id="iconCellB"
+                          className="tableCell-bottom"
+                        >
                           <EditIcon onClick={() => handleChange("edit", row)} />{" "}
                           &nbsp;
                           <ListIcon onClick={() => handleChange("list", row)} />
@@ -1205,22 +1208,51 @@ const Tables = () => {
             {isEdit ? (
               <ModalBody>
                 <FormGroup>
+                  <Label for="exampleEmail">Quantity Delivered</Label>
+                  <Input
+                    type="text"
+                    id="exampleEmail"
+                    placeholder="Quantity Delivered"
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="exampleEmail">Ancillary fee</Label>
+                  <Input
+                    type="text"
+                    id="exampleEmail"
+                    placeholder="Ancillary fee"
+                  />
+                </FormGroup>
+
+                <FormGroup>
+                  <Label for="exampleEmail">Frieght Ticket No</Label>
+                  <Input
+                    type="text"
+                    id="exampleEmail"
+                    placeholder="Frieght Ticket No"
+                  />
+                </FormGroup>
+                <FormGroup>
                   <Label for="exampleEmail">Status</Label>
-                  <Input type="text" id="exampleEmail" placeholder="Status" />
+                  <Input type="select" name="select" id="exampleSelect">
+                    <option>Select Status</option>
+                    <option>COMPLETED</option>
+                    <option>CANCELLED</option>
+                  </Input>
                 </FormGroup>
               </ModalBody>
             ) : (
               //  <QRCode className="qr-code-design" id="id" size={170} value={row ? JSON.stringify(row) : ""} />
               <ModalBody>
                 <div className="row">
-                  <div className="col-md-3 ml-4"/>
+                  <div className="col-md-3 ml-4" />
                   <div className="col-md-1">
-                  <QRCode
-                    className="qr-code-design"
-                    id="id"
-                    size={170}
-                    value={EditObj ? JSON.stringify(EditObj) : ""}
-                  />
+                    <QRCode
+                      className="qr-code-design"
+                      id="id"
+                      size={170}
+                      value={EditObj ? JSON.stringify(EditObj) : ""}
+                    />
                   </div>
                 </div>
               </ModalBody>

@@ -38,11 +38,20 @@ const Login = () => {
     CREATE("/user/login", body)
       .then(result => {
         if (result.status == 200) {
+          // history.push("/admin/something")
           // history.push("/admin/index")
-          window.location.replace(`${window.location.protocol}//${window.location.host}/admin/index`)
+
+          if (result.data.response.user.role == "Hauler") {
+           window.location.replace(`${window.location.protocol}//${window.location.host}/admin/index`)
+          } else if (result.data.response.user.role == "Terminal") {
+           window.location.replace(`${window.location.protocol}//${window.location.host}/admin/orders`)
+          }
 
           localStorage.setItem("token", result.data.response.token)
-          localStorage.setItem("loggedInUser", JSON.stringify(result.data.response.user))
+          localStorage.setItem(
+            "loggedInUser",
+            JSON.stringify(result.data.response.user)
+          )
           showNotfication("success", "Login Passed", "LoggedIn Successfully")
         }
       })

@@ -173,12 +173,12 @@ function Rows(props) {
             
           </Collapse>
         </TableCell>
-        {
+        {/* {
           open ?
             <div className="qr-design">
               <QRCode className="qr-code-design" id="id" size={170} value={row ? JSON.stringify(row) : ""} />
             </div> : null
-        }
+        } */}
       </TableRow>
     </React.Fragment>
   )
