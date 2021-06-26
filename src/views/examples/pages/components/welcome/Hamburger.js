@@ -28,6 +28,14 @@ export default function TemporaryDrawer() {
   const login = () => {
     history.push("/auth/login")
   }
+
+  const loggout = () => {
+    localStorage.removeItem("loggedInUser")
+    localStorage.removeItem("token")
+    // console.log(`http://${window.location.host}/auth/login`)
+    window.location.replace(`${window.location.protocol}//${window.location.host}/`)
+  }
+
   const classes = useStyles()
   const [state, setState] = React.useState({
     // top: false,
@@ -35,6 +43,8 @@ export default function TemporaryDrawer() {
     // bottom: false,
     right: false,
   })
+
+  let loggedIn = JSON.parse(localStorage.getItem("loggedInUser"))
 
   const toggleDrawer = (anchor, open) => event => {
     if (
@@ -56,20 +66,33 @@ export default function TemporaryDrawer() {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <List>
-        {["Home", "About Us", "Our Technology", "Login"].map((text, index) => (
-          <ListItem button key={text}>
-            {/* <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon> */}
-            <ListItemText
-              primary={text}
-              onClick={text == "Login" ? login : ""}
-            />
-          </ListItem>
-        ))}
-      </List>
-      
+      {!!loggedIn ? (
+        <List>
+          {["Home", "About Us", "Our Technology", "Logout"].map(
+            (text, index) => (
+              <ListItem button key={text}>
+                <ListItemText
+                  primary={text}
+                  onClick={text == "Logout" ? loggout : ""}
+                />
+              </ListItem>
+            )
+          )}
+        </List>
+      ) : (
+        <List>
+          {["Home", "About Us", "Our Technology", "Login"].map(
+            (text, index) => (
+              <ListItem button key={text}>
+                <ListItemText
+                  primary={text}
+                  onClick={text == "Login" ? login : ""}
+                />
+              </ListItem>
+            )
+          )}
+        </List>
+      )}
     </div>
   )
 

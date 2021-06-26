@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 
 // reactstrap components
 import {
@@ -22,6 +22,7 @@ import { CREATE } from "../../configuration/API-Instance"
 import { showNotfication } from "../../components/ResuableComponents/notification"
 
 const Login = () => {
+
   const history = useHistory()
 
   const [isPwdDisplayed, setisPwdDisplayed] = useState(false)
@@ -42,9 +43,13 @@ const Login = () => {
           // history.push("/admin/index")
 
           if (result.data.response.user.role == "Hauler") {
-           window.location.replace(`${window.location.protocol}//${window.location.host}/admin/index`)
+            window.location.replace(
+              `${window.location.protocol}//${window.location.host}/admin/index`
+            )
           } else if (result.data.response.user.role == "Terminal") {
-           window.location.replace(`${window.location.protocol}//${window.location.host}/admin/orders`)
+            window.location.replace(
+              `${window.location.protocol}//${window.location.host}/admin/orders`
+            )
           }
 
           localStorage.setItem("token", result.data.response.token)

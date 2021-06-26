@@ -1,4 +1,3 @@
-
 import React from "react"
 import {
   useLocation,
@@ -21,6 +20,19 @@ const Auth = props => {
 
   const mainContent = React.useRef(null)
   const location = useLocation()
+
+  React.useEffect(() => {
+    let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"))
+    if (loggedInUser !== null && loggedInUser.role == "Hauler") {
+      if (window.location.pathname == "/auth/login") {
+        history.push("/admin/index")
+      }
+    } else if(loggedInUser !== null && loggedInUser.role == "Terminal") {
+      if (window.location.pathname == "/auth/login") {
+        history.push("/admin/orders")
+      }
+    }
+  }, [])
 
   React.useEffect(() => {
     document.body.classList.add("bg-default")
