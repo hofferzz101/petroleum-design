@@ -4,7 +4,8 @@ import React, { useState } from "react"
 import { NavLink as NavLinkRRD, Link } from "react-router-dom"
 // nodejs library to set properties for components
 import { PropTypes } from "prop-types"
-
+import BicycleLogo from "../../views/examples/pages/components/bicycleLogo2.png";
+import "./SideBar.css";
 // reactstrap components
 import {
   Button,
@@ -115,7 +116,8 @@ const Sidebar = props => {
                 fontWeight: "bold",
               }}
             >
-              Petroleum
+              {/* Petroleum!!! */}
+              <img className="logo-admin" src={BicycleLogo}/>
             </h1>
           </NavbarBrand>
         ) : null}

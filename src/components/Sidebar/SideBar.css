@@ -1,0 +1,11 @@
+.logo-admin{
+    height: 50px;
+}
+
+@media (max-width:767px) {
+    .logo-admin{
+        height: 50px;
+        margin-bottom: 20px;
+    }
+    
+}
