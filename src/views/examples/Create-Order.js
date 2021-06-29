@@ -21,6 +21,7 @@ import "./pages/CreateOrder.css"
 import Header from "components/Headers/Header.js"
 
 import { useHistory } from "react-router-dom"
+import { GET } from "configuration/API-Instance"
 
 export default function CreateOrder() {
   const [state1, setstate1] = useState("gal")
@@ -28,7 +29,33 @@ export default function CreateOrder() {
   const [state3, setstate3] = useState("200")
   const [state4, setstate4] = useState("2,000 gal")
 
+  const [productResponse,setproductResponse] = useState([])
+  const [locationApi, setLocationApi] = useState([])
+
+  console.log("wowo",locationApi)
+
   let history = useHistory()
+
+  const gettingProducts=()=>{
+    GET("/products")
+    .then((res)=>{
+      console.log("=-=-",res.data.response)
+      setproductResponse(res.data.response)
+    }) 
+  }
+    
+  const gettingLocation=()=>{
+    GET("/racks")
+    .then((res)=>{
+      setLocationApi(res.data.response)
+    })
+  }
+
+  useEffect(()=>{
+    gettingProducts()
+    gettingLocation()
+  },[])
+
   return (
     <>
       <Header />
@@ -46,11 +73,10 @@ export default function CreateOrder() {
                       <div className="location-div-co">
                         <Label className="location-div-label-co" for="exampleSelect"><h3 className="location-text">Location : </h3></Label>
                         <Input className="location-div-input-co" type="select" name="select" id="exampleSelect">
-                          <option>Enter Station Location Here</option>
-                          <option>USA</option>
-                          <option>UK</option>
-                          <option>LA</option>
-                          <option>Canada</option>
+                          {locationApi.map((data,i)=> (
+                            <option key={i}>{data.location}</option>
+                          ))}
+                         
                         </Input>
                       </div>
                     </FormGroup>
@@ -73,8 +99,57 @@ export default function CreateOrder() {
                                 <th className="products-div-table-subheading">Quality Desired</th>
                               </tr>
                             </thead>
-                            <tbody>
-                              <tr>
+                             
+                              {productResponse.map((data)=>(
+                                  <tbody>
+                                   <tr>
+                                   <td>{data.name}</td>
+   
+                                   <td><span><input type="radio" /></span>{` $ ${data.price_per_gallon}/${data.unit_of_measure}`}</td>
+                                   <td><span><input type="radio" /></span>{` $ ${data.price_per_gallon}/${data.unit_of_measure}`}</td>
+                                   <td>
+                                     <Input
+                                       value={data.gallons}
+                                       onChange={e => setstate1(e.target.value)}
+                                     />
+                                   </td>
+                                 </tr>
+                                 {/* <tr>
+                                   <td>Tank 02</td>
+                                   <td><span><input type="radio" /></span>$2.18 / gal</td>
+                                   <td><span><input type="radio" /></span>$2.18 / gal</td>
+                                   <td>
+                                     <Input
+                                       value={state2}
+                                       onChange={e => setstate2(e.target.value)}
+                                     />
+                                   </td>
+                                 </tr>
+                                 <tr>
+                                   <td>Tank 03</td>
+                                   <td><span><input type="radio" /></span>$1.41 / gal</td>
+                                   <td><span><input type="radio" /></span>$2.08 / gal</td>
+                                   <td>
+                                     <Input
+                                       value={state3}
+                                       onChange={e => setstate3(e.target.value)}
+                                     />
+                                   </td>
+                                 </tr>
+                                 <tr>
+                                   <td>Tank 04</td>
+                                   <td><span><input type="radio" /></span>$1.48 / gal</td>
+                                   <td><span><input type="radio" /></span>$1.38 / gal</td>
+                                   <td>
+                                     <Input
+                                       value={state4}
+                                       onChange={e => setstate4(e.target.value)}
+                                     />
+                                   </td>
+                                 </tr> */}
+                                 </tbody>
+                              ))}
+                              {/* <tr>
                                 <td>Tank 01</td>
 
                                 <td><span><input type="radio" /></span>$2.48 / gal</td>
@@ -118,8 +193,8 @@ export default function CreateOrder() {
                                     onChange={e => setstate4(e.target.value)}
                                   />
                                 </td>
-                              </tr>
-                            </tbody>
+                              </tr> */}
+                            {/* </tbody> */}
                           </Table>
                           </div>
                         </div>
@@ -141,12 +216,12 @@ export default function CreateOrder() {
                         <div className="diliveryTime-div">
                           <div>
                             <Label className="diliveryTime-heading-div" for="exampleSelect">
-                              <h3 className="diliveryTimeAndPrefer">Delivery Time Preference : </h3>
+                              <h3 className="diliveryTimeAndPrefer">Delivery Window : </h3>
                             </Label>
                           </div>
                           <div>
                             <Input className="diliverytime-input" type="select" name="select" id="exampleSelect">
-                              <option>Select Delivery Time Preference</option>
+                              <option>Dilevery Window</option>
                               <option>Early Morning: 12:00am - 05:59am</option>
                               <option>Late Morning: 06:00am - 11:59am</option>
                               <option>Early Evening: 12:00pm - 05:59pm</option>
@@ -164,7 +239,7 @@ export default function CreateOrder() {
                     <FormGroup>
                       <div className="additional-main-div">
                         <div>
-                          <Label className="additional-label" for="exampleEmail"><h3 className="additional-info">Additonal Information : </h3></Label>
+                          <Label className="additional-label" for="exampleEmail"><h3 className="additional-info">Note : </h3></Label>
                         </div>
                         <div>
                           <Input className="additional-input" type="text" placeholder="PO Number" />

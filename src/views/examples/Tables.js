@@ -276,6 +276,8 @@ const Tables = () => {
   const [EditObj, setisEditObj] = useState({})
 
   const [modal, setModal] = useState(false)
+  const [dataforEdit, setdataforEdit] = useState({})
+  const [flagforEdit, setflagforEdit] = useState("")
 
   const toggle = () => setModal(!modal)
 
@@ -284,11 +286,17 @@ const Tables = () => {
       setModal(true)
       setisEdit(true)
       setisEditObj(item)
+      setdataforEdit(item)
+      setflagforEdit(flag)
     } else {
       setModal(true)
       setisEdit(false)
+      setdataforEdit(item)
+      setflagforEdit(flag)
     }
   }
+
+  
 
   const [CustomerName, setCustomerName] = React.useState("")
   const [filterCustomer, setFilterCustomer] = React.useState([])
@@ -315,24 +323,34 @@ const Tables = () => {
   const [Status2, setStatus2] = React.useState("")
   const [Alert2, setAlert2] = React.useState("")
 
+  const [HaulerData, setHaulerData] = useState([])
+  const [HaulerData2, setHaulerData2] = useState([])
+  const [column, setColumn] = useState("")
+  const [search, setsearch] = useState("")
 
-   const getOrder=()=>{
-     GET('/orders')
-     .then(response=>{
-       console.log(response.data.response.orders)
-       setFilterCustomer(response.data.response.orders)
-     })
-   }
+  const [qualityOrder, setqualityOrder] = useState()
+  const [qualityDeliver, setQualityDeliver] = useState()
+  const [ancillaryFee, setAncillaryFee] = useState()
+  const [totalCosting, setTotalCosting] = useState()
 
-   const getProduct=()=>{
-    GET('/products')
-    .then(response=>{
-      console.log(response.data.response)
-      // setFilterCustomer2(response.data.response.orders)
-    })
+  const getOrder = () => {
+    GET('/orders')
+      .then(response => {
+        console.log(response.data.response.orders)
+        setFilterCustomer(response.data.response.orders)
+        setHaulerData(response.data.response.orders)
+      })
   }
-    
-   
+
+  const getProduct = () => {
+    GET('/products')
+      .then(response => {
+        console.log(response.data)
+        setFilterCustomer2(response.data.response)
+      })
+  }
+
+
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, filterCustomer.length - page * rowsPerPage)
@@ -346,14 +364,6 @@ const Tables = () => {
     setPage(0)
   }
 
-  const [HaulerData, setHaulerData] = useState([])
-  const [column, setColumn] = useState("")
-  const [search, setsearch] = useState("")
-
-  const [qualityOrder, setqualityOrder] = useState()
-  const [qualityDeliver, setQualityDeliver] = useState()
-  const [ancillaryFee, setAncillaryFee] = useState()
-  const [totalCosting, setTotalCosting] = useState()
 
   function getSummery(arr, prop1, prop2, prop3, prop4) {
     let salary = arr.reduce((acc, val) => (acc += val[prop1]), 0)
@@ -379,7 +389,7 @@ const Tables = () => {
   }, [])
 
   const emptyRowsData =
-    rowsPerPage - Math.min(rowsPerPage, filterCustomer2 ?.length - page * rowsPerPage)
+    rowsPerPage - Math.min(rowsPerPage, filterCustomer2.length - page * rowsPerPage)
 
   var d = new Date()
   var n = d.getTime()
@@ -398,12 +408,14 @@ const Tables = () => {
   const handleSearch = (e, flag) => {
     let search = ""
     let filtered = ""
+    if(e.target.value != ""){
+
     switch (flag) {
       case "Customer Number":
         setCustomerNumber(e.target.value)
         search = e.target.value
 
-        filtered = rows.filter(item => {
+        filtered = filterCustomer.filter(item => {
           return (
             item.customerNumber.toLowerCase().indexOf(search.toLowerCase()) !==
             -1
@@ -417,7 +429,7 @@ const Tables = () => {
         setOrderNumber(e.target.value)
         search = e.target.value
 
-        filtered = rows.filter(item => {
+        filtered = filterCustomer.filter(item => {
           return (
             item.orderNumber.toLowerCase().indexOf(search.toLowerCase()) !== -1
           )
@@ -428,7 +440,7 @@ const Tables = () => {
         setCustomerName(e.target.value)
         search = e.target.value
 
-        filtered = rows.filter(item => {
+        filtered = filterCustomer.filter(item => {
           return (
             item.customerName.toLowerCase().indexOf(search.toLowerCase()) !== -1
           )
@@ -440,7 +452,7 @@ const Tables = () => {
         setCustomerLocation(e.target.value)
         search = e.target.value
 
-        filtered = rows.filter(item => {
+        filtered = filterCustomer.filter(item => {
           return (
             item.customerLocation
               .toLowerCase()
@@ -454,9 +466,10 @@ const Tables = () => {
         setPOnumber(e.target.value)
         search = e.target.value
 
-        filtered = rows.filter(item => {
+        filtered = filterCustomer.filter(item => {
           return (
-            item.poNumber.toLowerCase().indexOf(search.toLowerCase()) !== -1
+           item.p_no.toLowerCase().indexOf(search.toLowerCase()) !== -1
+           
           )
         })
         setFilterCustomer(filtered)
@@ -466,7 +479,7 @@ const Tables = () => {
         setRackLocation(e.target.value)
         search = e.target.value
 
-        filtered = rows.filter(item => {
+        filtered = filterCustomer.filter(item => {
           return (
             item.rackLocation.toLowerCase().indexOf(search.toLowerCase()) !== -1
           )
@@ -478,9 +491,9 @@ const Tables = () => {
         setOrderDate(e.target.value)
         search = e.target.value
 
-        filtered = rows.filter(item => {
+        filtered = filterCustomer.filter(item => {
           return (
-            item.orderDate.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            item.order_date.toLowerCase().indexOf(search.toLowerCase()) !== -1
           )
         })
         setFilterCustomer(filtered)
@@ -491,9 +504,9 @@ const Tables = () => {
         setDiliveryDate(e.target.value)
         search = e.target.value
 
-        filtered = rows.filter(item => {
+        filtered = filterCustomer.filter(item => {
           return (
-            item.DiliveryDate.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            item.delivery_date.toLowerCase().indexOf(search.toLowerCase()) !== -1
           )
         })
         setFilterCustomer(filtered)
@@ -503,7 +516,7 @@ const Tables = () => {
         setDiliveryWindow(e.target.value)
         search = e.target.value
 
-        filtered = rows.filter(item => {
+        filtered = filterCustomer.filter(item => {
           return (
             item.DiliveryWindow.toLowerCase().indexOf(search.toLowerCase()) !==
             -1
@@ -516,7 +529,7 @@ const Tables = () => {
         setStatus(e.target.value)
         search = e.target.value
 
-        filtered = rows.filter(item => {
+        filtered = filterCustomer.filter(item => {
           return item.status.toLowerCase().indexOf(search.toLowerCase()) !== -1
         })
         setFilterCustomer(filtered)
@@ -526,7 +539,7 @@ const Tables = () => {
         setAlert(e.target.value)
         search = e.target.value
 
-        filtered = rows.filter(item => {
+        filtered = filterCustomer.filter(item => {
           return item.alerts.toLowerCase().indexOf(search.toLowerCase()) !== -1
         })
         setFilterCustomer(filtered)
@@ -537,11 +550,15 @@ const Tables = () => {
         setFilterCustomer(rows)
         break
     }
+  }else{
+    setFilterCustomer(HaulerData)
   }
+}
 
   const handleSearch2 = (e, flag) => {
     let search = ""
     let filtered = ""
+    if(e.target.value != ""){
     switch (flag) {
       case "Line Number":
         setLineNumber(e.target.value)
@@ -668,7 +685,12 @@ const Tables = () => {
       default:
         setFilterCustomer2(data)
         break
+
+      }
+    }else{
+      setFilterCustomer2(HaulerData2)
     }
+      
   }
 
   return (
@@ -859,9 +881,9 @@ const Tables = () => {
                   <TableBody>
                     {(rowsPerPage > 0
                       ? filterCustomer.slice(
-                          page * rowsPerPage,
-                          page * rowsPerPage + rowsPerPage
-                        )
+                        page * rowsPerPage,
+                        page * rowsPerPage + rowsPerPage
+                      )
                       : filterCustomer
                     ).map((row, i) => (
                       <TableRow
@@ -960,7 +982,7 @@ const Tables = () => {
                   </TableFooter>
                 </Table>
                 <div className="float-right mt-2 mb-3 mr-4">
-                  <ExportCSV csvData={rows} fileName={orderFilename} />
+                  <ExportCSV csvData={filterCustomer} fileName={orderFilename} />
                 </div>
               </TableContainer>
             </Card>
@@ -999,7 +1021,7 @@ const Tables = () => {
                           placeholder="Search"
                         />
                       </TableCell>
-                      <TableCell className="table-headers-tables">
+                      {/* <TableCell className="table-headers-tables">
                         <div className="tableCell-top">
                           <b className="tableCell-top-title">Rack Location</b>
                         </div>
@@ -1009,7 +1031,7 @@ const Tables = () => {
                           onChange={e => handleSearch2(e, "Rack Location")}
                           placeholder="Search"
                         />
-                      </TableCell>
+                      </TableCell> */}
                       <TableCell className="table-headers-tables">
                         <div className="tableCell-top">
                           <b className="tableCell-top-title">
@@ -1095,21 +1117,21 @@ const Tables = () => {
                   </TableHead>
                   <TableBody>
                     {(rowsPerPage > 0
-                      ? filterCustomer2.slice(
-                          page * rowsPerPage,
-                          page * rowsPerPage + rowsPerPage,
-                          page * rowsPerPage + rowsPerPage + rowsPerPage,
-                          page * rowsPerPage +
-                            rowsPerPage +
-                            rowsPerPage +
-                            rowsPerPage,
-                          page * rowsPerPage +
-                            rowsPerPage +
-                            rowsPerPage +
-                            rowsPerPage +
-                            rowsPerPage
-                        )
-                      : data
+                      ? filterCustomer2 && filterCustomer2.slice(
+                        page * rowsPerPage,
+                        page * rowsPerPage + rowsPerPage,
+                        page * rowsPerPage + rowsPerPage + rowsPerPage,
+                        page * rowsPerPage +
+                        rowsPerPage +
+                        rowsPerPage +
+                        rowsPerPage,
+                        page * rowsPerPage +
+                        rowsPerPage +
+                        rowsPerPage +
+                        rowsPerPage +
+                        rowsPerPage
+                      )
+                      : filterCustomer2.length && filterCustomer2
                     ).map((row, i) => (
                       <TableRow
                         key={i}
@@ -1120,38 +1142,25 @@ const Tables = () => {
                         }
                       >
                         <TableCell className="tableCell-bottom">
-                          {row.lineNumber}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                          {row.product}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                          {row.rackLocation}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                          {row.qualityOrdered}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                          {row.qualityDelivered}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                          {row.freightTicket}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                          {/* $ {row.ancillaryFees} */}
-                          {new Intl.NumberFormat("en-US", {
-                            style: "currency",
-                            currency: "USD",
-                          }).format(row.ancillaryFees)}
+                         
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                          $ {row.totalCost}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                          {row.status}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                          {row.alerts}
                         </TableCell>
                       </TableRow>
                     ))}
@@ -1160,25 +1169,15 @@ const Tables = () => {
                       <TableCell className="tableCell-bottom"></TableCell>
                       <TableCell className="tableCell-bottom"></TableCell>
                       <TableCell className="tableCell-bottom">
-                        {qualityOrder}
                       </TableCell>
                       <TableCell className="tableCell-bottom">
-                        {qualityDeliver}
                       </TableCell>
                       <TableCell className="tableCell-bottom"></TableCell>
                       <TableCell className="tableCell-bottom">
-                        {/* {ancillaryFee} */}
-                        {new Intl.NumberFormat("en-US", {
-                          style: "currency",
-                          currency: "USD",
-                        }).format(ancillaryFee)}
+
                       </TableCell>
                       <TableCell className="tableCell-bottom">
-                        {/* {totalCosting} */}
-                        {new Intl.NumberFormat("en-US", {
-                          style: "currency",
-                          currency: "USD",
-                        }).format(totalCosting)}
+                      
                       </TableCell>
                       <TableCell className="tableCell-bottom"></TableCell>
                       <TableCell className="tableCell-bottom"></TableCell>
@@ -1215,7 +1214,7 @@ const Tables = () => {
                   </TableFooter>
                 </Table>
                 <div className="float-right mt-2 mb-3 mr-4">
-                  <ExportCSV csvData={data} fileName={detailsFilename} />
+                  <ExportCSV csvData={filterCustomer2} fileName={detailsFilename} />
                 </div>
               </TableContainer>
             </Card>
@@ -1276,9 +1275,75 @@ const Tables = () => {
                       value={EditObj ? JSON.stringify(EditObj) : ""}
                     />
                   </div>
+                   
                 </div>
               </ModalBody>
             )}
+             {flagforEdit !== "edit" && <div className="col-md-12">
+                   <Table>
+                     <TableHead>
+                       <TableRow className="col-md-12">
+                         <TableCell>
+                           <h5 className="modalTableHeading" >Order Number</h5>
+                           <h5 className="modalTableData">{dataforEdit.orderNumber ? dataforEdit.orderNumber : "-"}</h5>
+                         </TableCell>
+                         <TableCell>
+                         <h5 className="modalTableHeading">Customer Number</h5>
+                           <h5 className="modalTableData">{dataforEdit.customerNumber ? dataforEdit.customerNumber : "-"}</h5>
+                         </TableCell>
+                         <TableCell>
+                         <h5 className="modalTableHeading">Customer Name</h5>
+                          <h5 className="modalTableData">{dataforEdit.customerName ? dataforEdit.customerName : "-"}</h5>
+                         </TableCell>
+                         </TableRow >
+                         <TableRow className="col-md-4">
+                         <TableCell>
+                         <h5 className="modalTableHeading">Customer Location</h5>
+                           <h5 className="modalTableData">{dataforEdit.customerLocation ? dataforEdit.customerLocation : "-"}</h5>
+                         </TableCell>
+                         <TableCell>
+                         <h5 className="modalTableHeading">PO Number</h5>
+                           <h5 className="modalTableData">{dataforEdit.p_no ? dataforEdit.p_no : "-"}</h5>
+                        </TableCell>
+                        <TableCell>
+                        <h5 className="modalTableHeading">Rack Location</h5>
+                          <h5 className="modalTableData">{dataforEdit.rackLocation ? dataforEdit.rackLocation : "-"}</h5>
+                        </TableCell>
+                        </TableRow>
+                        <TableRow className="col-md-4">
+                        <TableCell>
+                        <h5 className="modalTableHeading">Order Date</h5>
+                          <h5 className="modalTableData">{dataforEdit.orderDate !== "" ? moment(dataforEdit.orderDate).format("DD/MM/YY") : "-"}</h5>
+                        </TableCell>
+                        <TableCell>
+                        <h5 className="modalTableHeading">Dilevery Date</h5>
+                          <h5 className="modalTableData">{dataforEdit.deliveryDate !== "" ? moment(dataforEdit.deliveryDate).format("DD/MM/YY") : "-"}</h5>
+                        </TableCell>
+                        
+                        <TableCell>
+                        <h5 className="modalTableHeading">Dilivery Window</h5>
+                          <select>
+                            <option>Select</option>
+                            <option>00:00 – 05:59</option>
+                            <option>06:00 – 11:59</option>
+                            <option>12:00 – 5:59</option>
+                            <option>6:00 – 11:59</option>
+                          </select>
+                        </TableCell>
+                        </TableRow>
+                        <TableRow className="col-md-4">
+                        <TableCell>
+                        <h5 className="modalTableHeading">Status</h5>
+                          <h5 className="modalTableData">{dataforEdit.status ? dataforEdit.status : "-"}</h5>
+                        </TableCell>
+                        <TableCell>
+                        <h5 className="modalTableHeading">Alert</h5>
+                          <h5 className="modalTableData">{dataforEdit.alerts ? dataforEdit.alerts :"-"}</h5>
+                        </TableCell>
+                       </TableRow>
+                     </TableHead>
+                   </Table>
+                </div>}
             <ModalFooter>
               <Button color="primary" onClick={toggle}>
                 {isEdit ? "Edit Status" : "Download PDF"}
@@ -1287,6 +1352,7 @@ const Tables = () => {
                 Cancel
               </Button>
             </ModalFooter>
+               
           </Modal>
         </div>
         {/* Dark table */}
