@@ -55,6 +55,7 @@ import "./pages/Tables.css"
 import EditIcon from "@material-ui/icons/Edit"
 import ListIcon from "@material-ui/icons/List"
 import QRCode from "react-qr-code"
+import { GET } from "configuration/API-Instance"
 
 const useStyles1 = makeStyles(theme => ({
   root: {
@@ -157,7 +158,7 @@ const rows = [
     customerName: "John",
     orderNumber: "ASD123",
     customerLocation: "London",
-    poNumber: "123456789",
+    po_no: "123456789",
     rackLocation: "London",
     orderDate: new Date(),
     deliveryDate: new Date(),
@@ -290,8 +291,8 @@ const Tables = () => {
   }
 
   const [CustomerName, setCustomerName] = React.useState("")
-  const [filterCustomer, setFilterCustomer] = React.useState(rows)
-  const [filterCustomer2, setFilterCustomer2] = React.useState(data)
+  const [filterCustomer, setFilterCustomer] = React.useState([])
+  const [filterCustomer2, setFilterCustomer2] = React.useState([])
   const [OrderNumber, setOrderNumber] = React.useState("")
   const [CustomerNumber, setCustomerNumber] = React.useState("")
   const [CustomerLocation, setCustomerLocation] = React.useState("")
@@ -314,8 +315,27 @@ const Tables = () => {
   const [Status2, setStatus2] = React.useState("")
   const [Alert2, setAlert2] = React.useState("")
 
+
+   const getOrder=()=>{
+     GET('/orders')
+     .then(response=>{
+       console.log(response.data.response.orders)
+       setFilterCustomer(response.data.response.orders)
+     })
+   }
+
+   const getProduct=()=>{
+    GET('/products')
+    .then(response=>{
+      console.log(response.data.response)
+      // setFilterCustomer2(response.data.response.orders)
+    })
+  }
+    
+   
+
   const emptyRows =
-    rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage)
+    rowsPerPage - Math.min(rowsPerPage, filterCustomer.length - page * rowsPerPage)
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage)
@@ -326,7 +346,7 @@ const Tables = () => {
     setPage(0)
   }
 
-  const [HaulerData, setHaulerData] = useState(rows)
+  const [HaulerData, setHaulerData] = useState([])
   const [column, setColumn] = useState("")
   const [search, setsearch] = useState("")
 
@@ -347,6 +367,8 @@ const Tables = () => {
   }
 
   useEffect(() => {
+    getOrder()
+    getProduct()
     getSummery(
       data,
       "qualityOrdered",
@@ -357,7 +379,7 @@ const Tables = () => {
   }, [])
 
   const emptyRowsData =
-    rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage)
+    rowsPerPage - Math.min(rowsPerPage, filterCustomer2 ?.length - page * rowsPerPage)
 
   var d = new Date()
   var n = d.getTime()
@@ -873,7 +895,7 @@ const Tables = () => {
                           {row.customerLocation}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                          {row.poNumber}
+                          {row.p_no}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
                           {row.rackLocation}
