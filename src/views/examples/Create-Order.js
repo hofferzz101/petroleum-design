@@ -103,8 +103,6 @@ export default function CreateOrder() {
       })
   }
 
-
-
   let body = {
     location: rackLocation,
     products: productResponse,
@@ -119,7 +117,9 @@ export default function CreateOrder() {
   const updateOrder = () => {
     CREATE("/orders", body)
       .then((res) => {
-        console.log("hitApi", res)
+        if (res.status == 200) {
+          history.push("/admin/index")
+        }
       })
   }
 
