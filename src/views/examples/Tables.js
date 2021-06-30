@@ -1244,10 +1244,11 @@ const Tables = () => {
                 <FormGroup> 
                 <Label for="exampleEmail">Edit Feilds</Label>
                   <select className="col-md-12" style={{height:"45px",borderRadius:"6px",border:"1px solid lightgray"}}>
-                    {/* <option>Select</option> */}
-                    {newOrderDetail.map((data)=>{
-                      <option>{console.log("ppp",data)}</option>
-                    })}
+                     <option>Select</option> 
+                    {/* <option>{newOrderDetail.ancillaryFee}</option>
+                     <option>{newOrderDetail.freight_ticket}</option> */}
+                        <option>{console.log(dataforEdit,"hehe")}</option>
+                    
                      
                   </select>
 
