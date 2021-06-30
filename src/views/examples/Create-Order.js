@@ -339,7 +339,7 @@ export default function CreateOrder() {
                         id="btn-co"
                       
                       >
-                        CSV
+                        Uplodad CSV
                       </Button>
                     </FormGroup>
                    
