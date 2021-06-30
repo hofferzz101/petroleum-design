@@ -40,6 +40,9 @@ export default function CreateOrder() {
   const [Notes,setNotes] = useState("")
   const [getOrdersData, setGetOrdersData] = useState("")
 
+  const [OrderNumber,setOrderNumber] = useState("")
+  const [ShippingDate,setShippingDate] = useState("")
+
   console.log("wowo",locationApi)
 
   let history = useHistory()
@@ -81,8 +84,8 @@ export default function CreateOrder() {
     delivery_window: "abc",
     notes : Notes,
     p_no : POnumber,
-    shipment_date : String(getOrdersData.shipment_date),
-    order_no : "123"
+    shipment_date : String(ShippingDate),
+    order_no :  OrderNumber
   }
 
   const updateOrder=()=>{
@@ -305,7 +308,7 @@ export default function CreateOrder() {
                         <Label className="order-label" for="exampleEmail"><h3 className="additional-info">Order Number : </h3></Label>
                         </div>
                         <div>
-                          <Input placeholder="Order Number" className="additional-input2"/>
+                          <Input placeholder="Order Number" className="additional-input2" onChange={(e)=>setOrderNumber(e.target.value)}/>
                         </div>
                       </div>
                       <div className="shipping-main-div">
@@ -313,7 +316,7 @@ export default function CreateOrder() {
                         <Label className="shipping-label" for="exampleEmail"><h3 className="additional-info">Shipping Date : </h3></Label>
                         </div>
                         <div>
-                          <Input placeholder="Shipping Date" className="additional-input2"/>
+                          <Input placeholder="Shipping Date" className="additional-input2" onChange={(e)=>setShippingDate(e.target.value)}/>
                         </div>
                       </div>
                     </FormGroup>
