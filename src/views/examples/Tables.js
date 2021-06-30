@@ -333,6 +333,7 @@ const Tables = () => {
   const [ancillaryFee, setAncillaryFee] = useState()
   const [totalCosting, setTotalCosting] = useState()
   const [newOrderDetail, setNewOrderDetail] = useState([])
+  const [childOrderDetail , setChildOrderDetail] = useState([])
 
   const getOrder = () => {
     GET('/orders')
@@ -698,6 +699,11 @@ const Tables = () => {
 
   }
 
+  const handleChildData = (data) => {
+    setChildOrderDetail(data.order_detials)
+  }
+
+
   return (
     <>
       <Header />
@@ -892,6 +898,7 @@ const Tables = () => {
                       : filterCustomer
                     ).map((row, i) => (
                       <TableRow
+                      onClick={()=> handleChildData(row)}
                         key={i}
                         className={
                           i % 2 == 0
@@ -1122,7 +1129,7 @@ const Tables = () => {
                   </TableHead>
                   <TableBody>
                     {(rowsPerPage > 0
-                      ? newOrderDetail && newOrderDetail.slice(
+                      ? childOrderDetail && childOrderDetail.slice(
                         page * rowsPerPage,
                         page * rowsPerPage + rowsPerPage,
                         page * rowsPerPage + rowsPerPage + rowsPerPage,
@@ -1136,9 +1143,10 @@ const Tables = () => {
                         rowsPerPage +
                         rowsPerPage
                       )
-                      : newOrderDetail.length && newOrderDetail
+                      : childOrderDetail.length && childOrderDetail
                     ).map((row, i) => (
                       <TableRow
+                    
                         key={i}
                         className={
                           i % 2 == 0
@@ -1147,31 +1155,31 @@ const Tables = () => {
                         }
                       >
                         <TableCell className="tableCell-bottom">
-                          {/* {row.product.number} */}
+                          {row.product.number ? row.product.number : '-'}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                          {/* {row.product.name} */}
+                          {row.product.name ? row.product.name : '-'}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                          {/* {row.quantity} */}
+                          {row.quantity ? row.quantity : '-'}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                          {/* {row.quantity_deliverd} */}
+                          {row.quantity_deliverd ? row.quantity_deliverd : '-'}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                          {/* {row.freight_ticket} */}
+                          {row.freight_ticket ? row.freight_ticket : '-'}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                          {/* {row.ancillary_fee} */}
+                          {row.ancillary_fee ? row.ancillary_fee : '-'}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                          {/* {row.total_cost} */}
+                          {row.total_cost ? row.total_cost : '-'}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                          {/* {row.status} */}
+                          {row.status ? row.status : '-'}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                          {/* {row.altert} */}
+                          {row.altert ? row.altert : '-'}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
                         </TableCell>
