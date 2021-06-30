@@ -55,7 +55,7 @@ import "./pages/Tables.css"
 import EditIcon from "@material-ui/icons/Edit"
 import ListIcon from "@material-ui/icons/List"
 import QRCode from "react-qr-code"
-import { GET } from "configuration/API-Instance"
+import { GET, UPDATE } from "configuration/API-Instance"
 
 const useStyles1 = makeStyles(theme => ({
   root: {
@@ -279,10 +279,21 @@ const Tables = () => {
   const [dataforEdit, setdataforEdit] = useState({})
   const [flagforEdit, setflagforEdit] = useState("")
 
+  const [selectedProduct, setSelectedProduct] = useState("")
+
+  const [products, setproducts] = useState([])
   const toggle = () => setModal(!modal)
 
   const handleChange = (flag, item) => {
     if (flag == "edit") {
+
+      let products_temp = [];
+      item.order_detials.map(element => {
+        products_temp.push(element.product)
+      })
+
+      setproducts(products_temp)
+
       setModal(true)
       setisEdit(true)
       setisEditObj(item)
@@ -312,6 +323,8 @@ const Tables = () => {
   const [Status, setStatus] = React.useState("")
   const [Alert, setAlert] = React.useState("")
 
+  const [editStatus, seteditStatus] = React.useState("")
+
   const [LineNumber, setLineNumber] = React.useState("")
   const [Product, setProduct] = React.useState("")
   const [RackLocation2, setRackLocation2] = React.useState("")
@@ -336,6 +349,10 @@ const Tables = () => {
   const [newOrderDetail, setNewOrderDetail] = useState([])
   const [childOrderDetail, setChildOrderDetail] = useState([])
 
+  const [acEdit, setacEdit] = useState("")
+  const [tickEdit, settickEdit] = useState("")
+  const [atyEdit, setatyEdit] = useState("")
+  
   const getOrder = () => {
     GET('/orders')
       .then(response => {
@@ -712,8 +729,24 @@ const Tables = () => {
       })
   }
 
-  const editOrder = () => {
-    console.log("edit")
+  const editOrder = (id) => {
+
+    let filteredobj = EditObj.order_detials.find(item => {
+      return item.product.id == selectedProduct
+    })
+
+    let body = {
+      "quantity_delivered": Number(atyEdit),
+      "ancillary_fee": Number(acEdit),
+      "frieght_ticket_no": tickEdit,
+      "status": editStatus
+    }
+    UPDATE(`/orders/${filteredobj.id}`, body).then(res => {
+      if (res.status == 200) {
+        setModal(false)
+        window.location.reload()
+      }
+    })
   }
 
 
@@ -954,7 +987,7 @@ const Tables = () => {
                           {moment(row.deliveryDate).format("DD/MM/YY")}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                            {row.delivery_window}
+                          {row.delivery_window}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
                           {row.status}
@@ -1257,22 +1290,41 @@ const Tables = () => {
             {isEdit ? (
               <ModalBody>
                 <FormGroup>
-                  
-               </FormGroup>
+
+                </FormGroup>
                 <FormGroup>
-                  <Label for="exampleEmail">Quantity Delivered</Label>
+                  <Label for="exampleEmail">Product</Label>
                   <Input
-                    type="text"
-                    id="exampleEmail"
-                    placeholder="Quantity Delivered"
-                  />
+                    type="select"
+                    value={selectedProduct}
+                    onChange={e => setSelectedProduct(e.target.value)}
+                  >
+                    <option value="" selected disabled>Select Product</option>
+                    {
+                      products.map(item => (
+                        <option key={item.id} value={item.id}>{item.name}</option>
+                      ))
+                    }
+                  </Input>
                 </FormGroup>
                 <FormGroup>
                   <Label for="exampleEmail">Ancillary fee</Label>
                   <Input
-                    type="text"
+                    type="number"
+                    value={acEdit}
+                    onChange={e => setacEdit(e.target.value)}
                     id="exampleEmail"
                     placeholder="Ancillary fee"
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="exampleEmail">Quantity Delievered</Label>
+                  <Input
+                    type="number"
+                    id="exampleEmail"
+                    value={atyEdit}
+                    onChange={e => setatyEdit(e.target.value)}
+                    placeholder="Quantity Delievered"
                   />
                 </FormGroup>
 
@@ -1281,15 +1333,17 @@ const Tables = () => {
                   <Input
                     type="text"
                     id="exampleEmail"
+                    value={tickEdit}
+                    onChange={e => settickEdit(e.target.value)}
                     placeholder="Frieght Ticket No"
                   />
                 </FormGroup>
                 <FormGroup>
                   <Label for="exampleEmail">Status</Label>
-                  <Input type="select" name="select" id="exampleSelect">
-                    <option>Select Status</option>
-                    <option>COMPLETED</option>
-                    <option>CANCELLED</option>
+                  <Input value={editStatus} onChange={e => seteditStatus(e.target.value)} type="select" name="select" id="exampleSelect">
+                    <option value="" selected disabled>Select Status</option>
+                    <option value="COMPLETED">COMPLETED</option>
+                    <option value="CANCELLED">CANCELLED</option>
                   </Input>
                 </FormGroup>
               </ModalBody>
@@ -1382,7 +1436,7 @@ const Tables = () => {
                     Download PDF
                   </Button>
                 </a>
-                  : <Button color="primary" onClick={editOrder}>
+                  : <Button disabled={selectedProduct == ""} color="primary" onClick={editOrder}>
                     Edit
                   </Button>}
               <Button color="secondary" onClick={toggle}>
