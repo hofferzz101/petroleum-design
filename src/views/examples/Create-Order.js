@@ -20,90 +20,124 @@ import "./pages/CreateOrder.css"
 
 import Header from "components/Headers/Header.js"
 
+// import { ExportCSV } from "./excel/exportExcel"
+// import moment from "moment"
+
+
 import { useHistory } from "react-router-dom"
 import { GET } from "configuration/API-Instance"
 import { CREATE } from "configuration/API-Instance"
+import { UPDATE } from "configuration/API-Instance"
 
 export default function CreateOrder() {
-  const [state1, setstate1] = useState("gal")
+  const [state1, setstate1] = useState("")
   const [state2, setstate2] = useState("5,000 gal")
   const [state3, setstate3] = useState("200")
   const [state4, setstate4] = useState("2,000 gal")
 
-  const [productResponse,setproductResponse] = useState([])
+  const [productResponse, setproductResponse] = useState([])
   const [locationApi, setLocationApi] = useState([])
 
   const [rackLocation, setRackLocation] = useState("NW Corner")
   const [deleveryDate, setDeliveryDate] = useState("")
-  const [deliveryWindow,setDeliveryWindow] = useState("")
-  const [POnumber,setPOnumber] = useState("")
-  const [Notes,setNotes] = useState("")
+  const [deliveryWindow, setDeliveryWindow] = useState("")
+  const [POnumber, setPOnumber] = useState("")
+  const [Notes, setNotes] = useState("")
   const [getOrdersData, setGetOrdersData] = useState("")
 
-  const [OrderNumber,setOrderNumber] = useState("")
-  const [ShippingDate,setShippingDate] = useState("")
+  const [OrderNumber, setOrderNumber] = useState("")
+  const [ShippingDate, setShippingDate] = useState("")
 
-  console.log("wowo",locationApi)
+  const [NewFiles, setNewFiles] = useState("")
+
+  const [text, settext] = useState([])
+
 
   let history = useHistory()
 
-  const gettingProducts=()=>{
+  const handleState = (e, index) => {
+    const values = [...productResponse]
+    values[index][e.target.name] = e.target.value
+
+    setproductResponse(values)
+  }
+
+  const gettingProducts = () => {
     GET("/products")
-    .then((res)=>{
-      console.log("=-=-",res.data.response)
-      setproductResponse(res.data.response)
-    }) 
+      .then((res) => {
+        console.log("=-=-", res.data.response)
+        setproductResponse(res.data.response)
+      })
   }
-    
-  const gettingLocation=()=>{
+
+  const gettingLocation = () => {
     GET("/racks")
-    .then((res)=>{
-      setLocationApi(res.data.response)
-      
-    })
+      .then((res) => {
+        setLocationApi(res.data.response)
+
+      })
   }
-  
+
 
   const getOrder = () => {
     GET('/orders')
       .then(response => {
-        console.log("><",response.data.response.orders)
-        response.data.response.orders.map((data)=>{
-          console.log("<=>",data)
+        console.log("><", response.data.response.orders)
+        response.data.response.orders.map((data) => {
+          console.log("<=>", data)
           setGetOrdersData(data)
         })
       })
   }
 
-  console.log(getOrdersData.shipment_date)
 
-  let body ={
-    location : rackLocation,
+
+  const handleCsv = () => {
+
+    const formData = new FormData();
+    formData.append("file", NewFiles)
+
+    CREATE("/orders/upload-csv", formData)
+      .then((data) => {
+        console.log(data)
+      })
+  }
+
+
+
+  let body = {
+    location: rackLocation,
     products: productResponse,
-    delivery_date : deleveryDate,
-    delivery_window: "abc",
-    notes : Notes,
-    p_no : POnumber,
-    shipment_date : String(ShippingDate),
-    order_no :  OrderNumber
+    delivery_date: deleveryDate,
+    delivery_window: deliveryWindow,
+    notes: Notes,
+    p_no: POnumber,
+    shipment_date: String(ShippingDate),
+    order_no: OrderNumber
   }
 
-  const updateOrder=()=>{
-    CREATE("/orders",body)
-    .then((res)=>{
-        console.log("hitApi",res)
-    })
+  const updateOrder = () => {
+    CREATE("/orders", body)
+      .then((res) => {
+        console.log("hitApi", res)
+      })
   }
-  
 
-  
+  const handleFile = (e) => {
+    var filess = e.target.files[0]
+    setNewFiles(filess)
+  }
 
-  useEffect(()=>{
+
+
+  useEffect(() => {
     gettingProducts()
     getOrder()
     gettingLocation()
 
-  },[])
+  }, [])
+
+
 
   return (
     <>
@@ -115,17 +149,17 @@ export default function CreateOrder() {
             <Card className="shadow">
               <div className="container">
 
-               
+
                 <Form className="main-form-co">
                   <div className="col-md-12">
                     <FormGroup>
                       <div className="location-div-co">
                         <Label className="location-div-label-co" for="exampleSelect"><h3 className="location-text">Location : </h3></Label>
                         <Input className="location-div-input-co" type="select" name="select" id="exampleSelect">
-                          {locationApi.map((data,i)=> (
-                            <option onChange={e=>setRackLocation(e.target.value)} key={i}>{data.location}</option>
+                          {locationApi.map((data, i) => (
+                            <option onChange={e => setRackLocation(e.target.value)} key={i}>{data.location}</option>
                           ))}
-                         
+
                         </Input>
                       </div>
                     </FormGroup>
@@ -137,33 +171,34 @@ export default function CreateOrder() {
                         </div>
                         <div>
                           <div>
-                          <Table className="products-div-table" >
-                           
-                            <thead>
-                              <h5 className="products-div-table-heading">Products,Pricing and Quantities</h5>
-                              <tr>
-                                <th className="products-div-table-subheading">Tank / Product</th>
-                                <th className="products-div-table-subheading">Citgo Lemont</th>
-                                <th className="products-div-table-subheading">Exxon Chicago</th>
-                                <th className="products-div-table-subheading">Quality Desired</th>
-                              </tr>
-                            </thead>
-                             
-                              {productResponse.map((data)=>(
-                                  <tbody>
-                                   <tr>
-                                   <td>{data.name}</td>
-   
-                                   <td><span><input type="radio" /></span>{` $ ${data.price_per_gallon}/${data.unit_of_measure}`}</td>
-                                   <td><span><input type="radio" /></span>{` $ ${data.price_per_gallon}/${data.unit_of_measure}`}</td>
-                                   <td>
-                                     <Input
-                                       value={data.gallons}
-                                       onChange={e => setstate1(e.target.value)}
-                                     />
-                                   </td>
-                                 </tr>
-                                 {/* <tr>
+                            <Table className="products-div-table" >
+
+                              <thead>
+                                <h5 className="products-div-table-heading">Products,Pricing and Quantities</h5>
+                                <tr>
+                                  <th className="products-div-table-subheading">Tank / Product</th>
+                                  <th className="products-div-table-subheading">Citgo Lemont</th>
+                                  <th className="products-div-table-subheading">Exxon Chicago</th>
+                                  <th className="products-div-table-subheading">Quality Desired</th>
+                                </tr>
+                              </thead>
+
+                              {productResponse.map((data, i) => (
+                                <tbody>
+                                  <tr>
+                                    <td>{data.name}</td>
+
+                                    <td><span><input type="radio" /></span>{` $ ${data.price_per_gallon}/${data.unit_of_measure}`}</td>
+                                    <td><span><input type="radio" /></span>{` $ ${data.price_per_gallon}/${data.unit_of_measure}`}</td>
+                                    <td>
+                                      <input
+                                        name="quntity"
+                                        value={productResponse[i] ? productResponse[i].quntity : "0"}
+                                        onChange={(e) => handleState(e, i)}
+                                      />
+                                    </td>
+                                  </tr>
+                                  {/* <tr>
                                    <td>Tank 02</td>
                                    <td><span><input type="radio" /></span>$2.18 / gal</td>
                                    <td><span><input type="radio" /></span>$2.18 / gal</td>
@@ -196,7 +231,7 @@ export default function CreateOrder() {
                                      />
                                    </td>
                                  </tr> */}
-                                 </tbody>
+                                </tbody>
                               ))}
                               {/* <tr>
                                 <td>Tank 01</td>
@@ -243,8 +278,8 @@ export default function CreateOrder() {
                                   />
                                 </td>
                               </tr> */}
-                            {/* </tbody> */}
-                          </Table>
+                              {/* </tbody> */}
+                            </Table>
                           </div>
                         </div>
                       </div>
@@ -256,7 +291,7 @@ export default function CreateOrder() {
                           <Label className="diliverydate-labeldiv" for="exampleSelect"><h3 className="deliverytext">Delivery Date : </h3></Label>
                         </div>
                         <div className="diliverydate-contactno">
-                          <Input type="date" placeholder="Contact Number" onChange={e=>setDeliveryDate(e.target.value)}/>
+                          <Input type="date" placeholder="Contact Number" onChange={e => setDeliveryDate(e.target.value)} />
                         </div>
                       </div>
                     </FormGroup>
@@ -269,12 +304,12 @@ export default function CreateOrder() {
                             </Label>
                           </div>
                           <div>
-                            <Input className="diliverytime-input" type="select" name="select" id="exampleSelect" onChange={e=>setDeliveryWindow(e.target.value)}>
+                            <Input className="diliverytime-input" type="select" name="select" id="exampleSelect" value={deliveryWindow} onChange={e => setDeliveryWindow(e.target.value)}>
                               <option>Dilevery Window</option>
-                              <option>Early Morning: 12:00am - 05:59am</option>
-                              <option>Late Morning: 06:00am - 11:59am</option>
-                              <option>Early Evening: 12:00pm - 05:59pm</option>
-                              <option>Late Evening: 06:00pm - 11:59pm</option>
+                              <option value="Early Morning: 12:00am - 05:59am">Early Morning: 12:00am - 05:59am</option>
+                              <option value="Late Morning: 06:00am - 11:59am">Late Morning: 06:00am - 11:59am</option>
+                              <option value="Early Evening: 12:00pm - 05:59pm">Early Evening: 12:00pm - 05:59pm</option>
+                              <option value="Late Evening: 06:00pm - 11:59pm">Late Evening: 06:00pm - 11:59pm</option>
                             </Input>
                           </div>
                         </div>
@@ -291,10 +326,10 @@ export default function CreateOrder() {
                           <Label className="additional-label" for="exampleEmail"><h3 className="additional-info">Note : </h3></Label>
                         </div>
                         <div>
-                          <Input className="additional-input" type="text" placeholder="PO Number" onChange={e=>setPOnumber(e.target.value)}/>
+                          <Input className="additional-input" type="text" placeholder="PO Number" onChange={e => setPOnumber(e.target.value)} />
                           <Input
                             className="additional-input2"
-                            onChange={e=>setNotes(e.target.value)}
+                            onChange={e => setNotes(e.target.value)}
                             type="text"
                             placeholder="Notes & Driver Instruction"
                           />
@@ -305,18 +340,18 @@ export default function CreateOrder() {
                     <FormGroup>
                       <div className="order-main-div">
                         <div>
-                        <Label className="order-label" for="exampleEmail"><h3 className="additional-info">Order Number : </h3></Label>
+                          <Label className="order-label" for="exampleEmail"><h3 className="additional-info">Order Number : </h3></Label>
                         </div>
                         <div>
-                          <Input placeholder="Order Number" className="additional-input2" onChange={(e)=>setOrderNumber(e.target.value)}/>
+                          <Input placeholder="Order Number" className="additional-input2" onChange={(e) => setOrderNumber(e.target.value)} />
                         </div>
                       </div>
                       <div className="shipping-main-div">
                         <div>
-                        <Label className="shipping-label" for="exampleEmail"><h3 className="additional-info">Shipping Date : </h3></Label>
+                          <Label className="shipping-label" for="exampleEmail"><h3 className="additional-info">Shipping Date : </h3></Label>
                         </div>
                         <div>
-                          <Input placeholder="Shipping Date" className="additional-input2" onChange={(e)=>setShippingDate(e.target.value)}/>
+                          <Input placeholder="Shipping Date" className="additional-input2" type="date" onChange={(e) => setShippingDate(e.target.value)} />
                         </div>
                       </div>
                     </FormGroup>
@@ -330,22 +365,25 @@ export default function CreateOrder() {
                         className="w-100"
                         // color="primary"
                         id="btn-co"
-                      
+
                       >
                         Create Order
                       </Button>
+                      <input style={{ marginLeft: "505px", marginTop: "7px" }} type="file" onChange={handleFile} />
                       <Button
                         type="button"
-                        onClick={updateOrder}
+                        onClick={handleCsv}
+                        onChange={handleCsv}
                         className="w-100"
                         // color="primary"
                         id="btn-co"
-                      
+
                       >
                         Uplodad CSV
                       </Button>
+
                     </FormGroup>
-                   
+
                   </div>
                   {/* <div className="row mt-2">
                     <div className="col-sm-1" />

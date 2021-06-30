@@ -331,9 +331,10 @@ const Tables = () => {
   const [qualityOrder, setqualityOrder] = useState()
   const [qualityDeliver, setQualityDeliver] = useState()
   const [ancillaryFee, setAncillaryFee] = useState()
+  const [link, setlink] = useState()
   const [totalCosting, setTotalCosting] = useState()
   const [newOrderDetail, setNewOrderDetail] = useState([])
-  const [childOrderDetail , setChildOrderDetail] = useState([])
+  const [childOrderDetail, setChildOrderDetail] = useState([])
 
   const getOrder = () => {
     GET('/orders')
@@ -704,6 +705,18 @@ const Tables = () => {
   }
 
 
+  const handlePDF = () => {
+    GET(`orders/pdf?id=${dataforEdit.id}`)
+      .then((data) => {
+        setlink(data.data.response.link)
+      })
+  }
+
+  const editOrder = () => {
+    console.log("edit")
+  }
+
+
   return (
     <>
       <Header />
@@ -898,7 +911,7 @@ const Tables = () => {
                       : filterCustomer
                     ).map((row, i) => (
                       <TableRow
-                      onClick={()=> handleChildData(row)}
+                        onClick={() => handleChildData(row)}
                         key={i}
                         className={
                           i % 2 == 0
@@ -941,13 +954,7 @@ const Tables = () => {
                           {moment(row.deliveryDate).format("DD/MM/YY")}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                          <select>
-                            <option>Select</option>
-                            <option>00:00 – 05:59</option>
-                            <option>06:00 – 11:59</option>
-                            <option>12:00 – 5:59</option>
-                            <option>6:00 – 11:59</option>
-                          </select>
+                            {row.delivery_window}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
                           {row.status}
@@ -1146,7 +1153,7 @@ const Tables = () => {
                       : childOrderDetail.length && childOrderDetail
                     ).map((row, i) => (
                       <TableRow
-                    
+
                         key={i}
                         className={
                           i % 2 == 0
@@ -1249,18 +1256,9 @@ const Tables = () => {
             </ModalHeader>
             {isEdit ? (
               <ModalBody>
-                <FormGroup> 
-                <Label for="exampleEmail">Edit Feilds</Label>
-                  <select className="col-md-12" style={{height:"45px",borderRadius:"6px",border:"1px solid lightgray"}}>
-                     <option>Select</option> 
-                    {/* <option>{newOrderDetail.ancillaryFee}</option>
-                     <option>{newOrderDetail.freight_ticket}</option> */}
-                        <option>{console.log(dataforEdit,"hehe")}</option>
-                    
-                     
-                  </select>
-
-                </FormGroup>
+                <FormGroup>
+                  
+               </FormGroup>
                 <FormGroup>
                   <Label for="exampleEmail">Quantity Delivered</Label>
                   <Input
@@ -1378,9 +1376,15 @@ const Tables = () => {
               </Table>
             </div>}
             <ModalFooter>
-              <Button color="primary" onClick={toggle}>
-                {isEdit ? "Edit Status" : "Download PDF"}
-              </Button>{" "}
+              {
+                isEdit == false ? <a onClick={handlePDF} href={link} download target="_blank">
+                  <Button color="primary" >
+                    Download PDF
+                  </Button>
+                </a>
+                  : <Button color="primary" onClick={editOrder}>
+                    Edit
+                  </Button>}
               <Button color="secondary" onClick={toggle}>
                 Cancel
               </Button>
