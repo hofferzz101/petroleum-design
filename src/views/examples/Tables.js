@@ -296,7 +296,7 @@ const Tables = () => {
     }
   }
 
-  
+
 
   const [CustomerName, setCustomerName] = React.useState("")
   const [filterCustomer, setFilterCustomer] = React.useState([])
@@ -332,12 +332,17 @@ const Tables = () => {
   const [qualityDeliver, setQualityDeliver] = useState()
   const [ancillaryFee, setAncillaryFee] = useState()
   const [totalCosting, setTotalCosting] = useState()
+  const [newOrderDetail, setNewOrderDetail] = useState([])
 
   const getOrder = () => {
     GET('/orders')
       .then(response => {
-        console.log(response.data.response.orders)
+        console.log("><", response.data.response.orders)
         setFilterCustomer(response.data.response.orders)
+        response.data.response.orders.map((data) => {
+          console.log(data.order_detials)
+          setNewOrderDetail(data.order_detials)
+        })
         setHaulerData(response.data.response.orders)
       })
   }
@@ -408,289 +413,289 @@ const Tables = () => {
   const handleSearch = (e, flag) => {
     let search = ""
     let filtered = ""
-    if(e.target.value != ""){
+    if (e.target.value != "") {
 
-    switch (flag) {
-      case "Customer Number":
-        setCustomerNumber(e.target.value)
-        search = e.target.value
+      switch (flag) {
+        case "Customer Number":
+          setCustomerNumber(e.target.value)
+          search = e.target.value
 
-        filtered = filterCustomer.filter(item => {
-          return (
-            item.customerNumber.toLowerCase().indexOf(search.toLowerCase()) !==
-            -1
-          )
-        })
-        setFilterCustomer(filtered)
+          filtered = filterCustomer.filter(item => {
+            return (
+              item.customerNumber.toLowerCase().indexOf(search.toLowerCase()) !==
+              -1
+            )
+          })
+          setFilterCustomer(filtered)
 
-        break
-      case "Order Number":
-        console.log(flag)
-        setOrderNumber(e.target.value)
-        search = e.target.value
+          break
+        case "Order Number":
+          console.log(flag)
+          setOrderNumber(e.target.value)
+          search = e.target.value
 
-        filtered = filterCustomer.filter(item => {
-          return (
-            item.orderNumber.toLowerCase().indexOf(search.toLowerCase()) !== -1
-          )
-        })
-        setFilterCustomer(filtered)
-        break
-      case "Customer Name":
-        setCustomerName(e.target.value)
-        search = e.target.value
+          filtered = filterCustomer.filter(item => {
+            return (
+              item.orderNumber.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            )
+          })
+          setFilterCustomer(filtered)
+          break
+        case "Customer Name":
+          setCustomerName(e.target.value)
+          search = e.target.value
 
-        filtered = filterCustomer.filter(item => {
-          return (
-            item.customerName.toLowerCase().indexOf(search.toLowerCase()) !== -1
-          )
-        })
-        setFilterCustomer(filtered)
-        console.log(flag)
-        break
-      case "Customer Location":
-        setCustomerLocation(e.target.value)
-        search = e.target.value
+          filtered = filterCustomer.filter(item => {
+            return (
+              item.customerName.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            )
+          })
+          setFilterCustomer(filtered)
+          console.log(flag)
+          break
+        case "Customer Location":
+          setCustomerLocation(e.target.value)
+          search = e.target.value
 
-        filtered = filterCustomer.filter(item => {
-          return (
-            item.customerLocation
-              .toLowerCase()
-              .indexOf(search.toLowerCase()) !== -1
-          )
-        })
-        setFilterCustomer(filtered)
-        console.log(flag)
-        break
-      case "PO Number":
-        setPOnumber(e.target.value)
-        search = e.target.value
+          filtered = filterCustomer.filter(item => {
+            return (
+              item.customerLocation
+                .toLowerCase()
+                .indexOf(search.toLowerCase()) !== -1
+            )
+          })
+          setFilterCustomer(filtered)
+          console.log(flag)
+          break
+        case "PO Number":
+          setPOnumber(e.target.value)
+          search = e.target.value
 
-        filtered = filterCustomer.filter(item => {
-          return (
-           item.p_no.toLowerCase().indexOf(search.toLowerCase()) !== -1
-           
-          )
-        })
-        setFilterCustomer(filtered)
-        console.log(flag)
-        break
-      case "Rack Location":
-        setRackLocation(e.target.value)
-        search = e.target.value
+          filtered = filterCustomer.filter(item => {
+            return (
+              item.p_no.toLowerCase().indexOf(search.toLowerCase()) !== -1
 
-        filtered = filterCustomer.filter(item => {
-          return (
-            item.rackLocation.toLowerCase().indexOf(search.toLowerCase()) !== -1
-          )
-        })
-        setFilterCustomer(filtered)
-        console.log(flag)
-        break
-      case "Order Date":
-        setOrderDate(e.target.value)
-        search = e.target.value
+            )
+          })
+          setFilterCustomer(filtered)
+          console.log(flag)
+          break
+        case "Rack Location":
+          setRackLocation(e.target.value)
+          search = e.target.value
 
-        filtered = filterCustomer.filter(item => {
-          return (
-            item.order_date.toLowerCase().indexOf(search.toLowerCase()) !== -1
-          )
-        })
-        setFilterCustomer(filtered)
+          filtered = filterCustomer.filter(item => {
+            return (
+              item.rackLocation.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            )
+          })
+          setFilterCustomer(filtered)
+          console.log(flag)
+          break
+        case "Order Date":
+          setOrderDate(e.target.value)
+          search = e.target.value
 
-        console.log(flag)
-        break
-      case "Delivery Date":
-        setDiliveryDate(e.target.value)
-        search = e.target.value
+          filtered = filterCustomer.filter(item => {
+            return (
+              item.order_date.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            )
+          })
+          setFilterCustomer(filtered)
 
-        filtered = filterCustomer.filter(item => {
-          return (
-            item.delivery_date.toLowerCase().indexOf(search.toLowerCase()) !== -1
-          )
-        })
-        setFilterCustomer(filtered)
-        console.log(flag)
-        break
-      case "Delivery Window":
-        setDiliveryWindow(e.target.value)
-        search = e.target.value
+          console.log(flag)
+          break
+        case "Delivery Date":
+          setDiliveryDate(e.target.value)
+          search = e.target.value
 
-        filtered = filterCustomer.filter(item => {
-          return (
-            item.DiliveryWindow.toLowerCase().indexOf(search.toLowerCase()) !==
-            -1
-          )
-        })
-        setFilterCustomer(filtered)
-        console.log(flag)
-        break
-      case "Status":
-        setStatus(e.target.value)
-        search = e.target.value
+          filtered = filterCustomer.filter(item => {
+            return (
+              item.delivery_date.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            )
+          })
+          setFilterCustomer(filtered)
+          console.log(flag)
+          break
+        case "Delivery Window":
+          setDiliveryWindow(e.target.value)
+          search = e.target.value
 
-        filtered = filterCustomer.filter(item => {
-          return item.status.toLowerCase().indexOf(search.toLowerCase()) !== -1
-        })
-        setFilterCustomer(filtered)
-        console.log(filtered)
-        break
-      case "Alert":
-        setAlert(e.target.value)
-        search = e.target.value
+          filtered = filterCustomer.filter(item => {
+            return (
+              item.DiliveryWindow.toLowerCase().indexOf(search.toLowerCase()) !==
+              -1
+            )
+          })
+          setFilterCustomer(filtered)
+          console.log(flag)
+          break
+        case "Status":
+          setStatus(e.target.value)
+          search = e.target.value
 
-        filtered = filterCustomer.filter(item => {
-          return item.alerts.toLowerCase().indexOf(search.toLowerCase()) !== -1
-        })
-        setFilterCustomer(filtered)
-        console.log(filtered)
-        break
+          filtered = filterCustomer.filter(item => {
+            return item.status.toLowerCase().indexOf(search.toLowerCase()) !== -1
+          })
+          setFilterCustomer(filtered)
+          console.log(filtered)
+          break
+        case "Alert":
+          setAlert(e.target.value)
+          search = e.target.value
 
-      default:
-        setFilterCustomer(rows)
-        break
+          filtered = filterCustomer.filter(item => {
+            return item.alerts.toLowerCase().indexOf(search.toLowerCase()) !== -1
+          })
+          setFilterCustomer(filtered)
+          console.log(filtered)
+          break
+
+        default:
+          setFilterCustomer(rows)
+          break
+      }
+    } else {
+      setFilterCustomer(HaulerData)
     }
-  }else{
-    setFilterCustomer(HaulerData)
   }
-}
 
   const handleSearch2 = (e, flag) => {
     let search = ""
     let filtered = ""
-    if(e.target.value != ""){
-    switch (flag) {
-      case "Line Number":
-        setLineNumber(e.target.value)
-        search = e.target.value
+    if (e.target.value != "") {
+      switch (flag) {
+        case "Line Number":
+          setLineNumber(e.target.value)
+          search = e.target.value
 
-        filtered = data.filter(item => {
-          return (
-            item.lineNumber.toLowerCase().indexOf(search.toLowerCase()) !== -1
-          )
-        })
-        setFilterCustomer2(filtered)
+          filtered = data.filter(item => {
+            return (
+              item.lineNumber.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            )
+          })
+          setFilterCustomer2(filtered)
 
-        break
-      case "Product":
-        console.log(flag)
-        setProduct(e.target.value)
-        search = e.target.value
+          break
+        case "Product":
+          console.log(flag)
+          setProduct(e.target.value)
+          search = e.target.value
 
-        filtered = data.filter(item => {
-          return item.product.toLowerCase().indexOf(search.toLowerCase()) !== -1
-        })
-        setFilterCustomer2(filtered)
-        break
-      case "Rack Location 2":
-        setRackLocation2(e.target.value)
-        search = e.target.value
+          filtered = data.filter(item => {
+            return item.product.toLowerCase().indexOf(search.toLowerCase()) !== -1
+          })
+          setFilterCustomer2(filtered)
+          break
+        case "Rack Location 2":
+          setRackLocation2(e.target.value)
+          search = e.target.value
 
-        filtered = data.filter(item => {
-          return (
-            item.rackLocation.toLowerCase().indexOf(search.toLowerCase()) !== -1
-          )
-        })
-        setFilterCustomer2(filtered)
-        console.log(flag)
-        break
-      case "Quality Order":
-        setQualityOrder(e.target.value)
-        search = e.target.value
+          filtered = data.filter(item => {
+            return (
+              item.rackLocation.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            )
+          })
+          setFilterCustomer2(filtered)
+          console.log(flag)
+          break
+        case "Quality Order":
+          setQualityOrder(e.target.value)
+          search = e.target.value
 
-        filtered = data.filter(item => {
-          return (
-            item.qualityOrdered.toLowerCase().indexOf(search.toLowerCase()) !==
-            -1
-          )
-        })
-        setFilterCustomer2(filtered)
+          filtered = data.filter(item => {
+            return (
+              item.qualityOrdered.toLowerCase().indexOf(search.toLowerCase()) !==
+              -1
+            )
+          })
+          setFilterCustomer2(filtered)
 
-        break
-      case "Quality Delivered":
-        setQualityDelivered(e.target.value)
-        search = e.target.value
+          break
+        case "Quality Delivered":
+          setQualityDelivered(e.target.value)
+          search = e.target.value
 
-        filtered = data.filter(item => {
-          return (
-            item.qualityDelivered
-              .toLowerCase()
-              .indexOf(search.toLowerCase()) !== -1
-          )
-        })
-        setFilterCustomer2(filtered)
-        console.log(flag)
-        break
-      case "Freight Ticket":
-        setFreightTicket(e.target.value)
-        search = e.target.value
+          filtered = data.filter(item => {
+            return (
+              item.qualityDelivered
+                .toLowerCase()
+                .indexOf(search.toLowerCase()) !== -1
+            )
+          })
+          setFilterCustomer2(filtered)
+          console.log(flag)
+          break
+        case "Freight Ticket":
+          setFreightTicket(e.target.value)
+          search = e.target.value
 
-        filtered = data.filter(item => {
-          return (
-            item.freightTicket.toLowerCase().indexOf(search.toLowerCase()) !==
-            -1
-          )
-        })
-        setFilterCustomer2(filtered)
-        console.log(flag)
-        break
-      case "Ancillary Fees":
-        setAncillaryFees(e.target.value)
-        search = e.target.value
+          filtered = data.filter(item => {
+            return (
+              item.freightTicket.toLowerCase().indexOf(search.toLowerCase()) !==
+              -1
+            )
+          })
+          setFilterCustomer2(filtered)
+          console.log(flag)
+          break
+        case "Ancillary Fees":
+          setAncillaryFees(e.target.value)
+          search = e.target.value
 
-        filtered = data.filter(item => {
-          return (
-            item.ancillaryFees.toLowerCase().indexOf(search.toLowerCase()) !==
-            -1
-          )
-        })
-        setFilterCustomer2(filtered)
+          filtered = data.filter(item => {
+            return (
+              item.ancillaryFees.toLowerCase().indexOf(search.toLowerCase()) !==
+              -1
+            )
+          })
+          setFilterCustomer2(filtered)
 
-        console.log(flag)
-        break
-      case "Total Cost":
-        setTotalCost(e.target.value)
-        search = e.target.value
+          console.log(flag)
+          break
+        case "Total Cost":
+          setTotalCost(e.target.value)
+          search = e.target.value
 
-        filtered = data.filter(item => {
-          return (
-            item.totalCost.toLowerCase().indexOf(search.toLowerCase()) !== -1
-          )
-        })
-        setFilterCustomer2(filtered)
+          filtered = data.filter(item => {
+            return (
+              item.totalCost.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            )
+          })
+          setFilterCustomer2(filtered)
 
-        break
-      case "Status2":
-        setStatus2(e.target.value)
-        search = e.target.value
+          break
+        case "Status2":
+          setStatus2(e.target.value)
+          search = e.target.value
 
-        filtered = data.filter(item => {
-          return item.status.toLowerCase().indexOf(search.toLowerCase()) !== -1
-        })
-        setFilterCustomer2(filtered)
+          filtered = data.filter(item => {
+            return item.status.toLowerCase().indexOf(search.toLowerCase()) !== -1
+          })
+          setFilterCustomer2(filtered)
 
-        break
+          break
 
-      case "Alert2":
-        setAlert2(e.target.value)
-        search = e.target.value
+        case "Alert2":
+          setAlert2(e.target.value)
+          search = e.target.value
 
-        filtered = data.filter(item => {
-          return item.alerts.toLowerCase().indexOf(search.toLowerCase()) !== -1
-        })
-        setFilterCustomer2(filtered)
+          filtered = data.filter(item => {
+            return item.alerts.toLowerCase().indexOf(search.toLowerCase()) !== -1
+          })
+          setFilterCustomer2(filtered)
 
-        break
+          break
 
-      default:
-        setFilterCustomer2(data)
-        break
+        default:
+          setFilterCustomer2(data)
+          break
 
       }
-    }else{
+    } else {
       setFilterCustomer2(HaulerData2)
     }
-      
+
   }
 
   return (
@@ -904,23 +909,23 @@ const Tables = () => {
                           <ListIcon onClick={() => handleChange("list", row)} />
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                          {row.orderNumber}
+                          {row.number}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                          {row.customerNumber}
+                          {row.customer.number}
                         </TableCell>
 
                         <TableCell className="tableCell-bottom">
-                          {row.customerName}
+                          {row.customer.name}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                          {row.customerLocation}
+                          {row.customer.city}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
                           {row.p_no}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                          {row.rackLocation}
+                          {row.location}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
                           {moment(row.orderDate).format("DD/MM/YY")}
@@ -1117,7 +1122,7 @@ const Tables = () => {
                   </TableHead>
                   <TableBody>
                     {(rowsPerPage > 0
-                      ? filterCustomer2 && filterCustomer2.slice(
+                      ? newOrderDetail && newOrderDetail.slice(
                         page * rowsPerPage,
                         page * rowsPerPage + rowsPerPage,
                         page * rowsPerPage + rowsPerPage + rowsPerPage,
@@ -1131,7 +1136,7 @@ const Tables = () => {
                         rowsPerPage +
                         rowsPerPage
                       )
-                      : filterCustomer2.length && filterCustomer2
+                      : newOrderDetail.length && newOrderDetail
                     ).map((row, i) => (
                       <TableRow
                         key={i}
@@ -1142,23 +1147,31 @@ const Tables = () => {
                         }
                       >
                         <TableCell className="tableCell-bottom">
+                          {/* {row.product.number} */}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
+                          {/* {row.product.name} */}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
+                          {/* {row.quantity} */}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
+                          {/* {row.quantity_deliverd} */}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
+                          {/* {row.freight_ticket} */}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
+                          {/* {row.ancillary_fee} */}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                         
+                          {/* {row.total_cost} */}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
+                          {/* {row.status} */}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
+                          {/* {row.altert} */}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
                         </TableCell>
@@ -1177,7 +1190,7 @@ const Tables = () => {
 
                       </TableCell>
                       <TableCell className="tableCell-bottom">
-                      
+
                       </TableCell>
                       <TableCell className="tableCell-bottom"></TableCell>
                       <TableCell className="tableCell-bottom"></TableCell>
@@ -1228,6 +1241,17 @@ const Tables = () => {
             </ModalHeader>
             {isEdit ? (
               <ModalBody>
+                <FormGroup> 
+                <Label for="exampleEmail">Edit Feilds</Label>
+                  <select className="col-md-12" style={{height:"45px",borderRadius:"6px",border:"1px solid lightgray"}}>
+                    {/* <option>Select</option> */}
+                    {newOrderDetail.map((data)=>{
+                      <option>{console.log("ppp",data)}</option>
+                    })}
+                     
+                  </select>
+
+                </FormGroup>
                 <FormGroup>
                   <Label for="exampleEmail">Quantity Delivered</Label>
                   <Input
@@ -1275,75 +1299,75 @@ const Tables = () => {
                       value={EditObj ? JSON.stringify(EditObj) : ""}
                     />
                   </div>
-                   
+
                 </div>
               </ModalBody>
             )}
-             {flagforEdit !== "edit" && <div className="col-md-12">
-                   <Table>
-                     <TableHead>
-                       <TableRow className="col-md-12">
-                         <TableCell>
-                           <h5 className="modalTableHeading" >Order Number</h5>
-                           <h5 className="modalTableData">{dataforEdit.orderNumber ? dataforEdit.orderNumber : "-"}</h5>
-                         </TableCell>
-                         <TableCell>
-                         <h5 className="modalTableHeading">Customer Number</h5>
-                           <h5 className="modalTableData">{dataforEdit.customerNumber ? dataforEdit.customerNumber : "-"}</h5>
-                         </TableCell>
-                         <TableCell>
-                         <h5 className="modalTableHeading">Customer Name</h5>
-                          <h5 className="modalTableData">{dataforEdit.customerName ? dataforEdit.customerName : "-"}</h5>
-                         </TableCell>
-                         </TableRow >
-                         <TableRow className="col-md-4">
-                         <TableCell>
-                         <h5 className="modalTableHeading">Customer Location</h5>
-                           <h5 className="modalTableData">{dataforEdit.customerLocation ? dataforEdit.customerLocation : "-"}</h5>
-                         </TableCell>
-                         <TableCell>
-                         <h5 className="modalTableHeading">PO Number</h5>
-                           <h5 className="modalTableData">{dataforEdit.p_no ? dataforEdit.p_no : "-"}</h5>
-                        </TableCell>
-                        <TableCell>
-                        <h5 className="modalTableHeading">Rack Location</h5>
-                          <h5 className="modalTableData">{dataforEdit.rackLocation ? dataforEdit.rackLocation : "-"}</h5>
-                        </TableCell>
-                        </TableRow>
-                        <TableRow className="col-md-4">
-                        <TableCell>
-                        <h5 className="modalTableHeading">Order Date</h5>
-                          <h5 className="modalTableData">{dataforEdit.orderDate !== "" ? moment(dataforEdit.orderDate).format("DD/MM/YY") : "-"}</h5>
-                        </TableCell>
-                        <TableCell>
-                        <h5 className="modalTableHeading">Dilevery Date</h5>
-                          <h5 className="modalTableData">{dataforEdit.deliveryDate !== "" ? moment(dataforEdit.deliveryDate).format("DD/MM/YY") : "-"}</h5>
-                        </TableCell>
-                        
-                        <TableCell>
-                        <h5 className="modalTableHeading">Dilivery Window</h5>
-                          <select>
-                            <option>Select</option>
-                            <option>00:00 – 05:59</option>
-                            <option>06:00 – 11:59</option>
-                            <option>12:00 – 5:59</option>
-                            <option>6:00 – 11:59</option>
-                          </select>
-                        </TableCell>
-                        </TableRow>
-                        <TableRow className="col-md-4">
-                        <TableCell>
-                        <h5 className="modalTableHeading">Status</h5>
-                          <h5 className="modalTableData">{dataforEdit.status ? dataforEdit.status : "-"}</h5>
-                        </TableCell>
-                        <TableCell>
-                        <h5 className="modalTableHeading">Alert</h5>
-                          <h5 className="modalTableData">{dataforEdit.alerts ? dataforEdit.alerts :"-"}</h5>
-                        </TableCell>
-                       </TableRow>
-                     </TableHead>
-                   </Table>
-                </div>}
+            {flagforEdit !== "edit" && <div className="col-md-12">
+              <Table>
+                <TableHead>
+                  <TableRow className="col-md-12">
+                    <TableCell>
+                      <h5 className="modalTableHeading" >Order Number</h5>
+                      <h5 className="modalTableData">{dataforEdit.orderNumber ? dataforEdit.orderNumber : "-"}</h5>
+                    </TableCell>
+                    <TableCell>
+                      <h5 className="modalTableHeading">Customer Number</h5>
+                      <h5 className="modalTableData">{dataforEdit.customerNumber ? dataforEdit.customerNumber : "-"}</h5>
+                    </TableCell>
+                    <TableCell>
+                      <h5 className="modalTableHeading">Customer Name</h5>
+                      <h5 className="modalTableData">{dataforEdit.customerName ? dataforEdit.customerName : "-"}</h5>
+                    </TableCell>
+                  </TableRow >
+                  <TableRow className="col-md-4">
+                    <TableCell>
+                      <h5 className="modalTableHeading">Customer Location</h5>
+                      <h5 className="modalTableData">{dataforEdit.customerLocation ? dataforEdit.customerLocation : "-"}</h5>
+                    </TableCell>
+                    <TableCell>
+                      <h5 className="modalTableHeading">PO Number</h5>
+                      <h5 className="modalTableData">{dataforEdit.p_no ? dataforEdit.p_no : "-"}</h5>
+                    </TableCell>
+                    <TableCell>
+                      <h5 className="modalTableHeading">Rack Location</h5>
+                      <h5 className="modalTableData">{dataforEdit.rackLocation ? dataforEdit.rackLocation : "-"}</h5>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow className="col-md-4">
+                    <TableCell>
+                      <h5 className="modalTableHeading">Order Date</h5>
+                      <h5 className="modalTableData">{dataforEdit.orderDate !== "" ? moment(dataforEdit.orderDate).format("DD/MM/YY") : "-"}</h5>
+                    </TableCell>
+                    <TableCell>
+                      <h5 className="modalTableHeading">Dilevery Date</h5>
+                      <h5 className="modalTableData">{dataforEdit.deliveryDate !== "" ? moment(dataforEdit.deliveryDate).format("DD/MM/YY") : "-"}</h5>
+                    </TableCell>
+
+                    <TableCell>
+                      <h5 className="modalTableHeading">Dilivery Window</h5>
+                      <select>
+                        <option>Select</option>
+                        <option>00:00 – 05:59</option>
+                        <option>06:00 – 11:59</option>
+                        <option>12:00 – 5:59</option>
+                        <option>6:00 – 11:59</option>
+                      </select>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow className="col-md-4">
+                    <TableCell>
+                      <h5 className="modalTableHeading">Status</h5>
+                      <h5 className="modalTableData">{dataforEdit.status ? dataforEdit.status : "-"}</h5>
+                    </TableCell>
+                    <TableCell>
+                      <h5 className="modalTableHeading">Alert</h5>
+                      <h5 className="modalTableData">{dataforEdit.alerts ? dataforEdit.alerts : "-"}</h5>
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+              </Table>
+            </div>}
             <ModalFooter>
               <Button color="primary" onClick={toggle}>
                 {isEdit ? "Edit Status" : "Download PDF"}
@@ -1352,7 +1376,7 @@ const Tables = () => {
                 Cancel
               </Button>
             </ModalFooter>
-               
+
           </Modal>
         </div>
         {/* Dark table */}

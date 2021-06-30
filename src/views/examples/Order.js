@@ -266,7 +266,7 @@ const Orders = () => {
   useEffect(() => {
     let data = JSON.parse(localStorage.getItem("Petroleum_Item"))
 
-    if (data.length) {
+    if (data != null) {
       setQR_Object(data[0])
       let products = data ? data[0].Product.split(",") : []
       let gallons = data ? data[0].Gallons.split(",") : []

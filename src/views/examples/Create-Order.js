@@ -22,6 +22,7 @@ import Header from "components/Headers/Header.js"
 
 import { useHistory } from "react-router-dom"
 import { GET } from "configuration/API-Instance"
+import { CREATE } from "configuration/API-Instance"
 
 export default function CreateOrder() {
   const [state1, setstate1] = useState("gal")
@@ -31,6 +32,13 @@ export default function CreateOrder() {
 
   const [productResponse,setproductResponse] = useState([])
   const [locationApi, setLocationApi] = useState([])
+
+  const [rackLocation, setRackLocation] = useState("NW Corner")
+  const [deleveryDate, setDeliveryDate] = useState("")
+  const [deliveryWindow,setDeliveryWindow] = useState("")
+  const [POnumber,setPOnumber] = useState("")
+  const [Notes,setNotes] = useState("")
+  const [getOrdersData, setGetOrdersData] = useState("")
 
   console.log("wowo",locationApi)
 
@@ -48,12 +56,50 @@ export default function CreateOrder() {
     GET("/racks")
     .then((res)=>{
       setLocationApi(res.data.response)
+      
     })
   }
+  
+
+  const getOrder = () => {
+    GET('/orders')
+      .then(response => {
+        console.log("><",response.data.response.orders)
+        response.data.response.orders.map((data)=>{
+          console.log("<=>",data)
+          setGetOrdersData(data)
+        })
+      })
+  }
+
+  console.log(getOrdersData.shipment_date)
+
+  let body ={
+    location : rackLocation,
+    products: productResponse,
+    delivery_date : deleveryDate,
+    delivery_window: "abc",
+    notes : Notes,
+    p_no : POnumber,
+    shipment_date : String(getOrdersData.shipment_date),
+    order_no : "123"
+  }
+
+  const updateOrder=()=>{
+    CREATE("/orders",body)
+    .then((res)=>{
+        console.log("hitApi",res)
+    })
+  }
+  
+
+  
 
   useEffect(()=>{
     gettingProducts()
+    getOrder()
     gettingLocation()
+
   },[])
 
   return (
@@ -74,7 +120,7 @@ export default function CreateOrder() {
                         <Label className="location-div-label-co" for="exampleSelect"><h3 className="location-text">Location : </h3></Label>
                         <Input className="location-div-input-co" type="select" name="select" id="exampleSelect">
                           {locationApi.map((data,i)=> (
-                            <option key={i}>{data.location}</option>
+                            <option onChange={e=>setRackLocation(e.target.value)} key={i}>{data.location}</option>
                           ))}
                          
                         </Input>
@@ -207,7 +253,7 @@ export default function CreateOrder() {
                           <Label className="diliverydate-labeldiv" for="exampleSelect"><h3 className="deliverytext">Delivery Date : </h3></Label>
                         </div>
                         <div className="diliverydate-contactno">
-                          <Input type="date" placeholder="Contact Number" />
+                          <Input type="date" placeholder="Contact Number" onChange={e=>setDeliveryDate(e.target.value)}/>
                         </div>
                       </div>
                     </FormGroup>
@@ -220,7 +266,7 @@ export default function CreateOrder() {
                             </Label>
                           </div>
                           <div>
-                            <Input className="diliverytime-input" type="select" name="select" id="exampleSelect">
+                            <Input className="diliverytime-input" type="select" name="select" id="exampleSelect" onChange={e=>setDeliveryWindow(e.target.value)}>
                               <option>Dilevery Window</option>
                               <option>Early Morning: 12:00am - 05:59am</option>
                               <option>Late Morning: 06:00am - 11:59am</option>
@@ -242,13 +288,32 @@ export default function CreateOrder() {
                           <Label className="additional-label" for="exampleEmail"><h3 className="additional-info">Note : </h3></Label>
                         </div>
                         <div>
-                          <Input className="additional-input" type="text" placeholder="PO Number" />
+                          <Input className="additional-input" type="text" placeholder="PO Number" onChange={e=>setPOnumber(e.target.value)}/>
                           <Input
                             className="additional-input2"
-
+                            onChange={e=>setNotes(e.target.value)}
                             type="text"
                             placeholder="Notes & Driver Instruction"
                           />
+                        </div>
+                      </div>
+                    </FormGroup>
+
+                    <FormGroup>
+                      <div className="order-main-div">
+                        <div>
+                        <Label className="order-label" for="exampleEmail"><h3 className="additional-info">Order Number : </h3></Label>
+                        </div>
+                        <div>
+                          <Input placeholder="Order Number" className="additional-input2"/>
+                        </div>
+                      </div>
+                      <div className="shipping-main-div">
+                        <div>
+                        <Label className="shipping-label" for="exampleEmail"><h3 className="additional-info">Shipping Date : </h3></Label>
+                        </div>
+                        <div>
+                          <Input placeholder="Shipping Date" className="additional-input2"/>
                         </div>
                       </div>
                     </FormGroup>
@@ -257,7 +322,8 @@ export default function CreateOrder() {
                     <FormGroup className="btn-div-co">
                       <Button
                         type="button"
-                        onClick={() => history.push("/admin/orders")}
+                        // onClick={() => history.push("/admin/orders")}
+                        onClick={updateOrder}
                         className="w-100"
                         // color="primary"
                         id="btn-co"
@@ -267,7 +333,7 @@ export default function CreateOrder() {
                       </Button>
                       <Button
                         type="button"
-                        // onClick={() => history.push("/admin/orders")}
+                        onClick={updateOrder}
                         className="w-100"
                         // color="primary"
                         id="btn-co"

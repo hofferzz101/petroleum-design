@@ -73,8 +73,26 @@
     display: flex;
 }
 
+
 .additional-label{
     margin-left:192px
+}
+
+.order-main-div{
+    display: flex;
+}
+
+.order-label{
+    margin-left:120px
+}
+
+.shipping-main-div{
+    display: flex;
+    margin-top: 10px;
+}
+
+.shipping-label{
+    margin-left:123px
 }
 
 .additional-input{
