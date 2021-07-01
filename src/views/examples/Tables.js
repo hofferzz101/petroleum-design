@@ -140,132 +140,132 @@ const useStyles2 = makeStyles({
   },
 })
 
-const rows = [
-  {
-    customerNumber: "123456",
-    customerName: "Alex",
-    orderNumber: "ASD123",
-    customerLocation: "London",
-    poNumber: "123456789",
-    rackLocation: "London",
-    orderDate: new Date(),
-    deliveryDate: new Date(),
-    status: "Delayed",
-    alerts: "None",
-  },
-  {
-    customerNumber: "123457",
-    customerName: "John",
-    orderNumber: "ASD123",
-    customerLocation: "London",
-    po_no: "123456789",
-    rackLocation: "London",
-    orderDate: new Date(),
-    deliveryDate: new Date(),
-    status: "Completed",
-    alerts: "Product Outage",
-  },
-  {
-    customerNumber: "123457",
-    customerName: "John",
-    orderNumber: "ASD123",
-    customerLocation: "London",
-    poNumber: "123456789",
-    rackLocation: "London",
-    orderDate: new Date(),
-    deliveryDate: new Date(),
-    status: "Completed",
-    alerts: "Product Outage",
-  },
-  {
-    customerNumber: "123457",
-    customerName: "John",
-    orderNumber: "ASD123",
-    customerLocation: "London",
-    poNumber: "123456789",
-    rackLocation: "London",
-    orderDate: new Date(),
-    deliveryDate: new Date(),
-    status: "Completed",
-    alerts: "Product Outage",
-  },
-  {
-    customerNumber: "123457",
-    customerName: "John",
-    orderNumber: "ASD123",
-    customerLocation: "London",
-    poNumber: "123456789",
-    rackLocation: "London",
-    orderDate: new Date(),
-    deliveryDate: new Date(),
-    status: "Completed",
-    alerts: "Product Outage",
-  },
-]
+// const rows = [
+//   {
+//     customerNumber: "123456",
+//     customerName: "Alex",
+//     orderNumber: "ASD123",
+//     customerLocation: "London",
+//     poNumber: "123456789",
+//     rackLocation: "London",
+//     orderDate: new Date(),
+//     deliveryDate: new Date(),
+//     status: "Delayed",
+//     alerts: "None",
+//   },
+//   {
+//     customerNumber: "123457",
+//     customerName: "John",
+//     orderNumber: "ASD123",
+//     customerLocation: "London",
+//     po_no: "123456789",
+//     rackLocation: "London",
+//     orderDate: new Date(),
+//     deliveryDate: new Date(),
+//     status: "Completed",
+//     alerts: "Product Outage",
+//   },
+//   {
+//     customerNumber: "123457",
+//     customerName: "John",
+//     orderNumber: "ASD123",
+//     customerLocation: "London",
+//     poNumber: "123456789",
+//     rackLocation: "London",
+//     orderDate: new Date(),
+//     deliveryDate: new Date(),
+//     status: "Completed",
+//     alerts: "Product Outage",
+//   },
+//   {
+//     customerNumber: "123457",
+//     customerName: "John",
+//     orderNumber: "ASD123",
+//     customerLocation: "London",
+//     poNumber: "123456789",
+//     rackLocation: "London",
+//     orderDate: new Date(),
+//     deliveryDate: new Date(),
+//     status: "Completed",
+//     alerts: "Product Outage",
+//   },
+//   {
+//     customerNumber: "123457",
+//     customerName: "John",
+//     orderNumber: "ASD123",
+//     customerLocation: "London",
+//     poNumber: "123456789",
+//     rackLocation: "London",
+//     orderDate: new Date(),
+//     deliveryDate: new Date(),
+//     status: "Completed",
+//     alerts: "Product Outage",
+//   },
+// ]
 
-const data = [
-  {
-    lineNumber: "123456",
-    product: "Reg Gas",
-    rackLocation: "London",
-    qualityOrdered: 3000,
-    qualityDelivered: 5700,
-    freightTicket: "123456789",
-    ancillaryFees: 2300,
-    totalCost: 234565,
-    status: "Scheduled",
-    alerts: "None",
-  },
-  {
-    lineNumber: "098765",
-    product: "Mid Gas",
-    rackLocation: "London",
-    qualityOrdered: 2500,
-    qualityDelivered: 12000,
-    freightTicket: "123456789",
-    ancillaryFees: 4300,
-    totalCost: 234565,
-    status: "Scheduled",
-    alerts: "None",
-  },
+// const data = [
+//   {
+//     lineNumber: "123456",
+//     product: "Reg Gas",
+//     rackLocation: "London",
+//     qualityOrdered: 3000,
+//     qualityDelivered: 5700,
+//     freightTicket: "123456789",
+//     ancillaryFees: 2300,
+//     totalCost: 234565,
+//     status: "Scheduled",
+//     alerts: "None",
+//   },
+//   {
+//     lineNumber: "098765",
+//     product: "Mid Gas",
+//     rackLocation: "London",
+//     qualityOrdered: 2500,
+//     qualityDelivered: 12000,
+//     freightTicket: "123456789",
+//     ancillaryFees: 4300,
+//     totalCost: 234565,
+//     status: "Scheduled",
+//     alerts: "None",
+//   },
 
-  {
-    lineNumber: "098765",
-    product: "Mid Gas",
-    rackLocation: "London",
-    qualityOrdered: 2500,
-    qualityDelivered: 12000,
-    freightTicket: "123456789",
-    ancillaryFees: 4300,
-    totalCost: 234565,
-    status: "Scheduled",
-    alerts: "None",
-  },
-  {
-    lineNumber: "123456",
-    product: "Reg Gas",
-    rackLocation: "London",
-    qualityOrdered: 3000,
-    qualityDelivered: 5700,
-    freightTicket: "123456789",
-    ancillaryFees: 2300,
-    totalCost: 234565,
-    status: "Scheduled",
-    alerts: "None",
-  },
-  {
-    lineNumber: "098765",
-    product: "Mid Gas",
-    rackLocation: "London",
-    qualityOrdered: 2500,
-    qualityDelivered: 12000,
-    freightTicket: "123456789",
-    ancillaryFees: 10000,
-    totalCost: 234565,
-    status: "Scheduled",
-    alerts: "None",
-  },
-]
+//   {
+//     lineNumber: "098765",
+//     product: "Mid Gas",
+//     rackLocation: "London",
+//     qualityOrdered: 2500,
+//     qualityDelivered: 12000,
+//     freightTicket: "123456789",
+//     ancillaryFees: 4300,
+//     totalCost: 234565,
+//     status: "Scheduled",
+//     alerts: "None",
+//   },
+//   {
+//     lineNumber: "123456",
+//     product: "Reg Gas",
+//     rackLocation: "London",
+//     qualityOrdered: 3000,
+//     qualityDelivered: 5700,
+//     freightTicket: "123456789",
+//     ancillaryFees: 2300,
+//     totalCost: 234565,
+//     status: "Scheduled",
+//     alerts: "None",
+//   },
+//   {
+//     lineNumber: "098765",
+//     product: "Mid Gas",
+//     rackLocation: "London",
+//     qualityOrdered: 2500,
+//     qualityDelivered: 12000,
+//     freightTicket: "123456789",
+//     ancillaryFees: 10000,
+//     totalCost: 234565,
+//     status: "Scheduled",
+//     alerts: "None",
+//   },
+// ]
 
 const Tables = () => {
   const classes = useStyles2()
@@ -356,10 +356,10 @@ const Tables = () => {
   const getOrder = () => {
     GET('/orders')
       .then(response => {
-        console.log("><", response.data.response.orders)
+       
         setFilterCustomer(response.data.response.orders)
         response.data.response.orders.map((data) => {
-          console.log(data.order_detials)
+          
           setNewOrderDetail(data.order_detials)
         })
         setHaulerData(response.data.response.orders)
@@ -369,7 +369,7 @@ const Tables = () => {
   const getProduct = () => {
     GET('/products')
       .then(response => {
-        console.log(response.data)
+       
         setFilterCustomer2(response.data.response)
       })
   }
@@ -404,7 +404,7 @@ const Tables = () => {
     getOrder()
     getProduct()
     getSummery(
-      data,
+      childOrderDetail,
       "qualityOrdered",
       "qualityDelivered",
       "totalCost",
@@ -449,7 +449,7 @@ const Tables = () => {
 
           break
         case "Order Number":
-          console.log(flag)
+          
           setOrderNumber(e.target.value)
           search = e.target.value
 
@@ -470,7 +470,7 @@ const Tables = () => {
             )
           })
           setFilterCustomer(filtered)
-          console.log(flag)
+        
           break
         case "Customer Location":
           setCustomerLocation(e.target.value)
@@ -484,7 +484,7 @@ const Tables = () => {
             )
           })
           setFilterCustomer(filtered)
-          console.log(flag)
+          
           break
         case "PO Number":
           setPOnumber(e.target.value)
@@ -497,7 +497,7 @@ const Tables = () => {
             )
           })
           setFilterCustomer(filtered)
-          console.log(flag)
+          
           break
         case "Rack Location":
           setRackLocation(e.target.value)
@@ -509,7 +509,7 @@ const Tables = () => {
             )
           })
           setFilterCustomer(filtered)
-          console.log(flag)
+          
           break
         case "Order Date":
           setOrderDate(e.target.value)
@@ -522,7 +522,7 @@ const Tables = () => {
           })
           setFilterCustomer(filtered)
 
-          console.log(flag)
+         
           break
         case "Delivery Date":
           setDiliveryDate(e.target.value)
@@ -534,7 +534,7 @@ const Tables = () => {
             )
           })
           setFilterCustomer(filtered)
-          console.log(flag)
+         
           break
         case "Delivery Window":
           setDiliveryWindow(e.target.value)
@@ -547,7 +547,7 @@ const Tables = () => {
             )
           })
           setFilterCustomer(filtered)
-          console.log(flag)
+          
           break
         case "Status":
           setStatus(e.target.value)
@@ -557,7 +557,7 @@ const Tables = () => {
             return item.status.toLowerCase().indexOf(search.toLowerCase()) !== -1
           })
           setFilterCustomer(filtered)
-          console.log(filtered)
+          
           break
         case "Alert":
           setAlert(e.target.value)
@@ -567,11 +567,11 @@ const Tables = () => {
             return item.alerts.toLowerCase().indexOf(search.toLowerCase()) !== -1
           })
           setFilterCustomer(filtered)
-          console.log(filtered)
+          
           break
 
         default:
-          setFilterCustomer(rows)
+          setFilterCustomer(filterCustomer)
           break
       }
     } else {
@@ -588,7 +588,7 @@ const Tables = () => {
           setLineNumber(e.target.value)
           search = e.target.value
 
-          filtered = data.filter(item => {
+          filtered = childOrderDetail.filter(item => {
             return (
               item.lineNumber.toLowerCase().indexOf(search.toLowerCase()) !== -1
             )
@@ -597,11 +597,11 @@ const Tables = () => {
 
           break
         case "Product":
-          console.log(flag)
+         
           setProduct(e.target.value)
           search = e.target.value
 
-          filtered = data.filter(item => {
+          filtered = childOrderDetail.filter(item => {
             return item.product.toLowerCase().indexOf(search.toLowerCase()) !== -1
           })
           setFilterCustomer2(filtered)
@@ -610,19 +610,19 @@ const Tables = () => {
           setRackLocation2(e.target.value)
           search = e.target.value
 
-          filtered = data.filter(item => {
+          filtered = childOrderDetail.filter(item => {
             return (
               item.rackLocation.toLowerCase().indexOf(search.toLowerCase()) !== -1
             )
           })
           setFilterCustomer2(filtered)
-          console.log(flag)
+         
           break
         case "Quality Order":
           setQualityOrder(e.target.value)
           search = e.target.value
 
-          filtered = data.filter(item => {
+          filtered = childOrderDetail.filter(item => {
             return (
               item.qualityOrdered.toLowerCase().indexOf(search.toLowerCase()) !==
               -1
@@ -635,7 +635,7 @@ const Tables = () => {
           setQualityDelivered(e.target.value)
           search = e.target.value
 
-          filtered = data.filter(item => {
+          filtered = childOrderDetail.filter(item => {
             return (
               item.qualityDelivered
                 .toLowerCase()
@@ -643,26 +643,26 @@ const Tables = () => {
             )
           })
           setFilterCustomer2(filtered)
-          console.log(flag)
+         
           break
         case "Freight Ticket":
           setFreightTicket(e.target.value)
           search = e.target.value
 
-          filtered = data.filter(item => {
+          filtered = childOrderDetail.filter(item => {
             return (
               item.freightTicket.toLowerCase().indexOf(search.toLowerCase()) !==
               -1
             )
           })
           setFilterCustomer2(filtered)
-          console.log(flag)
+          
           break
         case "Ancillary Fees":
           setAncillaryFees(e.target.value)
           search = e.target.value
 
-          filtered = data.filter(item => {
+          filtered = childOrderDetail.filter(item => {
             return (
               item.ancillaryFees.toLowerCase().indexOf(search.toLowerCase()) !==
               -1
@@ -670,13 +670,13 @@ const Tables = () => {
           })
           setFilterCustomer2(filtered)
 
-          console.log(flag)
+         
           break
         case "Total Cost":
           setTotalCost(e.target.value)
           search = e.target.value
 
-          filtered = data.filter(item => {
+          filtered = childOrderDetail.filter(item => {
             return (
               item.totalCost.toLowerCase().indexOf(search.toLowerCase()) !== -1
             )
@@ -688,7 +688,7 @@ const Tables = () => {
           setStatus2(e.target.value)
           search = e.target.value
 
-          filtered = data.filter(item => {
+          filtered = childOrderDetail.filter(item => {
             return item.status.toLowerCase().indexOf(search.toLowerCase()) !== -1
           })
           setFilterCustomer2(filtered)
@@ -699,7 +699,7 @@ const Tables = () => {
           setAlert2(e.target.value)
           search = e.target.value
 
-          filtered = data.filter(item => {
+          filtered = childOrderDetail.filter(item => {
             return item.alerts.toLowerCase().indexOf(search.toLowerCase()) !== -1
           })
           setFilterCustomer2(filtered)
@@ -707,7 +707,7 @@ const Tables = () => {
           break
 
         default:
-          setFilterCustomer2(data)
+          setFilterCustomer2(childOrderDetail)
           break
 
       }
@@ -1019,7 +1019,7 @@ const Tables = () => {
                           { label: "All", value: -1 },
                         ]}
                         colSpan={3}
-                        count={rows.length}
+                        count={filterCustomer.length}
                         rowsPerPage={rowsPerPage}
                         page={page}
                         SelectProps={{
@@ -1260,7 +1260,7 @@ const Tables = () => {
                           { label: "All", value: -1 },
                         ]}
                         colSpan={3}
-                        count={rows.length}
+                        count={childOrderDetail.length}
                         rowsPerPage={rowsPerPage}
                         page={page}
                         SelectProps={{
