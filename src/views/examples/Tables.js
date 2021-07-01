@@ -279,6 +279,7 @@ const Tables = () => {
   const [dataforEdit, setdataforEdit] = useState({})
   const [flagforEdit, setflagforEdit] = useState("")
 
+  const [qrObject, setqrObject] = useState({})
   const [selectedProduct, setSelectedProduct] = useState("")
 
   const [products, setproducts] = useState([])
@@ -292,6 +293,7 @@ const Tables = () => {
         products_temp.push(element.product)
       })
 
+     
       setproducts(products_temp)
 
       setModal(true)
@@ -300,10 +302,25 @@ const Tables = () => {
       setdataforEdit(item)
       setflagforEdit(flag)
     } else {
+      console.log("item",item)
+      let qrData = {
+        order_number: item && item.number,
+        supplier_number: item && item.customer.number,
+        customer_number: item && item.customer.number,
+        product_number: item && item.order_detials.map(x => x.product.number),
+        quantity: item && item.order_detials.map(x => x.quantity),
+        order_detail_id: item && item.order_detials.map(x => x.id)
+      }
+
+      console.log(qrData)
+      setqrObject(qrData)
       setModal(true)
       setisEdit(false)
       setdataforEdit(item)
+
       setflagforEdit(flag)
+
+
     }
   }
 
@@ -352,14 +369,14 @@ const Tables = () => {
   const [acEdit, setacEdit] = useState("")
   const [tickEdit, settickEdit] = useState("")
   const [atyEdit, setatyEdit] = useState("")
-  
+
   const getOrder = () => {
     GET('/orders')
       .then(response => {
-       
+
         setFilterCustomer(response.data.response.orders)
         response.data.response.orders.map((data) => {
-          
+
           setNewOrderDetail(data.order_detials)
         })
         setHaulerData(response.data.response.orders)
@@ -369,7 +386,7 @@ const Tables = () => {
   const getProduct = () => {
     GET('/products')
       .then(response => {
-       
+
         setFilterCustomer2(response.data.response)
       })
   }
@@ -449,7 +466,7 @@ const Tables = () => {
 
           break
         case "Order Number":
-          
+
           setOrderNumber(e.target.value)
           search = e.target.value
 
@@ -470,7 +487,7 @@ const Tables = () => {
             )
           })
           setFilterCustomer(filtered)
-        
+
           break
         case "Customer Location":
           setCustomerLocation(e.target.value)
@@ -484,7 +501,7 @@ const Tables = () => {
             )
           })
           setFilterCustomer(filtered)
-          
+
           break
         case "PO Number":
           setPOnumber(e.target.value)
@@ -497,7 +514,7 @@ const Tables = () => {
             )
           })
           setFilterCustomer(filtered)
-          
+
           break
         case "Rack Location":
           setRackLocation(e.target.value)
@@ -509,7 +526,7 @@ const Tables = () => {
             )
           })
           setFilterCustomer(filtered)
-          
+
           break
         case "Order Date":
           setOrderDate(e.target.value)
@@ -522,7 +539,7 @@ const Tables = () => {
           })
           setFilterCustomer(filtered)
 
-         
+
           break
         case "Delivery Date":
           setDiliveryDate(e.target.value)
@@ -534,7 +551,7 @@ const Tables = () => {
             )
           })
           setFilterCustomer(filtered)
-         
+
           break
         case "Delivery Window":
           setDiliveryWindow(e.target.value)
@@ -547,7 +564,7 @@ const Tables = () => {
             )
           })
           setFilterCustomer(filtered)
-          
+
           break
         case "Status":
           setStatus(e.target.value)
@@ -557,7 +574,7 @@ const Tables = () => {
             return item.status.toLowerCase().indexOf(search.toLowerCase()) !== -1
           })
           setFilterCustomer(filtered)
-          
+
           break
         case "Alert":
           setAlert(e.target.value)
@@ -567,7 +584,7 @@ const Tables = () => {
             return item.alerts.toLowerCase().indexOf(search.toLowerCase()) !== -1
           })
           setFilterCustomer(filtered)
-          
+
           break
 
         default:
@@ -597,7 +614,7 @@ const Tables = () => {
 
           break
         case "Product":
-         
+
           setProduct(e.target.value)
           search = e.target.value
 
@@ -616,7 +633,7 @@ const Tables = () => {
             )
           })
           setFilterCustomer2(filtered)
-         
+
           break
         case "Quality Order":
           setQualityOrder(e.target.value)
@@ -643,7 +660,7 @@ const Tables = () => {
             )
           })
           setFilterCustomer2(filtered)
-         
+
           break
         case "Freight Ticket":
           setFreightTicket(e.target.value)
@@ -656,7 +673,7 @@ const Tables = () => {
             )
           })
           setFilterCustomer2(filtered)
-          
+
           break
         case "Ancillary Fees":
           setAncillaryFees(e.target.value)
@@ -670,7 +687,7 @@ const Tables = () => {
           })
           setFilterCustomer2(filtered)
 
-         
+
           break
         case "Total Cost":
           setTotalCost(e.target.value)
@@ -748,7 +765,6 @@ const Tables = () => {
       }
     })
   }
-
 
   return (
     <>
@@ -972,7 +988,7 @@ const Tables = () => {
                           {row.customer.name}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                          {row.customer.city}
+                          {row.customer.address}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
                           {row.p_no}
@@ -1087,7 +1103,7 @@ const Tables = () => {
                       <TableCell className="table-headers-tables">
                         <div className="tableCell-top">
                           <b className="tableCell-top-title">
-                            Quality Order (gal)
+                            Quantity Ordered (gal)
                           </b>
                         </div>
                         <input
@@ -1100,7 +1116,7 @@ const Tables = () => {
                       <TableCell className="table-headers-tables">
                         <div className="tableCell-top">
                           <b className="tableCell-top-title">
-                            Quality Delivered (gal)
+                            Quantity Delivered (gal)
                           </b>
                         </div>
                         <input
@@ -1357,7 +1373,7 @@ const Tables = () => {
                       className="qr-code-design"
                       id="id"
                       size={170}
-                      value={EditObj ? JSON.stringify(EditObj) : ""}
+                      value={qrObject ? JSON.stringify(qrObject) : ""}
                     />
                   </div>
 
@@ -1370,21 +1386,21 @@ const Tables = () => {
                   <TableRow className="col-md-12">
                     <TableCell>
                       <h5 className="modalTableHeading" >Order Number</h5>
-                      <h5 className="modalTableData">{dataforEdit.orderNumber ? dataforEdit.orderNumber : "-"}</h5>
+                      <h5 className="modalTableData">{dataforEdit.number ? dataforEdit.number : "-"}</h5>
                     </TableCell>
                     <TableCell>
                       <h5 className="modalTableHeading">Customer Number</h5>
-                      <h5 className="modalTableData">{dataforEdit.customerNumber ? dataforEdit.customerNumber : "-"}</h5>
+                      <h5 className="modalTableData">{dataforEdit?.customer?.number  ? dataforEdit.customer.number : "-"}</h5>
                     </TableCell>
                     <TableCell>
                       <h5 className="modalTableHeading">Customer Name</h5>
-                      <h5 className="modalTableData">{dataforEdit.customerName ? dataforEdit.customerName : "-"}</h5>
+                      <h5 className="modalTableData">{dataforEdit?.customer?.name  ? dataforEdit.customer.name : "-"}</h5>
                     </TableCell>
                   </TableRow >
                   <TableRow className="col-md-4">
                     <TableCell>
                       <h5 className="modalTableHeading">Customer Location</h5>
-                      <h5 className="modalTableData">{dataforEdit.customerLocation ? dataforEdit.customerLocation : "-"}</h5>
+                      <h5 className="modalTableData">{dataforEdit?.customer?.address ? dataforEdit.customer.address : "-"}</h5>
                     </TableCell>
                     <TableCell>
                       <h5 className="modalTableHeading">PO Number</h5>
@@ -1392,7 +1408,7 @@ const Tables = () => {
                     </TableCell>
                     <TableCell>
                       <h5 className="modalTableHeading">Rack Location</h5>
-                      <h5 className="modalTableData">{dataforEdit.rackLocation ? dataforEdit.rackLocation : "-"}</h5>
+                      <h5 className="modalTableData">{dataforEdit.location ? dataforEdit.location : "-"}</h5>
                     </TableCell>
                   </TableRow>
                   <TableRow className="col-md-4">
@@ -1407,13 +1423,7 @@ const Tables = () => {
 
                     <TableCell>
                       <h5 className="modalTableHeading">Dilivery Window</h5>
-                      <select>
-                        <option>Select</option>
-                        <option>00:00 – 05:59</option>
-                        <option>06:00 – 11:59</option>
-                        <option>12:00 – 5:59</option>
-                        <option>6:00 – 11:59</option>
-                      </select>
+                      <h5 className="modalTableData">{dataforEdit.delivery_window !== "" ? dataforEdit.delivery_window : "-"}</h5>
                     </TableCell>
                   </TableRow>
                   <TableRow className="col-md-4">

@@ -4,11 +4,12 @@
   color:white;
   text-align:center;
   margin-bottom: 10px;
+  width: 125px;
 }
 
 .modalTableData{
   text-align:center;
-  
+  height: 50px
 }
 
 

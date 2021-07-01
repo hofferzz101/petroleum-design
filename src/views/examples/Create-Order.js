@@ -84,7 +84,7 @@ export default function CreateOrder() {
       .then(response => {
         
         response.data.response.orders.map((data) => {
-          // console.log("<=>", data)
+          
           setGetOrdersData(data)
         })
       })
