@@ -15,6 +15,7 @@ import Paper from "@material-ui/core/Paper"
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown"
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp"
 import { ContactSupportOutlined } from "@material-ui/icons"
+import { GET } from "configuration/API-Instance"
 
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined"
 import VisibilityOutlinedIcon from "@material-ui/icons/VisibilityOutlined"
@@ -205,7 +206,8 @@ Rows.propTypes = {
 export default function CollapsibleTable() {
   const [MasterData, setMasterData] = useState([])
   // const [openingModal, setOpeningModal] = useState(false)
-  
+  const [getOrdersData, setGetOrdersData] = useState("")
+  console.log("master",MasterData)
 
   useEffect(() => {
     let data = JSON.parse(localStorage.getItem("Petroleum_Item"))
@@ -248,6 +250,21 @@ export default function CollapsibleTable() {
     }
   }, [])
 
+  const getOrder = () => {
+    GET('/orders')
+      .then(response => {
+        
+       
+          // console.log("ioioio", data)
+          setMasterData(response.data.response.orders)
+          // setGetOrdersData(data)
+        
+      })
+  }
+   
+  useEffect(()=>{
+    getOrder()
+  },[])
   //  const handlingModal = ()=>{
   //     setOpeningModal(true)
   //  }
@@ -296,9 +313,13 @@ export default function CollapsibleTable() {
         <TableBody>
           {MasterData
             ? MasterData.map((row, i) =>
-              <Rows key={i} row={row} />
+              <TableRow>
+                <TableCell></TableCell>
+              </TableRow>
+              
             )
             : null}
+
 
         </TableBody>
       </Table>

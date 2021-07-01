@@ -65,7 +65,7 @@ export default function CreateOrder() {
   const gettingProducts = () => {
     GET("/products")
       .then((res) => {
-        console.log("=-=-", res.data.response)
+      
         setproductResponse(res.data.response)
       })
   }
@@ -82,9 +82,9 @@ export default function CreateOrder() {
   const getOrder = () => {
     GET('/orders')
       .then(response => {
-        console.log("><", response.data.response.orders)
+        
         response.data.response.orders.map((data) => {
-          console.log("<=>", data)
+          // console.log("<=>", data)
           setGetOrdersData(data)
         })
       })
@@ -99,7 +99,7 @@ export default function CreateOrder() {
 
     CREATE("/orders/upload-csv", formData)
       .then((data) => {
-        console.log(data)
+        
       })
   }
 
