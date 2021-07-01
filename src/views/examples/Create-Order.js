@@ -19,6 +19,9 @@ import {
 import "./pages/CreateOrder.css"
 
 import Header from "components/Headers/Header.js"
+import { openNotificationWithIcon } from "./NotificationPop";
+import { notification, Space } from 'antd';
+
 
 // import { ExportCSV } from "./excel/exportExcel"
 // import moment from "moment"
@@ -52,6 +55,9 @@ export default function CreateOrder() {
 
   const [text, settext] = useState([])
 
+  const [filteredProducts, setFilteredProducts] = useState([])
+
+  let temperedData = []
 
   let history = useHistory()
 
@@ -65,7 +71,7 @@ export default function CreateOrder() {
   const gettingProducts = () => {
     GET("/products")
       .then((res) => {
-      
+
         setproductResponse(res.data.response)
       })
   }
@@ -82,9 +88,9 @@ export default function CreateOrder() {
   const getOrder = () => {
     GET('/orders')
       .then(response => {
-        
+
         response.data.response.orders.map((data) => {
-          
+
           setGetOrdersData(data)
         })
       })
@@ -98,28 +104,45 @@ export default function CreateOrder() {
     formData.append("file", NewFiles)
 
     CREATE("/orders/upload-csv", formData)
-      .then((data) => {
-        
+      .then((res) => {
+        if (res.status == 200) {
+          openNotificationWithIcon('success', "Success", "Uploaded CSV Successfully")
+          history.push("/admin/index")
+        }
       })
+      .catch((e) => {
+        openNotificationWithIcon('error', "Error", e.response.data.message)
+      })
+
   }
 
-  let body = {
-    location: rackLocation,
-    products: productResponse,
-    delivery_date: deleveryDate,
-    delivery_window: deliveryWindow,
-    notes: Notes,
-    p_no: POnumber,
-    shipment_date: String(ShippingDate),
-    order_no: OrderNumber
-  }
+  const createOrder = () => {
 
-  const updateOrder = () => {
+    let productItem = []
+    if(productResponse.length) {
+      productItem = productResponse.filter(item => item.quntity)
+    }
+
+    let body = {
+      location: rackLocation,
+      products: productItem,
+      delivery_date: deleveryDate,
+      delivery_window: deliveryWindow,
+      notes: Notes,
+      p_no: POnumber,
+      shipment_date: String(ShippingDate),
+      order_no: OrderNumber
+    }
+  
     CREATE("/orders", body)
       .then((res) => {
         if (res.status == 200) {
+          openNotificationWithIcon('success', "Success", "Order Created Successfully")
           history.push("/admin/index")
         }
+      })
+      .catch((e) => {
+        openNotificationWithIcon('error', "Error", e.response.data.message)
       })
   }
 
@@ -361,7 +384,7 @@ export default function CreateOrder() {
                       <Button
                         type="button"
                         // onClick={() => history.push("/admin/orders")}
-                        onClick={updateOrder}
+                        onClick={createOrder}
                         className="w-100"
                         // color="primary"
                         id="btn-co"
@@ -505,6 +528,13 @@ export default function CreateOrder() {
             </Card>
           </div>
         </Row>
+        <openNotificationWithIcon />
+        <Space>
+          {/* <Button onClick={() => }>Success</Button> */}
+          {/* <Button onClick={() => openNotificationWithIcon('info')}>Info</Button>
+                      <Button onClick={() => openNotificationWithIcon('warning')}>Warning</Button>
+                      <Button onClick={() => openNotificationWithIcon('error')}>Error</Button> */}
+        </Space>
       </Container>
     </>
   )

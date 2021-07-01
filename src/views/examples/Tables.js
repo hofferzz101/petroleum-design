@@ -302,7 +302,6 @@ const Tables = () => {
       setdataforEdit(item)
       setflagforEdit(flag)
     } else {
-      console.log("item",item)
       let qrData = {
         order_number: item && item.number,
         supplier_number: item && item.customer.number,
@@ -312,7 +311,6 @@ const Tables = () => {
         order_detail_id: item && item.order_detials.map(x => x.id)
       }
 
-      console.log(qrData)
       setqrObject(qrData)
       setModal(true)
       setisEdit(false)
