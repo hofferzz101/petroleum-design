@@ -209,7 +209,8 @@ export default function CollapsibleTable() {
 
   useEffect(() => {
     let data = JSON.parse(localStorage.getItem("Petroleum_Item"))
-    if (data != null) {
+    console.log(data)
+    if (data != null && data.length > 0) {
       let products = data ? data[0].Product.split(",") : []
       let gallons = data ? data[0].Gallons.split(",") : []
       let shipTo = data ? data[0].Shipto.toString().split("/") : []
