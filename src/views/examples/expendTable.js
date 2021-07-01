@@ -54,9 +54,9 @@ function Row(props) {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell align="center">{"-"}</TableCell>
-        <TableCell align="center">{row.customer.number}</TableCell>
         <TableCell align="center">{row.number}</TableCell>
+        <TableCell align="center">{row.customer.number}</TableCell>
+        <TableCell align="center">{row.customer.name}</TableCell>
         <TableCell align="center">{row.customer.city}</TableCell>
         <TableCell align="center">{row.p_no}</TableCell>
         <TableCell align="center">{row.location}</TableCell>
