@@ -109,7 +109,6 @@ export default function CreateOrder() {
 
   const createOrder = () => {
     let productItem = []
-
     if(productResponse.length) {
       productItem = productResponse.filter(item => item.isQuantity == true)
     }
@@ -401,7 +400,6 @@ export default function CreateOrder() {
                           <Label className="ship-label" for="exampleEmail"><h3 className="additional-info">Note : </h3></Label>
                         </div>
                           <div>
-                      
                           <Input
                             className="additional-input2"
                             onChange={e => setNotes(e.target.value)}
