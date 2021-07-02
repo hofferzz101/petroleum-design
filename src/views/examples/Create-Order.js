@@ -64,6 +64,7 @@ export default function CreateOrder() {
   const handleState = (e, index) => {
     const values = [...productResponse]
     values[index][e.target.name] = e.target.value
+    values[index]["isQuantity"] = true
 
     setproductResponse(values)
   }
@@ -120,7 +121,7 @@ export default function CreateOrder() {
 
     let productItem = []
     if(productResponse.length) {
-      productItem = productResponse.filter(item => item.quntity)
+      productItem = productResponse.filter(item => item.isQuantity == true)
     }
 
     let body = {
@@ -202,7 +203,7 @@ export default function CreateOrder() {
                                   <th className="products-div-table-subheading">Tank / Product</th>
                                   <th className="products-div-table-subheading">Citgo Lemont</th>
                                   <th className="products-div-table-subheading">Exxon Chicago</th>
-                                  <th className="products-div-table-subheading">Quality Desired</th>
+                                  <th className="products-div-table-subheading">Quantity Desired</th>
                                 </tr>
                               </thead>
 
@@ -215,8 +216,8 @@ export default function CreateOrder() {
                                     <td><span><input type="radio" /></span>{` $ ${data.price_per_gallon}/${data.unit_of_measure}`}</td>
                                     <td>
                                       <input
-                                        name="quntity"
-                                        value={productResponse[i] ? productResponse[i].quntity : "0"}
+                                        name="quantity"
+                                        value={productResponse[i] ? productResponse[i].quantity : "0"}
                                         onChange={(e) => handleState(e, i)}
                                       />
                                     </td>
@@ -344,12 +345,20 @@ export default function CreateOrder() {
 
 
                     <FormGroup>
-                      <div className="additional-main-div">
+                      <div className="po-main-div">
                         <div>
-                          <Label className="additional-label" for="exampleEmail"><h3 className="additional-info">Note : </h3></Label>
+                          <Label className="po-label" for="exampleEmail"><h3 className="additional-info">PO Number : </h3></Label>
                         </div>
                         <div>
-                          <Input className="additional-input" type="text" placeholder="PO Number" onChange={e => setPOnumber(e.target.value)} />
+                          <Input className="po-input" type="text" placeholder="PO Number" onChange={e => setPOnumber(e.target.value)} />
+                          </div>
+                          </div>
+
+                          <div className="po-main-div">
+                            <div>
+                          <Label className="ship-label" for="exampleEmail"><h3 className="additional-info">Note : </h3></Label>
+                        </div>
+                          <div>
                           <Input
                             className="additional-input2"
                             onChange={e => setNotes(e.target.value)}

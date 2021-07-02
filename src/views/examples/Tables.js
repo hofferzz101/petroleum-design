@@ -1001,7 +1001,7 @@ const Tables = () => {
                           {moment(row.deliveryDate).format("DD/MM/YY")}
                         </TableCell>
                         <TableCell className="tableCell-bottom">
-                          {row.delivery_window}
+                          <h6>{row.delivery_window}</h6>
                         </TableCell>
                         <TableCell className="tableCell-bottom">
                           {row.status}

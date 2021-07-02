@@ -69,12 +69,17 @@
     margin-left:40px
 }
 
-.additional-main-div{
+.po-main-div{
     display: flex;
+    
 }
 
 
-.additional-label{
+.po-label{
+    margin-left:140px
+}
+
+.ship-label{
     margin-left:192px
 }
 
@@ -95,7 +100,7 @@
     margin-left:123px
 }
 
-.additional-input{
+.po-input{
     width:300px;
     margin-left:40px;
     margin-bottom:10px
